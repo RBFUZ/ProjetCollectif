@@ -92,14 +92,16 @@
       </div>
     </div>
 
+
     <!--
     <div class="column">
       <div class="ui toggle checkbox">
-        <input type="checkbox" name="entreprice" />
+        <input type="checkbox" id="entreprice" />
         <label>Entreprice</label>
       </div>
     </div>
-  -->
+    -->
+
   </div>
 
 
@@ -112,11 +114,13 @@
     $('.ui.dropdown').dropdown();
     $('#datedebut').calendar({
       type: 'date',
-      endCalendar: $('#datefin')
+      endCalendar: $('#datefin'),
+      monthFirst: false
     });
     $('#datefin').calendar({
       type: 'date',
-      startCalendar: $('#datedebut')
+      startCalendar: $('#datedebut'),
+      monthFirst: false
     });
   </script>
 </body>
