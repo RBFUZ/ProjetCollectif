@@ -11,6 +11,7 @@
   <title>Index</title>
   <!--Importer les css semantic-->
   <link rel="stylesheet" type="text/css" href="css/semantic-ui/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="css/calendar.min.css">
 </head>
 
 <body>
@@ -25,42 +26,80 @@
     </div>
   </div>
   <div class="ui three column stackable grid container">
-    <div class="ui center column">
-      <div class="ui labeled input date">
-        <i class="ui label center">Début</i>
-        <input type="date" />
+    <div class="ui column">
+      <div class="ui calendar" id="datedebut">
+        <div class="ui input left icon">
+          <i class="calendar icon"></i>
+          <input type="text" placeholder="Début">
+        </div>
       </div>
     </div>
     <div class="column">
-      <div class="ui labeled input date">
-        <i class="ui label center">Fin</i>
-        <input type="date" />
+      <div class="ui calendar" id="datefin">
+        <div class="ui input left icon">
+          <i class="calendar icon"></i>
+          <input type="text" placeholder="Fin">
+        </div>
       </div>
     </div>
+    <!--
     <div class="column">
       <div class="ui toggle checkbox">
         <input type="checkbox" name="date" />
         <label>Date</label>
       </div>
     </div>
+  -->
   </div>
 
   <div class="ui three column stackable grid container">
-    <div class="ui center column">
+    <div class="column">
       <div class="ui search selection dropdown">
-        <input type="hidden" name="entreprise">
+        <input type="hidden" name="country">
         <i class="dropdown icon"></i>
-        <div class="default text">Entriprise</div>
-
+        <div class="default text">Entreprice</div>
+        <div class="menu">
+          <div class="item" data-value="Orange">Orange</div>
+          <div class="item" data-value="Worldline">Worldline</div>
+          <div class="item" data-value="Google">Google</div>
+          <div class="item" data-value="Amazon">Amazon</div>
+        </div>
       </div>
     </div>
 
+    <!--
     <div class="column">
       <div class="ui toggle checkbox">
-        <input type="checkbox" name="date" />
-        <label>Date</label>
+        <input type="checkbox" name="entreprice" />
+        <label>Entreprice</label>
       </div>
     </div>
+  -->
+  </div>
+
+  <div class="ui three column stackable grid container">
+    <div class="column">
+      <div class="ui selection dropdown">
+        <input type="hidden" name="type">
+        <i class="dropdown icon"></i>
+        <div class="default text">Type de donnée</div>
+        <div class="menu">
+          <div class="item" data-value="1">Type1</div>
+          <div class="item" data-value="2">Type2</div>
+          <div class="item" data-value="3">Type3</div>
+          <div class="item" data-value="4">Type4</div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    <div class="column">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="entreprice" />
+        <label>Entreprice</label>
+      </div>
+    </div>
+  -->
   </div>
 
 
@@ -68,6 +107,18 @@
   <!--Importer les javascript semantic et jquery-->
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="css/semantic-ui/semantic.min.js"></script>
+  <script src="css/calendar.min.js"></script>
+  <script>
+    $('.ui.dropdown').dropdown();
+    $('#datedebut').calendar({
+      type: 'date',
+      endCalendar: $('#datefin')
+    });
+    $('#datefin').calendar({
+      type: 'date',
+      startCalendar: $('#datedebut')
+    });
+  </script>
 </body>
 
 </html>
