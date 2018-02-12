@@ -57,7 +57,7 @@
       <div class="ui search selection dropdown">
         <input type="hidden" name="country">
         <i class="dropdown icon"></i>
-        <div class="default text">Entreprice</div>
+        <div class="default text">Entreprise</div>
         <div class="menu">
           <div class="item" data-value="Orange">Orange</div>
           <div class="item" data-value="Worldline">Worldline</div>
@@ -70,8 +70,8 @@
     <!--
     <div class="column">
       <div class="ui toggle checkbox">
-        <input type="checkbox" name="entreprice" />
-        <label>Entreprice</label>
+        <input type="checkbox" name="Entreprise" />
+        <label>Entreprise</label>
       </div>
     </div>
   -->
@@ -93,11 +93,78 @@
     </div>
 
 
+
+    <div class="column">
+      <!--  <div class="ui toggle checkbox">
+        <input type="checkbox" id="Entreprise" />
+        <label>Entreprise</label>
+      </div>
+    -->
+    </div>
+    <div class="column">
+      <div class="ui primary button">Recherche</div>
+    </div>
+
+  </div>
+
+  <div class="ui center aligned one column stackable grid container center">
+
+  </div>
+
+  <div class="ui one column stackable grid container">
+    <div class="column">
+      <table class="ui sortable selectable celled table">
+        <thead>
+          <tr>
+            <th>Nom Entreprise</th>
+            <th>Nom Stagaire</th>
+            <th>Date Début</th>
+            <th>Date Fin</th>
+            <th>Année</th>
+            <th>Promotion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <input type="hidden" value="1" />
+            <td>John</td>
+            <td>No Action</td>
+            <td>None</td>
+            <td>John</td>
+            <td>No Action</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <input type="hidden" value="2" />
+            <td>Jamie</td>
+            <td>Approved</td>
+            <td>Requires call</td>
+            <td>John</td>
+            <td>No Action</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <input type="hidden" value="3" />
+            <td>Jamie</td>
+            <td>Approved</td>
+            <td>Requires call</td>
+            <td>John</td>
+            <td>No Action</td>
+            <td>None</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+
+    </div>
+
+
     <!--
     <div class="column">
       <div class="ui toggle checkbox">
-        <input type="checkbox" id="entreprice" />
-        <label>Entreprice</label>
+        <input type="checkbox" id="Entreprise" />
+        <label>Entreprise</label>
       </div>
     </div>
     -->
@@ -108,6 +175,7 @@
 
   <!--Importer les javascript semantic et jquery-->
   <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery.tablesort.min.js"></script>
   <script src="css/semantic-ui/semantic.min.js"></script>
   <script src="css/calendar.min.js"></script>
   <script>
@@ -122,6 +190,10 @@
       startCalendar: $('#datedebut'),
       monthFirst: false
     });
+    $(".selectable.table td").click(function() {
+      alert($(this).siblings("input").val());
+    });
+    $('table').tablesort();
   </script>
 </body>
 
