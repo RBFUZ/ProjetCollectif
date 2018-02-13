@@ -21,10 +21,14 @@
 	margin-top : 2%
 }
 
-
 @media only screen and (min-width: 990px){
-	.marginSize
-	{
-		margin-left : -50px;
-	}
+ 
+  .marginSize
+ 
+  {
+ 
+    margin-left : -50px;
+ 
+  }
+ 
 }
