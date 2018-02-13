@@ -21,6 +21,10 @@
 	margin-top : 2%
 }
 
+.margeAccueil {
+	margin-left : 14em;
+}
+
 @media only screen and (min-width: 990px){
  
   .marginSize
