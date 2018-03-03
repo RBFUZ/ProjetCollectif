@@ -1,0 +1,41 @@
+
+.marginSize 
+{
+	width: 15%;
+	margin-top: 5%;
+	min-width: 200px
+}
+
+.importMessage
+{
+	margin : 5%;
+}
+
+.margin5t
+{
+	 margin-top : 5%;
+}
+
+.margin2t
+{
+	margin-top : 2%
+}
+
+.margeAccueil {
+	margin-left : 25%;
+}
+
+#title{
+	margin-bottom: 3%;
+}
+@media only screen and (min-width: 990px){
+ 
+  .marginSize
+ 
+  {
+ 
+    margin-left : -50px;
+ 
+  }
+ 
+}
