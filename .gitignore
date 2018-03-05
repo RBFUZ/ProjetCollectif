@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
@@ -19,3 +20,6 @@
 ###> symfony/web-server-bundle ###
 .web-server-pid
 ###< symfony/web-server-bundle ###
+=======
+\.DS_Store
+>>>>>>> 8dd92556c204ec7772df6bb98af14f7c166156cb
