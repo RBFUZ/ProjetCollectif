@@ -12,7 +12,6 @@ class RechercheController extends Controller
      */
     public function index()
     {
-        return $this->render('recherche.html.twig', array(
-        ));
+        return $this->render('recherche/index.html.twig', array());
     }
 }
