@@ -1,3 +1,23 @@
 index:
     path: /
     controller: App\Controller\AccueilController::affichage
+
+connection:
+    path: /connection
+    controller: App\Controller\ConnectionController::index
+
+importation:
+    path: /importation
+    controller: App\Controller\ImportationController::index
+
+pop_up:
+    path: /pop_up
+    controller: App\Controller\PopUpController::index
+
+recherche:
+    path: /recherche
+    controller: App\Controller\RechercheController::index
+
+aproposentreprise:
+    path: /aproposentreprise
+    controller: App\Controller\AProposEntrepriseController::index
