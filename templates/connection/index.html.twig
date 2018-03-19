@@ -2,40 +2,33 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/css/semantic-ui/semantic.min.css">
+    <link rel="stylesheet" href="/style.css">
 
     <title>Connexion</title>
 
-    <!--Importer les css semantic-->
-    <link rel="stylesheet" type="text/css" href="/css/semantic-ui/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
-<body class="importMessage">
-<form class="ui form one column center aligned grid">
-    <div class="column">
-        <div class="center">
-            <h2>Authentification</h2>
-        </div>
-    </div>
+<body>
+  <form class="ui form">
+      <h4 class="ui dividing header">Authentification</h4>
+          <div class="two fields">
+              <div class="field">
+                  <label>Nom d'utilisateur</label>
+                  <input name="login" placeholder="Nom d'utilisateur" type="text">
+              </div>
+              <div class="field">
+                <label>Mot de passe</label>
+                <input name="password" placeholder="Mot de passe" type="text">
+              </div>
+          </div>
 
-    <div class="field largeur">
-        <div class="column">
-            <div class="center">
-                <input placeholder="Utilisateur" type="text">
-            </div>
-        </div>
-        <div class="column">
-            <div class="center">
-                <input placeholder="Mot de passe" type="password">
-            </div>
-        </div>
+    <div class="ui buttons">
+        <a class="ui button" href="{{ path('accueil') }}">Annuler</a>
+        <div class="or"></div>
+        <a class="ui positive button active" href="{{ path('accueil') }}">Connexion</a>
     </div>
-    <div class="column">
-	<a class="ui button" href="{{ path('accueil') }}">Connexion</a></button>
-    </div>
-</form>
+  </form>
 
-<!--Importer les javascript semantic et jquery-->
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/css/semantic/semantic.min.js"></script>
+  <script src="/js/jquery-3.3.1.min.js"></script>
+  <script src="/css/semantic/semantic.min.js"></script>
 </body>

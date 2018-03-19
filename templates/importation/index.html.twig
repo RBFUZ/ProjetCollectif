@@ -1,58 +1,42 @@
 <!doctype html>
-<html lang="fr">
+<html>
+
 <head>
   <meta charset="utf-8">
   <title>Importation</title>
+  
+  <!--Importer les css semantic-->
   <link rel="stylesheet" type="text/css" href="/css/semantic-ui/semantic.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
-  <link rel="stylesheet" href="style.css">
-
-
+  <link rel="stylesheet" href="/style.css">
 </head>
 
-<body class="ui inverted segment">
+<body>
+	<form class="ui form">
+      <h4 class="ui dividing header">Importation</h4>
+      		<div class="field">
+            	<label>Type de fichier</label>
+                <select class="ui fluid dropdown">
+					<option value="">Type 
+					<option>Stage
+					<option>Alternance
+					<option>Taxe
+					<option>Intervenant
+					<option>Tout le tralala
+				</select>
+            </div>
+            <div class="field">
+            	<label>Choisir le fichier</label>
+                		<input class="inverted ui" type="file" accept=".xls, xlsx"></input>
+            </div>
 
-
-	<div class ="importMessage ">
-		<h4 class="ui header inverted centered ">Choisissez le type de fichier a importer, et cliquer sur importer pour choisir le fichier.</h4>
-
-
-		<div class="ui form">
-			<div class="field ">
-				<div class="ui grid margin5t">
-					<div class="four wide tablet one wide computer column centered">
-						<form>
-							<select name="Type" size="1" class="marginSize">
-								<option value="">Type 
-								<option>Stage
-								<option>Alternance
-								<option>Taxe
-								<option>Intervenant
-								<option>Tout le tralala
-							</select>
-						</form>
-					</div>
-				</div>
-
-				<div class="ui grid margin2t" >
-					<div class=" computer column centered">
-						<input class="inverted ui"type="file" accept=".xls, xlsx"></input> 
-					</div>
-				</div>
-
-				<div class="ui grid margin2t" >
-					<div class="two wide tablet one wide computer column centered">
-						<a class="ui button inverted button" href="{{ path('accueil') }}">Importer</a>
-					</div>
-				</div>
+            <div class="ui buttons">
+  				<a class="ui button" href="{{ path('accueil') }}">Annuler</a>
+  						<div class="or"></div>
+  				<a class="ui positive button active" href="{{ path('accueil') }}">Importer</a>
 			</div>
-		</div>
-	</div>
+	</form>
 
-
-
-
-<!--Importer les javascript semantic et jquery-->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/css/semantic-ui/semantic.min.js"></script>
 </body>
