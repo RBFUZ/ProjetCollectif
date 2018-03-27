@@ -25,7 +25,11 @@
 
 /assets/
 /bin/
-/config/
+/config/bundles.php
+/config/packages/
+/config/routes/
+/config/services_test.yaml
+/config/services.yaml
 /translations/
 /tests/
 composer.*
