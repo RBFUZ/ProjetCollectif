@@ -1,62 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+{% extends 'base/base.html.twig' %}
+{% block content %}
+    <div class="ui equal width left aligned padded grid stackable">
+        <div class="row">
+            <div class="eight wide tablet four wide computer column">
+                <div class="ui horizontal segments">
+                    <div class="ui inverted teal segment center aligned">
 
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+                        <div class="ui inverted  statistic">
+                            <div class="value">
+                                3,952
+                            </div>
+                            <div class="label">
+                                Nombre d'entreprise
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui inverted teal tertiary segment center aligned">
+                        <div id="sparkline1">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-	<title>Accueil</title>
+            <div class="eight wide tablet four wide computer column">
+                <div class="ui horizontal segments">
+                    <div class="ui inverted red segment center aligned">
 
-	<style type="text/css">
+                        <div class="ui inverted statistic">
+                            <div class="value">
+                                3,952
+                            </div>
+                            <div class="label">
+                                Nombre d'entreprise
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui inverted red tertiary segment center aligned">
+                        <div id="sparkline2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eight wide tablet four wide computer column">
+                <div class="ui horizontal segments">
+                    <div class="ui inverted blue segment center aligned">
 
-	    .masthead.segment {
-	      min-height: 700px;
-	      padding: 5em 0em;
-	    }
-	   
-	    
-	    .masthead h1.ui.header {
-	      margin-top: 3em;
-	      margin-bottom: 0em;
-	      font-size: 4em;
-	      font-weight: normal;
-	    }
-	    .masthead h2 {
-	    margin-top: 6em;
-	    
-	      font-size: 1.7em;
-	      font-weight: normal;
-	    }
+                        <div class="ui inverted statistic">
+                            <div class="value">
+                                3,112
+                            </div>
+                            <div class="label">
+                                Nombre d'entreprise
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui inverted blue tertiary segment center aligned">
+                        <div id="sparkline3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eight wide tablet four wide computer column">
+                <div class="ui horizontal segments">
+                    <div class="ui inverted green segment center aligned">
 
-	</style>
-</head>
-<body class="ui inverted segment">
-<div class="pusher">
-<div class="ui inverted vertical masthead center aligned segment">
-
-<div class="ui container">
-  <div class="ui large secondary inverted pointing menu">
-    
-    <div class="left item">
-      <a class="ui inverted button" href="{{ path('importation') }}">Importer un fichier</a>
+                        <div class="ui inverted statistic">
+                            <div class="value">
+                                9,582
+                            </div>
+                            <div class="label">
+                                Nombre d'entreprise
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui inverted green tertiary segment center aligned">
+                        <div id="sparkline4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="right item">
-      <a class="ui inverted button" href="{{ path('connection') }}">Connexion</a>
-    </div>
-  </div>
-</div>
-
-<div class="ui text container">
-  <h1 class="ui inverted header">
-    Bonjour !
-  </h1>
-  <h2>Vous êtes connecté en tant  que {{ user }}</h2>
-  <div class="ui huge primary button" href="index.html"><i class="left arrow icon"></i>Entreprise </div>
-  <div class="ui huge primary button">Partenariat <i class="right arrow icon"></i></div>
-</div>
-
-</div>
-</div>
-</body>
-</html>
+{% endblock %}

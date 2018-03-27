@@ -1,41 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link rel="image_src" type="image/jpeg" href="/images/logo.png" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <!-- Site Properities -->
+    <meta name="generator" content="Visual Studio 2015" />
+    <title>Connection</title>
+    <link href="/dist/semantic.min.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/plugins/pacejs/pace.css" rel="stylesheet" />
 
-    <title>Connexion</title>
-
-    <!--Importer les css semantic-->
-    <link rel="stylesheet" type="text/css" href="/css/semantic-ui/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
-<body class="importMessage">
-<form class="ui form one column center aligned grid">
-    <div class="column">
-        <div class="center">
-            <h2>Authentification</h2>
-        </div>
-    </div>
+<body class="signin">
+<div class="ui container">
+    <div class="ui equal width center aligned padded grid stackable">
+        <div class="row">
+            <div class="five wide column">
+                <div class="ui segments">
+                    <div class="ui segment inverted nightli">
+                        <h3 class="ui header">
+                            Connection
+                        </h3>
+                    </div>
+                    <div class="ui segment">
+                        <div class="ui divider"></div>
+                        <div class="ui input fluid">
+                            <input type="text" placeholder="Email...">
+                        </div>
+                        <div class="ui divider hidden"></div>
+                        <div class="ui input fluid">
+                            <input type="text" placeholder="Mot de passe...">
+                        </div>
+                        <div class="ui divider hidden"></div>
 
-    <div class="field largeur">
-        <div class="column">
-            <div class="center">
-                <input placeholder="Utilisateur" type="text">
-            </div>
-        </div>
-        <div class="column">
-            <div class="center">
-                <input placeholder="Mot de passe" type="password">
-            </div>
-        </div>
-    </div>
-    <div class="column">
-	<a class="ui button" href="{{ path('accueil') }}">Connexion</a></button>
-    </div>
-</form>
 
-<!--Importer les javascript semantic et jquery-->
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/css/semantic/semantic.min.js"></script>
+                        <div class="ui divider hidden"></div>
+                        <button class="ui primary fluid button">
+                            <i class="key icon"></i>
+                            Connection
+                        </button>
+                        <div class="ui divider hidden"></div>
+                        <a href="forgotpassword.html" class="ui">Mot de passe oublé?</a>
+                        <div class="ui hidden divider"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script src="/js/jquery-2.1.4.min.js"></script>
 </body>
+</html>
