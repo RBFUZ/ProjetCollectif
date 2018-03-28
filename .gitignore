@@ -32,9 +32,7 @@
 /config/services.yaml
 /translations/
 /tests/
-composer.*
 .env.dist
-package.json
 phpunit.xml.dist
 symfony.lock
 webpack.config.js
