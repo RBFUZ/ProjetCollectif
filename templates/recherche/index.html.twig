@@ -2,7 +2,8 @@
 {% extends 'base/base.html.twig' %}
 {% block title %}Recherche{% endblock %}
 
-    {% block content %}
+{% block content %}
+    <div id="recherche_entreprise">
 <div class="ui three column stackable grid container">
     <div class="ui column">
         <div class="ui calendar" id="datedebut">
@@ -26,7 +27,7 @@
 <div class="ui three column stackable grid container">
     <div class="column">
         <div class="ui search selection dropdown">
-            <input type="hidden" name="country">
+            <input type="hidden" name="nom_entreprise">
             <i class="dropdown icon"></i>
             <div class="default text">Entreprise</div>
             <div class="menu">
@@ -73,7 +74,7 @@
       -->
     </div>
     <div class="column">
-        <div class="ui primary button">Recherche</div>
+        <button class="ui primary button" v-on:click="get_data">Recherche</button>
     </div>
 
 </div>
@@ -95,36 +96,16 @@
                 <th>Promotion</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody v-for="e in entreprises">
             <tr>
-                <input type="hidden" value="1" />
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
+                {#<input type="hidden" value="1" />#}
+                <td>${e.nomentreprise}</td>
+                <td>${e.nomentreprise}</td>
+                <td>${e.id}</td>
+                <td>${e.id}</td>
+                <td>${e.id}</td>
+                <td>${e.id}</td>
             </tr>
-            <tr>
-                <input type="hidden" value="2" />
-                <td>Jamie</td>
-                <td>Approved</td>
-                <td>Requires call</td>
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
-            </tr>
-            <tr>
-                <input type="hidden" value="3" />
-                <td>Jamie</td>
-                <td>Approved</td>
-                <td>Requires call</td>
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
-            </tr>
-
-
             </tbody>
         </table>
 
@@ -132,6 +113,7 @@
 
 
 </div>
+    </div>
 {% endblock %}
     {% block js %}
 
@@ -139,6 +121,7 @@
 
 <script src="/js/jquery.tablesort.min.js"></script>
 <script src="/css/calendar.min.js"></script>
+        <script src="/js/recherche.js"></script>
 <script>
     $('.ui.dropdown').dropdown();
     $('#datedebut').calendar({
