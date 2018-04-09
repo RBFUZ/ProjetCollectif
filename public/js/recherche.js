@@ -3,27 +3,49 @@
  * Look at the doc of Vuejs
  *
  */
+$(document).ready(function() {
+    dtable = $("#data_table").DataTable({
+        data:[],
+        "language": {
+            "emptyTable": "No result"
+        },
+        "ajax":{
+            "url":"/search_enterprise",
+            "type":"post",
+            "data":
+                function ( d ) {
+                    d.nom_entreprise = $("input[name='nom_entreprise']").val();
+                },
+        },
+        "columns": [
+
+        {data: 'nomentreprise'},
+        {data: 'numsiren'},
+        {data: 'statutjuridique'},
+        {data: 'sitewebentreprise'},
+        {data: 'commentaireentreprise'}
+        ],
+
+        rowCallback: function (row, data) {},
+        filter: false,
+        info: false,
+        ordering: true,
+        processing: true,
+        retrieve: true
+    });
+} );
 
 var recherche_entreprise = new Vue({
     el: '#recherche_entreprise', // the element that you want to control
     data: {
         entreprises:[], // the data to the twig
-        type:1
     },
     delimiters: ['${', '}'],
     methods:{
         get_data: function (event) { // the methods that you want to excute
-            var url = "/recherche_entreprise";
-            //empty the array
-            recherche_entreprise.entreprises.splice(0);
-            $.post(url,{
-                nom_entreprise:$("input[name='nom_entreprise']").val(),
-            },function(data){
-                // insert the data into array
-                for(i = 0;i<data.data.length;i++){
-                    Vue.set(recherche_entreprise.entreprises, i,  data.data[i])
-                }
-            });
+            $("#data_table").show();
+            dtable.ajax.reload();
+
         }
     }
 });

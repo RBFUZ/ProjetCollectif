@@ -1,27 +1,27 @@
 index:
     path: /
-    controller: App\Controller\AccueilController::affichage
+    controller: App\Controller\MainPageController::index
 
 connection:
     path: /connection
     controller: App\Controller\ConnectionController::index
 
-importation:
-    path: /importation
-    controller: App\Controller\ImportationController::index
+import:
+    path: /import
+    controller: App\Controller\ImportController::index
 
 pop_up:
     path: /pop_up
     controller: App\Controller\PopUpController::index
 
-recherche:
-    path: /recherche
-    controller: App\Controller\RechercheController::index
+search:
+    path: /search
+    controller: App\Controller\SearchController::index
 
 aproposentreprise:
     path: /aproposentreprise
     controller: App\Controller\AProposEntrepriseController::index
 
-recherche_entreprise:
-    path: /recherche_entreprise
-    controller: App\Controller\RechercheController::rechercheEntreprise
+search_enterprise:
+    path: /search_enterprise
+    controller: App\Controller\SearchController::searchEnterprise

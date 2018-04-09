@@ -5,15 +5,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 
-class AccueilController extends Controller
+class MainPageController extends Controller
 {
 	/**
-     * @Route("/accueil", name="accueil")
+     * @Route("/index", name="index")
      */
-    public function affichage()
+    public function index()
     {
         	$user = "User / Admin";
-            return $this->render('accueil/index.html.twig', array(
+            return $this->render('index/index.html.twig', array(
 		'user' => $user,
 		));
     }

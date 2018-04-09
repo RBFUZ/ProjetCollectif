@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ImportationController extends Controller
+class ImportController extends Controller
 {
     /**
-     * @Route("/importation", name="importation")
+     * @Route("/import", name="import")
      */
     public function index()
     {
-        return $this->render('importation/index.html.twig', array());
+        return $this->render('import/index.html.twig', array());
     }
 }

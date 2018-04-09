@@ -7,16 +7,36 @@
         <img src="img/bg/5.png" />
 >>>>>>> production
     </a>
-    <a class="item title" href="{{ path('accueil') }}">
+    <a class="item title" href="{{ path('index') }}">
         <b>Main</b>
     </a>
 
     <div class="ui accordion">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Recherche
+        </div>
         <div class="content">
-            <a class="item" href="{{ path('recherche') }}">
-                Recherche
+            <a class="item" href="{{ path('search') }}">
+                Stage
             </a>
-            <a class="item" href="{{ path('importation') }}">
+            <a class="item" href="{{ path('search') }}">
+                Entreprise
+            </a>
+            <a class="item" href="{{ path('search') }}">
+                Apprentissage
+            </a>
+            <a class="item" href="{{ path('search') }}">
+                Forum
+            </a>
+            <a class="item" href="{{ path('search') }}">
+                Conférence
+            </a>
+        </div>
+        <!-- -->
+        <div class="title">
+
+            <a class="item" href="{{ path('import') }}">
                 Importation
             </a>
         </div>

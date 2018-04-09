@@ -27,7 +27,7 @@
 <div class="ui three column stackable grid container">
     <div class="column">
         <div class="ui search selection dropdown">
-            <input type="hidden" name="nom_entreprise">
+            <input type="hidden" name="nom_entreprise" >
             <i class="dropdown icon"></i>
             <div class="default text">Entreprise</div>
             <div class="menu">
@@ -85,27 +85,27 @@
 
 <div class="ui one column stackable grid container">
     <div class="column">
-        <table class="ui sortable selectable celled table">
+        <table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
             <thead>
             <tr>
+
                 <th>Nom Entreprise</th>
-                <th>Nom Stagaire</th>
-                <th>Date Début</th>
-                <th>Date Fin</th>
-                <th>Année</th>
-                <th>Promotion</th>
+                <th>Num Siren</th>
+                <th>Statut Juridique</th>
+                <th>Site Web Entreprise</th>
+                <th>Commentaire Entreprise</th>
             </tr>
             </thead>
-            <tbody v-for="e in entreprises">
-            <tr>
+            <tbody>
+            {#<tr>#}
                 {#<input type="hidden" value="1" />#}
-                <td>${e.nomentreprise}</td>
-                <td>${e.nomentreprise}</td>
-                <td>${e.id}</td>
-                <td>${e.id}</td>
-                <td>${e.id}</td>
-                <td>${e.id}</td>
-            </tr>
+                {#<td>${e.nomentreprise}</td>#}
+                {#<td>${e.nomentreprise}</td>#}
+                {#<td>${e.id}</td>#}
+                {#<td>${e.id}</td>#}
+                {#<td>${e.id}</td>#}
+                {#<td>${e.id}</td>#}
+            {#</tr>#}
             </tbody>
         </table>
 
@@ -118,28 +118,11 @@
     {% block js %}
 
 <!--Importer les javascript semantic et jquery-->
-
-<script src="/js/jquery.tablesort.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="/css/calendar.min.js"></script>
-        <script src="/js/recherche.js"></script>
-<script>
-    $('.ui.dropdown').dropdown();
-    $('#datedebut').calendar({
-        type: 'date',
-        endCalendar: $('#datefin'),
-        monthFirst: false
-    });
-    $('#datefin').calendar({
-        type: 'date',
-        startCalendar: $('#datedebut'),
-        monthFirst: false
-    });
-    $(".selectable.table td").click(function() {
-        alert($(this).siblings("input").val());
-    });
-    $('table').tablesort();
-</script>
 
+        <script src="/js/customjs/custom-datatable.js"></script>
+        <script src="/js/recherche.js"></script>
 {% endblock %}
 <<<<<<< HEAD
 =======
