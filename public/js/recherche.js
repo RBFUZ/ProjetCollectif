@@ -29,7 +29,7 @@ $(document).ready(function() {
         rowCallback: function (row, data) {},
         filter: false,
         info: false,
-        ordering: false,
+        ordering: true,
         processing: true,
         retrieve: true
     });
