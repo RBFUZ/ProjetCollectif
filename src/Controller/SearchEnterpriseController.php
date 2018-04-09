@@ -8,14 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Entreprise;
 
-class SearchController extends Controller
+class SearchEnterpriseController extends Controller
 {
     /**
      * @Route("/search", name="search")
      */
     public function index()
     {
-        return $this->render('search/index.html.twig', array());
+        return $this->render('search/search_enterprise/index.html.twig', array());
     }
 
     /**
