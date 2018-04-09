@@ -10,7 +10,7 @@ $(document).ready(function() {
             "emptyTable": "No result"
         },
         "ajax":{
-            "url":"/recherche_entreprise",
+            "url":"/search_enterprise",
             "type":"post",
             "data":
                 function ( d ) {
@@ -45,23 +45,7 @@ var recherche_entreprise = new Vue({
         get_data: function (event) { // the methods that you want to excute
             $("#data_table").show();
             dtable.ajax.reload();
-            //empty the array
-            // recherche_entreprise.entreprises.splice(0);
-            // $.post(url,{
-            //     nom_entreprise:$("input[name='nom_entreprise']").val(),
-            // },function(data){
-            //     // insert the data into array
-            //     // for(i = 0;i<data.data.length;i++){
-            //     //     Vue.set(recherche_entreprise.entreprises, i,  data.data[i])
-            //     // }
-            //     //delete data.data.id;
-            //     //dtable.clear();
-            //     dtable.clear().draw();
-            //
-            //     console.log(data.data);
-            //     dtable.ajax.url( 'newData.json' ).load();
-            //     dtable.rows.add(data).draw();
-            // });
+
         }
     }
 });

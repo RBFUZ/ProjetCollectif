@@ -8,24 +8,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Entreprise;
 
-class RechercheController extends Controller
+class SearchController extends Controller
 {
     /**
-     * @Route("/recherche", name="recherche")
+     * @Route("/search", name="search")
      */
     public function index()
     {
-        return $this->render('recherche/index.html.twig', array());
+        return $this->render('search/index.html.twig', array());
     }
 
     /**
-     * @Route("/recherche_entreprise", name="recherche_entreprise")
+     * @Route("/search_enterprise", name="search_enterprise")
      */
-    public function rechercheEntreprise(Request $request)
+    public function searchEnterprise(Request $request)
     {
         $nom = $request->request->get("nom_entreprise");
         $repository = $this->getDoctrine()->getRepository(Entreprise::class);
-        $entreprise = $repository->findBy(['nomentreprise' => $nom]);
+        $entreprise = array();
+        if($nom != ""){
+            $entreprise = $repository->findBy(['nomentreprise' => $nom]);
+        }
 
         return $this->json(array('data' => $entreprise));
     }
