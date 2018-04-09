@@ -16,7 +16,7 @@ pop_up:
 
 search:
     path: /search
-    controller: App\Controller\SearchController::index
+    controller: App\Controller\SearchEnterpriseController::index
 
 aproposentreprise:
     path: /aproposentreprise
@@ -24,4 +24,4 @@ aproposentreprise:
 
 search_enterprise:
     path: /search_enterprise
-    controller: App\Controller\SearchController::searchEnterprise
+    controller: App\Controller\SearchEnterpriseController::searchEnterprise
