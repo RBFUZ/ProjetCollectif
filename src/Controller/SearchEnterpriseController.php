@@ -6,7 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Entreprise;
+use App\Entity\Etablissement;
 
 class SearchEnterpriseController extends Controller
 {
@@ -23,13 +23,13 @@ class SearchEnterpriseController extends Controller
      */
     public function searchEnterprise(Request $request)
     {
-        $nom = $request->request->get("nom_entreprise");
-        $repository = $this->getDoctrine()->getRepository(Entreprise::class);
-        $entreprise = array();
+        $nom = $request->request->get("nom_etablissement");
+        $repository = $this->getDoctrine()->getRepository(Etablissement::class);
+        $etablissement = array();
         if($nom != ""){
-            $entreprise = $repository->findBy(['nomentreprise' => $nom]);
+            $etablissement = $repository->findBy(['nometablissement' => $nom]);
         }
 
-        return $this->json(array('data' => $entreprise));
+        return $this->json(array('data' => $etablissement));
     }
 }

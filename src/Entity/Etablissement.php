@@ -244,7 +244,7 @@ class Etablissement
     /**
      * @return \Adresse
      */
-    public function getIdadresse(): \Adresse
+    public function getIdadresse(): Adresse
     {
         return $this->idadresse;
     }
@@ -252,7 +252,7 @@ class Etablissement
     /**
      * @param \Adresse $idadresse
      */
-    public function setIdadresse(\Adresse $idadresse): void
+    public function setIdadresse(Adresse $idadresse): void
     {
         $this->idadresse = $idadresse;
     }
@@ -260,7 +260,7 @@ class Etablissement
     /**
      * @return \Entreprise
      */
-    public function getIdentreprise(): \Entreprise
+    public function getIdentreprise(): Entreprise
     {
         return $this->identreprise;
     }
@@ -268,7 +268,7 @@ class Etablissement
     /**
      * @param \Entreprise $identreprise
      */
-    public function setIdentreprise(\Entreprise $identreprise): void
+    public function setIdentreprise(Entreprise $identreprise): void
     {
         $this->identreprise = $identreprise;
     }

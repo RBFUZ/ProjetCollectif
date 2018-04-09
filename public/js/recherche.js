@@ -14,16 +14,17 @@ $(document).ready(function() {
             "type":"post",
             "data":
                 function ( d ) {
-                    d.nom_entreprise = $("input[name='nom_entreprise']").val();
+                    d.nom_etablissement = $("input[name='nom_etablissement']").val();
+
                 },
         },
         "columns": [
 
-        {data: 'nomentreprise'},
-        {data: 'numsiren'},
-        {data: 'statutjuridique'},
-        {data: 'sitewebentreprise'},
-        {data: 'commentaireentreprise'}
+        {data: 'nometablissement'},
+        {data: 'numsiret'},
+        {data: "idadresse.villeville.nomville"},
+        // {data: 'sitewebentreprise'},
+        // {data: 'commentaireentreprise'}
         ],
 
         rowCallback: function (row, data) {},
@@ -36,7 +37,7 @@ $(document).ready(function() {
 } );
 
 var recherche_entreprise = new Vue({
-    el: '#recherche_entreprise', // the element that you want to control
+    el: '#search_enterprise', // the element that you want to control
     data: {
         entreprises:[], // the data to the twig
     },

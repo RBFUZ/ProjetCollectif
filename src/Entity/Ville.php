@@ -73,7 +73,7 @@ class Ville
     /**
      * @return \Pays
      */
-    public function getIdpays(): \Pays
+    public function getIdpays(): Pays
     {
         return $this->idpays;
     }
@@ -81,7 +81,7 @@ class Ville
     /**
      * @param \Pays $idpays
      */
-    public function setIdpays(\Pays $idpays): void
+    public function setIdpays(Pays $idpays): void
     {
         $this->idpays = $idpays;
     }

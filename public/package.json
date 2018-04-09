@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jquery-form": "^4.2.2",
     "vue": "^2.5.16"
   }
 }

@@ -117,7 +117,7 @@ class Adresse
     }
 
     /**
-     * @return Ville
+     * @return \Ville
      */
     public function getVilleville(): Ville
     {
@@ -125,13 +125,12 @@ class Adresse
     }
 
     /**
-     * @param Ville $villeville
+     * @param \Ville $villeville
      */
     public function setVilleville(Ville $villeville): void
     {
         $this->villeville = $villeville;
     }
-
 
 
 }
