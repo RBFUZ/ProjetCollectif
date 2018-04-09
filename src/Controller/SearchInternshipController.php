@@ -8,11 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SearchInternshipController extends Controller
 {
     /**
-     * @Route("/search/internship", name="search_internship")
+     * @Route("/search/search_internship", name="search_internship")
      */
     public function index()
     {
-        return $this->render('search_internship/index.html.twig', [
+        return $this->render('/search/search_internship/index.html.twig', [
             'controller_name' => 'SearchInternshipController',
         ]);
     }
