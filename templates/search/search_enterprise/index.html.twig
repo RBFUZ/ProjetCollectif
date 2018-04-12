@@ -12,23 +12,27 @@
             <i class="dropdown icon"></i>
             <div class="default text">Établissement</div>
             <div class="menu">
-                <div class="item" data-value="CNRS">CNRS</div>
-                <div class="item" data-value="EDF">EDF</div>
-                <div class="item" data-value="Google">Google</div>
-                <div class="item" data-value="Amazon">Amazon</div>
+                {% for e in enterprise %}
+                    <div class="item" data-value="{{e.nomEntreprise }}">{{e.nomEntreprise }}</div>
+                {% endfor %}
+                {#<div class="item" data-value="CNRS">CNRS</div>#}
+                {#<div class="item" data-value="EDF">EDF</div>#}
+                {#<div class="item" data-value="Google">Google</div>#}
+                {#<div class="item" data-value="Amazon">Amazon</div>#}
             </div>
         </div>
     </div>
     <div class="column">
-        <div class="ui search selection dropdown">
-            <input type="hidden" name="ville" >
-            <i class="dropdown icon"></i>
-            <div class="default text">Ville</div>
-            <div id="list_cities" class="menu" >
-                <div class="item" v-for="c in cities" data-value="${c.id}">${c.name}</div>
+        
+        {#<div class="ui search selection dropdown">#}
+            {#<input type="hidden" name="ville" >#}
+            {#<i class="dropdown icon"></i>#}
+            {#<div class="default text">Ville</div>#}
+            {#<div id="list_cities" class="menu" >#}
+                {#<div class="item" v-for="c in cities" data-value="${c.id}">${c.name}</div>#}
 
-            </div>
-        </div>
+            {#</div>#}
+        {#</div>#}
     </div>
 
     <div class="column">

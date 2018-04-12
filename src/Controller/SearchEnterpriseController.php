@@ -14,6 +14,12 @@ use App\Entity\Etablissement;
 
 class SearchEnterpriseController extends Controller
 {
+
+    private function loadEnterprise()
+    {
+        $repository = $this->getDoctrine()->getRepository(Entreprise::class);
+        return $repository->findAll();
+    }
     private function loadCity()
     {
         $repository = $this->getDoctrine()->getRepository(Ville::class);
@@ -24,9 +30,9 @@ class SearchEnterpriseController extends Controller
      */
     public function index()
     {
-        $cities = null;//$this->loadCity();
+        $enterprise = $this->loadEnterprise();
         return $this->render('search/search_enterprise/index.html.twig', array(
-            "cities"=>$cities
+            "enterprise"=>$enterprise
         ));
     }
 
