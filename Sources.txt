@@ -1,0 +1,2 @@
+https://sql.sh/514-liste-pays-csv-xml
+https://sql.sh/736-base-donnees-villes-francaises
