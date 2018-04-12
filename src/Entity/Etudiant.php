@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Etudiant
  *
- * @ORM\Table(name="Etudiant", uniqueConstraints={@ORM\UniqueConstraint(name="numeroEtudiant_UNIQUE", columns={"numeroEtudiant"})}, indexes={@ORM\Index(name="fk_Etudiant_Startup1_idx", columns={"idStartup"}), @ORM\Index(name="fk_Etudiant_Personne1_idx", columns={"idPersonne"}), @ORM\Index(name="fk_Etudiant_Specialite1_idx", columns={"idSpecialite"})})
+ * @ORM\Table(name="etudiant", uniqueConstraints={@ORM\UniqueConstraint(name="numeroEtudiant_UNIQUE", columns={"numero_etudiant"})}, indexes={@ORM\Index(name="fk_Etudiant_Startup1_idx", columns={"id_startup"}), @ORM\Index(name="fk_Etudiant_Personne1_idx", columns={"id_personne"}), @ORM\Index(name="fk_Etudiant_Specialite1_idx", columns={"id_specialite"})})
  * @ORM\Entity
  */
 class Etudiant
@@ -24,23 +24,23 @@ class Etudiant
     /**
      * @var int
      *
-     * @ORM\Column(name="numeroEtudiant", type="integer", nullable=false)
+     * @ORM\Column(name="numero_etudiant", type="integer", nullable=false)
      */
-    private $numeroetudiant;
+    private $numeroEtudiant;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mailEtudiant", type="string", length=100, nullable=false)
+     * @ORM\Column(name="mail_etudiant", type="string", length=100, nullable=false)
      */
-    private $mailetudiant;
+    private $mailEtudiant;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="anneeEtude", type="integer", nullable=false)
+     * @ORM\Column(name="annee_etude", type="integer", nullable=false)
      */
-    private $anneeetude;
+    private $anneeEtude;
 
     /**
      * @var bool
@@ -52,216 +52,307 @@ class Etudiant
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="dateDiplomation", type="date", nullable=true)
+     * @ORM\Column(name="date_diplomation", type="date", nullable=true)
      */
-    private $datediplomation;
+    private $dateDiplomation;
 
     /**
-     * @var \Personne
+     * @var \App\Entity\Personne
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Personne")
+     * @ORM\OneToOne(targetEntity="App\Entity\Personne")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonne", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personne", referencedColumnName="id")
      * })
      */
-    private $idpersonne;
+    private $idPersonne;
 
     /**
-     * @var \Specialite
+     * @var \App\Entity\Specialite
      *
-     * @ORM\ManyToOne(targetEntity="Specialite")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Specialite")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idSpecialite", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_specialite", referencedColumnName="id")
      * })
      */
-    private $idspecialite;
+    private $idSpecialite;
 
     /**
-     * @var \Startup
+     * @var \App\Entity\Startup
      *
-     * @ORM\ManyToOne(targetEntity="Startup")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Startup")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idStartup", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_startup", referencedColumnName="id")
      * })
      */
-    private $idstartup;
+    private $idStartup;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Conseilperfectionnement", mappedBy="idpersonneetudiant")
+     * @ORM\ManyToMany(targetEntity="App\Entity\ConseilPerfectionnement", mappedBy="idPersonneEtudiant")
      */
-    private $idconseilperfectionnement;
+    private $idConseilPerfectionnement;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idconseilperfectionnement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idConseilPerfectionnement = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Set id.
+     *
+     * @param int $id
+     *
+     * @return Etudiant
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set numeroEtudiant.
+     *
+     * @param int $numeroEtudiant
+     *
+     * @return Etudiant
      */
-    public function setId(int $id): void
+    public function setNumeroEtudiant($numeroEtudiant)
     {
-        $this->id = $id;
+        $this->numeroEtudiant = $numeroEtudiant;
+
+        return $this;
     }
 
     /**
+     * Get numeroEtudiant.
+     *
      * @return int
      */
-    public function getNumeroetudiant(): int
+    public function getNumeroEtudiant()
     {
-        return $this->numeroetudiant;
+        return $this->numeroEtudiant;
     }
 
     /**
-     * @param int $numeroetudiant
+     * Set mailEtudiant.
+     *
+     * @param string $mailEtudiant
+     *
+     * @return Etudiant
      */
-    public function setNumeroetudiant(int $numeroetudiant): void
+    public function setMailEtudiant($mailEtudiant)
     {
-        $this->numeroetudiant = $numeroetudiant;
+        $this->mailEtudiant = $mailEtudiant;
+
+        return $this;
     }
 
     /**
+     * Get mailEtudiant.
+     *
      * @return string
      */
-    public function getMailetudiant(): string
+    public function getMailEtudiant()
     {
-        return $this->mailetudiant;
+        return $this->mailEtudiant;
     }
 
     /**
-     * @param string $mailetudiant
+     * Set anneeEtude.
+     *
+     * @param int $anneeEtude
+     *
+     * @return Etudiant
      */
-    public function setMailetudiant(string $mailetudiant): void
+    public function setAnneeEtude($anneeEtude)
     {
-        $this->mailetudiant = $mailetudiant;
+        $this->anneeEtude = $anneeEtude;
+
+        return $this;
     }
 
     /**
+     * Get anneeEtude.
+     *
      * @return int
      */
-    public function getAnneeetude(): int
+    public function getAnneeEtude()
     {
-        return $this->anneeetude;
+        return $this->anneeEtude;
     }
 
     /**
-     * @param int $anneeetude
+     * Set diplome.
+     *
+     * @param bool $diplome
+     *
+     * @return Etudiant
      */
-    public function setAnneeetude(int $anneeetude): void
+    public function setDiplome($diplome)
     {
-        $this->anneeetude = $anneeetude;
+        $this->diplome = $diplome;
+
+        return $this;
     }
 
     /**
+     * Get diplome.
+     *
      * @return bool
      */
-    public function isDiplome(): bool
+    public function getDiplome()
     {
         return $this->diplome;
     }
 
     /**
-     * @param bool $diplome
+     * Set dateDiplomation.
+     *
+     * @param \DateTime|null $dateDiplomation
+     *
+     * @return Etudiant
      */
-    public function setDiplome(bool $diplome): void
+    public function setDateDiplomation($dateDiplomation = null)
     {
-        $this->diplome = $diplome;
+        $this->dateDiplomation = $dateDiplomation;
+
+        return $this;
     }
 
     /**
+     * Get dateDiplomation.
+     *
      * @return \DateTime|null
      */
-    public function getDatediplomation(): ?\DateTime
+    public function getDateDiplomation()
     {
-        return $this->datediplomation;
+        return $this->dateDiplomation;
     }
 
     /**
-     * @param \DateTime|null $datediplomation
+     * Set idPersonne.
+     *
+     * @param \App\Entity\Personne $idPersonne
+     *
+     * @return Etudiant
      */
-    public function setDatediplomation(?\DateTime $datediplomation): void
+    public function setIdPersonne(\App\Entity\Personne $idPersonne)
     {
-        $this->datediplomation = $datediplomation;
+        $this->idPersonne = $idPersonne;
+
+        return $this;
     }
 
     /**
-     * @return \Personne
+     * Get idPersonne.
+     *
+     * @return \App\Entity\Personne
      */
-    public function getIdpersonne(): \Personne
+    public function getIdPersonne()
     {
-        return $this->idpersonne;
+        return $this->idPersonne;
     }
 
     /**
-     * @param \Personne $idpersonne
+     * Set idSpecialite.
+     *
+     * @param \App\Entity\Specialite|null $idSpecialite
+     *
+     * @return Etudiant
      */
-    public function setIdpersonne(\Personne $idpersonne): void
+    public function setIdSpecialite(\App\Entity\Specialite $idSpecialite = null)
     {
-        $this->idpersonne = $idpersonne;
+        $this->idSpecialite = $idSpecialite;
+
+        return $this;
     }
 
     /**
-     * @return \Specialite
+     * Get idSpecialite.
+     *
+     * @return \App\Entity\Specialite|null
      */
-    public function getIdspecialite(): \Specialite
+    public function getIdSpecialite()
     {
-        return $this->idspecialite;
+        return $this->idSpecialite;
     }
 
     /**
-     * @param \Specialite $idspecialite
+     * Set idStartup.
+     *
+     * @param \App\Entity\Startup|null $idStartup
+     *
+     * @return Etudiant
      */
-    public function setIdspecialite(\Specialite $idspecialite): void
+    public function setIdStartup(\App\Entity\Startup $idStartup = null)
     {
-        $this->idspecialite = $idspecialite;
+        $this->idStartup = $idStartup;
+
+        return $this;
     }
 
     /**
-     * @return \Startup
+     * Get idStartup.
+     *
+     * @return \App\Entity\Startup|null
      */
-    public function getIdstartup(): \Startup
+    public function getIdStartup()
     {
-        return $this->idstartup;
+        return $this->idStartup;
     }
 
     /**
-     * @param \Startup $idstartup
+     * Add idConseilPerfectionnement.
+     *
+     * @param \App\Entity\ConseilPerfectionnement $idConseilPerfectionnement
+     *
+     * @return Etudiant
      */
-    public function setIdstartup(\Startup $idstartup): void
+    public function addIdConseilPerfectionnement(\App\Entity\ConseilPerfectionnement $idConseilPerfectionnement)
     {
-        $this->idstartup = $idstartup;
+        $this->idConseilPerfectionnement[] = $idConseilPerfectionnement;
+
+        return $this;
     }
 
     /**
+     * Remove idConseilPerfectionnement.
+     *
+     * @param \App\Entity\ConseilPerfectionnement $idConseilPerfectionnement
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdConseilPerfectionnement(\App\Entity\ConseilPerfectionnement $idConseilPerfectionnement)
+    {
+        return $this->idConseilPerfectionnement->removeElement($idConseilPerfectionnement);
+    }
+
+    /**
+     * Get idConseilPerfectionnement.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdconseilperfectionnement(): \Doctrine\Common\Collections\Collection
+    public function getIdConseilPerfectionnement()
     {
-        return $this->idconseilperfectionnement;
+        return $this->idConseilPerfectionnement;
     }
-
-    /**
-     * @param \Doctrine\Common\Collections\Collection $idconseilperfectionnement
-     */
-    public function setIdconseilperfectionnement(\Doctrine\Common\Collections\Collection $idconseilperfectionnement): void
-    {
-        $this->idconseilperfectionnement = $idconseilperfectionnement;
-    }
-
-
 }

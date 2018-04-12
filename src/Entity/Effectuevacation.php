@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Effectuevacation
+ * EffectueVacation
  *
- * @ORM\Table(name="EffectueVacation", indexes={@ORM\Index(name="fk_EffectueVacation_ContactEtablissement1_idx", columns={"idContactEtablissement", "idPersonneContactEtablissement"}), @ORM\Index(name="fk_EffectueVacation_Etablissement1_idx", columns={"idEtablissement"})})
+ * @ORM\Table(name="effectue_vacation", indexes={@ORM\Index(name="fk_EffectueVacation_ContactEtablissement1_idx", columns={"id_contact_etablissement", "id_personne_contact_etablissement"}), @ORM\Index(name="fk_EffectueVacation_Etablissement1_idx", columns={"id_etablissement"})})
  * @ORM\Entity
  */
-class Effectuevacation
+class EffectueVacation
 {
     /**
      * @var int
@@ -24,164 +24,205 @@ class Effectuevacation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutVacation", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_vacation", type="date", nullable=false)
      */
-    private $datedebutvacation;
+    private $dateDebutVacation;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="dateFinVacation", type="date", nullable=true)
+     * @ORM\Column(name="date_fin_vacation", type="date", nullable=true)
      */
-    private $datefinvacation;
+    private $dateFinVacation;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="volumeHoraire", type="integer", nullable=false)
+     * @ORM\Column(name="volume_horaire", type="integer", nullable=false)
      */
-    private $volumehoraire;
+    private $volumeHoraire;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaireVacation", type="string", length=255, nullable=true)
+     * @ORM\Column(name="commentaire_vacation", type="string", length=255, nullable=true)
      */
-    private $commentairevacation;
+    private $commentaireVacation;
 
     /**
-     * @var \Contactetablissement
+     * @var \App\Entity\ContactEtablissement
      *
-     * @ORM\ManyToOne(targetEntity="Contactetablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContactEtablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idContactEtablissement", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonneContactEtablissement", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_contact_etablissement", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_contact_etablissement", referencedColumnName="id_personne")
      * })
      */
-    private $idcontactetablissement;
+    private $idContactEtablissement;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateDebutVacation.
+     *
+     * @param \DateTime $dateDebutVacation
+     *
+     * @return EffectueVacation
      */
-    public function setId(int $id): void
+    public function setDateDebutVacation($dateDebutVacation)
     {
-        $this->id = $id;
+        $this->dateDebutVacation = $dateDebutVacation;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutVacation.
+     *
      * @return \DateTime
      */
-    public function getDatedebutvacation(): \DateTime
+    public function getDateDebutVacation()
     {
-        return $this->datedebutvacation;
+        return $this->dateDebutVacation;
     }
 
     /**
-     * @param \DateTime $datedebutvacation
+     * Set dateFinVacation.
+     *
+     * @param \DateTime|null $dateFinVacation
+     *
+     * @return EffectueVacation
      */
-    public function setDatedebutvacation(\DateTime $datedebutvacation): void
+    public function setDateFinVacation($dateFinVacation = null)
     {
-        $this->datedebutvacation = $datedebutvacation;
+        $this->dateFinVacation = $dateFinVacation;
+
+        return $this;
     }
 
     /**
+     * Get dateFinVacation.
+     *
      * @return \DateTime|null
      */
-    public function getDatefinvacation(): ?\DateTime
+    public function getDateFinVacation()
     {
-        return $this->datefinvacation;
+        return $this->dateFinVacation;
     }
 
     /**
-     * @param \DateTime|null $datefinvacation
+     * Set volumeHoraire.
+     *
+     * @param int $volumeHoraire
+     *
+     * @return EffectueVacation
      */
-    public function setDatefinvacation(?\DateTime $datefinvacation): void
+    public function setVolumeHoraire($volumeHoraire)
     {
-        $this->datefinvacation = $datefinvacation;
+        $this->volumeHoraire = $volumeHoraire;
+
+        return $this;
     }
 
     /**
+     * Get volumeHoraire.
+     *
      * @return int
      */
-    public function getVolumehoraire(): int
+    public function getVolumeHoraire()
     {
-        return $this->volumehoraire;
+        return $this->volumeHoraire;
     }
 
     /**
-     * @param int $volumehoraire
+     * Set commentaireVacation.
+     *
+     * @param string|null $commentaireVacation
+     *
+     * @return EffectueVacation
      */
-    public function setVolumehoraire(int $volumehoraire): void
+    public function setCommentaireVacation($commentaireVacation = null)
     {
-        $this->volumehoraire = $volumehoraire;
+        $this->commentaireVacation = $commentaireVacation;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get commentaireVacation.
+     *
+     * @return string|null
      */
-    public function getCommentairevacation(): ?string
+    public function getCommentaireVacation()
     {
-        return $this->commentairevacation;
+        return $this->commentaireVacation;
     }
 
     /**
-     * @param null|string $commentairevacation
+     * Set idContactEtablissement.
+     *
+     * @param \App\Entity\ContactEtablissement|null $idContactEtablissement
+     *
+     * @return EffectueVacation
      */
-    public function setCommentairevacation(?string $commentairevacation): void
+    public function setIdContactEtablissement(\App\Entity\ContactEtablissement $idContactEtablissement = null)
     {
-        $this->commentairevacation = $commentairevacation;
+        $this->idContactEtablissement = $idContactEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Contactetablissement
+     * Get idContactEtablissement.
+     *
+     * @return \App\Entity\ContactEtablissement|null
      */
-    public function getIdcontactetablissement(): \Contactetablissement
+    public function getIdContactEtablissement()
     {
-        return $this->idcontactetablissement;
+        return $this->idContactEtablissement;
     }
 
     /**
-     * @param \Contactetablissement $idcontactetablissement
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return EffectueVacation
      */
-    public function setIdcontactetablissement(\Contactetablissement $idcontactetablissement): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->idcontactetablissement = $idcontactetablissement;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
-
-    /**
-     * @param \Etablissement $idetablissement
-     */
-    public function setIdetablissement(\Etablissement $idetablissement): void
-    {
-        $this->idetablissement = $idetablissement;
-    }
-
-
-
 }

@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Forum
  *
- * @ORM\Table(name="Forum")
+ * @ORM\Table(name="forum", indexes={@ORM\Index(name="fk_Forum_TypeForum1_idx", columns={"id_type_forum"}), @ORM\Index(name="fk_Forum_Adresse1_idx", columns={"id_adresse"})})
  * @ORM\Entity
  */
 class Forum
@@ -22,120 +22,206 @@ class Forum
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_forum", type="string", length=45, nullable=false)
+     */
+    private $nomForum;
+
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutForum", type="datetime", nullable=false)
+     * @ORM\Column(name="date_debut_forum", type="datetime", nullable=false)
      */
-    private $datedebutforum;
+    private $dateDebutForum;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="dateFinForum", type="datetime", nullable=true)
+     * @ORM\Column(name="date_fin_forum", type="datetime", nullable=true)
      */
-    private $datefinforum;
+    private $dateFinForum;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaireForum", type="string", length=255, nullable=true)
+     * @ORM\Column(name="commentaire_forum", type="string", length=255, nullable=true)
      */
-    private $commentaireforum;
+    private $commentaireForum;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var \App\Entity\Adresse
      *
-     * @ORM\ManyToMany(targetEntity="Contactetablissement", mappedBy="idforum")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Adresse")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_adresse", referencedColumnName="id")
+     * })
      */
-    private $idcontactetablissement;
+    private $idAdresse;
 
     /**
-     * Constructor
+     * @var \App\Entity\TypeForum
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeForum")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_type_forum", referencedColumnName="id")
+     * })
      */
-    public function __construct()
-    {
-        $this->idcontactetablissement = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $idTypeForum;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set nomForum.
+     *
+     * @param string $nomForum
+     *
+     * @return Forum
      */
-    public function setId(int $id): void
+    public function setNomForum($nomForum)
     {
-        $this->id = $id;
+        $this->nomForum = $nomForum;
+
+        return $this;
     }
 
     /**
+     * Get nomForum.
+     *
+     * @return string
+     */
+    public function getNomForum()
+    {
+        return $this->nomForum;
+    }
+
+    /**
+     * Set dateDebutForum.
+     *
+     * @param \DateTime $dateDebutForum
+     *
+     * @return Forum
+     */
+    public function setDateDebutForum($dateDebutForum)
+    {
+        $this->dateDebutForum = $dateDebutForum;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebutForum.
+     *
      * @return \DateTime
      */
-    public function getDatedebutforum(): \DateTime
+    public function getDateDebutForum()
     {
-        return $this->datedebutforum;
+        return $this->dateDebutForum;
     }
 
     /**
-     * @param \DateTime $datedebutforum
+     * Set dateFinForum.
+     *
+     * @param \DateTime|null $dateFinForum
+     *
+     * @return Forum
      */
-    public function setDatedebutforum(\DateTime $datedebutforum): void
+    public function setDateFinForum($dateFinForum = null)
     {
-        $this->datedebutforum = $datedebutforum;
+        $this->dateFinForum = $dateFinForum;
+
+        return $this;
     }
 
     /**
+     * Get dateFinForum.
+     *
      * @return \DateTime|null
      */
-    public function getDatefinforum(): ?\DateTime
+    public function getDateFinForum()
     {
-        return $this->datefinforum;
+        return $this->dateFinForum;
     }
 
     /**
-     * @param \DateTime|null $datefinforum
+     * Set commentaireForum.
+     *
+     * @param string|null $commentaireForum
+     *
+     * @return Forum
      */
-    public function setDatefinforum(?\DateTime $datefinforum): void
+    public function setCommentaireForum($commentaireForum = null)
     {
-        $this->datefinforum = $datefinforum;
+        $this->commentaireForum = $commentaireForum;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get commentaireForum.
+     *
+     * @return string|null
      */
-    public function getCommentaireforum(): ?string
+    public function getCommentaireForum()
     {
-        return $this->commentaireforum;
+        return $this->commentaireForum;
     }
 
     /**
-     * @param null|string $commentaireforum
+     * Set idAdresse.
+     *
+     * @param \App\Entity\Adresse|null $idAdresse
+     *
+     * @return Forum
      */
-    public function setCommentaireforum(?string $commentaireforum): void
+    public function setIdAdresse(\App\Entity\Adresse $idAdresse = null)
     {
-        $this->commentaireforum = $commentaireforum;
+        $this->idAdresse = $idAdresse;
+
+        return $this;
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * Get idAdresse.
+     *
+     * @return \App\Entity\Adresse|null
      */
-    public function getIdcontactetablissement(): \Doctrine\Common\Collections\Collection
+    public function getIdAdresse()
     {
-        return $this->idcontactetablissement;
+        return $this->idAdresse;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $idcontactetablissement
+     * Set idTypeForum.
+     *
+     * @param \App\Entity\TypeForum|null $idTypeForum
+     *
+     * @return Forum
      */
-    public function setIdcontactetablissement(\Doctrine\Common\Collections\Collection $idcontactetablissement): void
+    public function setIdTypeForum(\App\Entity\TypeForum $idTypeForum = null)
     {
-        $this->idcontactetablissement = $idcontactetablissement;
+        $this->idTypeForum = $idTypeForum;
+
+        return $this;
     }
 
-
+    /**
+     * Get idTypeForum.
+     *
+     * @return \App\Entity\TypeForum|null
+     */
+    public function getIdTypeForum()
+    {
+        return $this->idTypeForum;
+    }
 }

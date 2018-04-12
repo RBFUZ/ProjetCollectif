@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Gratification
  *
- * @ORM\Table(name="Gratification")
+ * @ORM\Table(name="gratification")
  * @ORM\Entity
  */
 class Gratification
@@ -24,87 +24,105 @@ class Gratification
     /**
      * @var float
      *
-     * @ORM\Column(name="montantGratification", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="montant_gratification", type="float", precision=10, scale=0, nullable=false)
      */
-    private $montantgratification;
+    private $montantGratification;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="uniteGratification", type="string", length=45, nullable=false, options={"comment"="BRUT / NET"})
+     * @ORM\Column(name="unite_gratification", type="string", length=45, nullable=false, options={"comment"="BRUT / NET"})
      */
-    private $unitegratification;
+    private $uniteGratification;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="uniteDureeGratification", type="string", length=45, nullable=false, options={"comment"="HEURE, MOIS, etc."})
+     * @ORM\Column(name="unite_duree_gratification", type="string", length=45, nullable=false, options={"comment"="HEURE, MOIS, etc."})
      */
-    private $unitedureegratification;
+    private $uniteDureeGratification;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set montantGratification.
+     *
+     * @param float $montantGratification
+     *
+     * @return Gratification
      */
-    public function setId(int $id): void
+    public function setMontantGratification($montantGratification)
     {
-        $this->id = $id;
+        $this->montantGratification = $montantGratification;
+
+        return $this;
     }
 
     /**
+     * Get montantGratification.
+     *
      * @return float
      */
-    public function getMontantgratification(): float
+    public function getMontantGratification()
     {
-        return $this->montantgratification;
+        return $this->montantGratification;
     }
 
     /**
-     * @param float $montantgratification
+     * Set uniteGratification.
+     *
+     * @param string $uniteGratification
+     *
+     * @return Gratification
      */
-    public function setMontantgratification(float $montantgratification): void
+    public function setUniteGratification($uniteGratification)
     {
-        $this->montantgratification = $montantgratification;
+        $this->uniteGratification = $uniteGratification;
+
+        return $this;
     }
 
     /**
+     * Get uniteGratification.
+     *
      * @return string
      */
-    public function getUnitegratification(): string
+    public function getUniteGratification()
     {
-        return $this->unitegratification;
+        return $this->uniteGratification;
     }
 
     /**
-     * @param string $unitegratification
+     * Set uniteDureeGratification.
+     *
+     * @param string $uniteDureeGratification
+     *
+     * @return Gratification
      */
-    public function setUnitegratification(string $unitegratification): void
+    public function setUniteDureeGratification($uniteDureeGratification)
     {
-        $this->unitegratification = $unitegratification;
+        $this->uniteDureeGratification = $uniteDureeGratification;
+
+        return $this;
     }
 
     /**
+     * Get uniteDureeGratification.
+     *
      * @return string
      */
-    public function getUnitedureegratification(): string
+    public function getUniteDureeGratification()
     {
-        return $this->unitedureegratification;
+        return $this->uniteDureeGratification;
     }
-
-    /**
-     * @param string $unitedureegratification
-     */
-    public function setUnitedureegratification(string $unitedureegratification): void
-    {
-        $this->unitedureegratification = $unitedureegratification;
-    }
-
-
 }

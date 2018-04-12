@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Personne
  *
- * @ORM\Table(name="Personne", indexes={@ORM\Index(name="fk_Personne_Adresse1_idx", columns={"idAdresse"})})
+ * @ORM\Table(name="personne", indexes={@ORM\Index(name="fk_Personne_Adresse1_idx", columns={"id_adresse"})})
  * @ORM\Entity
  */
 class Personne
@@ -38,16 +38,16 @@ class Personne
     /**
      * @var string|null
      *
-     * @ORM\Column(name="adresseMailPerso", type="string", length=100, nullable=true)
+     * @ORM\Column(name="adresse_mail_perso", type="string", length=100, nullable=true)
      */
-    private $adressemailperso;
+    private $adresseMailPerso;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="codeSexe", type="string", length=1, nullable=true)
+     * @ORM\Column(name="code_sexe", type="string", length=1, nullable=true, options={"comment"="M, F, etc."})
      */
-    private $codesexe;
+    private $codeSexe;
 
     /**
      * @var string|null
@@ -57,165 +57,226 @@ class Personne
     private $nationalite;
 
     /**
-     * @var \Adresse
+     * @var \App\Entity\Adresse
      *
-     * @ORM\ManyToOne(targetEntity="Adresse")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Adresse")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idAdresse", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_adresse", referencedColumnName="id")
      * })
      */
-    private $idadresse;
+    private $idAdresse;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Telephone", inversedBy="idpersonne")
-     * @ORM\JoinTable(name="possedetelephone",
+     * @ORM\ManyToMany(targetEntity="App\Entity\Telephone", inversedBy="idPersonne")
+     * @ORM\JoinTable(name="possede_telephone",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="idPersonne", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_personne", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idTelephone", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_telephone", referencedColumnName="id")
      *   }
      * )
      */
-    private $idtelephone;
+    private $idTelephone;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idtelephone = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idTelephone = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set nom.
+     *
+     * @param string $nom
+     *
+     * @return Personne
      */
-    public function setId(int $id): void
+    public function setNom($nom)
     {
-        $this->id = $id;
+        $this->nom = $nom;
+
+        return $this;
     }
 
     /**
+     * Get nom.
+     *
      * @return string
      */
-    public function getNom(): string
+    public function getNom()
     {
         return $this->nom;
     }
 
     /**
-     * @param string $nom
+     * Set prenom.
+     *
+     * @param string $prenom
+     *
+     * @return Personne
      */
-    public function setNom(string $nom): void
+    public function setPrenom($prenom)
     {
-        $this->nom = $nom;
+        $this->prenom = $prenom;
+
+        return $this;
     }
 
     /**
+     * Get prenom.
+     *
      * @return string
      */
-    public function getPrenom(): string
+    public function getPrenom()
     {
         return $this->prenom;
     }
 
     /**
-     * @param string $prenom
+     * Set adresseMailPerso.
+     *
+     * @param string|null $adresseMailPerso
+     *
+     * @return Personne
      */
-    public function setPrenom(string $prenom): void
+    public function setAdresseMailPerso($adresseMailPerso = null)
     {
-        $this->prenom = $prenom;
+        $this->adresseMailPerso = $adresseMailPerso;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get adresseMailPerso.
+     *
+     * @return string|null
      */
-    public function getAdressemailperso(): ?string
+    public function getAdresseMailPerso()
     {
-        return $this->adressemailperso;
+        return $this->adresseMailPerso;
     }
 
     /**
-     * @param null|string $adressemailperso
+     * Set codeSexe.
+     *
+     * @param string|null $codeSexe
+     *
+     * @return Personne
      */
-    public function setAdressemailperso(?string $adressemailperso): void
+    public function setCodeSexe($codeSexe = null)
     {
-        $this->adressemailperso = $adressemailperso;
+        $this->codeSexe = $codeSexe;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get codeSexe.
+     *
+     * @return string|null
      */
-    public function getCodesexe(): ?string
+    public function getCodeSexe()
     {
-        return $this->codesexe;
+        return $this->codeSexe;
     }
 
     /**
-     * @param null|string $codesexe
+     * Set nationalite.
+     *
+     * @param string|null $nationalite
+     *
+     * @return Personne
      */
-    public function setCodesexe(?string $codesexe): void
+    public function setNationalite($nationalite = null)
     {
-        $this->codesexe = $codesexe;
+        $this->nationalite = $nationalite;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get nationalite.
+     *
+     * @return string|null
      */
-    public function getNationalite(): ?string
+    public function getNationalite()
     {
         return $this->nationalite;
     }
 
     /**
-     * @param null|string $nationalite
+     * Set idAdresse.
+     *
+     * @param \App\Entity\Adresse|null $idAdresse
+     *
+     * @return Personne
      */
-    public function setNationalite(?string $nationalite): void
+    public function setIdAdresse(\App\Entity\Adresse $idAdresse = null)
     {
-        $this->nationalite = $nationalite;
+        $this->idAdresse = $idAdresse;
+
+        return $this;
     }
 
     /**
-     * @return \Adresse
+     * Get idAdresse.
+     *
+     * @return \App\Entity\Adresse|null
      */
-    public function getIdadresse(): \Adresse
+    public function getIdAdresse()
     {
-        return $this->idadresse;
+        return $this->idAdresse;
     }
 
     /**
-     * @param \Adresse $idadresse
+     * Add idTelephone.
+     *
+     * @param \App\Entity\Telephone $idTelephone
+     *
+     * @return Personne
      */
-    public function setIdadresse(\Adresse $idadresse): void
+    public function addIdTelephone(\App\Entity\Telephone $idTelephone)
     {
-        $this->idadresse = $idadresse;
+        $this->idTelephone[] = $idTelephone;
+
+        return $this;
     }
 
     /**
+     * Remove idTelephone.
+     *
+     * @param \App\Entity\Telephone $idTelephone
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdTelephone(\App\Entity\Telephone $idTelephone)
+    {
+        return $this->idTelephone->removeElement($idTelephone);
+    }
+
+    /**
+     * Get idTelephone.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdtelephone(): \Doctrine\Common\Collections\Collection
+    public function getIdTelephone()
     {
-        return $this->idtelephone;
+        return $this->idTelephone;
     }
-
-    /**
-     * @param \Doctrine\Common\Collections\Collection $idtelephone
-     */
-    public function setIdtelephone(\Doctrine\Common\Collections\Collection $idtelephone): void
-    {
-        $this->idtelephone = $idtelephone;
-    }
-
-
 }

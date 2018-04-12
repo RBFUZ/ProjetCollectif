@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Cifre
  *
- * @ORM\Table(name="CIFRE", indexes={@ORM\Index(name="fk_CIFRE_Etudiant1_idx", columns={"idPersonneEtudiant", "idEtudiant"}), @ORM\Index(name="fk_CIFRE_Etablissement1_idx", columns={"idEtablissement"}), @ORM\Index(name="fk_CIFRE_PersonnelPolytech1_idx", columns={"idPersonnePersonnelPolytech", "idPersonnelPolytech"})})
+ * @ORM\Table(name="cifre", indexes={@ORM\Index(name="fk_CIFRE_Etudiant1_idx", columns={"id_personne_etudiant", "id_etudiant"}), @ORM\Index(name="fk_CIFRE_Etablissement1_idx", columns={"id_etablissement"}), @ORM\Index(name="fk_CIFRE_PersonnelPolytech1_idx", columns={"id_personne_personnel_polytech", "id_personnel_polytech"})})
  * @ORM\Entity
  */
 class Cifre
@@ -24,16 +24,16 @@ class Cifre
     /**
      * @var string
      *
-     * @ORM\Column(name="intituleCIFRE", type="string", length=255, nullable=false)
+     * @ORM\Column(name="intitule_cifre", type="string", length=255, nullable=false)
      */
-    private $intitulecifre;
+    private $intituleCifre;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutCIFRE", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_cifre", type="date", nullable=false)
      */
-    private $datedebutcifre;
+    private $dateDebutCifre;
 
     /**
      * @var bool
@@ -43,148 +43,190 @@ class Cifre
     private $soutenue;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
 
     /**
-     * @var \Etudiant
+     * @var \App\Entity\Etudiant
      *
-     * @ORM\ManyToOne(targetEntity="Etudiant")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etudiant")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonneEtudiant", referencedColumnName="idPersonne"),
-     *   @ORM\JoinColumn(name="idEtudiant", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personne_etudiant", referencedColumnName="id_personne"),
+     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
      * })
      */
-    private $idpersonneetudiant;
+    private $idPersonneEtudiant;
 
     /**
-     * @var \Personnelpolytech
+     * @var \App\Entity\PersonnelPolytech
      *
-     * @ORM\ManyToOne(targetEntity="Personnelpolytech")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PersonnelPolytech")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonnePersonnelPolytech", referencedColumnName="idPersonne"),
-     *   @ORM\JoinColumn(name="idPersonnelPolytech", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personne_personnel_polytech", referencedColumnName="id_personne"),
+     *   @ORM\JoinColumn(name="id_personnel_polytech", referencedColumnName="id")
      * })
      */
-    private $idpersonnepersonnelpolytech;
+    private $idPersonnePersonnelPolytech;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set intituleCifre.
+     *
+     * @param string $intituleCifre
+     *
+     * @return Cifre
      */
-    public function setId(int $id): void
+    public function setIntituleCifre($intituleCifre)
     {
-        $this->id = $id;
+        $this->intituleCifre = $intituleCifre;
+
+        return $this;
     }
 
     /**
+     * Get intituleCifre.
+     *
      * @return string
      */
-    public function getIntitulecifre(): string
+    public function getIntituleCifre()
     {
-        return $this->intitulecifre;
+        return $this->intituleCifre;
     }
 
     /**
-     * @param string $intitulecifre
+     * Set dateDebutCifre.
+     *
+     * @param \DateTime $dateDebutCifre
+     *
+     * @return Cifre
      */
-    public function setIntitulecifre(string $intitulecifre): void
+    public function setDateDebutCifre($dateDebutCifre)
     {
-        $this->intitulecifre = $intitulecifre;
+        $this->dateDebutCifre = $dateDebutCifre;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutCifre.
+     *
      * @return \DateTime
      */
-    public function getDatedebutcifre(): \DateTime
+    public function getDateDebutCifre()
     {
-        return $this->datedebutcifre;
+        return $this->dateDebutCifre;
     }
 
     /**
-     * @param \DateTime $datedebutcifre
+     * Set soutenue.
+     *
+     * @param bool $soutenue
+     *
+     * @return Cifre
      */
-    public function setDatedebutcifre(\DateTime $datedebutcifre): void
+    public function setSoutenue($soutenue)
     {
-        $this->datedebutcifre = $datedebutcifre;
+        $this->soutenue = $soutenue;
+
+        return $this;
     }
 
     /**
+     * Get soutenue.
+     *
      * @return bool
      */
-    public function isSoutenue(): bool
+    public function getSoutenue()
     {
         return $this->soutenue;
     }
 
     /**
-     * @param bool $soutenue
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return Cifre
      */
-    public function setSoutenue(bool $soutenue): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->soutenue = $soutenue;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
 
     /**
-     * @param \Etablissement $idetablissement
+     * Set idPersonneEtudiant.
+     *
+     * @param \App\Entity\Etudiant|null $idPersonneEtudiant
+     *
+     * @return Cifre
      */
-    public function setIdetablissement(\Etablissement $idetablissement): void
+    public function setIdPersonneEtudiant(\App\Entity\Etudiant $idPersonneEtudiant = null)
     {
-        $this->idetablissement = $idetablissement;
+        $this->idPersonneEtudiant = $idPersonneEtudiant;
+
+        return $this;
     }
 
     /**
-     * @return \Etudiant
+     * Get idPersonneEtudiant.
+     *
+     * @return \App\Entity\Etudiant|null
      */
-    public function getIdpersonneetudiant(): \Etudiant
+    public function getIdPersonneEtudiant()
     {
-        return $this->idpersonneetudiant;
+        return $this->idPersonneEtudiant;
     }
 
     /**
-     * @param \Etudiant $idpersonneetudiant
+     * Set idPersonnePersonnelPolytech.
+     *
+     * @param \App\Entity\PersonnelPolytech|null $idPersonnePersonnelPolytech
+     *
+     * @return Cifre
      */
-    public function setIdpersonneetudiant(\Etudiant $idpersonneetudiant): void
+    public function setIdPersonnePersonnelPolytech(\App\Entity\PersonnelPolytech $idPersonnePersonnelPolytech = null)
     {
-        $this->idpersonneetudiant = $idpersonneetudiant;
+        $this->idPersonnePersonnelPolytech = $idPersonnePersonnelPolytech;
+
+        return $this;
     }
 
     /**
-     * @return \Personnelpolytech
+     * Get idPersonnePersonnelPolytech.
+     *
+     * @return \App\Entity\PersonnelPolytech|null
      */
-    public function getIdpersonnepersonnelpolytech(): \Personnelpolytech
+    public function getIdPersonnePersonnelPolytech()
     {
-        return $this->idpersonnepersonnelpolytech;
+        return $this->idPersonnePersonnelPolytech;
     }
-
-    /**
-     * @param \Personnelpolytech $idpersonnepersonnelpolytech
-     */
-    public function setIdpersonnepersonnelpolytech(\Personnelpolytech $idpersonnepersonnelpolytech): void
-    {
-        $this->idpersonnepersonnelpolytech = $idpersonnepersonnelpolytech;
-    }
-
-
 }

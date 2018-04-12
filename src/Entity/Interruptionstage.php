@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Interruptionstage
+ * InterruptionStage
  *
- * @ORM\Table(name="InterruptionStage", indexes={@ORM\Index(name="fk_InterruptionStage_ConventionStage1_idx", columns={"idConventionStage"})})
+ * @ORM\Table(name="interruption_stage", indexes={@ORM\Index(name="fk_InterruptionStage_ConventionStage1_idx", columns={"id_convention_stage"})})
  * @ORM\Entity
  */
-class Interruptionstage
+class InterruptionStage
 {
     /**
      * @var int
@@ -24,113 +24,139 @@ class Interruptionstage
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutInterruption", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_interruption", type="date", nullable=false)
      */
-    private $datedebutinterruption;
+    private $dateDebutInterruption;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateFinInterruption", type="date", nullable=false)
+     * @ORM\Column(name="date_fin_interruption", type="date", nullable=false)
      */
-    private $datefininterruption;
+    private $dateFinInterruption;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaireInterruption", type="string", length=255, nullable=true)
+     * @ORM\Column(name="commentaire_interruption", type="string", length=255, nullable=true)
      */
-    private $commentaireinterruption;
+    private $commentaireInterruption;
 
     /**
-     * @var \Conventionstage
+     * @var \App\Entity\ConventionStage
      *
-     * @ORM\ManyToOne(targetEntity="Conventionstage")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ConventionStage")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idConventionStage", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_convention_stage", referencedColumnName="id")
      * })
      */
-    private $idconventionstage;
+    private $idConventionStage;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateDebutInterruption.
+     *
+     * @param \DateTime $dateDebutInterruption
+     *
+     * @return InterruptionStage
      */
-    public function setId(int $id): void
+    public function setDateDebutInterruption($dateDebutInterruption)
     {
-        $this->id = $id;
+        $this->dateDebutInterruption = $dateDebutInterruption;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutInterruption.
+     *
      * @return \DateTime
      */
-    public function getDatedebutinterruption(): \DateTime
+    public function getDateDebutInterruption()
     {
-        return $this->datedebutinterruption;
+        return $this->dateDebutInterruption;
     }
 
     /**
-     * @param \DateTime $datedebutinterruption
+     * Set dateFinInterruption.
+     *
+     * @param \DateTime $dateFinInterruption
+     *
+     * @return InterruptionStage
      */
-    public function setDatedebutinterruption(\DateTime $datedebutinterruption): void
+    public function setDateFinInterruption($dateFinInterruption)
     {
-        $this->datedebutinterruption = $datedebutinterruption;
+        $this->dateFinInterruption = $dateFinInterruption;
+
+        return $this;
     }
 
     /**
+     * Get dateFinInterruption.
+     *
      * @return \DateTime
      */
-    public function getDatefininterruption(): \DateTime
+    public function getDateFinInterruption()
     {
-        return $this->datefininterruption;
+        return $this->dateFinInterruption;
     }
 
     /**
-     * @param \DateTime $datefininterruption
+     * Set commentaireInterruption.
+     *
+     * @param string|null $commentaireInterruption
+     *
+     * @return InterruptionStage
      */
-    public function setDatefininterruption(\DateTime $datefininterruption): void
+    public function setCommentaireInterruption($commentaireInterruption = null)
     {
-        $this->datefininterruption = $datefininterruption;
+        $this->commentaireInterruption = $commentaireInterruption;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get commentaireInterruption.
+     *
+     * @return string|null
      */
-    public function getCommentaireinterruption(): ?string
+    public function getCommentaireInterruption()
     {
-        return $this->commentaireinterruption;
+        return $this->commentaireInterruption;
     }
 
     /**
-     * @param null|string $commentaireinterruption
+     * Set idConventionStage.
+     *
+     * @param \App\Entity\ConventionStage|null $idConventionStage
+     *
+     * @return InterruptionStage
      */
-    public function setCommentaireinterruption(?string $commentaireinterruption): void
+    public function setIdConventionStage(\App\Entity\ConventionStage $idConventionStage = null)
     {
-        $this->commentaireinterruption = $commentaireinterruption;
+        $this->idConventionStage = $idConventionStage;
+
+        return $this;
     }
 
     /**
-     * @return \Conventionstage
+     * Get idConventionStage.
+     *
+     * @return \App\Entity\ConventionStage|null
      */
-    public function getIdconventionstage(): \Conventionstage
+    public function getIdConventionStage()
     {
-        return $this->idconventionstage;
+        return $this->idConventionStage;
     }
-
-    /**
-     * @param \Conventionstage $idconventionstage
-     */
-    public function setIdconventionstage(\Conventionstage $idconventionstage): void
-    {
-        $this->idconventionstage = $idconventionstage;
-    }
-
-
 }

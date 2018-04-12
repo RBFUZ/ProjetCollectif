@@ -12,8 +12,8 @@
             <i class="dropdown icon"></i>
             <div class="default text">Établissement</div>
             <div class="menu">
-                <div class="item" data-value="Orange">Orange</div>
-                <div class="item" data-value="Worldline">Worldline</div>
+                <div class="item" data-value="CNRS">CNRS</div>
+                <div class="item" data-value="EDF">EDF</div>
                 <div class="item" data-value="Google">Google</div>
                 <div class="item" data-value="Amazon">Amazon</div>
             </div>
@@ -24,10 +24,9 @@
             <input type="hidden" name="ville" >
             <i class="dropdown icon"></i>
             <div class="default text">Ville</div>
-            <div class="menu">
-                {% for city in cities %}
-                <div class="item" data-value="{{city.id }}">{{city.nomville }}</div>
-                {% endfor %}
+            <div id="list_cities" class="menu" >
+                <div class="item" v-for="c in cities" data-value="${c.id}">${c.name}</div>
+
             </div>
         </div>
     </div>

@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Adresse
  *
- * @ORM\Table(name="Adresse", indexes={@ORM\Index(name="fk_Adresse_Ville1_idx", columns={"Ville_idVille"})})
+ * @ORM\Table(name="adresse", indexes={@ORM\Index(name="fk_Adresse_Ville1_idx", columns={"id_ville"})})
  * @ORM\Entity
  */
 class Adresse
@@ -24,113 +24,139 @@ class Adresse
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=200, nullable=false)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
      */
     private $adresse;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="complementAdresse", type="string", length=200, nullable=true)
+     * @ORM\Column(name="complement_adresse", type="string", length=255, nullable=true)
      */
-    private $complementadresse;
+    private $complementAdresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="codePostal", type="string", length=45, nullable=false)
+     * @ORM\Column(name="code_postal", type="string", length=45, nullable=false)
      */
-    private $codepostal;
+    private $codePostal;
 
     /**
-     * @var \Ville
+     * @var \App\Entity\Ville
      *
-     * @ORM\ManyToOne(targetEntity="Ville")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Ville_idVille", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_ville", referencedColumnName="id")
      * })
      */
-    private $villeville;
+    private $idVille;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set adresse.
+     *
+     * @param string $adresse
+     *
+     * @return Adresse
      */
-    public function setId(int $id): void
+    public function setAdresse($adresse)
     {
-        $this->id = $id;
+        $this->adresse = $adresse;
+
+        return $this;
     }
 
     /**
+     * Get adresse.
+     *
      * @return string
      */
-    public function getAdresse(): string
+    public function getAdresse()
     {
         return $this->adresse;
     }
 
     /**
-     * @param string $adresse
+     * Set complementAdresse.
+     *
+     * @param string|null $complementAdresse
+     *
+     * @return Adresse
      */
-    public function setAdresse(string $adresse): void
+    public function setComplementAdresse($complementAdresse = null)
     {
-        $this->adresse = $adresse;
+        $this->complementAdresse = $complementAdresse;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get complementAdresse.
+     *
+     * @return string|null
      */
-    public function getComplementadresse(): ?string
+    public function getComplementAdresse()
     {
-        return $this->complementadresse;
+        return $this->complementAdresse;
     }
 
     /**
-     * @param null|string $complementadresse
+     * Set codePostal.
+     *
+     * @param string $codePostal
+     *
+     * @return Adresse
      */
-    public function setComplementadresse(?string $complementadresse): void
+    public function setCodePostal($codePostal)
     {
-        $this->complementadresse = $complementadresse;
+        $this->codePostal = $codePostal;
+
+        return $this;
     }
 
     /**
+     * Get codePostal.
+     *
      * @return string
      */
-    public function getCodepostal(): string
+    public function getCodePostal()
     {
-        return $this->codepostal;
+        return $this->codePostal;
     }
 
     /**
-     * @param string $codepostal
+     * Set idVille.
+     *
+     * @param \App\Entity\Ville|null $idVille
+     *
+     * @return Adresse
      */
-    public function setCodepostal(string $codepostal): void
+    public function setIdVille(\App\Entity\Ville $idVille = null)
     {
-        $this->codepostal = $codepostal;
+        $this->idVille = $idVille;
+
+        return $this;
     }
 
     /**
-     * @return \Ville
+     * Get idVille.
+     *
+     * @return \App\Entity\Ville|null
      */
-    public function getVilleville(): Ville
+    public function getIdVille()
     {
-        return $this->villeville;
+        return $this->idVille;
     }
-
-    /**
-     * @param \Ville $villeville
-     */
-    public function setVilleville(Ville $villeville): void
-    {
-        $this->villeville = $villeville;
-    }
-
-
 }

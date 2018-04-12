@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Specialite
  *
- * @ORM\Table(name="Specialite", uniqueConstraints={@ORM\UniqueConstraint(name="libelleSpecialite_UNIQUE", columns={"libelleSpecialite"})}, indexes={@ORM\Index(name="fk_Specialite_Departement1_idx", columns={"idDepartement"})})
+ * @ORM\Table(name="specialite", uniqueConstraints={@ORM\UniqueConstraint(name="libelleSpecialite_UNIQUE", columns={"libelle_specialite"})}, indexes={@ORM\Index(name="fk_Specialite_Departement1_idx", columns={"id_departement"})})
  * @ORM\Entity
  */
 class Specialite
@@ -24,68 +24,77 @@ class Specialite
     /**
      * @var string
      *
-     * @ORM\Column(name="libelleSpecialite", type="string", length=100, nullable=false)
+     * @ORM\Column(name="libelle_specialite", type="string", length=100, nullable=false)
      */
-    private $libellespecialite;
+    private $libelleSpecialite;
 
     /**
-     * @var \Departement
+     * @var \App\Entity\Departement
      *
-     * @ORM\ManyToOne(targetEntity="Departement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Departement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idDepartement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_departement", referencedColumnName="id")
      * })
      */
-    private $iddepartement;
+    private $idDepartement;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set libelleSpecialite.
+     *
+     * @param string $libelleSpecialite
+     *
+     * @return Specialite
      */
-    public function setId(int $id): void
+    public function setLibelleSpecialite($libelleSpecialite)
     {
-        $this->id = $id;
+        $this->libelleSpecialite = $libelleSpecialite;
+
+        return $this;
     }
 
     /**
+     * Get libelleSpecialite.
+     *
      * @return string
      */
-    public function getLibellespecialite(): string
+    public function getLibelleSpecialite()
     {
-        return $this->libellespecialite;
+        return $this->libelleSpecialite;
     }
 
     /**
-     * @param string $libellespecialite
+     * Set idDepartement.
+     *
+     * @param \App\Entity\Departement|null $idDepartement
+     *
+     * @return Specialite
      */
-    public function setLibellespecialite(string $libellespecialite): void
+    public function setIdDepartement(\App\Entity\Departement $idDepartement = null)
     {
-        $this->libellespecialite = $libellespecialite;
+        $this->idDepartement = $idDepartement;
+
+        return $this;
     }
 
     /**
-     * @return \Departement
+     * Get idDepartement.
+     *
+     * @return \App\Entity\Departement|null
      */
-    public function getIddepartement(): \Departement
+    public function getIdDepartement()
     {
-        return $this->iddepartement;
+        return $this->idDepartement;
     }
-
-    /**
-     * @param \Departement $iddepartement
-     */
-    public function setIddepartement(\Departement $iddepartement): void
-    {
-        $this->iddepartement = $iddepartement;
-    }
-
-
-
 }

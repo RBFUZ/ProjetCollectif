@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Avenant
  *
- * @ORM\Table(name="Avenant", indexes={@ORM\Index(name="fk_Avenant_ConventionStage1_idx", columns={"idConventionStage"})})
+ * @ORM\Table(name="avenant", indexes={@ORM\Index(name="fk_Avenant_ConventionStage1_idx", columns={"id_convention_stage"})})
  * @ORM\Entity
  */
 class Avenant
@@ -24,113 +24,139 @@ class Avenant
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreationAvenant", type="date", nullable=false)
+     * @ORM\Column(name="date_creation_avenant", type="date", nullable=false)
      */
-    private $datecreationavenant;
+    private $dateCreationAvenant;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="objetAvenant", type="string", length=45, nullable=false)
+     * @ORM\Column(name="objet_avenant", type="string", length=45, nullable=false)
      */
-    private $objetavenant;
+    private $objetAvenant;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="detailsAvenant", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="details_avenant", type="text", length=65535, nullable=true)
      */
-    private $detailsavenant;
+    private $detailsAvenant;
 
     /**
-     * @var \Conventionstage
+     * @var \App\Entity\ConventionStage
      *
-     * @ORM\ManyToOne(targetEntity="Conventionstage")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ConventionStage")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idConventionStage", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_convention_stage", referencedColumnName="id")
      * })
      */
-    private $idconventionstage;
+    private $idConventionStage;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateCreationAvenant.
+     *
+     * @param \DateTime $dateCreationAvenant
+     *
+     * @return Avenant
      */
-    public function setId(int $id): void
+    public function setDateCreationAvenant($dateCreationAvenant)
     {
-        $this->id = $id;
+        $this->dateCreationAvenant = $dateCreationAvenant;
+
+        return $this;
     }
 
     /**
+     * Get dateCreationAvenant.
+     *
      * @return \DateTime
      */
-    public function getDatecreationavenant(): \DateTime
+    public function getDateCreationAvenant()
     {
-        return $this->datecreationavenant;
+        return $this->dateCreationAvenant;
     }
 
     /**
-     * @param \DateTime $datecreationavenant
+     * Set objetAvenant.
+     *
+     * @param string $objetAvenant
+     *
+     * @return Avenant
      */
-    public function setDatecreationavenant(\DateTime $datecreationavenant): void
+    public function setObjetAvenant($objetAvenant)
     {
-        $this->datecreationavenant = $datecreationavenant;
+        $this->objetAvenant = $objetAvenant;
+
+        return $this;
     }
 
     /**
+     * Get objetAvenant.
+     *
      * @return string
      */
-    public function getObjetavenant(): string
+    public function getObjetAvenant()
     {
-        return $this->objetavenant;
+        return $this->objetAvenant;
     }
 
     /**
-     * @param string $objetavenant
+     * Set detailsAvenant.
+     *
+     * @param string|null $detailsAvenant
+     *
+     * @return Avenant
      */
-    public function setObjetavenant(string $objetavenant): void
+    public function setDetailsAvenant($detailsAvenant = null)
     {
-        $this->objetavenant = $objetavenant;
+        $this->detailsAvenant = $detailsAvenant;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get detailsAvenant.
+     *
+     * @return string|null
      */
-    public function getDetailsavenant(): ?string
+    public function getDetailsAvenant()
     {
-        return $this->detailsavenant;
+        return $this->detailsAvenant;
     }
 
     /**
-     * @param null|string $detailsavenant
+     * Set idConventionStage.
+     *
+     * @param \App\Entity\ConventionStage|null $idConventionStage
+     *
+     * @return Avenant
      */
-    public function setDetailsavenant(?string $detailsavenant): void
+    public function setIdConventionStage(\App\Entity\ConventionStage $idConventionStage = null)
     {
-        $this->detailsavenant = $detailsavenant;
+        $this->idConventionStage = $idConventionStage;
+
+        return $this;
     }
 
     /**
-     * @return \Conventionstage
+     * Get idConventionStage.
+     *
+     * @return \App\Entity\ConventionStage|null
      */
-    public function getIdconventionstage(): \Conventionstage
+    public function getIdConventionStage()
     {
-        return $this->idconventionstage;
+        return $this->idConventionStage;
     }
-
-    /**
-     * @param \Conventionstage $idconventionstage
-     */
-    public function setIdconventionstage(\Conventionstage $idconventionstage): void
-    {
-        $this->idconventionstage = $idconventionstage;
-    }
-
-
 }

@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Estcontacttechnique
+ * EstContactTechnique
  *
- * @ORM\Table(name="EstContactTechnique", indexes={@ORM\Index(name="fk_EstContactTechnique_ContactEtablissement1_idx", columns={"idContactEtablissement", "idPersonneContactEtablissement"}), @ORM\Index(name="fk_EstContactTechnique_Etablissement1_idx", columns={"idEtablissement"})})
+ * @ORM\Table(name="est_contact_technique", indexes={@ORM\Index(name="fk_EstContactTechnique_ContactEtablissement1_idx", columns={"id_contact_etablissement", "id_personne_contact_etablissement"}), @ORM\Index(name="fk_EstContactTechnique_Etablissement1_idx", columns={"id_etablissement"})})
  * @ORM\Entity
  */
-class Estcontacttechnique
+class EstContactTechnique
 {
     /**
      * @var int
@@ -24,117 +24,143 @@ class Estcontacttechnique
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutContactTechnique", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_contact_technique", type="date", nullable=false)
      */
-    private $datedebutcontacttechnique;
+    private $dateDebutContactTechnique;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="dateFinContactTechnique", type="date", nullable=true)
+     * @ORM\Column(name="date_fin_contact_technique", type="date", nullable=true)
      */
-    private $datefincontacttechnique;
+    private $dateFinContactTechnique;
 
     /**
-     * @var \Contactetablissement
+     * @var \App\Entity\ContactEtablissement
      *
-     * @ORM\ManyToOne(targetEntity="Contactetablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContactEtablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idContactEtablissement", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonneContactEtablissement", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_contact_etablissement", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_contact_etablissement", referencedColumnName="id_personne")
      * })
      */
-    private $idcontactetablissement;
+    private $idContactEtablissement;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateDebutContactTechnique.
+     *
+     * @param \DateTime $dateDebutContactTechnique
+     *
+     * @return EstContactTechnique
      */
-    public function setId(int $id): void
+    public function setDateDebutContactTechnique($dateDebutContactTechnique)
     {
-        $this->id = $id;
+        $this->dateDebutContactTechnique = $dateDebutContactTechnique;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutContactTechnique.
+     *
      * @return \DateTime
      */
-    public function getDatedebutcontacttechnique(): \DateTime
+    public function getDateDebutContactTechnique()
     {
-        return $this->datedebutcontacttechnique;
+        return $this->dateDebutContactTechnique;
     }
 
     /**
-     * @param \DateTime $datedebutcontacttechnique
+     * Set dateFinContactTechnique.
+     *
+     * @param \DateTime|null $dateFinContactTechnique
+     *
+     * @return EstContactTechnique
      */
-    public function setDatedebutcontacttechnique(\DateTime $datedebutcontacttechnique): void
+    public function setDateFinContactTechnique($dateFinContactTechnique = null)
     {
-        $this->datedebutcontacttechnique = $datedebutcontacttechnique;
+        $this->dateFinContactTechnique = $dateFinContactTechnique;
+
+        return $this;
     }
 
     /**
+     * Get dateFinContactTechnique.
+     *
      * @return \DateTime|null
      */
-    public function getDatefincontacttechnique(): ?\DateTime
+    public function getDateFinContactTechnique()
     {
-        return $this->datefincontacttechnique;
+        return $this->dateFinContactTechnique;
     }
 
     /**
-     * @param \DateTime|null $datefincontacttechnique
+     * Set idContactEtablissement.
+     *
+     * @param \App\Entity\ContactEtablissement|null $idContactEtablissement
+     *
+     * @return EstContactTechnique
      */
-    public function setDatefincontacttechnique(?\DateTime $datefincontacttechnique): void
+    public function setIdContactEtablissement(\App\Entity\ContactEtablissement $idContactEtablissement = null)
     {
-        $this->datefincontacttechnique = $datefincontacttechnique;
+        $this->idContactEtablissement = $idContactEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Contactetablissement
+     * Get idContactEtablissement.
+     *
+     * @return \App\Entity\ContactEtablissement|null
      */
-    public function getIdcontactetablissement(): \Contactetablissement
+    public function getIdContactEtablissement()
     {
-        return $this->idcontactetablissement;
+        return $this->idContactEtablissement;
     }
 
     /**
-     * @param \Contactetablissement $idcontactetablissement
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return EstContactTechnique
      */
-    public function setIdcontactetablissement(\Contactetablissement $idcontactetablissement): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->idcontactetablissement = $idcontactetablissement;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
-
-    /**
-     * @param \Etablissement $idetablissement
-     */
-    public function setIdetablissement(\Etablissement $idetablissement): void
-    {
-        $this->idetablissement = $idetablissement;
-    }
-
-
 }

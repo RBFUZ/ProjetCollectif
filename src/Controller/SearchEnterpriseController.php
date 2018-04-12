@@ -6,9 +6,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Ville;
 use App\Entity\Entreprise;
 use App\Entity\Etablissement;
-use App\Entity\Ville;
+
+
 
 class SearchEnterpriseController extends Controller
 {
@@ -22,7 +24,7 @@ class SearchEnterpriseController extends Controller
      */
     public function index()
     {
-        $cities = $this->loadCity();
+        $cities = null;//$this->loadCity();
         return $this->render('search/search_enterprise/index.html.twig', array(
             "cities"=>$cities
         ));
@@ -39,29 +41,27 @@ class SearchEnterpriseController extends Controller
         $nom = $request->request->get("nom_enterprise");
         $id_ville = $request->request->get("id_ville");
 
-        // search entreprise
-        $repository_entr = $this->getDoctrine()->getRepository(Entreprise::class);
-        // search adresse
 
-        if($nom != ""){
-            $entreprise = $repository_entr->findOneBy(['nomentreprise' => $nom]);
+        // by name
+        if($nom != "" &&$id_ville==""){
 
-            // search etablissement
             $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
-            if($entreprise!=null) {
-                $etablissement = $repository_etab->findBy(
-                    ['identreprise' => $entreprise->getId()]
-                );
-
-                // search by ville if not null
-                if ($id_ville != "")
-                {
-
-                }
-            }
-
+            $etablissement = $repository_etab->findEtablissementByEnterpriseName($nom);
         }
 
+        // by name and city
+        if($nom != "" &&$id_ville!=""){
+
+            $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
+            $etablissement = $repository_etab->findEtablissementByEnterpriseNameAndCity($nom,$id_ville);
+        }
+
+        // by city
+        if($nom == "" &&$id_ville!=""){
+
+            $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
+            $etablissement = $repository_etab->findEtablissementByCity($id_ville);
+        }
         return $this->json(array('data' => $etablissement));
     }
 }

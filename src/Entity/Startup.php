@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Startup
  *
- * @ORM\Table(name="Startup")
+ * @ORM\Table(name="startup")
  * @ORM\Entity
  */
 class Startup
@@ -24,65 +24,74 @@ class Startup
     /**
      * @var string
      *
-     * @ORM\Column(name="nomStartup", type="string", length=100, nullable=false)
+     * @ORM\Column(name="nom_startup", type="string", length=100, nullable=false)
      */
-    private $nomstartup;
+    private $nomStartup;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreationStartup", type="date", nullable=false)
+     * @ORM\Column(name="date_creation_startup", type="date", nullable=false)
      */
-    private $datecreationstartup;
+    private $dateCreationStartup;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set nomStartup.
+     *
+     * @param string $nomStartup
+     *
+     * @return Startup
      */
-    public function setId(int $id): void
+    public function setNomStartup($nomStartup)
     {
-        $this->id = $id;
+        $this->nomStartup = $nomStartup;
+
+        return $this;
     }
 
     /**
+     * Get nomStartup.
+     *
      * @return string
      */
-    public function getNomstartup(): string
+    public function getNomStartup()
     {
-        return $this->nomstartup;
+        return $this->nomStartup;
     }
 
     /**
-     * @param string $nomstartup
+     * Set dateCreationStartup.
+     *
+     * @param \DateTime $dateCreationStartup
+     *
+     * @return Startup
      */
-    public function setNomstartup(string $nomstartup): void
+    public function setDateCreationStartup($dateCreationStartup)
     {
-        $this->nomstartup = $nomstartup;
+        $this->dateCreationStartup = $dateCreationStartup;
+
+        return $this;
     }
 
     /**
+     * Get dateCreationStartup.
+     *
      * @return \DateTime
      */
-    public function getDatecreationstartup(): \DateTime
+    public function getDateCreationStartup()
     {
-        return $this->datecreationstartup;
+        return $this->dateCreationStartup;
     }
-
-    /**
-     * @param \DateTime $datecreationstartup
-     */
-    public function setDatecreationstartup(\DateTime $datecreationstartup): void
-    {
-        $this->datecreationstartup = $datecreationstartup;
-    }
-
-
-
 }
