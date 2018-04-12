@@ -8,7 +8,7 @@
 <div class="ui three column stackable grid container">
     <div class="column">
         <div class="ui search selection dropdown">
-            <input type="hidden" name="nom_etablissement" >
+            <input type="hidden" name="nom_enterprise" >
             <i class="dropdown icon"></i>
             <div class="default text">Établissement</div>
             <div class="menu">
@@ -21,42 +21,23 @@
     </div>
     <div class="column">
         <div class="ui search selection dropdown">
-            <input type="hidden" name="nom_entreprise" >
+            <input type="hidden" name="ville" >
             <i class="dropdown icon"></i>
             <div class="default text">Ville</div>
             <div class="menu">
-                <div class="item" data-value="Orange">Tours</div>
-                <div class="item" data-value="Worldline">Paris</div>
-                <div class="item" data-value="Google">Orléan</div>
-                <div class="item" data-value="Amazon">Lille</div>
+                {% for city in cities %}
+                <div class="item" data-value="{{city.id }}">{{city.nomville }}</div>
+                {% endfor %}
             </div>
         </div>
     </div>
 
-</div>
-
-<div class="ui three column stackable grid container">
-    <div class="column">
-        <div class="ui form">
-            <input type="text" name="number_siret" placeholder="Numéro SIRET">
-
-        </div>
-    </div>
-
-
-
-    <div class="column">
-        <!--  <div class="ui toggle checkbox">
-          <input type="checkbox" id="Entreprise" />
-          <label>Entreprise</label>
-        </div>
-      -->
-    </div>
     <div class="column">
         <button class="ui primary button" v-on:click="get_data">Recherche</button>
     </div>
 
 </div>
+
 
 <div class="ui center aligned one column stackable grid container center">
 
@@ -71,7 +52,7 @@
                 <th>Nom Établissement</th>
                 <th>Num Siren</th>
                 <th>Ville</th>
-                {#<th>Site Web Entreprise</th>#}
+                {#<th>Nom Entreprise</th>#}
                 {#<th>Commentaire Entreprise</th>#}
             </tr>
             </thead>

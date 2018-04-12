@@ -14,8 +14,8 @@ $(document).ready(function() {
             "type":"post",
             "data":
                 function ( d ) {
-                    d.nom_etablissement = $("input[name='nom_etablissement']").val();
-
+                    d.nom_enterprise = $("input[name='nom_enterprise']").val();
+                    d.id_ville = $("input[name='ville']").val();
                 },
         },
         "columns": [
@@ -23,7 +23,7 @@ $(document).ready(function() {
         {data: 'nometablissement'},
         {data: 'numsiret'},
         {data: "idadresse.villeville.nomville"},
-        // {data: 'sitewebentreprise'},
+        // {data: 'identreprise.nomentreprise'},
         // {data: 'commentaireentreprise'}
         ],
 
