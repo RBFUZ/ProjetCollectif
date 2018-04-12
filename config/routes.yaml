@@ -18,10 +18,26 @@ search:
     path: /search
     controller: App\Controller\SearchEnterpriseController::index
 
-aproposentreprise:
-    path: /aproposentreprise
-    controller: App\Controller\AProposEntrepriseController::index
+search_internship:
+    path: /search_internship
+    controller: App\Controller\SearchInternshipController::index
 
 search_enterprise:
     path: /search_enterprise
     controller: App\Controller\SearchEnterpriseController::searchEnterprise
+
+search_apprenticeship:
+    path: /search_apprenticeship
+    controller: App\Controller\SearchApprenticeshipController::index
+
+search_forum:
+    path: /search_forum
+    controller: App\Controller\SearchForumController::index
+
+search_convention:
+    path: /search_convention
+    controller: App\Controller\SearchConventionController::index
+
+aproposentreprise:
+    path: /aproposentreprise
+    controller: App\Controller\AProposEntrepriseController::index

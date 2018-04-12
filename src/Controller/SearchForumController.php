@@ -12,7 +12,7 @@ class SearchForumController extends Controller
      */
     public function index()
     {
-        return $this->render('search_forum/index.html.twig', [
+        return $this->render('search/search_forum/index.html.twig', [
             'controller_name' => 'SearchForumController',
         ]);
     }

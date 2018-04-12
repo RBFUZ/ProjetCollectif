@@ -12,7 +12,7 @@ class SearchConventionController extends Controller
      */
     public function index()
     {
-        return $this->render('search_convention/index.html.twig', [
+        return $this->render('search/search_convention/index.html.twig', [
             'controller_name' => 'SearchConventionController',
         ]);
     }

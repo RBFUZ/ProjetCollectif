@@ -12,7 +12,7 @@ class SearchApprenticeshipController extends Controller
      */
     public function index()
     {
-        return $this->render('search_apprenticeship/index.html.twig', [
+        return $this->render('search/search_apprenticeship/index.html.twig', [
             'controller_name' => 'SearchApprenticeshipController',
         ]);
     }
