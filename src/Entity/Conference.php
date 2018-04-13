@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Conference
  *
- * @ORM\Table(name="Conference", indexes={@ORM\Index(name="fk_Conference_Etablissement1_idx", columns={"idEtablissement"})})
+ * @ORM\Table(name="conference", indexes={@ORM\Index(name="fk_Conference_Etablissement1_idx", columns={"id_etablissement"})})
  * @ORM\Entity
  */
 class Conference
@@ -24,177 +24,260 @@ class Conference
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateConference", type="date", nullable=false)
+     * @ORM\Column(name="date_conference", type="date", nullable=false)
      */
-    private $dateconference;
+    private $dateConference;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="heureDebutConference", type="time", nullable=true)
+     * @ORM\Column(name="heure_debut_conference", type="time", nullable=true)
      */
-    private $heuredebutconference;
+    private $heureDebutConference;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="heureFinConference", type="time", nullable=true)
+     * @ORM\Column(name="heure_fin_conference", type="time", nullable=true)
      */
-    private $heurefinconference;
+    private $heureFinConference;
 
     /**
-     * @var string|null
+     * @var string
      *
-     * @ORM\Column(name="sujetConference", type="string", length=255, nullable=true)
+     * @ORM\Column(name="sujet_conference", type="string", length=255, nullable=false)
      */
-    private $sujetconference;
+    private $sujetConference;
 
     /**
-     * @var \Etablissement
+     * @var bool
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\Column(name="annulee", type="boolean", nullable=false)
+     */
+    private $annulee;
+
+    /**
+     * @var \App\Entity\Etablissement
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Contactetablissement", inversedBy="idconference")
-     * @ORM\JoinTable(name="participeconference",
+     * @ORM\ManyToMany(targetEntity="App\Entity\ContactEtablissement", inversedBy="idConference")
+     * @ORM\JoinTable(name="participe_conference",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="idConference", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_conference", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idContactEtablissement", referencedColumnName="id"),
-     *     @ORM\JoinColumn(name="idPersonneContactEtablissement", referencedColumnName="idPersonne")
+     *     @ORM\JoinColumn(name="id_contact_etablissement", referencedColumnName="id"),
+     *     @ORM\JoinColumn(name="id_personne_contact_etablissement", referencedColumnName="id_personne")
      *   }
      * )
      */
-    private $idcontactetablissement;
+    private $idContactEtablissement;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idcontactetablissement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idContactEtablissement = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateConference.
+     *
+     * @param \DateTime $dateConference
+     *
+     * @return Conference
      */
-    public function setId(int $id): void
+    public function setDateConference($dateConference)
     {
-        $this->id = $id;
+        $this->dateConference = $dateConference;
+
+        return $this;
     }
 
     /**
+     * Get dateConference.
+     *
      * @return \DateTime
      */
-    public function getDateconference(): \DateTime
+    public function getDateConference()
     {
-        return $this->dateconference;
+        return $this->dateConference;
     }
 
     /**
-     * @param \DateTime $dateconference
+     * Set heureDebutConference.
+     *
+     * @param \DateTime|null $heureDebutConference
+     *
+     * @return Conference
      */
-    public function setDateconference(\DateTime $dateconference): void
+    public function setHeureDebutConference($heureDebutConference = null)
     {
-        $this->dateconference = $dateconference;
+        $this->heureDebutConference = $heureDebutConference;
+
+        return $this;
     }
 
     /**
+     * Get heureDebutConference.
+     *
      * @return \DateTime|null
      */
-    public function getHeuredebutconference(): ?\DateTime
+    public function getHeureDebutConference()
     {
-        return $this->heuredebutconference;
+        return $this->heureDebutConference;
     }
 
     /**
-     * @param \DateTime|null $heuredebutconference
+     * Set heureFinConference.
+     *
+     * @param \DateTime|null $heureFinConference
+     *
+     * @return Conference
      */
-    public function setHeuredebutconference(?\DateTime $heuredebutconference): void
+    public function setHeureFinConference($heureFinConference = null)
     {
-        $this->heuredebutconference = $heuredebutconference;
+        $this->heureFinConference = $heureFinConference;
+
+        return $this;
     }
 
     /**
+     * Get heureFinConference.
+     *
      * @return \DateTime|null
      */
-    public function getHeurefinconference(): ?\DateTime
+    public function getHeureFinConference()
     {
-        return $this->heurefinconference;
+        return $this->heureFinConference;
     }
 
     /**
-     * @param \DateTime|null $heurefinconference
+     * Set sujetConference.
+     *
+     * @param string $sujetConference
+     *
+     * @return Conference
      */
-    public function setHeurefinconference(?\DateTime $heurefinconference): void
+    public function setSujetConference($sujetConference)
     {
-        $this->heurefinconference = $heurefinconference;
+        $this->sujetConference = $sujetConference;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get sujetConference.
+     *
+     * @return string
      */
-    public function getSujetconference(): ?string
+    public function getSujetConference()
     {
-        return $this->sujetconference;
+        return $this->sujetConference;
     }
 
     /**
-     * @param null|string $sujetconference
+     * Set annulee.
+     *
+     * @param bool $annulee
+     *
+     * @return Conference
      */
-    public function setSujetconference(?string $sujetconference): void
+    public function setAnnulee($annulee)
     {
-        $this->sujetconference = $sujetconference;
+        $this->annulee = $annulee;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get annulee.
+     *
+     * @return bool
      */
-    public function getIdetablissement(): \Etablissement
+    public function getAnnulee()
     {
-        return $this->idetablissement;
+        return $this->annulee;
     }
 
     /**
-     * @param \Etablissement $idetablissement
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return Conference
      */
-    public function setIdetablissement(\Etablissement $idetablissement): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->idetablissement = $idetablissement;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
+     */
+    public function getIdEtablissement()
+    {
+        return $this->idEtablissement;
+    }
+
+    /**
+     * Add idContactEtablissement.
+     *
+     * @param \App\Entity\ContactEtablissement $idContactEtablissement
+     *
+     * @return Conference
+     */
+    public function addIdContactEtablissement(\App\Entity\ContactEtablissement $idContactEtablissement)
+    {
+        $this->idContactEtablissement[] = $idContactEtablissement;
+
+        return $this;
+    }
+
+    /**
+     * Remove idContactEtablissement.
+     *
+     * @param \App\Entity\ContactEtablissement $idContactEtablissement
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdContactEtablissement(\App\Entity\ContactEtablissement $idContactEtablissement)
+    {
+        return $this->idContactEtablissement->removeElement($idContactEtablissement);
+    }
+
+    /**
+     * Get idContactEtablissement.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdcontactetablissement(): \Doctrine\Common\Collections\Collection
+    public function getIdContactEtablissement()
     {
-        return $this->idcontactetablissement;
+        return $this->idContactEtablissement;
     }
-
-    /**
-     * @param \Doctrine\Common\Collections\Collection $idcontactetablissement
-     */
-    public function setIdcontactetablissement(\Doctrine\Common\Collections\Collection $idcontactetablissement): void
-    {
-        $this->idcontactetablissement = $idcontactetablissement;
-    }
-
-
-
 }

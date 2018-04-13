@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Entreprise
  *
- * @ORM\Table(name="Entreprise")
+ * @ORM\Table(name="entreprise")
  * @ORM\Entity
  */
 class Entreprise
@@ -24,133 +24,167 @@ class Entreprise
     /**
      * @var string
      *
-     * @ORM\Column(name="nomEntreprise", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nom_entreprise", type="string", length=255, nullable=false)
      */
-    private $nomentreprise;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numSIREN", type="string", length=9, nullable=false)
-     */
-    private $numsiren;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="statutJuridique", type="string", length=45, nullable=false)
-     */
-    private $statutjuridique;
+    private $nomEntreprise;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="siteWebEntreprise", type="string", length=255, nullable=true)
+     * @ORM\Column(name="num_siren", type="string", length=9, nullable=true)
      */
-    private $sitewebentreprise;
+    private $numSiren;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statut_juridique", type="string", length=45, nullable=false)
+     */
+    private $statutJuridique;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaireEntreprise", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="site_web_entreprise", type="string", length=255, nullable=true)
      */
-    private $commentaireentreprise;
+    private $siteWebEntreprise;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="commentaire_entreprise", type="text", length=65535, nullable=true)
+     */
+    private $commentaireEntreprise;
+
+
+
+    /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set nomEntreprise.
+     *
+     * @param string $nomEntreprise
+     *
+     * @return Entreprise
      */
-    public function setId(int $id): void
+    public function setNomEntreprise($nomEntreprise)
     {
-        $this->id = $id;
+        $this->nomEntreprise = $nomEntreprise;
+
+        return $this;
     }
 
     /**
+     * Get nomEntreprise.
+     *
      * @return string
      */
-    public function getNomentreprise(): string
+    public function getNomEntreprise()
     {
-        return $this->nomentreprise;
+        return $this->nomEntreprise;
     }
 
     /**
-     * @param string $nomentreprise
+     * Set numSiren.
+     *
+     * @param string|null $numSiren
+     *
+     * @return Entreprise
      */
-    public function setNomentreprise(string $nomentreprise): void
+    public function setNumSiren($numSiren = null)
     {
-        $this->nomentreprise = $nomentreprise;
+        $this->numSiren = $numSiren;
+
+        return $this;
     }
 
     /**
+     * Get numSiren.
+     *
+     * @return string|null
+     */
+    public function getNumSiren()
+    {
+        return $this->numSiren;
+    }
+
+    /**
+     * Set statutJuridique.
+     *
+     * @param string $statutJuridique
+     *
+     * @return Entreprise
+     */
+    public function setStatutJuridique($statutJuridique)
+    {
+        $this->statutJuridique = $statutJuridique;
+
+        return $this;
+    }
+
+    /**
+     * Get statutJuridique.
+     *
      * @return string
      */
-    public function getNumsiren(): string
+    public function getStatutJuridique()
     {
-        return $this->numsiren;
+        return $this->statutJuridique;
     }
 
     /**
-     * @param string $numsiren
+     * Set siteWebEntreprise.
+     *
+     * @param string|null $siteWebEntreprise
+     *
+     * @return Entreprise
      */
-    public function setNumsiren(string $numsiren): void
+    public function setSiteWebEntreprise($siteWebEntreprise = null)
     {
-        $this->numsiren = $numsiren;
+        $this->siteWebEntreprise = $siteWebEntreprise;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get siteWebEntreprise.
+     *
+     * @return string|null
      */
-    public function getStatutjuridique(): string
+    public function getSiteWebEntreprise()
     {
-        return $this->statutjuridique;
+        return $this->siteWebEntreprise;
     }
 
     /**
-     * @param string $statutjuridique
+     * Set commentaireEntreprise.
+     *
+     * @param string|null $commentaireEntreprise
+     *
+     * @return Entreprise
      */
-    public function setStatutjuridique(string $statutjuridique): void
+    public function setCommentaireEntreprise($commentaireEntreprise = null)
     {
-        $this->statutjuridique = $statutjuridique;
+        $this->commentaireEntreprise = $commentaireEntreprise;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get commentaireEntreprise.
+     *
+     * @return string|null
      */
-    public function getSitewebentreprise(): ?string
+    public function getCommentaireEntreprise()
     {
-        return $this->sitewebentreprise;
+        return $this->commentaireEntreprise;
     }
-
-    /**
-     * @param null|string $sitewebentreprise
-     */
-    public function setSitewebentreprise(?string $sitewebentreprise): void
-    {
-        $this->sitewebentreprise = $sitewebentreprise;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getCommentaireentreprise(): ?string
-    {
-        return $this->commentaireentreprise;
-    }
-
-    /**
-     * @param null|string $commentaireentreprise
-     */
-    public function setCommentaireentreprise(?string $commentaireentreprise): void
-    {
-        $this->commentaireentreprise = $commentaireentreprise;
-    }
-
-
 }

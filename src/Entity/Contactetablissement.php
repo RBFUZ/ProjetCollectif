@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Contactetablissement
+ * ContactEtablissement
  *
- * @ORM\Table(name="ContactEtablissement", indexes={@ORM\Index(name="fk_ContactEtablissement_Personne1_idx", columns={"idPersonne"})})
+ * @ORM\Table(name="contact_etablissement", indexes={@ORM\Index(name="fk_ContactEtablissement_Personne1_idx", columns={"id_personne"})})
  * @ORM\Entity
  */
-class Contactetablissement
+class ContactEtablissement
 {
     /**
      * @var int
@@ -24,9 +24,9 @@ class Contactetablissement
     /**
      * @var string|null
      *
-     * @ORM\Column(name="mailProfessionnel", type="string", length=100, nullable=true)
+     * @ORM\Column(name="mail_professionnel", type="string", length=100, nullable=true)
      */
-    private $mailprofessionnel;
+    private $mailProfessionnel;
 
     /**
      * @var string|null
@@ -36,169 +36,206 @@ class Contactetablissement
     private $fax;
 
     /**
-     * @var \Personne
+     * @var \App\Entity\Personne
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Personne")
+     * @ORM\OneToOne(targetEntity="App\Entity\Personne")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonne", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personne", referencedColumnName="id")
      * })
      */
-    private $idpersonne;
+    private $idPersonne;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Conseilperfectionnement", mappedBy="idpersonnecontactetablissement")
+     * @ORM\ManyToMany(targetEntity="App\Entity\ConseilPerfectionnement", mappedBy="idPersonneContactEtablissement")
      */
-    private $idconseilperfectionnement;
+    private $idConseilPerfectionnement;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Conference", mappedBy="idcontactetablissement")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Conference", mappedBy="idContactEtablissement")
      */
-    private $idconference;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Forum", inversedBy="idcontactetablissement")
-     * @ORM\JoinTable(name="participeforum",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="idContactEtablissement", referencedColumnName="id"),
-     *     @ORM\JoinColumn(name="idPersonneContactEtablissement", referencedColumnName="idPersonne")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idForum", referencedColumnName="id")
-     *   }
-     * )
-     */
-    private $idforum;
+    private $idConference;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idconseilperfectionnement = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idconference = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idforum = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idConseilPerfectionnement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idConference = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Set id.
+     *
+     * @param int $id
+     *
+     * @return ContactEtablissement
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set mailProfessionnel.
+     *
+     * @param string|null $mailProfessionnel
+     *
+     * @return ContactEtablissement
      */
-    public function setId(int $id): void
+    public function setMailProfessionnel($mailProfessionnel = null)
     {
-        $this->id = $id;
+        $this->mailProfessionnel = $mailProfessionnel;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get mailProfessionnel.
+     *
+     * @return string|null
      */
-    public function getMailprofessionnel(): ?string
+    public function getMailProfessionnel()
     {
-        return $this->mailprofessionnel;
+        return $this->mailProfessionnel;
     }
 
     /**
-     * @param null|string $mailprofessionnel
+     * Set fax.
+     *
+     * @param string|null $fax
+     *
+     * @return ContactEtablissement
      */
-    public function setMailprofessionnel(?string $mailprofessionnel): void
+    public function setFax($fax = null)
     {
-        $this->mailprofessionnel = $mailprofessionnel;
+        $this->fax = $fax;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get fax.
+     *
+     * @return string|null
      */
-    public function getFax(): ?string
+    public function getFax()
     {
         return $this->fax;
     }
 
     /**
-     * @param null|string $fax
+     * Set idPersonne.
+     *
+     * @param \App\Entity\Personne $idPersonne
+     *
+     * @return ContactEtablissement
      */
-    public function setFax(?string $fax): void
+    public function setIdPersonne(\App\Entity\Personne $idPersonne)
     {
-        $this->fax = $fax;
+        $this->idPersonne = $idPersonne;
+
+        return $this;
     }
 
     /**
-     * @return \Personne
+     * Get idPersonne.
+     *
+     * @return \App\Entity\Personne
      */
-    public function getIdpersonne(): \Personne
+    public function getIdPersonne()
     {
-        return $this->idpersonne;
+        return $this->idPersonne;
     }
 
     /**
-     * @param \Personne $idpersonne
+     * Add idConseilPerfectionnement.
+     *
+     * @param \App\Entity\ConseilPerfectionnement $idConseilPerfectionnement
+     *
+     * @return ContactEtablissement
      */
-    public function setIdpersonne(\Personne $idpersonne): void
+    public function addIdConseilPerfectionnement(\App\Entity\ConseilPerfectionnement $idConseilPerfectionnement)
     {
-        $this->idpersonne = $idpersonne;
+        $this->idConseilPerfectionnement[] = $idConseilPerfectionnement;
+
+        return $this;
     }
 
     /**
+     * Remove idConseilPerfectionnement.
+     *
+     * @param \App\Entity\ConseilPerfectionnement $idConseilPerfectionnement
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdConseilPerfectionnement(\App\Entity\ConseilPerfectionnement $idConseilPerfectionnement)
+    {
+        return $this->idConseilPerfectionnement->removeElement($idConseilPerfectionnement);
+    }
+
+    /**
+     * Get idConseilPerfectionnement.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdconseilperfectionnement(): \Doctrine\Common\Collections\Collection
+    public function getIdConseilPerfectionnement()
     {
-        return $this->idconseilperfectionnement;
+        return $this->idConseilPerfectionnement;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $idconseilperfectionnement
+     * Add idConference.
+     *
+     * @param \App\Entity\Conference $idConference
+     *
+     * @return ContactEtablissement
      */
-    public function setIdconseilperfectionnement(\Doctrine\Common\Collections\Collection $idconseilperfectionnement): void
+    public function addIdConference(\App\Entity\Conference $idConference)
     {
-        $this->idconseilperfectionnement = $idconseilperfectionnement;
+        $this->idConference[] = $idConference;
+
+        return $this;
     }
 
     /**
+     * Remove idConference.
+     *
+     * @param \App\Entity\Conference $idConference
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdConference(\App\Entity\Conference $idConference)
+    {
+        return $this->idConference->removeElement($idConference);
+    }
+
+    /**
+     * Get idConference.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdconference(): \Doctrine\Common\Collections\Collection
+    public function getIdConference()
     {
-        return $this->idconference;
+        return $this->idConference;
     }
-
-    /**
-     * @param \Doctrine\Common\Collections\Collection $idconference
-     */
-    public function setIdconference(\Doctrine\Common\Collections\Collection $idconference): void
-    {
-        $this->idconference = $idconference;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIdforum(): \Doctrine\Common\Collections\Collection
-    {
-        return $this->idforum;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\Collection $idforum
-     */
-    public function setIdforum(\Doctrine\Common\Collections\Collection $idforum): void
-    {
-        $this->idforum = $idforum;
-    }
-
-
-
 }

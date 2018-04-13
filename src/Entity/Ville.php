@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Ville
  *
- * @ORM\Table(name="Ville", indexes={@ORM\Index(name="fk_Ville_Pays1_idx", columns={"idPays"})})
+ * @ORM\Table(name="ville", indexes={@ORM\Index(name="fk_Ville_Pays1_idx", columns={"id_pays"})})
  * @ORM\Entity
  */
 class Ville
@@ -24,68 +24,108 @@ class Ville
     /**
      * @var string
      *
-     * @ORM\Column(name="nomVille", type="string", length=200, nullable=false)
+     * @ORM\Column(name="nom_ville", type="string", length=200, nullable=false)
      */
-    private $nomville;
+    private $nomVille;
 
     /**
-     * @var \Pays
+     * @var string|null
      *
-     * @ORM\ManyToOne(targetEntity="Pays")
+     * @ORM\Column(name="departement", type="string", length=3, nullable=true)
+     */
+    private $departement;
+
+    /**
+     * @var \App\Entity\Pays
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pays")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPays", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_pays", referencedColumnName="id")
      * })
      */
-    private $idpays;
+    private $idPays;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set nomVille.
+     *
+     * @param string $nomVille
+     *
+     * @return Ville
      */
-    public function setId(int $id): void
+    public function setNomVille($nomVille)
     {
-        $this->id = $id;
+        $this->nomVille = $nomVille;
+
+        return $this;
     }
 
     /**
+     * Get nomVille.
+     *
      * @return string
      */
-    public function getNomville(): string
+    public function getNomVille()
     {
-        return $this->nomville;
+        return $this->nomVille;
     }
 
     /**
-     * @param string $nomville
+     * Set departement.
+     *
+     * @param string|null $departement
+     *
+     * @return Ville
      */
-    public function setNomville(string $nomville): void
+    public function setDepartement($departement = null)
     {
-        $this->nomville = $nomville;
+        $this->departement = $departement;
+
+        return $this;
     }
 
     /**
-     * @return \Pays
+     * Get departement.
+     *
+     * @return string|null
      */
-    public function getIdpays(): \Pays
+    public function getDepartement()
     {
-        return $this->idpays;
+        return $this->departement;
     }
 
     /**
-     * @param \Pays $idpays
+     * Set idPays.
+     *
+     * @param \App\Entity\Pays|null $idPays
+     *
+     * @return Ville
      */
-    public function setIdpays(\Pays $idpays): void
+    public function setIdPays(\App\Entity\Pays $idPays = null)
     {
-        $this->idpays = $idpays;
+        $this->idPays = $idPays;
+
+        return $this;
     }
 
-
-
+    /**
+     * Get idPays.
+     *
+     * @return \App\Entity\Pays|null
+     */
+    public function getIdPays()
+    {
+        return $this->idPays;
+    }
 }

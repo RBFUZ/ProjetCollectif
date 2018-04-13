@@ -1,144 +1,183 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Versetaxeapprentissage
+ * VerseTaxeApprentissage
  *
- * @ORM\Table(name="VerseTaxeApprentissage", indexes={@ORM\Index(name="fk_VerseTaxeApprentissage_Etablissement1_idx", columns={"idEtablissement"}), @ORM\Index(name="IDX_D05CB0C0812BA41B", columns={"idDepartement"})})
+ * @ORM\Table(name="verse_taxe_apprentissage", indexes={@ORM\Index(name="fk_VerseTaxeApprentissage_Etablissement1_idx", columns={"id_etablissement"}), @ORM\Index(name="IDX_BBC2644AD9649694", columns={"id_departement"})})
  * @ORM\Entity
  */
-class Versetaxeapprentissage
+class VerseTaxeApprentissage
 {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="anneeVersement", type="date", nullable=false)
+     * @ORM\Column(name="annee_versement", type="date", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private $anneeversement;
+    private $anneeVersement;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="montantTaxe", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="montant_taxe", type="float", precision=10, scale=0, nullable=false)
      */
-    private $montanttaxe;
+    private $montantTaxe;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="partieVersante", type="string", length=255, nullable=false)
+     * @ORM\Column(name="partie_versante", type="string", length=255, nullable=false)
      */
-    private $partieversante;
+    private $partieVersante;
 
     /**
-     * @var \Departement
+     * @var \App\Entity\Departement
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Departement")
+     * @ORM\OneToOne(targetEntity="App\Entity\Departement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idDepartement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_departement", referencedColumnName="id")
      * })
      */
-    private $iddepartement;
+    private $idDepartement;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Etablissement")
+     * @ORM\OneToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
+
+
 
     /**
+     * Set anneeVersement.
+     *
+     * @param \DateTime $anneeVersement
+     *
+     * @return VerseTaxeApprentissage
+     */
+    public function setAnneeVersement($anneeVersement)
+    {
+        $this->anneeVersement = $anneeVersement;
+
+        return $this;
+    }
+
+    /**
+     * Get anneeVersement.
+     *
      * @return \DateTime
      */
-    public function getAnneeversement(): \DateTime
+    public function getAnneeVersement()
     {
-        return $this->anneeversement;
+        return $this->anneeVersement;
     }
 
     /**
-     * @param \DateTime $anneeversement
+     * Set montantTaxe.
+     *
+     * @param float $montantTaxe
+     *
+     * @return VerseTaxeApprentissage
      */
-    public function setAnneeversement(\DateTime $anneeversement): void
+    public function setMontantTaxe($montantTaxe)
     {
-        $this->anneeversement = $anneeversement;
+        $this->montantTaxe = $montantTaxe;
+
+        return $this;
     }
 
     /**
+     * Get montantTaxe.
+     *
      * @return float
      */
-    public function getMontanttaxe(): float
+    public function getMontantTaxe()
     {
-        return $this->montanttaxe;
+        return $this->montantTaxe;
     }
 
     /**
-     * @param float $montanttaxe
+     * Set partieVersante.
+     *
+     * @param string $partieVersante
+     *
+     * @return VerseTaxeApprentissage
      */
-    public function setMontanttaxe(float $montanttaxe): void
+    public function setPartieVersante($partieVersante)
     {
-        $this->montanttaxe = $montanttaxe;
+        $this->partieVersante = $partieVersante;
+
+        return $this;
     }
 
     /**
+     * Get partieVersante.
+     *
      * @return string
      */
-    public function getPartieversante(): string
+    public function getPartieVersante()
     {
-        return $this->partieversante;
+        return $this->partieVersante;
     }
 
     /**
-     * @param string $partieversante
+     * Set idDepartement.
+     *
+     * @param \App\Entity\Departement $idDepartement
+     *
+     * @return VerseTaxeApprentissage
      */
-    public function setPartieversante(string $partieversante): void
+    public function setIdDepartement(\App\Entity\Departement $idDepartement)
     {
-        $this->partieversante = $partieversante;
+        $this->idDepartement = $idDepartement;
+
+        return $this;
     }
 
     /**
-     * @return \Departement
+     * Get idDepartement.
+     *
+     * @return \App\Entity\Departement
      */
-    public function getIddepartement(): \Departement
+    public function getIdDepartement()
     {
-        return $this->iddepartement;
+        return $this->idDepartement;
     }
 
     /**
-     * @param \Departement $iddepartement
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement $idEtablissement
+     *
+     * @return VerseTaxeApprentissage
      */
-    public function setIddepartement(\Departement $iddepartement): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement)
     {
-        $this->iddepartement = $iddepartement;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
-
-    /**
-     * @param \Etablissement $idetablissement
-     */
-    public function setIdetablissement(\Etablissement $idetablissement): void
-    {
-        $this->idetablissement = $idetablissement;
-    }
-
-
-
 }

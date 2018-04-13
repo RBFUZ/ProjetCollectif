@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Conseilperfectionnement
+ * ConseilPerfectionnement
  *
- * @ORM\Table(name="ConseilPerfectionnement", indexes={@ORM\Index(name="fk_ConseilPerfectionnement_Departement1_idx", columns={"idDepartement"})})
+ * @ORM\Table(name="conseil_perfectionnement", indexes={@ORM\Index(name="fk_ConseilPerfectionnement_Departement1_idx", columns={"id_departement"})})
  * @ORM\Entity
  */
-class Conseilperfectionnement
+class ConseilPerfectionnement
 {
     /**
      * @var int
@@ -22,175 +22,244 @@ class Conseilperfectionnement
     private $id;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="dateConseilPerfectionnement", type="string", length=45, nullable=false)
+     * @ORM\Column(name="date_conseil_perfectionnement", type="date", nullable=false)
      */
-    private $dateconseilperfectionnement;
+    private $dateConseilPerfectionnement;
 
     /**
-     * @var \Departement
+     * @var \App\Entity\Departement
      *
-     * @ORM\ManyToOne(targetEntity="Departement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Departement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idDepartement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_departement", referencedColumnName="id")
      * })
      */
-    private $iddepartement;
+    private $idDepartement;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Contactetablissement", inversedBy="idconseilperfectionnement")
-     * @ORM\JoinTable(name="contactparticipeconseil",
+     * @ORM\ManyToMany(targetEntity="App\Entity\ContactEtablissement", inversedBy="idConseilPerfectionnement")
+     * @ORM\JoinTable(name="contact_participe_conseil",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="idConseilPerfectionnement", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_conseil_perfectionnement", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idPersonneContactEtablissement", referencedColumnName="idPersonne"),
-     *     @ORM\JoinColumn(name="idContactEtablissement", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_personne_contact_etablissement", referencedColumnName="id_personne"),
+     *     @ORM\JoinColumn(name="id_contact_etablissement", referencedColumnName="id")
      *   }
      * )
      */
-    private $idpersonnecontactetablissement;
+    private $idPersonneContactEtablissement;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Etudiant", inversedBy="idconseilperfectionnement")
-     * @ORM\JoinTable(name="etudiantparticipeconseil",
+     * @ORM\ManyToMany(targetEntity="App\Entity\Etudiant", inversedBy="idConseilPerfectionnement")
+     * @ORM\JoinTable(name="etudiant_participe_conseil",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="idConseilPerfectionnement", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_conseil_perfectionnement", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idPersonneEtudiant", referencedColumnName="idPersonne"),
-     *     @ORM\JoinColumn(name="idEtudiant", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_personne_etudiant", referencedColumnName="id_personne"),
+     *     @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
      *   }
      * )
      */
-    private $idpersonneetudiant;
+    private $idPersonneEtudiant;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Personnelpolytech", inversedBy="idconseilperfectionnement")
-     * @ORM\JoinTable(name="personnelparticipeconseil",
+     * @ORM\ManyToMany(targetEntity="App\Entity\PersonnelPolytech", inversedBy="idConseilPerfectionnement")
+     * @ORM\JoinTable(name="personnel_participe_conseil",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="idConseilPerfectionnement", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_conseil_perfectionnement", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idPersonnePersonnelPolytech", referencedColumnName="idPersonne"),
-     *     @ORM\JoinColumn(name="idPersonnelPolytech", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="id_personne_personnel_polytech", referencedColumnName="id_personne"),
+     *     @ORM\JoinColumn(name="id_personnel_polytech", referencedColumnName="id")
      *   }
      * )
      */
-    private $idpersonnepersonnelpolytech;
+    private $idPersonnePersonnelPolytech;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idpersonnecontactetablissement = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idpersonneetudiant = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idpersonnepersonnelpolytech = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idPersonneContactEtablissement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idPersonneEtudiant = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idPersonnePersonnelPolytech = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateConseilPerfectionnement.
+     *
+     * @param \DateTime $dateConseilPerfectionnement
+     *
+     * @return ConseilPerfectionnement
      */
-    public function setId(int $id): void
+    public function setDateConseilPerfectionnement($dateConseilPerfectionnement)
     {
-        $this->id = $id;
+        $this->dateConseilPerfectionnement = $dateConseilPerfectionnement;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get dateConseilPerfectionnement.
+     *
+     * @return \DateTime
      */
-    public function getDateconseilperfectionnement(): string
+    public function getDateConseilPerfectionnement()
     {
-        return $this->dateconseilperfectionnement;
+        return $this->dateConseilPerfectionnement;
     }
 
     /**
-     * @param string $dateconseilperfectionnement
+     * Set idDepartement.
+     *
+     * @param \App\Entity\Departement|null $idDepartement
+     *
+     * @return ConseilPerfectionnement
      */
-    public function setDateconseilperfectionnement(string $dateconseilperfectionnement): void
+    public function setIdDepartement(\App\Entity\Departement $idDepartement = null)
     {
-        $this->dateconseilperfectionnement = $dateconseilperfectionnement;
+        $this->idDepartement = $idDepartement;
+
+        return $this;
     }
 
     /**
-     * @return \Departement
+     * Get idDepartement.
+     *
+     * @return \App\Entity\Departement|null
      */
-    public function getIddepartement(): \Departement
+    public function getIdDepartement()
     {
-        return $this->iddepartement;
+        return $this->idDepartement;
     }
 
     /**
-     * @param \Departement $iddepartement
+     * Add idPersonneContactEtablissement.
+     *
+     * @param \App\Entity\ContactEtablissement $idPersonneContactEtablissement
+     *
+     * @return ConseilPerfectionnement
      */
-    public function setIddepartement(\Departement $iddepartement): void
+    public function addIdPersonneContactEtablissement(\App\Entity\ContactEtablissement $idPersonneContactEtablissement)
     {
-        $this->iddepartement = $iddepartement;
+        $this->idPersonneContactEtablissement[] = $idPersonneContactEtablissement;
+
+        return $this;
     }
 
     /**
+     * Remove idPersonneContactEtablissement.
+     *
+     * @param \App\Entity\ContactEtablissement $idPersonneContactEtablissement
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdPersonneContactEtablissement(\App\Entity\ContactEtablissement $idPersonneContactEtablissement)
+    {
+        return $this->idPersonneContactEtablissement->removeElement($idPersonneContactEtablissement);
+    }
+
+    /**
+     * Get idPersonneContactEtablissement.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdpersonnecontactetablissement(): \Doctrine\Common\Collections\Collection
+    public function getIdPersonneContactEtablissement()
     {
-        return $this->idpersonnecontactetablissement;
+        return $this->idPersonneContactEtablissement;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $idpersonnecontactetablissement
+     * Add idPersonneEtudiant.
+     *
+     * @param \App\Entity\Etudiant $idPersonneEtudiant
+     *
+     * @return ConseilPerfectionnement
      */
-    public function setIdpersonnecontactetablissement(\Doctrine\Common\Collections\Collection $idpersonnecontactetablissement): void
+    public function addIdPersonneEtudiant(\App\Entity\Etudiant $idPersonneEtudiant)
     {
-        $this->idpersonnecontactetablissement = $idpersonnecontactetablissement;
+        $this->idPersonneEtudiant[] = $idPersonneEtudiant;
+
+        return $this;
     }
 
     /**
+     * Remove idPersonneEtudiant.
+     *
+     * @param \App\Entity\Etudiant $idPersonneEtudiant
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdPersonneEtudiant(\App\Entity\Etudiant $idPersonneEtudiant)
+    {
+        return $this->idPersonneEtudiant->removeElement($idPersonneEtudiant);
+    }
+
+    /**
+     * Get idPersonneEtudiant.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdpersonneetudiant(): \Doctrine\Common\Collections\Collection
+    public function getIdPersonneEtudiant()
     {
-        return $this->idpersonneetudiant;
+        return $this->idPersonneEtudiant;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection $idpersonneetudiant
+     * Add idPersonnePersonnelPolytech.
+     *
+     * @param \App\Entity\PersonnelPolytech $idPersonnePersonnelPolytech
+     *
+     * @return ConseilPerfectionnement
      */
-    public function setIdpersonneetudiant(\Doctrine\Common\Collections\Collection $idpersonneetudiant): void
+    public function addIdPersonnePersonnelPolytech(\App\Entity\PersonnelPolytech $idPersonnePersonnelPolytech)
     {
-        $this->idpersonneetudiant = $idpersonneetudiant;
+        $this->idPersonnePersonnelPolytech[] = $idPersonnePersonnelPolytech;
+
+        return $this;
     }
 
     /**
+     * Remove idPersonnePersonnelPolytech.
+     *
+     * @param \App\Entity\PersonnelPolytech $idPersonnePersonnelPolytech
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdPersonnePersonnelPolytech(\App\Entity\PersonnelPolytech $idPersonnePersonnelPolytech)
+    {
+        return $this->idPersonnePersonnelPolytech->removeElement($idPersonnePersonnelPolytech);
+    }
+
+    /**
+     * Get idPersonnePersonnelPolytech.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdpersonnepersonnelpolytech(): \Doctrine\Common\Collections\Collection
+    public function getIdPersonnePersonnelPolytech()
     {
-        return $this->idpersonnepersonnelpolytech;
+        return $this->idPersonnePersonnelPolytech;
     }
-
-    /**
-     * @param \Doctrine\Common\Collections\Collection $idpersonnepersonnelpolytech
-     */
-    public function setIdpersonnepersonnelpolytech(\Doctrine\Common\Collections\Collection $idpersonnepersonnelpolytech): void
-    {
-        $this->idpersonnepersonnelpolytech = $idpersonnepersonnelpolytech;
-    }
-
-
 }

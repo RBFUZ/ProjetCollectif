@@ -4,6 +4,7 @@
  *
  */
 $(document).ready(function() {
+
     dtable = $("#data_table").DataTable({
         data:[],
         "language": {
@@ -14,16 +15,17 @@ $(document).ready(function() {
             "type":"post",
             "data":
                 function ( d ) {
-                    d.nom_entreprise = $("input[name='nom_entreprise']").val();
+                    d.nom_enterprise = $("input[name='nom_enterprise']").val();
+                    d.id_ville = $("input[name='ville']").val();
                 },
         },
         "columns": [
 
-        {data: 'nomentreprise'},
-        {data: 'numsiren'},
-        {data: 'statutjuridique'},
-        {data: 'sitewebentreprise'},
-        {data: 'commentaireentreprise'}
+        {data: 'nomEtablissement'},
+        {data: 'numSiret'},
+        {data: "idAdresse.idVille.nomVille"},
+        // {data: 'identreprise.nomentreprise'},
+        // {data: 'commentaireentreprise'}
         ],
 
         rowCallback: function (row, data) {},
@@ -36,17 +38,30 @@ $(document).ready(function() {
 } );
 
 var recherche_entreprise = new Vue({
-    el: '#recherche_entreprise', // the element that you want to control
+    el: '#search_enterprise', // the element that you want to control
     data: {
         entreprises:[], // the data to the twig
+        cities:[]
     },
     delimiters: ['${', '}'],
     methods:{
         get_data: function (event) { // the methods that you want to excute
             $("#data_table").show();
             dtable.ajax.reload();
-
         }
     }
 });
+
+$.get('city.json',function (data) {
+    //console.log(data);
+    //recherche_entreprise.cities = data;
+    // alert(data[1]);
+    // var i = 0;
+    // data.foreach(function (d) {
+    //     console.log(d);
+    //     i++;
+    //     $("#list_cities").append('<div class="item"  data-value="'+i+'">'+d+'</div>')
+    // })
+
+})
 

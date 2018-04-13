@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Projetpedagogique
+ * ProjetPedagogique
  *
- * @ORM\Table(name="ProjetPedagogique", indexes={@ORM\Index(name="fk_ProjetPedagogique_Etablissement1_idx", columns={"idEtablissement"})})
+ * @ORM\Table(name="projet_pedagogique", indexes={@ORM\Index(name="fk_ProjetPedagogique_Etablissement1_idx", columns={"id_etablissement"})})
  * @ORM\Entity
  */
-class Projetpedagogique
+class ProjetPedagogique
 {
     /**
      * @var int
@@ -24,137 +24,170 @@ class Projetpedagogique
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutProjet", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_projet", type="date", nullable=false)
      */
-    private $datedebutprojet;
+    private $dateDebutProjet;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="intituleProjet", type="string", length=255, nullable=false)
+     * @ORM\Column(name="intitule_projet", type="string", length=255, nullable=false)
      */
-    private $intituleprojet;
+    private $intituleProjet;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="detailsProjet", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="details_projet", type="text", length=65535, nullable=true)
      */
-    private $detailsprojet;
+    private $detailsProjet;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="montantAlloué", type="float", precision=10, scale=0, nullable=true)
+     * @ORM\Column(name="montant_alloue", type="float", precision=10, scale=0, nullable=true)
      */
-    private $montantallou�;
+    private $montantAlloue;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateDebutProjet.
+     *
+     * @param \DateTime $dateDebutProjet
+     *
+     * @return ProjetPedagogique
      */
-    public function setId(int $id): void
+    public function setDateDebutProjet($dateDebutProjet)
     {
-        $this->id = $id;
+        $this->dateDebutProjet = $dateDebutProjet;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutProjet.
+     *
      * @return \DateTime
      */
-    public function getDatedebutprojet(): \DateTime
+    public function getDateDebutProjet()
     {
-        return $this->datedebutprojet;
+        return $this->dateDebutProjet;
     }
 
     /**
-     * @param \DateTime $datedebutprojet
+     * Set intituleProjet.
+     *
+     * @param string $intituleProjet
+     *
+     * @return ProjetPedagogique
      */
-    public function setDatedebutprojet(\DateTime $datedebutprojet): void
+    public function setIntituleProjet($intituleProjet)
     {
-        $this->datedebutprojet = $datedebutprojet;
+        $this->intituleProjet = $intituleProjet;
+
+        return $this;
     }
 
     /**
+     * Get intituleProjet.
+     *
      * @return string
      */
-    public function getIntituleprojet(): string
+    public function getIntituleProjet()
     {
-        return $this->intituleprojet;
+        return $this->intituleProjet;
     }
 
     /**
-     * @param string $intituleprojet
+     * Set detailsProjet.
+     *
+     * @param string|null $detailsProjet
+     *
+     * @return ProjetPedagogique
      */
-    public function setIntituleprojet(string $intituleprojet): void
+    public function setDetailsProjet($detailsProjet = null)
     {
-        $this->intituleprojet = $intituleprojet;
+        $this->detailsProjet = $detailsProjet;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get detailsProjet.
+     *
+     * @return string|null
      */
-    public function getDetailsprojet(): ?string
+    public function getDetailsProjet()
     {
-        return $this->detailsprojet;
+        return $this->detailsProjet;
     }
 
     /**
-     * @param null|string $detailsprojet
+     * Set montantAlloue.
+     *
+     * @param float|null $montantAlloue
+     *
+     * @return ProjetPedagogique
      */
-    public function setDetailsprojet(?string $detailsprojet): void
+    public function setMontantAlloue($montantAlloue = null)
     {
-        $this->detailsprojet = $detailsprojet;
+        $this->montantAlloue = $montantAlloue;
+
+        return $this;
     }
 
     /**
+     * Get montantAlloue.
+     *
      * @return float|null
      */
-    public function getMontantallou�(): ?float
+    public function getMontantAlloue()
     {
-        return $this->montantallou�;
+        return $this->montantAlloue;
     }
 
     /**
-     * @param float|null $montantallou�
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return ProjetPedagogique
      */
-    public function setMontantallou�(?float $montantallou�): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->montantallou� = $montantallou�;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
-
-    /**
-     * @param \Etablissement $idetablissement
-     */
-    public function setIdetablissement(\Etablissement $idetablissement): void
-    {
-        $this->idetablissement = $idetablissement;
-    }
-
-
-
 }

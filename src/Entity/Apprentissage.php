@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Apprentissage
  *
- * @ORM\Table(name="Apprentissage", indexes={@ORM\Index(name="fk_Apprentissage_Gratification1_idx", columns={"idGratification"}), @ORM\Index(name="fk_Apprentissage_Specialite1_idx", columns={"idSpecialite"}), @ORM\Index(name="fk_Apprentissage_Etudiant1_idx", columns={"idPersonneEtudiant", "idEtudiant"}), @ORM\Index(name="fk_Apprentissage_Etablissement1_idx", columns={"idEtablissement"})})
+ * @ORM\Table(name="apprentissage", indexes={@ORM\Index(name="fk_Apprentissage_Gratification1_idx", columns={"id_gratification"}), @ORM\Index(name="fk_Apprentissage_Specialite1_idx", columns={"id_specialite"}), @ORM\Index(name="fk_Apprentissage_Etudiant1_idx", columns={"id_personne_etudiant", "id_etudiant"}), @ORM\Index(name="fk_Apprentissage_Etablissement1_idx", columns={"id_etablissement"})})
  * @ORM\Entity
  */
 class Apprentissage
@@ -24,23 +24,23 @@ class Apprentissage
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutApprentissage", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_apprentissage", type="date", nullable=false)
      */
-    private $datedebutapprentissage;
+    private $dateDebutApprentissage;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="dateFinApprentissage", type="date", nullable=true)
+     * @ORM\Column(name="date_fin_apprentissage", type="date", nullable=true)
      */
-    private $datefinapprentissage;
+    private $dateFinApprentissage;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dureeApprentissageAnnes", type="integer", nullable=false, options={"comment"="1 an, 3 ans, etc."})
+     * @ORM\Column(name="duree_apprentissage_annees", type="integer", nullable=false, options={"comment"="1 an, 3 ans, etc."})
      */
-    private $dureeapprentissageannes;
+    private $dureeApprentissageAnnees;
 
     /**
      * @var bool
@@ -52,211 +52,276 @@ class Apprentissage
     /**
      * @var string|null
      *
-     * @ORM\Column(name="detailsApprentissage", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="details_apprentissage", type="text", length=65535, nullable=true)
      */
-    private $detailsapprentissage;
+    private $detailsApprentissage;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
 
     /**
-     * @var \Etudiant
+     * @var \App\Entity\Etudiant
      *
-     * @ORM\ManyToOne(targetEntity="Etudiant")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etudiant")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonneEtudiant", referencedColumnName="idPersonne"),
-     *   @ORM\JoinColumn(name="idEtudiant", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personne_etudiant", referencedColumnName="id_personne"),
+     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id")
      * })
      */
-    private $idpersonneetudiant;
+    private $idPersonneEtudiant;
 
     /**
-     * @var \Gratification
+     * @var \App\Entity\Gratification
      *
-     * @ORM\ManyToOne(targetEntity="Gratification")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gratification")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idGratification", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_gratification", referencedColumnName="id")
      * })
      */
-    private $idgratification;
+    private $idGratification;
 
     /**
-     * @var \Specialite
+     * @var \App\Entity\Specialite
      *
-     * @ORM\ManyToOne(targetEntity="Specialite")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Specialite")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idSpecialite", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_specialite", referencedColumnName="id")
      * })
      */
-    private $idspecialite;
+    private $idSpecialite;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateDebutApprentissage.
+     *
+     * @param \DateTime $dateDebutApprentissage
+     *
+     * @return Apprentissage
      */
-    public function setId(int $id): void
+    public function setDateDebutApprentissage($dateDebutApprentissage)
     {
-        $this->id = $id;
+        $this->dateDebutApprentissage = $dateDebutApprentissage;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutApprentissage.
+     *
      * @return \DateTime
      */
-    public function getDatedebutapprentissage(): \DateTime
+    public function getDateDebutApprentissage()
     {
-        return $this->datedebutapprentissage;
+        return $this->dateDebutApprentissage;
     }
 
     /**
-     * @param \DateTime $datedebutapprentissage
+     * Set dateFinApprentissage.
+     *
+     * @param \DateTime|null $dateFinApprentissage
+     *
+     * @return Apprentissage
      */
-    public function setDatedebutapprentissage(\DateTime $datedebutapprentissage): void
+    public function setDateFinApprentissage($dateFinApprentissage = null)
     {
-        $this->datedebutapprentissage = $datedebutapprentissage;
+        $this->dateFinApprentissage = $dateFinApprentissage;
+
+        return $this;
     }
 
     /**
+     * Get dateFinApprentissage.
+     *
      * @return \DateTime|null
      */
-    public function getDatefinapprentissage(): ?\DateTime
+    public function getDateFinApprentissage()
     {
-        return $this->datefinapprentissage;
+        return $this->dateFinApprentissage;
     }
 
     /**
-     * @param \DateTime|null $datefinapprentissage
+     * Set dureeApprentissageAnnees.
+     *
+     * @param int $dureeApprentissageAnnees
+     *
+     * @return Apprentissage
      */
-    public function setDatefinapprentissage(?\DateTime $datefinapprentissage): void
+    public function setDureeApprentissageAnnees($dureeApprentissageAnnees)
     {
-        $this->datefinapprentissage = $datefinapprentissage;
+        $this->dureeApprentissageAnnees = $dureeApprentissageAnnees;
+
+        return $this;
     }
 
     /**
+     * Get dureeApprentissageAnnees.
+     *
      * @return int
      */
-    public function getDureeapprentissageannes(): int
+    public function getDureeApprentissageAnnees()
     {
-        return $this->dureeapprentissageannes;
+        return $this->dureeApprentissageAnnees;
     }
 
     /**
-     * @param int $dureeapprentissageannes
+     * Set etranger.
+     *
+     * @param bool $etranger
+     *
+     * @return Apprentissage
      */
-    public function setDureeapprentissageannes(int $dureeapprentissageannes): void
+    public function setEtranger($etranger)
     {
-        $this->dureeapprentissageannes = $dureeapprentissageannes;
+        $this->etranger = $etranger;
+
+        return $this;
     }
 
     /**
+     * Get etranger.
+     *
      * @return bool
      */
-    public function isEtranger(): bool
+    public function getEtranger()
     {
         return $this->etranger;
     }
 
     /**
-     * @param bool $etranger
+     * Set detailsApprentissage.
+     *
+     * @param string|null $detailsApprentissage
+     *
+     * @return Apprentissage
      */
-    public function setEtranger(bool $etranger): void
+    public function setDetailsApprentissage($detailsApprentissage = null)
     {
-        $this->etranger = $etranger;
+        $this->detailsApprentissage = $detailsApprentissage;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get detailsApprentissage.
+     *
+     * @return string|null
      */
-    public function getDetailsapprentissage(): ?string
+    public function getDetailsApprentissage()
     {
-        return $this->detailsapprentissage;
+        return $this->detailsApprentissage;
     }
 
     /**
-     * @param null|string $detailsapprentissage
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return Apprentissage
      */
-    public function setDetailsapprentissage(?string $detailsapprentissage): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->detailsapprentissage = $detailsapprentissage;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
 
     /**
-     * @param \Etablissement $idetablissement
+     * Set idPersonneEtudiant.
+     *
+     * @param \App\Entity\Etudiant|null $idPersonneEtudiant
+     *
+     * @return Apprentissage
      */
-    public function setIdetablissement(\Etablissement $idetablissement): void
+    public function setIdPersonneEtudiant(\App\Entity\Etudiant $idPersonneEtudiant = null)
     {
-        $this->idetablissement = $idetablissement;
+        $this->idPersonneEtudiant = $idPersonneEtudiant;
+
+        return $this;
     }
 
     /**
-     * @return \Etudiant
+     * Get idPersonneEtudiant.
+     *
+     * @return \App\Entity\Etudiant|null
      */
-    public function getIdpersonneetudiant(): \Etudiant
+    public function getIdPersonneEtudiant()
     {
-        return $this->idpersonneetudiant;
+        return $this->idPersonneEtudiant;
     }
 
     /**
-     * @param \Etudiant $idpersonneetudiant
+     * Set idGratification.
+     *
+     * @param \App\Entity\Gratification|null $idGratification
+     *
+     * @return Apprentissage
      */
-    public function setIdpersonneetudiant(\Etudiant $idpersonneetudiant): void
+    public function setIdGratification(\App\Entity\Gratification $idGratification = null)
     {
-        $this->idpersonneetudiant = $idpersonneetudiant;
+        $this->idGratification = $idGratification;
+
+        return $this;
     }
 
     /**
-     * @return \Gratification
+     * Get idGratification.
+     *
+     * @return \App\Entity\Gratification|null
      */
-    public function getIdgratification(): \Gratification
+    public function getIdGratification()
     {
-        return $this->idgratification;
+        return $this->idGratification;
     }
 
     /**
-     * @param \Gratification $idgratification
+     * Set idSpecialite.
+     *
+     * @param \App\Entity\Specialite|null $idSpecialite
+     *
+     * @return Apprentissage
      */
-    public function setIdgratification(\Gratification $idgratification): void
+    public function setIdSpecialite(\App\Entity\Specialite $idSpecialite = null)
     {
-        $this->idgratification = $idgratification;
+        $this->idSpecialite = $idSpecialite;
+
+        return $this;
     }
 
     /**
-     * @return \Specialite
+     * Get idSpecialite.
+     *
+     * @return \App\Entity\Specialite|null
      */
-    public function getIdspecialite(): \Specialite
+    public function getIdSpecialite()
     {
-        return $this->idspecialite;
+        return $this->idSpecialite;
     }
-
-    /**
-     * @param \Specialite $idspecialite
-     */
-    public function setIdspecialite(\Specialite $idspecialite): void
-    {
-        $this->idspecialite = $idspecialite;
-    }
-
-
-
 }

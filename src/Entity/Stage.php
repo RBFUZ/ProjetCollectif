@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Stage
  *
- * @ORM\Table(name="Stage")
+ * @ORM\Table(name="stage")
  * @ORM\Entity
  */
 class Stage
@@ -24,340 +24,446 @@ class Stage
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutStage", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_stage", type="date", nullable=false)
      */
-    private $datedebutstage;
+    private $dateDebutStage;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateFinStage", type="date", nullable=false)
+     * @ORM\Column(name="date_fin_stage", type="date", nullable=false)
      */
-    private $datefinstage;
+    private $dateFinStage;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="anneeEtudeStage", type="integer", nullable=false)
+     * @ORM\Column(name="annee_etude_stage", type="integer", nullable=false)
      */
-    private $anneeetudestage;
+    private $anneeEtudeStage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="thematiqueStage", type="string", length=255, nullable=false)
+     * @ORM\Column(name="thematique_stage", type="string", length=255, nullable=false)
      */
-    private $thematiquestage;
+    private $thematiqueStage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sujetStage", type="string", length=255, nullable=false)
+     * @ORM\Column(name="sujet_stage", type="string", length=255, nullable=false)
      */
-    private $sujetstage;
+    private $sujetStage;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fonctionsTachesStage", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="fonctions_taches_stage", type="text", length=65535, nullable=false)
      */
-    private $fonctionstachesstage;
+    private $fonctionsTachesStage;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="detailsProjetStage", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="details_projet_stage", type="text", length=65535, nullable=true)
      */
-    private $detailsprojetstage;
+    private $detailsProjetStage;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dureeStageSemaines", type="integer", nullable=false)
+     * @ORM\Column(name="duree_stage_semaines", type="integer", nullable=false)
      */
-    private $dureestagesemaines;
+    private $dureeStageSemaines;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="dureeStageHeures", type="integer", nullable=false)
+     * @ORM\Column(name="duree_stage_heures", type="integer", nullable=false)
      */
-    private $dureestageheures;
+    private $dureeStageHeures;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbJoursTravail", type="integer", nullable=false)
+     * @ORM\Column(name="nb_jours_travail", type="integer", nullable=false)
      */
-    private $nbjourstravail;
+    private $nbJoursTravail;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaireDureeStage", type="string", length=255, nullable=true)
+     * @ORM\Column(name="commentaire_duree_stage", type="string", length=255, nullable=true)
      */
-    private $commentairedureestage;
+    private $commentaireDureeStage;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaireStage", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="commentaire_stage", type="text", length=65535, nullable=true)
      */
-    private $commentairestage;
+    private $commentaireStage;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="elementPedagogique", type="string", length=255, nullable=true)
+     * @ORM\Column(name="element_pedagogique", type="string", length=255, nullable=true)
      */
-    private $elementpedagogique;
+    private $elementPedagogique;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="avantagesNature", type="string", length=255, nullable=true)
+     * @ORM\Column(name="avantages_nature", type="string", length=255, nullable=true)
      */
-    private $avantagesnature;
+    private $avantagesNature;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateDebutStage.
+     *
+     * @param \DateTime $dateDebutStage
+     *
+     * @return Stage
      */
-    public function setId(int $id): void
+    public function setDateDebutStage($dateDebutStage)
     {
-        $this->id = $id;
+        $this->dateDebutStage = $dateDebutStage;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutStage.
+     *
      * @return \DateTime
      */
-    public function getDatedebutstage(): \DateTime
+    public function getDateDebutStage()
     {
-        return $this->datedebutstage;
+        return $this->dateDebutStage;
     }
 
     /**
-     * @param \DateTime $datedebutstage
+     * Set dateFinStage.
+     *
+     * @param \DateTime $dateFinStage
+     *
+     * @return Stage
      */
-    public function setDatedebutstage(\DateTime $datedebutstage): void
+    public function setDateFinStage($dateFinStage)
     {
-        $this->datedebutstage = $datedebutstage;
+        $this->dateFinStage = $dateFinStage;
+
+        return $this;
     }
 
     /**
+     * Get dateFinStage.
+     *
      * @return \DateTime
      */
-    public function getDatefinstage(): \DateTime
+    public function getDateFinStage()
     {
-        return $this->datefinstage;
+        return $this->dateFinStage;
     }
 
     /**
-     * @param \DateTime $datefinstage
+     * Set anneeEtudeStage.
+     *
+     * @param int $anneeEtudeStage
+     *
+     * @return Stage
      */
-    public function setDatefinstage(\DateTime $datefinstage): void
+    public function setAnneeEtudeStage($anneeEtudeStage)
     {
-        $this->datefinstage = $datefinstage;
+        $this->anneeEtudeStage = $anneeEtudeStage;
+
+        return $this;
     }
 
     /**
+     * Get anneeEtudeStage.
+     *
      * @return int
      */
-    public function getAnneeetudestage(): int
+    public function getAnneeEtudeStage()
     {
-        return $this->anneeetudestage;
+        return $this->anneeEtudeStage;
     }
 
     /**
-     * @param int $anneeetudestage
+     * Set thematiqueStage.
+     *
+     * @param string $thematiqueStage
+     *
+     * @return Stage
      */
-    public function setAnneeetudestage(int $anneeetudestage): void
+    public function setThematiqueStage($thematiqueStage)
     {
-        $this->anneeetudestage = $anneeetudestage;
+        $this->thematiqueStage = $thematiqueStage;
+
+        return $this;
     }
 
     /**
+     * Get thematiqueStage.
+     *
      * @return string
      */
-    public function getThematiquestage(): string
+    public function getThematiqueStage()
     {
-        return $this->thematiquestage;
+        return $this->thematiqueStage;
     }
 
     /**
-     * @param string $thematiquestage
+     * Set sujetStage.
+     *
+     * @param string $sujetStage
+     *
+     * @return Stage
      */
-    public function setThematiquestage(string $thematiquestage): void
+    public function setSujetStage($sujetStage)
     {
-        $this->thematiquestage = $thematiquestage;
+        $this->sujetStage = $sujetStage;
+
+        return $this;
     }
 
     /**
+     * Get sujetStage.
+     *
      * @return string
      */
-    public function getSujetstage(): string
+    public function getSujetStage()
     {
-        return $this->sujetstage;
+        return $this->sujetStage;
     }
 
     /**
-     * @param string $sujetstage
+     * Set fonctionsTachesStage.
+     *
+     * @param string $fonctionsTachesStage
+     *
+     * @return Stage
      */
-    public function setSujetstage(string $sujetstage): void
+    public function setFonctionsTachesStage($fonctionsTachesStage)
     {
-        $this->sujetstage = $sujetstage;
+        $this->fonctionsTachesStage = $fonctionsTachesStage;
+
+        return $this;
     }
 
     /**
+     * Get fonctionsTachesStage.
+     *
      * @return string
      */
-    public function getFonctionstachesstage(): string
+    public function getFonctionsTachesStage()
     {
-        return $this->fonctionstachesstage;
+        return $this->fonctionsTachesStage;
     }
 
     /**
-     * @param string $fonctionstachesstage
+     * Set detailsProjetStage.
+     *
+     * @param string|null $detailsProjetStage
+     *
+     * @return Stage
      */
-    public function setFonctionstachesstage(string $fonctionstachesstage): void
+    public function setDetailsProjetStage($detailsProjetStage = null)
     {
-        $this->fonctionstachesstage = $fonctionstachesstage;
+        $this->detailsProjetStage = $detailsProjetStage;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get detailsProjetStage.
+     *
+     * @return string|null
      */
-    public function getDetailsprojetstage(): ?string
+    public function getDetailsProjetStage()
     {
-        return $this->detailsprojetstage;
+        return $this->detailsProjetStage;
     }
 
     /**
-     * @param null|string $detailsprojetstage
+     * Set dureeStageSemaines.
+     *
+     * @param int $dureeStageSemaines
+     *
+     * @return Stage
      */
-    public function setDetailsprojetstage(?string $detailsprojetstage): void
+    public function setDureeStageSemaines($dureeStageSemaines)
     {
-        $this->detailsprojetstage = $detailsprojetstage;
+        $this->dureeStageSemaines = $dureeStageSemaines;
+
+        return $this;
     }
 
     /**
+     * Get dureeStageSemaines.
+     *
      * @return int
      */
-    public function getDureestagesemaines(): int
+    public function getDureeStageSemaines()
     {
-        return $this->dureestagesemaines;
+        return $this->dureeStageSemaines;
     }
 
     /**
-     * @param int $dureestagesemaines
+     * Set dureeStageHeures.
+     *
+     * @param int $dureeStageHeures
+     *
+     * @return Stage
      */
-    public function setDureestagesemaines(int $dureestagesemaines): void
+    public function setDureeStageHeures($dureeStageHeures)
     {
-        $this->dureestagesemaines = $dureestagesemaines;
+        $this->dureeStageHeures = $dureeStageHeures;
+
+        return $this;
     }
 
     /**
+     * Get dureeStageHeures.
+     *
      * @return int
      */
-    public function getDureestageheures(): int
+    public function getDureeStageHeures()
     {
-        return $this->dureestageheures;
+        return $this->dureeStageHeures;
     }
 
     /**
-     * @param int $dureestageheures
+     * Set nbJoursTravail.
+     *
+     * @param int $nbJoursTravail
+     *
+     * @return Stage
      */
-    public function setDureestageheures(int $dureestageheures): void
+    public function setNbJoursTravail($nbJoursTravail)
     {
-        $this->dureestageheures = $dureestageheures;
+        $this->nbJoursTravail = $nbJoursTravail;
+
+        return $this;
     }
 
     /**
+     * Get nbJoursTravail.
+     *
      * @return int
      */
-    public function getNbjourstravail(): int
+    public function getNbJoursTravail()
     {
-        return $this->nbjourstravail;
+        return $this->nbJoursTravail;
     }
 
     /**
-     * @param int $nbjourstravail
+     * Set commentaireDureeStage.
+     *
+     * @param string|null $commentaireDureeStage
+     *
+     * @return Stage
      */
-    public function setNbjourstravail(int $nbjourstravail): void
+    public function setCommentaireDureeStage($commentaireDureeStage = null)
     {
-        $this->nbjourstravail = $nbjourstravail;
+        $this->commentaireDureeStage = $commentaireDureeStage;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get commentaireDureeStage.
+     *
+     * @return string|null
      */
-    public function getCommentairedureestage(): ?string
+    public function getCommentaireDureeStage()
     {
-        return $this->commentairedureestage;
+        return $this->commentaireDureeStage;
     }
 
     /**
-     * @param null|string $commentairedureestage
+     * Set commentaireStage.
+     *
+     * @param string|null $commentaireStage
+     *
+     * @return Stage
      */
-    public function setCommentairedureestage(?string $commentairedureestage): void
+    public function setCommentaireStage($commentaireStage = null)
     {
-        $this->commentairedureestage = $commentairedureestage;
+        $this->commentaireStage = $commentaireStage;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get commentaireStage.
+     *
+     * @return string|null
      */
-    public function getCommentairestage(): ?string
+    public function getCommentaireStage()
     {
-        return $this->commentairestage;
+        return $this->commentaireStage;
     }
 
     /**
-     * @param null|string $commentairestage
+     * Set elementPedagogique.
+     *
+     * @param string|null $elementPedagogique
+     *
+     * @return Stage
      */
-    public function setCommentairestage(?string $commentairestage): void
+    public function setElementPedagogique($elementPedagogique = null)
     {
-        $this->commentairestage = $commentairestage;
+        $this->elementPedagogique = $elementPedagogique;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get elementPedagogique.
+     *
+     * @return string|null
      */
-    public function getElementpedagogique(): ?string
+    public function getElementPedagogique()
     {
-        return $this->elementpedagogique;
+        return $this->elementPedagogique;
     }
 
     /**
-     * @param null|string $elementpedagogique
+     * Set avantagesNature.
+     *
+     * @param string|null $avantagesNature
+     *
+     * @return Stage
      */
-    public function setElementpedagogique(?string $elementpedagogique): void
+    public function setAvantagesNature($avantagesNature = null)
     {
-        $this->elementpedagogique = $elementpedagogique;
+        $this->avantagesNature = $avantagesNature;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get avantagesNature.
+     *
+     * @return string|null
      */
-    public function getAvantagesnature(): ?string
+    public function getAvantagesNature()
     {
-        return $this->avantagesnature;
+        return $this->avantagesNature;
     }
-
-    /**
-     * @param null|string $avantagesnature
-     */
-    public function setAvantagesnature(?string $avantagesnature): void
-    {
-        $this->avantagesnature = $avantagesnature;
-    }
-
-
 }

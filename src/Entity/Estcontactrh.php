@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Estcontactrh
+ * EstContactRh
  *
- * @ORM\Table(name="EstContactRH", indexes={@ORM\Index(name="fk_EstContactRH_ContactEtablissement1_idx", columns={"idContactEtablissement", "idPersonneContactEtablissement"}), @ORM\Index(name="fk_EstContactRH_Etablissement1_idx", columns={"idEtablissement"})})
+ * @ORM\Table(name="est_contact_rh", indexes={@ORM\Index(name="fk_EstContactRH_ContactEtablissement1_idx", columns={"id_contact_etablissement", "id_personne_contact_etablissement"}), @ORM\Index(name="fk_EstContactRH_Etablissement1_idx", columns={"id_etablissement"})})
  * @ORM\Entity
  */
-class Estcontactrh
+class EstContactRh
 {
     /**
      * @var int
@@ -24,117 +24,143 @@ class Estcontactrh
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebutContactRH", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_contact_rh", type="date", nullable=false)
      */
-    private $datedebutcontactrh;
+    private $dateDebutContactRh;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="dateFinContactRH", type="date", nullable=true)
+     * @ORM\Column(name="date_fin_contact_rh", type="date", nullable=true)
      */
-    private $datefincontactrh;
+    private $dateFinContactRh;
 
     /**
-     * @var \Contactetablissement
+     * @var \App\Entity\ContactEtablissement
      *
-     * @ORM\ManyToOne(targetEntity="Contactetablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContactEtablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idContactEtablissement", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonneContactEtablissement", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_contact_etablissement", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_contact_etablissement", referencedColumnName="id_personne")
      * })
      */
-    private $idcontactetablissement;
+    private $idContactEtablissement;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateDebutContactRh.
+     *
+     * @param \DateTime $dateDebutContactRh
+     *
+     * @return EstContactRh
      */
-    public function setId(int $id): void
+    public function setDateDebutContactRh($dateDebutContactRh)
     {
-        $this->id = $id;
+        $this->dateDebutContactRh = $dateDebutContactRh;
+
+        return $this;
     }
 
     /**
+     * Get dateDebutContactRh.
+     *
      * @return \DateTime
      */
-    public function getDatedebutcontactrh(): \DateTime
+    public function getDateDebutContactRh()
     {
-        return $this->datedebutcontactrh;
+        return $this->dateDebutContactRh;
     }
 
     /**
-     * @param \DateTime $datedebutcontactrh
+     * Set dateFinContactRh.
+     *
+     * @param \DateTime|null $dateFinContactRh
+     *
+     * @return EstContactRh
      */
-    public function setDatedebutcontactrh(\DateTime $datedebutcontactrh): void
+    public function setDateFinContactRh($dateFinContactRh = null)
     {
-        $this->datedebutcontactrh = $datedebutcontactrh;
+        $this->dateFinContactRh = $dateFinContactRh;
+
+        return $this;
     }
 
     /**
+     * Get dateFinContactRh.
+     *
      * @return \DateTime|null
      */
-    public function getDatefincontactrh(): ?\DateTime
+    public function getDateFinContactRh()
     {
-        return $this->datefincontactrh;
+        return $this->dateFinContactRh;
     }
 
     /**
-     * @param \DateTime|null $datefincontactrh
+     * Set idContactEtablissement.
+     *
+     * @param \App\Entity\ContactEtablissement|null $idContactEtablissement
+     *
+     * @return EstContactRh
      */
-    public function setDatefincontactrh(?\DateTime $datefincontactrh): void
+    public function setIdContactEtablissement(\App\Entity\ContactEtablissement $idContactEtablissement = null)
     {
-        $this->datefincontactrh = $datefincontactrh;
+        $this->idContactEtablissement = $idContactEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Contactetablissement
+     * Get idContactEtablissement.
+     *
+     * @return \App\Entity\ContactEtablissement|null
      */
-    public function getIdcontactetablissement(): \Contactetablissement
+    public function getIdContactEtablissement()
     {
-        return $this->idcontactetablissement;
+        return $this->idContactEtablissement;
     }
 
     /**
-     * @param \Contactetablissement $idcontactetablissement
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return EstContactRh
      */
-    public function setIdcontactetablissement(\Contactetablissement $idcontactetablissement): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->idcontactetablissement = $idcontactetablissement;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
-
-    /**
-     * @param \Etablissement $idetablissement
-     */
-    public function setIdetablissement(\Etablissement $idetablissement): void
-    {
-        $this->idetablissement = $idetablissement;
-    }
-
-
 }

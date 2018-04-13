@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Personnelpolytech
+ * PersonnelPolytech
  *
- * @ORM\Table(name="PersonnelPolytech", indexes={@ORM\Index(name="fk_PersonnelPolytech_Personne1_idx", columns={"idPersonne"}), @ORM\Index(name="fk_PersonnelPolytech_Departement1_idx", columns={"idDepartement"})})
+ * @ORM\Table(name="personnel_polytech", indexes={@ORM\Index(name="fk_PersonnelPolytech_Personne1_idx", columns={"id_personne"}), @ORM\Index(name="fk_PersonnelPolytech_Departement1_idx", columns={"id_departement"})})
  * @ORM\Entity
  */
-class Personnelpolytech
+class PersonnelPolytech
 {
     /**
      * @var int
@@ -24,149 +24,208 @@ class Personnelpolytech
     /**
      * @var string
      *
-     * @ORM\Column(name="mailUniversitaire", type="string", length=100, nullable=false)
+     * @ORM\Column(name="mail_universitaire", type="string", length=100, nullable=false)
      */
-    private $mailuniversitaire;
+    private $mailUniversitaire;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fonction", type="string", length=200, nullable=false)
+     * @ORM\Column(name="fonction", type="string", length=255, nullable=false)
      */
     private $fonction;
 
     /**
-     * @var \Departement
+     * @var \App\Entity\Departement
      *
-     * @ORM\ManyToOne(targetEntity="Departement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Departement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idDepartement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_departement", referencedColumnName="id")
      * })
      */
-    private $iddepartement;
+    private $idDepartement;
 
     /**
-     * @var \Personne
+     * @var \App\Entity\Personne
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Personne")
+     * @ORM\OneToOne(targetEntity="App\Entity\Personne")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonne", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personne", referencedColumnName="id")
      * })
      */
-    private $idpersonne;
+    private $idPersonne;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Conseilperfectionnement", mappedBy="idpersonnepersonnelpolytech")
+     * @ORM\ManyToMany(targetEntity="App\Entity\ConseilPerfectionnement", mappedBy="idPersonnePersonnelPolytech")
      */
-    private $idconseilperfectionnement;
+    private $idConseilPerfectionnement;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->idconseilperfectionnement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idConseilPerfectionnement = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Set id.
+     *
+     * @param int $id
+     *
+     * @return PersonnelPolytech
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set mailUniversitaire.
+     *
+     * @param string $mailUniversitaire
+     *
+     * @return PersonnelPolytech
      */
-    public function setId(int $id): void
+    public function setMailUniversitaire($mailUniversitaire)
     {
-        $this->id = $id;
+        $this->mailUniversitaire = $mailUniversitaire;
+
+        return $this;
     }
 
     /**
+     * Get mailUniversitaire.
+     *
      * @return string
      */
-    public function getMailuniversitaire(): string
+    public function getMailUniversitaire()
     {
-        return $this->mailuniversitaire;
+        return $this->mailUniversitaire;
     }
 
     /**
-     * @param string $mailuniversitaire
+     * Set fonction.
+     *
+     * @param string $fonction
+     *
+     * @return PersonnelPolytech
      */
-    public function setMailuniversitaire(string $mailuniversitaire): void
+    public function setFonction($fonction)
     {
-        $this->mailuniversitaire = $mailuniversitaire;
+        $this->fonction = $fonction;
+
+        return $this;
     }
 
     /**
+     * Get fonction.
+     *
      * @return string
      */
-    public function getFonction(): string
+    public function getFonction()
     {
         return $this->fonction;
     }
 
     /**
-     * @param string $fonction
+     * Set idDepartement.
+     *
+     * @param \App\Entity\Departement|null $idDepartement
+     *
+     * @return PersonnelPolytech
      */
-    public function setFonction(string $fonction): void
+    public function setIdDepartement(\App\Entity\Departement $idDepartement = null)
     {
-        $this->fonction = $fonction;
+        $this->idDepartement = $idDepartement;
+
+        return $this;
     }
 
     /**
-     * @return \Departement
+     * Get idDepartement.
+     *
+     * @return \App\Entity\Departement|null
      */
-    public function getIddepartement(): \Departement
+    public function getIdDepartement()
     {
-        return $this->iddepartement;
+        return $this->idDepartement;
     }
 
     /**
-     * @param \Departement $iddepartement
+     * Set idPersonne.
+     *
+     * @param \App\Entity\Personne $idPersonne
+     *
+     * @return PersonnelPolytech
      */
-    public function setIddepartement(\Departement $iddepartement): void
+    public function setIdPersonne(\App\Entity\Personne $idPersonne)
     {
-        $this->iddepartement = $iddepartement;
+        $this->idPersonne = $idPersonne;
+
+        return $this;
     }
 
     /**
-     * @return \Personne
+     * Get idPersonne.
+     *
+     * @return \App\Entity\Personne
      */
-    public function getIdpersonne(): \Personne
+    public function getIdPersonne()
     {
-        return $this->idpersonne;
+        return $this->idPersonne;
     }
 
     /**
-     * @param \Personne $idpersonne
+     * Add idConseilPerfectionnement.
+     *
+     * @param \App\Entity\ConseilPerfectionnement $idConseilPerfectionnement
+     *
+     * @return PersonnelPolytech
      */
-    public function setIdpersonne(\Personne $idpersonne): void
+    public function addIdConseilPerfectionnement(\App\Entity\ConseilPerfectionnement $idConseilPerfectionnement)
     {
-        $this->idpersonne = $idpersonne;
+        $this->idConseilPerfectionnement[] = $idConseilPerfectionnement;
+
+        return $this;
     }
 
     /**
+     * Remove idConseilPerfectionnement.
+     *
+     * @param \App\Entity\ConseilPerfectionnement $idConseilPerfectionnement
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeIdConseilPerfectionnement(\App\Entity\ConseilPerfectionnement $idConseilPerfectionnement)
+    {
+        return $this->idConseilPerfectionnement->removeElement($idConseilPerfectionnement);
+    }
+
+    /**
+     * Get idConseilPerfectionnement.
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getIdconseilperfectionnement(): \Doctrine\Common\Collections\Collection
+    public function getIdConseilPerfectionnement()
     {
-        return $this->idconseilperfectionnement;
+        return $this->idConseilPerfectionnement;
     }
-
-    /**
-     * @param \Doctrine\Common\Collections\Collection $idconseilperfectionnement
-     */
-    public function setIdconseilperfectionnement(\Doctrine\Common\Collections\Collection $idconseilperfectionnement): void
-    {
-        $this->idconseilperfectionnement = $idconseilperfectionnement;
-    }
-
-
 }

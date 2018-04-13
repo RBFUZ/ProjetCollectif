@@ -3,81 +3,44 @@
 {% block title %}Recherche{% endblock %}
 
 {% block content %}
-    <div id="recherche_entreprise">
-<div class="ui three column stackable grid container">
-    <div class="ui column">
-        <div class="ui calendar" id="datedebut">
-            <div class="ui input left icon">
-                <i class="calendar icon"></i>
-                <input type="text" placeholder="Début">
-            </div>
-        </div>
-    </div>
-    <div class="column">
-        <div class="ui calendar" id="datefin">
-            <div class="ui input left icon">
-                <i class="calendar icon"></i>
-                <input type="text" placeholder="Fin">
-            </div>
-        </div>
-    </div>
-
-</div>
+    <div id="search_enterprise">
 
 <div class="ui three column stackable grid container">
     <div class="column">
         <div class="ui search selection dropdown">
-            <input type="hidden" name="nom_entreprise" >
+            <input type="hidden" name="nom_enterprise" >
             <i class="dropdown icon"></i>
-            <div class="default text">Entreprise</div>
+            <div class="default text">Établissement</div>
             <div class="menu">
-                <div class="item" data-value="Orange">Orange</div>
-                <div class="item" data-value="Worldline">Worldline</div>
-                <div class="item" data-value="Google">Google</div>
-                <div class="item" data-value="Amazon">Amazon</div>
+                {% for e in enterprise %}
+                    <div class="item" data-value="{{e.nomEntreprise }}">{{e.nomEntreprise }}</div>
+                {% endfor %}
+                {#<div class="item" data-value="CNRS">CNRS</div>#}
+                {#<div class="item" data-value="EDF">EDF</div>#}
+                {#<div class="item" data-value="Google">Google</div>#}
+                {#<div class="item" data-value="Amazon">Amazon</div>#}
             </div>
         </div>
     </div>
-
-    <!--
     <div class="column">
-      <div class="ui toggle checkbox">
-        <input type="checkbox" name="Entreprise" />
-        <label>Entreprise</label>
-      </div>
-    </div>
-  -->
-</div>
+        
+        {#<div class="ui search selection dropdown">#}
+            {#<input type="hidden" name="ville" >#}
+            {#<i class="dropdown icon"></i>#}
+            {#<div class="default text">Ville</div>#}
+            {#<div id="list_cities" class="menu" >#}
+                {#<div class="item" v-for="c in cities" data-value="${c.id}">${c.name}</div>#}
 
-<div class="ui three column stackable grid container">
-    <div class="column">
-        <div class="ui selection dropdown">
-            <input type="hidden" name="type">
-            <i class="dropdown icon"></i>
-            <div class="default text">Type de donnée</div>
-            <div class="menu">
-                <div class="item" data-value="1">Type1</div>
-                <div class="item" data-value="2">Type2</div>
-                <div class="item" data-value="3">Type3</div>
-                <div class="item" data-value="4">Type4</div>
-            </div>
-        </div>
+            {#</div>#}
+        {#</div>#}
     </div>
 
-
-
-    <div class="column">
-        <!--  <div class="ui toggle checkbox">
-          <input type="checkbox" id="Entreprise" />
-          <label>Entreprise</label>
-        </div>
-      -->
-    </div>
     <div class="column">
         <button class="ui primary button" v-on:click="get_data">Recherche</button>
     </div>
 
 </div>
+
 
 <div class="ui center aligned one column stackable grid container center">
 
@@ -89,11 +52,11 @@
             <thead>
             <tr>
 
-                <th>Nom Entreprise</th>
+                <th>Nom Établissement</th>
                 <th>Num Siren</th>
-                <th>Statut Juridique</th>
-                <th>Site Web Entreprise</th>
-                <th>Commentaire Entreprise</th>
+                <th>Ville</th>
+                {#<th>Nom Entreprise</th>#}
+                {#<th>Commentaire Entreprise</th>#}
             </tr>
             </thead>
             <tbody>
@@ -123,6 +86,15 @@
 
         <script src="/js/customjs/custom-datatable.js"></script>
         <script src="/js/recherche.js"></script>
+        <script>
+            $('.ui.form')
+                .form({
+                    fields: {
+                        number_siret : ['minLength[14]', 'empty']
+                    }
+                })
+            ;
+        </script>
 {% endblock %}
 <<<<<<< HEAD
 =======

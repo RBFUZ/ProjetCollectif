@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Serviceaccueil
+ * ServiceAccueil
  *
- * @ORM\Table(name="ServiceAccueil", indexes={@ORM\Index(name="fk_ServiceAccueil_Etablissement1_idx", columns={"idEtablissement"})})
+ * @ORM\Table(name="service_accueil", indexes={@ORM\Index(name="fk_ServiceAccueil_Etablissement1_idx", columns={"id_etablissement"})})
  * @ORM\Entity
  */
-class Serviceaccueil
+class ServiceAccueil
 {
     /**
      * @var int
@@ -24,68 +24,77 @@ class Serviceaccueil
     /**
      * @var string
      *
-     * @ORM\Column(name="nomService", type="string", length=100, nullable=false)
+     * @ORM\Column(name="nom_service", type="string", length=100, nullable=false)
      */
-    private $nomservice;
+    private $nomService;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set nomService.
+     *
+     * @param string $nomService
+     *
+     * @return ServiceAccueil
      */
-    public function setId(int $id): void
+    public function setNomService($nomService)
     {
-        $this->id = $id;
+        $this->nomService = $nomService;
+
+        return $this;
     }
 
     /**
+     * Get nomService.
+     *
      * @return string
      */
-    public function getNomservice(): string
+    public function getNomService()
     {
-        return $this->nomservice;
+        return $this->nomService;
     }
 
     /**
-     * @param string $nomservice
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return ServiceAccueil
      */
-    public function setNomservice(string $nomservice): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->nomservice = $nomservice;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
-
-    /**
-     * @param \Etablissement $idetablissement
-     */
-    public function setIdetablissement(\Etablissement $idetablissement): void
-    {
-        $this->idetablissement = $idetablissement;
-    }
-
-
-
 }

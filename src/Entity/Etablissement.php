@@ -1,14 +1,17 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Etablissement
  *
- * @ORM\Table(name="Etablissement", uniqueConstraints={@ORM\UniqueConstraint(name="siret_UNIQUE", columns={"numSIRET"})}, indexes={@ORM\Index(name="fk_Etablissement_Adresse1_idx", columns={"idAdresse"}), @ORM\Index(name="fk_Etablissement_Entreprise1_idx", columns={"idEntreprise"})})
+ * @ORM\Table(name="etablissement", uniqueConstraints={@ORM\UniqueConstraint(name="siret_UNIQUE", columns={"num_siret"})}, indexes={@ORM\Index(name="fk_Etablissement_Adresse1_idx", columns={"id_adresse"}), @ORM\Index(name="fk_Etablissement_Entreprise1_idx", columns={"id_entreprise"})})
  * @ORM\Entity
+* (repositoryClass="App\Repository\EtablissementRepository")
+* (repositoryClass="App\Repository\EtablissementRepository")
+* (repositoryClass="App\Repository\EtablissementRepository")
  */
 class Etablissement
 {
@@ -24,23 +27,23 @@ class Etablissement
     /**
      * @var string
      *
-     * @ORM\Column(name="nomEtablissement", type="string", length=200, nullable=false)
+     * @ORM\Column(name="nom_etablissement", type="string", length=255, nullable=false)
      */
-    private $nometablissement;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numSIRET", type="string", length=14, nullable=false)
-     */
-    private $numsiret;
+    private $nomEtablissement;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="typeStructure", type="string", length=45, nullable=true)
+     * @ORM\Column(name="num_siret", type="string", length=14, nullable=true)
      */
-    private $typestructure;
+    private $numSiret;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="type_structure", type="string", length=255, nullable=true)
+     */
+    private $typeStructure;
 
     /**
      * @var string|null
@@ -52,226 +55,300 @@ class Etablissement
     /**
      * @var string|null
      *
-     * @ORM\Column(name="secteursActivites", type="string", length=200, nullable=true)
+     * @ORM\Column(name="secteurs_activites", type="string", length=255, nullable=true)
      */
-    private $secteursactivites;
+    private $secteursActivites;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="codeNAF", type="string", length=45, nullable=true)
+     * @ORM\Column(name="code_naf", type="string", length=45, nullable=true)
      */
-    private $codenaf;
+    private $codeNaf;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="siteWebEtablissement", type="string", length=255, nullable=true)
+     * @ORM\Column(name="site_web_etablissement", type="string", length=255, nullable=true)
      */
-    private $sitewebetablissement;
+    private $siteWebEtablissement;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="commentaireEtablissement", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="commentaire_etablissement", type="text", length=65535, nullable=true)
      */
-    private $commentaireetablissement;
+    private $commentaireEtablissement;
 
     /**
-     * @var \Adresse
+     * @var \App\Entity\Adresse
      *
-     * @ORM\ManyToOne(targetEntity="Adresse")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Adresse")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idAdresse", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_adresse", referencedColumnName="id")
      * })
      */
-    private $idadresse;
+    private $idAdresse;
 
     /**
-     * @var \Entreprise
+     * @var \App\Entity\Entreprise
      *
-     * @ORM\ManyToOne(targetEntity="Entreprise")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Entreprise")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEntreprise", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_entreprise", referencedColumnName="id")
      * })
      */
-    private $identreprise;
+    private $idEntreprise;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set nomEtablissement.
+     *
+     * @param string $nomEtablissement
+     *
+     * @return Etablissement
      */
-    public function setId(int $id): void
+    public function setNomEtablissement($nomEtablissement)
     {
-        $this->id = $id;
+        $this->nomEtablissement = $nomEtablissement;
+
+        return $this;
     }
 
     /**
+     * Get nomEtablissement.
+     *
      * @return string
      */
-    public function getNometablissement(): string
+    public function getNomEtablissement()
     {
-        return $this->nometablissement;
+        return $this->nomEtablissement;
     }
 
     /**
-     * @param string $nometablissement
+     * Set numSiret.
+     *
+     * @param string|null $numSiret
+     *
+     * @return Etablissement
      */
-    public function setNometablissement(string $nometablissement): void
+    public function setNumSiret($numSiret = null)
     {
-        $this->nometablissement = $nometablissement;
+        $this->numSiret = $numSiret;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get numSiret.
+     *
+     * @return string|null
      */
-    public function getNumsiret(): string
+    public function getNumSiret()
     {
-        return $this->numsiret;
+        return $this->numSiret;
     }
 
     /**
-     * @param string $numsiret
+     * Set typeStructure.
+     *
+     * @param string|null $typeStructure
+     *
+     * @return Etablissement
      */
-    public function setNumsiret(string $numsiret): void
+    public function setTypeStructure($typeStructure = null)
     {
-        $this->numsiret = $numsiret;
+        $this->typeStructure = $typeStructure;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get typeStructure.
+     *
+     * @return string|null
      */
-    public function getTypestructure(): ?string
+    public function getTypeStructure()
     {
-        return $this->typestructure;
+        return $this->typeStructure;
     }
 
     /**
-     * @param null|string $typestructure
+     * Set effectifs.
+     *
+     * @param string|null $effectifs
+     *
+     * @return Etablissement
      */
-    public function setTypestructure(?string $typestructure): void
+    public function setEffectifs($effectifs = null)
     {
-        $this->typestructure = $typestructure;
+        $this->effectifs = $effectifs;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get effectifs.
+     *
+     * @return string|null
      */
-    public function getEffectifs(): ?string
+    public function getEffectifs()
     {
         return $this->effectifs;
     }
 
     /**
-     * @param null|string $effectifs
+     * Set secteursActivites.
+     *
+     * @param string|null $secteursActivites
+     *
+     * @return Etablissement
      */
-    public function setEffectifs(?string $effectifs): void
+    public function setSecteursActivites($secteursActivites = null)
     {
-        $this->effectifs = $effectifs;
+        $this->secteursActivites = $secteursActivites;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get secteursActivites.
+     *
+     * @return string|null
      */
-    public function getSecteursactivites(): ?string
+    public function getSecteursActivites()
     {
-        return $this->secteursactivites;
+        return $this->secteursActivites;
     }
 
     /**
-     * @param null|string $secteursactivites
+     * Set codeNaf.
+     *
+     * @param string|null $codeNaf
+     *
+     * @return Etablissement
      */
-    public function setSecteursactivites(?string $secteursactivites): void
+    public function setCodeNaf($codeNaf = null)
     {
-        $this->secteursactivites = $secteursactivites;
+        $this->codeNaf = $codeNaf;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get codeNaf.
+     *
+     * @return string|null
      */
-    public function getCodenaf(): ?string
+    public function getCodeNaf()
     {
-        return $this->codenaf;
+        return $this->codeNaf;
     }
 
     /**
-     * @param null|string $codenaf
+     * Set siteWebEtablissement.
+     *
+     * @param string|null $siteWebEtablissement
+     *
+     * @return Etablissement
      */
-    public function setCodenaf(?string $codenaf): void
+    public function setSiteWebEtablissement($siteWebEtablissement = null)
     {
-        $this->codenaf = $codenaf;
+        $this->siteWebEtablissement = $siteWebEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get siteWebEtablissement.
+     *
+     * @return string|null
      */
-    public function getSitewebetablissement(): ?string
+    public function getSiteWebEtablissement()
     {
-        return $this->sitewebetablissement;
+        return $this->siteWebEtablissement;
     }
 
     /**
-     * @param null|string $sitewebetablissement
+     * Set commentaireEtablissement.
+     *
+     * @param string|null $commentaireEtablissement
+     *
+     * @return Etablissement
      */
-    public function setSitewebetablissement(?string $sitewebetablissement): void
+    public function setCommentaireEtablissement($commentaireEtablissement = null)
     {
-        $this->sitewebetablissement = $sitewebetablissement;
+        $this->commentaireEtablissement = $commentaireEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get commentaireEtablissement.
+     *
+     * @return string|null
      */
-    public function getCommentaireetablissement(): ?string
+    public function getCommentaireEtablissement()
     {
-        return $this->commentaireetablissement;
+        return $this->commentaireEtablissement;
     }
 
     /**
-     * @param null|string $commentaireetablissement
+     * Set idAdresse.
+     *
+     * @param \App\Entity\Adresse|null $idAdresse
+     *
+     * @return Etablissement
      */
-    public function setCommentaireetablissement(?string $commentaireetablissement): void
+    public function setIdAdresse(\App\Entity\Adresse $idAdresse = null)
     {
-        $this->commentaireetablissement = $commentaireetablissement;
+        $this->idAdresse = $idAdresse;
+
+        return $this;
     }
 
     /**
-     * @return \Adresse
+     * Get idAdresse.
+     *
+     * @return \App\Entity\Adresse|null
      */
-    public function getIdadresse(): \Adresse
+    public function getIdAdresse()
     {
-        return $this->idadresse;
+        return $this->idAdresse;
     }
 
     /**
-     * @param \Adresse $idadresse
+     * Set idEntreprise.
+     *
+     * @param \App\Entity\Entreprise|null $idEntreprise
+     *
+     * @return Etablissement
      */
-    public function setIdadresse(\Adresse $idadresse): void
+    public function setIdEntreprise(\App\Entity\Entreprise $idEntreprise = null)
     {
-        $this->idadresse = $idadresse;
+        $this->idEntreprise = $idEntreprise;
+
+        return $this;
     }
 
     /**
-     * @return \Entreprise
+     * Get idEntreprise.
+     *
+     * @return \App\Entity\Entreprise|null
      */
-    public function getIdentreprise(): \Entreprise
+    public function getIdEntreprise()
     {
-        return $this->identreprise;
+        return $this->idEntreprise;
     }
-
-    /**
-     * @param \Entreprise $identreprise
-     */
-    public function setIdentreprise(\Entreprise $identreprise): void
-    {
-        $this->identreprise = $identreprise;
-    }
-
-
 }

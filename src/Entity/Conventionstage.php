@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Conventionstage
+ * ConventionStage
  *
- * @ORM\Table(name="ConventionStage", indexes={@ORM\Index(name="fk_ConventionStage_Stage1_idx", columns={"idStage"}), @ORM\Index(name="fk_ConventionStage_Gratification1_idx", columns={"idGratification"}), @ORM\Index(name="fk_ConventionStage_Etudiant1_idx", columns={"idEtudiant", "idPersonneEtudiant"}), @ORM\Index(name="fk_ConventionStage_Specialite1_idx", columns={"idSpecialite"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech1_idx", columns={"idPersonnelPolytechTuteur", "idPersonnePersonnelPolytechTuteur"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech2_idx", columns={"idPersonnelPolytechChargeSuivi", "idPersonnePersonnelPolytechChargeSuivi"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement1_idx", columns={"idContactEtablissementTuteur", "idPersonneContactEtablissementTuteur"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement2_idx", columns={"idContactEtablissementSignataire", "idPersonneContactEtablissementSignataire"}), @ORM\Index(name="fk_ConventionStage_Etablissement1_idx", columns={"idEtablissement"}), @ORM\Index(name="fk_ConventionStage_ServiceAccueil1_idx", columns={"idServiceAccueil"})})
+ * @ORM\Table(name="convention_stage", indexes={@ORM\Index(name="fk_ConventionStage_Stage1_idx", columns={"id_stage"}), @ORM\Index(name="fk_ConventionStage_Gratification1_idx", columns={"id_gratification"}), @ORM\Index(name="fk_ConventionStage_Etudiant1_idx", columns={"id_etudiant", "id_personne_etudiant"}), @ORM\Index(name="fk_ConventionStage_Specialite1_idx", columns={"id_specialite"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech1_idx", columns={"id_personnel_polytech_tuteur", "id_personne_personnel_polytech_tuteur"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech2_idx", columns={"id_personnel_polytech_charge_suivi", "id_personne_personnel_polytech_charge_suivi"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement1_idx", columns={"id_contact_etablissement_tuteur", "id_personne_contact_etablissement_tuteur"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement2_idx", columns={"id_contact_etablissement_signataire", "id_personne_contact_etablissement_signataire"}), @ORM\Index(name="fk_ConventionStage_Etablissement1_idx", columns={"id_etablissement"}), @ORM\Index(name="fk_ConventionStage_ServiceAccueil1_idx", columns={"id_service_accueil"})})
  * @ORM\Entity
  */
-class Conventionstage
+class ConventionStage
 {
     /**
      * @var int
@@ -24,23 +24,23 @@ class Conventionstage
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreation", type="date", nullable=false)
+     * @ORM\Column(name="date_creation", type="date", nullable=false)
      */
-    private $datecreation;
+    private $dateCreation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDerniereModification", type="date", nullable=false)
+     * @ORM\Column(name="date_derniere_modification", type="date", nullable=false)
      */
-    private $datedernieremodification;
+    private $dateDerniereModification;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="typeConvention", type="string", length=45, nullable=true, options={"comment"="Obligatoire, non obligatoire, ..."})
+     * @ORM\Column(name="type_convention", type="string", length=45, nullable=true, options={"comment"="Obligatoire, non obligatoire, ..."})
      */
-    private $typeconvention;
+    private $typeConvention;
 
     /**
      * @var bool
@@ -52,371 +52,484 @@ class Conventionstage
     /**
      * @var bool
      *
-     * @ORM\Column(name="valideePedagogiquement", type="boolean", nullable=false)
+     * @ORM\Column(name="validee_pedagogiquement", type="boolean", nullable=false)
      */
-    private $valideepedagogiquement;
+    private $valideePedagogiquement;
 
     /**
-     * @var \Contactetablissement
+     * @var \App\Entity\ContactEtablissement
      *
-     * @ORM\ManyToOne(targetEntity="Contactetablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContactEtablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idContactEtablissementTuteur", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonneContactEtablissementTuteur", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_contact_etablissement_tuteur", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_contact_etablissement_tuteur", referencedColumnName="id_personne")
      * })
      */
-    private $idcontactetablissementtuteur;
+    private $idContactEtablissementTuteur;
 
     /**
-     * @var \Contactetablissement
+     * @var \App\Entity\ContactEtablissement
      *
-     * @ORM\ManyToOne(targetEntity="Contactetablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContactEtablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idContactEtablissementSignataire", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonneContactEtablissementSignataire", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_contact_etablissement_signataire", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_contact_etablissement_signataire", referencedColumnName="id_personne")
      * })
      */
-    private $idcontactetablissementsignataire;
+    private $idContactEtablissementSignataire;
 
     /**
-     * @var \Etablissement
+     * @var \App\Entity\Etablissement
      *
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etablissement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
      * })
      */
-    private $idetablissement;
+    private $idEtablissement;
 
     /**
-     * @var \Etudiant
+     * @var \App\Entity\Etudiant
      *
-     * @ORM\ManyToOne(targetEntity="Etudiant")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Etudiant")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEtudiant", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonneEtudiant", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_etudiant", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_etudiant", referencedColumnName="id_personne")
      * })
      */
-    private $idetudiant;
+    private $idEtudiant;
 
     /**
-     * @var \Gratification
+     * @var \App\Entity\Gratification
      *
-     * @ORM\ManyToOne(targetEntity="Gratification")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gratification")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idGratification", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_gratification", referencedColumnName="id")
      * })
      */
-    private $idgratification;
+    private $idGratification;
 
     /**
-     * @var \Personnelpolytech
+     * @var \App\Entity\PersonnelPolytech
      *
-     * @ORM\ManyToOne(targetEntity="Personnelpolytech")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PersonnelPolytech")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonnelPolytechTuteur", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonnePersonnelPolytechTuteur", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_personnel_polytech_tuteur", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_personnel_polytech_tuteur", referencedColumnName="id_personne")
      * })
      */
-    private $idpersonnelpolytechtuteur;
+    private $idPersonnelPolytechTuteur;
 
     /**
-     * @var \Personnelpolytech
+     * @var \App\Entity\PersonnelPolytech
      *
-     * @ORM\ManyToOne(targetEntity="Personnelpolytech")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PersonnelPolytech")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idPersonnelPolytechChargeSuivi", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="idPersonnePersonnelPolytechChargeSuivi", referencedColumnName="idPersonne")
+     *   @ORM\JoinColumn(name="id_personnel_polytech_charge_suivi", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="id_personne_personnel_polytech_charge_suivi", referencedColumnName="id_personne")
      * })
      */
-    private $idpersonnelpolytechchargesuivi;
+    private $idPersonnelPolytechChargeSuivi;
 
     /**
-     * @var \Serviceaccueil
+     * @var \App\Entity\ServiceAccueil
      *
-     * @ORM\ManyToOne(targetEntity="Serviceaccueil")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ServiceAccueil")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idServiceAccueil", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_service_accueil", referencedColumnName="id")
      * })
      */
-    private $idserviceaccueil;
+    private $idServiceAccueil;
 
     /**
-     * @var \Specialite
+     * @var \App\Entity\Specialite
      *
-     * @ORM\ManyToOne(targetEntity="Specialite")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Specialite")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idSpecialite", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_specialite", referencedColumnName="id")
      * })
      */
-    private $idspecialite;
+    private $idSpecialite;
 
     /**
-     * @var \Stage
+     * @var \App\Entity\Stage
      *
-     * @ORM\ManyToOne(targetEntity="Stage")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Stage")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idStage", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_stage", referencedColumnName="id")
      * })
      */
-    private $idstage;
+    private $idStage;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set dateCreation.
+     *
+     * @param \DateTime $dateCreation
+     *
+     * @return ConventionStage
      */
-    public function setId(int $id): void
+    public function setDateCreation($dateCreation)
     {
-        $this->id = $id;
+        $this->dateCreation = $dateCreation;
+
+        return $this;
     }
 
     /**
+     * Get dateCreation.
+     *
      * @return \DateTime
      */
-    public function getDatecreation(): \DateTime
+    public function getDateCreation()
     {
-        return $this->datecreation;
+        return $this->dateCreation;
     }
 
     /**
-     * @param \DateTime $datecreation
+     * Set dateDerniereModification.
+     *
+     * @param \DateTime $dateDerniereModification
+     *
+     * @return ConventionStage
      */
-    public function setDatecreation(\DateTime $datecreation): void
+    public function setDateDerniereModification($dateDerniereModification)
     {
-        $this->datecreation = $datecreation;
+        $this->dateDerniereModification = $dateDerniereModification;
+
+        return $this;
     }
 
     /**
+     * Get dateDerniereModification.
+     *
      * @return \DateTime
      */
-    public function getDatedernieremodification(): \DateTime
+    public function getDateDerniereModification()
     {
-        return $this->datedernieremodification;
+        return $this->dateDerniereModification;
     }
 
     /**
-     * @param \DateTime $datedernieremodification
+     * Set typeConvention.
+     *
+     * @param string|null $typeConvention
+     *
+     * @return ConventionStage
      */
-    public function setDatedernieremodification(\DateTime $datedernieremodification): void
+    public function setTypeConvention($typeConvention = null)
     {
-        $this->datedernieremodification = $datedernieremodification;
+        $this->typeConvention = $typeConvention;
+
+        return $this;
     }
 
     /**
-     * @return null|string
+     * Get typeConvention.
+     *
+     * @return string|null
      */
-    public function getTypeconvention(): ?string
+    public function getTypeConvention()
     {
-        return $this->typeconvention;
+        return $this->typeConvention;
     }
 
     /**
-     * @param null|string $typeconvention
+     * Set validee.
+     *
+     * @param bool $validee
+     *
+     * @return ConventionStage
      */
-    public function setTypeconvention(?string $typeconvention): void
+    public function setValidee($validee)
     {
-        $this->typeconvention = $typeconvention;
+        $this->validee = $validee;
+
+        return $this;
     }
 
     /**
+     * Get validee.
+     *
      * @return bool
      */
-    public function isValidee(): bool
+    public function getValidee()
     {
         return $this->validee;
     }
 
     /**
-     * @param bool $validee
+     * Set valideePedagogiquement.
+     *
+     * @param bool $valideePedagogiquement
+     *
+     * @return ConventionStage
      */
-    public function setValidee(bool $validee): void
+    public function setValideePedagogiquement($valideePedagogiquement)
     {
-        $this->validee = $validee;
+        $this->valideePedagogiquement = $valideePedagogiquement;
+
+        return $this;
     }
 
     /**
+     * Get valideePedagogiquement.
+     *
      * @return bool
      */
-    public function isValideepedagogiquement(): bool
+    public function getValideePedagogiquement()
     {
-        return $this->valideepedagogiquement;
+        return $this->valideePedagogiquement;
     }
 
     /**
-     * @param bool $valideepedagogiquement
+     * Set idContactEtablissementTuteur.
+     *
+     * @param \App\Entity\ContactEtablissement|null $idContactEtablissementTuteur
+     *
+     * @return ConventionStage
      */
-    public function setValideepedagogiquement(bool $valideepedagogiquement): void
+    public function setIdContactEtablissementTuteur(\App\Entity\ContactEtablissement $idContactEtablissementTuteur = null)
     {
-        $this->valideepedagogiquement = $valideepedagogiquement;
+        $this->idContactEtablissementTuteur = $idContactEtablissementTuteur;
+
+        return $this;
     }
 
     /**
-     * @return \Contactetablissement
+     * Get idContactEtablissementTuteur.
+     *
+     * @return \App\Entity\ContactEtablissement|null
      */
-    public function getIdcontactetablissementtuteur(): \Contactetablissement
+    public function getIdContactEtablissementTuteur()
     {
-        return $this->idcontactetablissementtuteur;
+        return $this->idContactEtablissementTuteur;
     }
 
     /**
-     * @param \Contactetablissement $idcontactetablissementtuteur
+     * Set idContactEtablissementSignataire.
+     *
+     * @param \App\Entity\ContactEtablissement|null $idContactEtablissementSignataire
+     *
+     * @return ConventionStage
      */
-    public function setIdcontactetablissementtuteur(\Contactetablissement $idcontactetablissementtuteur): void
+    public function setIdContactEtablissementSignataire(\App\Entity\ContactEtablissement $idContactEtablissementSignataire = null)
     {
-        $this->idcontactetablissementtuteur = $idcontactetablissementtuteur;
+        $this->idContactEtablissementSignataire = $idContactEtablissementSignataire;
+
+        return $this;
     }
 
     /**
-     * @return \Contactetablissement
+     * Get idContactEtablissementSignataire.
+     *
+     * @return \App\Entity\ContactEtablissement|null
      */
-    public function getIdcontactetablissementsignataire(): \Contactetablissement
+    public function getIdContactEtablissementSignataire()
     {
-        return $this->idcontactetablissementsignataire;
+        return $this->idContactEtablissementSignataire;
     }
 
     /**
-     * @param \Contactetablissement $idcontactetablissementsignataire
+     * Set idEtablissement.
+     *
+     * @param \App\Entity\Etablissement|null $idEtablissement
+     *
+     * @return ConventionStage
      */
-    public function setIdcontactetablissementsignataire(\Contactetablissement $idcontactetablissementsignataire): void
+    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement = null)
     {
-        $this->idcontactetablissementsignataire = $idcontactetablissementsignataire;
+        $this->idEtablissement = $idEtablissement;
+
+        return $this;
     }
 
     /**
-     * @return \Etablissement
+     * Get idEtablissement.
+     *
+     * @return \App\Entity\Etablissement|null
      */
-    public function getIdetablissement(): \Etablissement
+    public function getIdEtablissement()
     {
-        return $this->idetablissement;
+        return $this->idEtablissement;
     }
 
     /**
-     * @param \Etablissement $idetablissement
+     * Set idEtudiant.
+     *
+     * @param \App\Entity\Etudiant|null $idEtudiant
+     *
+     * @return ConventionStage
      */
-    public function setIdetablissement(\Etablissement $idetablissement): void
+    public function setIdEtudiant(\App\Entity\Etudiant $idEtudiant = null)
     {
-        $this->idetablissement = $idetablissement;
+        $this->idEtudiant = $idEtudiant;
+
+        return $this;
     }
 
     /**
-     * @return \Etudiant
+     * Get idEtudiant.
+     *
+     * @return \App\Entity\Etudiant|null
      */
-    public function getIdetudiant(): \Etudiant
+    public function getIdEtudiant()
     {
-        return $this->idetudiant;
+        return $this->idEtudiant;
     }
 
     /**
-     * @param \Etudiant $idetudiant
+     * Set idGratification.
+     *
+     * @param \App\Entity\Gratification|null $idGratification
+     *
+     * @return ConventionStage
      */
-    public function setIdetudiant(\Etudiant $idetudiant): void
+    public function setIdGratification(\App\Entity\Gratification $idGratification = null)
     {
-        $this->idetudiant = $idetudiant;
+        $this->idGratification = $idGratification;
+
+        return $this;
     }
 
     /**
-     * @return \Gratification
+     * Get idGratification.
+     *
+     * @return \App\Entity\Gratification|null
      */
-    public function getIdgratification(): \Gratification
+    public function getIdGratification()
     {
-        return $this->idgratification;
+        return $this->idGratification;
     }
 
     /**
-     * @param \Gratification $idgratification
+     * Set idPersonnelPolytechTuteur.
+     *
+     * @param \App\Entity\PersonnelPolytech|null $idPersonnelPolytechTuteur
+     *
+     * @return ConventionStage
      */
-    public function setIdgratification(\Gratification $idgratification): void
+    public function setIdPersonnelPolytechTuteur(\App\Entity\PersonnelPolytech $idPersonnelPolytechTuteur = null)
     {
-        $this->idgratification = $idgratification;
+        $this->idPersonnelPolytechTuteur = $idPersonnelPolytechTuteur;
+
+        return $this;
     }
 
     /**
-     * @return \Personnelpolytech
+     * Get idPersonnelPolytechTuteur.
+     *
+     * @return \App\Entity\PersonnelPolytech|null
      */
-    public function getIdpersonnelpolytechtuteur(): \Personnelpolytech
+    public function getIdPersonnelPolytechTuteur()
     {
-        return $this->idpersonnelpolytechtuteur;
+        return $this->idPersonnelPolytechTuteur;
     }
 
     /**
-     * @param \Personnelpolytech $idpersonnelpolytechtuteur
+     * Set idPersonnelPolytechChargeSuivi.
+     *
+     * @param \App\Entity\PersonnelPolytech|null $idPersonnelPolytechChargeSuivi
+     *
+     * @return ConventionStage
      */
-    public function setIdpersonnelpolytechtuteur(\Personnelpolytech $idpersonnelpolytechtuteur): void
+    public function setIdPersonnelPolytechChargeSuivi(\App\Entity\PersonnelPolytech $idPersonnelPolytechChargeSuivi = null)
     {
-        $this->idpersonnelpolytechtuteur = $idpersonnelpolytechtuteur;
+        $this->idPersonnelPolytechChargeSuivi = $idPersonnelPolytechChargeSuivi;
+
+        return $this;
     }
 
     /**
-     * @return \Personnelpolytech
+     * Get idPersonnelPolytechChargeSuivi.
+     *
+     * @return \App\Entity\PersonnelPolytech|null
      */
-    public function getIdpersonnelpolytechchargesuivi(): \Personnelpolytech
+    public function getIdPersonnelPolytechChargeSuivi()
     {
-        return $this->idpersonnelpolytechchargesuivi;
+        return $this->idPersonnelPolytechChargeSuivi;
     }
 
     /**
-     * @param \Personnelpolytech $idpersonnelpolytechchargesuivi
+     * Set idServiceAccueil.
+     *
+     * @param \App\Entity\ServiceAccueil|null $idServiceAccueil
+     *
+     * @return ConventionStage
      */
-    public function setIdpersonnelpolytechchargesuivi(\Personnelpolytech $idpersonnelpolytechchargesuivi): void
+    public function setIdServiceAccueil(\App\Entity\ServiceAccueil $idServiceAccueil = null)
     {
-        $this->idpersonnelpolytechchargesuivi = $idpersonnelpolytechchargesuivi;
+        $this->idServiceAccueil = $idServiceAccueil;
+
+        return $this;
     }
 
     /**
-     * @return \Serviceaccueil
+     * Get idServiceAccueil.
+     *
+     * @return \App\Entity\ServiceAccueil|null
      */
-    public function getIdserviceaccueil(): \Serviceaccueil
+    public function getIdServiceAccueil()
     {
-        return $this->idserviceaccueil;
+        return $this->idServiceAccueil;
     }
 
     /**
-     * @param \Serviceaccueil $idserviceaccueil
+     * Set idSpecialite.
+     *
+     * @param \App\Entity\Specialite|null $idSpecialite
+     *
+     * @return ConventionStage
      */
-    public function setIdserviceaccueil(\Serviceaccueil $idserviceaccueil): void
+    public function setIdSpecialite(\App\Entity\Specialite $idSpecialite = null)
     {
-        $this->idserviceaccueil = $idserviceaccueil;
+        $this->idSpecialite = $idSpecialite;
+
+        return $this;
     }
 
     /**
-     * @return \Specialite
+     * Get idSpecialite.
+     *
+     * @return \App\Entity\Specialite|null
      */
-    public function getIdspecialite(): \Specialite
+    public function getIdSpecialite()
     {
-        return $this->idspecialite;
+        return $this->idSpecialite;
     }
 
     /**
-     * @param \Specialite $idspecialite
+     * Set idStage.
+     *
+     * @param \App\Entity\Stage|null $idStage
+     *
+     * @return ConventionStage
      */
-    public function setIdspecialite(\Specialite $idspecialite): void
+    public function setIdStage(\App\Entity\Stage $idStage = null)
     {
-        $this->idspecialite = $idspecialite;
+        $this->idStage = $idStage;
+
+        return $this;
     }
 
     /**
-     * @return \Stage
+     * Get idStage.
+     *
+     * @return \App\Entity\Stage|null
      */
-    public function getIdstage(): \Stage
+    public function getIdStage()
     {
-        return $this->idstage;
+        return $this->idStage;
     }
-
-    /**
-     * @param \Stage $idstage
-     */
-    public function setIdstage(\Stage $idstage): void
-    {
-        $this->idstage = $idstage;
-    }
-
-
-
 }

@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Departement
  *
- * @ORM\Table(name="Departement", uniqueConstraints={@ORM\UniqueConstraint(name="libelleDepartement_UNIQUE", columns={"libelleDepartement"})})
+ * @ORM\Table(name="departement", uniqueConstraints={@ORM\UniqueConstraint(name="libelleDepartement_UNIQUE", columns={"libelle_departement"})})
  * @ORM\Entity
  */
 class Departement
@@ -24,42 +24,43 @@ class Departement
     /**
      * @var string
      *
-     * @ORM\Column(name="libelleDepartement", type="string", length=100, nullable=false)
+     * @ORM\Column(name="libelle_departement", type="string", length=100, nullable=false)
      */
-    private $libelledepartement;
+    private $libelleDepartement;
+
+
 
     /**
+     * Get id.
+     *
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * Set libelleDepartement.
+     *
+     * @param string $libelleDepartement
+     *
+     * @return Departement
      */
-    public function setId(int $id): void
+    public function setLibelleDepartement($libelleDepartement)
     {
-        $this->id = $id;
+        $this->libelleDepartement = $libelleDepartement;
+
+        return $this;
     }
 
     /**
+     * Get libelleDepartement.
+     *
      * @return string
      */
-    public function getLibelledepartement(): string
+    public function getLibelleDepartement()
     {
-        return $this->libelledepartement;
+        return $this->libelleDepartement;
     }
-
-    /**
-     * @param string $libelledepartement
-     */
-    public function setLibelledepartement(string $libelledepartement): void
-    {
-        $this->libelledepartement = $libelledepartement;
-    }
-
-
-
 }
