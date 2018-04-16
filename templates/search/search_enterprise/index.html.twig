@@ -8,7 +8,7 @@
 <div class="ui three column stackable grid container">
     <div class="column">
         <div class="ui search selection dropdown">
-            <input type="hidden" name="nom_enterprise" >
+            <input type="hidden" name="nom_enterprise" id="nom" >
             <i class="dropdown icon"></i>
             <div class="default text">Établissement</div>
             <div class="menu">
@@ -23,26 +23,27 @@
         </div>
     </div>
     <div class="column">
-        
+        <button class="ui primary button" v-on:click="get_data">Recherche</button>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="ui one left aligned column stackable grid container">
+    <div class="column">
         {#<div class="ui search selection dropdown">#}
             {#<input type="hidden" name="ville" >#}
             {#<i class="dropdown icon"></i>#}
             {#<div class="default text">Ville</div>#}
             {#<div id="list_cities" class="menu" >#}
-                {#<div class="item" v-for="c in cities" data-value="${c.id}">${c.name}</div>#}
+                {#<div class="item"  data-value="Paris">Paris</div>#}
 
             {#</div>#}
         {#</div>#}
     </div>
-
-    <div class="column">
-        <button class="ui primary button" v-on:click="get_data">Recherche</button>
-    </div>
-
-</div>
-
-
-<div class="ui center aligned one column stackable grid container center">
 
 </div>
 
@@ -81,7 +82,7 @@
     {% block js %}
 
 <!--Importer les javascript semantic et jquery-->
-        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="/plugins/datatable/jquery.dataTables.js"></script>
 <script src="/css/calendar.min.js"></script>
 
         <script src="/js/customjs/custom-datatable.js"></script>
