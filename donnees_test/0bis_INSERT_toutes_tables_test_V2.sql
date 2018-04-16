@@ -41986,10 +41986,10 @@ INSERT INTO interruption_stage(date_debut_interruption,date_fin_interruption,com
 
 INSERT INTO apprentissage(date_debut_apprentissage,date_fin_apprentissage,duree_apprentissage_annees,etranger,details_apprentissage,id_gratification,id_specialite,id_personne_etudiant,id_etudiant,id_etablissement) VALUES
  ('2017-09-15','2018-06-30',1,0,NULL,1,1,11,11,6)
-,('2017-09-15',NULL,2,1,'Cet apprentissage est en Allemagne',2,3,13,13,98)
-,('2017-09-16',NULL,3,0,NULL,3,3,18,18,9)
-,('2017-09-17','2018-07-03',1,0,NULL,4,2,12,12,18)
-,('2017-09-18',NULL,2,0,NULL,1,3,28,28,23)
+,('2017-09-15','2018-06-30',2,1,'Cet apprentissage est en Allemagne',2,3,13,13,98)
+,('2017-09-16','2020-06-30',3,0,NULL,3,3,18,18,9)
+,('2015-09-17','2018-07-03',1,0,NULL,4,2,12,12,18)
+,('2016-09-18','2019-06-30',2,0,NULL,1,3,28,28,23)
 ,('2017-09-19','2018-07-05',1,0,NULL,2,2,22,22,64)
 ,('2017-09-20','2018-07-06',1,0,NULL,3,4,14,14,70);
 
