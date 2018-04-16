@@ -7,10 +7,9 @@ use App\Entity\Forum;
 use App\Entity\Conference;
 use \DateTime;
 
-
 class MainPageController extends Controller
 {
-	/**
+    /**
      * @Route("/index", name="index")
      */
     public function index()
@@ -29,23 +28,22 @@ class MainPageController extends Controller
         $forums = $repository->findAll();
 
         //get date of the most reccent forum
-        foreach($forums as $forum){
-            if($currentDateForum < $forum->getDatedebutforum()){
-            $currentDateForum = $forum->getDatedebutforum();
-          }
+        foreach ($forums as $forum) {
+            if ($currentDateForum < $forum->getDatedebutforum()) {
+                $currentDateForum = $forum->getDatedebutforum();
+            }
         }
 
         //get past and future forum from the current date
-        foreach($forums as $forum){
-          if(strcmp($currentDateForum->format('Y'),$forum->getDatedebutforum()->format('Y')) == 0){
-            $currentForums[] = $forum;
-            if($forum->getDatedebutforum() < $currentDate){
-              $currentPastForums[] = $forum;
-            }elseif($forum->getDatedebutforum() > $currentDate){
-              $currentFutureForums[] = $forum;
+        foreach ($forums as $forum) {
+            if (strcmp($currentDateForum->format('Y'), $forum->getDatedebutforum()->format('Y')) == 0) {
+                $currentForums[] = $forum;
+                if ($forum->getDatedebutforum() < $currentDate) {
+                    $currentPastForums[] = $forum;
+                } elseif ($forum->getDatedebutforum() > $currentDate) {
+                    $currentFutureForums[] = $forum;
+                }
             }
-          }
-
         }
 
         /************ CONFERENCE ************/
@@ -59,22 +57,22 @@ class MainPageController extends Controller
         $conferences = $repository->findAll();
 
         //get date of the most reccent conf
-        foreach($conferences as $conference){
-            if($currentDateConf < $conference->getDateconference()){
-            $currentDateConf = $conference->getDateconference();
-          }
+        foreach ($conferences as $conference) {
+            if ($currentDateConf < $conference->getDateconference()) {
+                $currentDateConf = $conference->getDateconference();
+            }
         }
 
         //get past and future conf from the current date
-        foreach($conferences as $conference){
-          if(strcmp($currentDateConf->format('Y'),$conference->getDateconference()->format('Y')) == 0){
-            $currentConf[] = $conference;
-            if($conference->getDateconference() < $currentDate){
-              $currentPastConf[] = $conference;
-            }elseif($conference->getDateconference() > $currentDate){
-              $currentFutureConf[] = $conference;
+        foreach ($conferences as $conference) {
+            if (strcmp($currentDateConf->format('Y'), $conference->getDateconference()->format('Y')) == 0) {
+                $currentConf[] = $conference;
+                if ($conference->getDateconference() < $currentDate) {
+                    $currentPastConf[] = $conference;
+                } elseif ($conference->getDateconference() > $currentDate) {
+                    $currentFutureConf[] = $conference;
+                }
             }
-          }
         }
 
 
@@ -83,7 +81,7 @@ class MainPageController extends Controller
 
 
 
-        return $this->render('accueil/index.html.twig', array(
+        return $this->render('index/index.html.twig', array(
             'user' => $user,
           'yearForum' => $currentDateForum->format('Y'),
           'countForum' => count($forums),
