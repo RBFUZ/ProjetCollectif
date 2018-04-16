@@ -1,5 +1,5 @@
 Contact Rel Indus			: php OUI	symphony NON
-TA 					: php NON 	symphony NON
+TA 					: php OUI	symphony NON
 Cnventions				: php NON	symphony NON
 Conseil de perfectionnement 		: php NON	symphony NON
 Conference DI 				: php NON	symphony NON
