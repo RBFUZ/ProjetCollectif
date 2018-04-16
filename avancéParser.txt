@@ -1,0 +1,9 @@
+Contact Rel Indus			: php OUI	symphony NON
+TA 					: php NON 	symphony NON
+Cnventions				: php NON	symphony NON
+Conseil de perfectionnement 		: php NON	symphony NON
+Conference DI 				: php NON	symphony NON
+Forum 2016				: php NON	symphony NON
+Apprentissage 2016-2017			: php OUI	symphony NON
+Contrat de professionnalisation 	: php OUI	symphony NON
+Stage 					: php NON	symphony NON
