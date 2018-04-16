@@ -3,8 +3,9 @@
  * XLS parsing uses php-excel-reader from http://code.google.com/p/php-excel-reader/
  */
 	// require_once("class/Etudiant.php");
-	require_once("class/BilanDII.php");
-	//require_once("class/contactEntreprise.php");
+	// require_once("class/BilanDII.php");
+	// require_once("class/contactEntreprise.php");
+	require_once("class/forum.php");
 	header('Content-Type: text/plain');
 
 	$etu = new Etudiant;
