@@ -1,2 +1,30 @@
 {% extends 'base/base.html.twig' %}
 {% block title %}Recherche{% endblock %}
+
+{% block content %}
+
+<div class="ui one column stackable grid container">
+	<div class="column">
+    	<table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+        	<thead>
+            	<tr>
+            		<th>Nom Établissement</th>
+                    <th>Sujet</th>
+                    <th>Date</th>
+                    <th>Conférencier</th>
+                    <th>Adresse mail</th>
+            	</tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="/js/customjs/custom-datatable.js"></script>
+{% endblock %}
