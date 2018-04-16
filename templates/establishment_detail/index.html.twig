@@ -47,6 +47,7 @@
                         <i class="dropdown icon"></i>
                         <div class="default text">Département</div>
                         <div id="list_cities" class="menu" >
+                            <div class="item"  data-value="ALL">Tous les départements</div>
                             <div class="item"  data-value="DI">DI</div>
                             <div class="item"  data-value="DSE">DSE</div>
                             <div class="item"  data-value="DAE">DAE</div>
@@ -105,10 +106,10 @@
                                                     <h3 class="ui header">List de stagaires</h3>
                                                 </div>
                                                 <div class="ui segment">
-                                                    <table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+                                                    <table id="data_table_intern" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
                                                         <thead>
                                                         <tr>
-                                                            <th>Numéro d'étudiant</th>
+                                                            <th>Numéro étudiant</th>
                                                             <th>Nom</th>
                                                             <th>Prénom</th>
                                                             <th>Professeur réferent</th>
@@ -127,16 +128,120 @@
 
 
                                     </div>
-
+                                </div>
                             </div>
-
-
-                            </div>
+                            <!--apprentissage-->
                             <div class="ui bottom attached tab segment" data-tab="second">
-                                Second
+                                <div class="row">
+                                    <div class="ui equal width left aligned padded grid">
+
+                                        <!--chart 1-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Nombre d'apprentis</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area-apprentissage1"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart 2-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Gratification</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area-apprentissage2"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--table of student-->
+                                    <div class="ui equal width left aligned padded grid">
+                                        <div class="sixteen wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">List d'apprentis</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <table id="data_table_apprenti" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Numéro étudiant</th>
+                                                            <th>Nom</th>
+                                                            <th>Prénom</th>
+                                                            <th>Année</th>
+                                                            <th>Département</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="third">
-                                Third
+                                <div class="ui equal width left aligned padded grid">
+                                <div class="row">
+                                    <div class="eight wide column">
+                                        <div class="ui segments">
+                                            <div class="ui segment">
+                                                <h3 class="ui header">Timeline</h3>
+                                            </div>
+                                            <div class="ui segment">
+                                                <div class="ui feed timeline">
+                                                    <div class="event">
+                                                        <div class="label">
+                                                            <img src="/img/avatar/people/Abraham.png">
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="summary">
+
+                                                                <h3 class="head">
+                                                                    2014
+                                                                </h3>
+                                                            </div>
+                                                            <div class="meta">
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="event">
+                                                        <div class="label">
+                                                            <img src="/img/avatar/people/Abraham.png">
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="summary">
+
+                                                                <h3 class="head">
+                                                                    2014
+                                                                </h3>
+                                                            </div>
+                                                            <div class="meta">
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="fourth">
                                 Fourth
