@@ -35,7 +35,6 @@
         <!--Load Sidebar Menu In App.js loadhtml function-->
 
         <div class="article">
-
             <!--Load Navbar Menu In App.js loadhtml function-->
             <div class="navbarmenu">
                 {{ include('base/navbar.html.twig' )}}
@@ -44,18 +43,13 @@
             <!--Begin Container-->
             <div class="containerli">
                 <div class="ui equal width left aligned padded grid stackable">
-
                     <div class="row">
                         <div class="column">
-
                                 {% block content %}
                                 {% endblock %}
-
-
                         </div>
                     </div>
                 </div>
-
             </div>
             <!--Finish Container-->
             <!--Load Footer Menu In App.js loadhtml function-->
@@ -70,6 +64,9 @@
 <script src="/css/semantic/semantic.min.js"></script>
 <script data-pace-options='{ "ajax": false }' src="/plugins/pacejs/pace.js"></script>
 <script src="/js/app.js"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="/node_modules/vue/dist/vue.js"></script>
+
 {% block js %}
 {% endblock %}
 </body>

@@ -21,3 +21,7 @@ recherche:
 aproposentreprise:
     path: /aproposentreprise
     controller: App\Controller\AProposEntrepriseController::index
+
+recherche_entreprise:
+    path: /recherche_entreprise
+    controller: App\Controller\RechercheController::rechercheEntreprise

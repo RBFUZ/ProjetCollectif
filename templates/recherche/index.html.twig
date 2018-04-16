@@ -3,128 +3,113 @@
 {% block title %}Recherche{% endblock %}
 
     {% block content %}
-<div class="ui three column stackable grid container">
-    <div class="ui column">
-        <div class="ui calendar" id="datedebut">
-            <div class="ui input left icon">
-                <i class="calendar icon"></i>
-                <input type="text" placeholder="Début">
-            </div>
-        </div>
-    </div>
-    <div class="column">
-        <div class="ui calendar" id="datefin">
-            <div class="ui input left icon">
-                <i class="calendar icon"></i>
-                <input type="text" placeholder="Fin">
-            </div>
-        </div>
-    </div>
 
-</div>
+<form action="" methode="get">
+	<div class="ui three column stackable grid container">
+	    <div class="ui column">
+		<div class="ui calendar" id="datedebut">
+		    <div class="ui input left icon">
+		        <i class="calendar icon"></i>
+		        <input type="text" placeholder="Début">
+		    </div>
+		</div>
+	    </div>
+	    <div class="column">
+		<div class="ui calendar" id="datefin">
+		    <div class="ui input left icon">
+		        <i class="calendar icon"></i>
+		        <input type="text" placeholder="Fin">
+		    </div>
+		</div>
+	    </div>
 
-<div class="ui three column stackable grid container">
-    <div class="column">
-        <div class="ui search selection dropdown">
-            <input type="hidden" name="country">
-            <i class="dropdown icon"></i>
-            <div class="default text">Entreprise</div>
-            <div class="menu">
-                <div class="item" data-value="Orange">Orange</div>
-                <div class="item" data-value="Worldline">Worldline</div>
-                <div class="item" data-value="Google">Google</div>
-                <div class="item" data-value="Amazon">Amazon</div>
-            </div>
-        </div>
-    </div>
-
-    <!--
-    <div class="column">
-      <div class="ui toggle checkbox">
-        <input type="checkbox" name="Entreprise" />
-        <label>Entreprise</label>
-      </div>
-    </div>
-  -->
-</div>
-
-<div class="ui three column stackable grid container">
-    <div class="column">
-        <div class="ui selection dropdown">
-            <input type="hidden" name="type">
-            <i class="dropdown icon"></i>
-            <div class="default text">Type de donnée</div>
-            <div class="menu">
-                <div class="item" data-value="1">Type1</div>
-                <div class="item" data-value="2">Type2</div>
-                <div class="item" data-value="3">Type3</div>
-                <div class="item" data-value="4">Type4</div>
-            </div>
-        </div>
-    </div>
+	</div>
 
 
+	<div class="ui three column stackable grid container">
+	    <div class="column">
+		<div class="ui search selection dropdown">
+		    <input type="hidden" name="country">
+		    <i class="dropdown icon"></i>
+		    <div class="default text">Entreprise</div>
+		    <div class="menu">
+		    {% for entreprise in entreprises %}
+		        <div class="item" data-value="{{ entreprise.Nom }}">{{ entreprise.Nom }}</div>
+		    {% endfor %}
+		    </div>
+		</div>
+	    </div>
 
-    <div class="column">
-        <!--  <div class="ui toggle checkbox">
-          <input type="checkbox" id="Entreprise" />
-          <label>Entreprise</label>
-        </div>
-      -->
-    </div>
-    <div class="column">
-        <div class="ui primary button">Recherche</div>
-    </div>
+	    <!--
+	    <div class="column">
+	      <div class="ui toggle checkbox">
+		<input type="checkbox" name="Entreprise" />
+		<label>Entreprise</label>
+	      </div>
+	    </div>
+	  -->
+	</div>
 
-</div>
+	<div class="ui three column stackable grid container">
+	    <div class="column">
+		<div class="ui selection dropdown">
+		    <input type="hidden" name="type">
+		    <i class="dropdown icon"></i>
+		    <div class="default text">Type de donnée</div>
+		    <div class="menu">
+		        <div class="item" data-value="1">Type1</div>
+		        <div class="item" data-value="2">Type2</div>
+		        <div class="item" data-value="3">Type3</div>
+		        <div class="item" data-value="4">Type4</div>
+		    </div>
+		</div>
+	    </div>
 
-<div class="ui center aligned one column stackable grid container center">
 
-</div>
 
+	    <div class="column">
+		<!--  <div class="ui toggle checkbox">
+		  <input type="checkbox" id="Entreprise" />
+		  <label>Entreprise</label>
+		</div>
+	      -->
+	    </div>
+	    <div class="column">
+		<div class="ui primary button" type="submit">Recherche</div>
+	    </div>
+
+	</div>
+
+	<div class="ui center aligned one column stackable grid container center">
+
+	</div>
+</form>
+
+<!-- table enterprise -->
 <div class="ui one column stackable grid container">
     <div class="column">
         <table class="ui sortable selectable celled table">
             <thead>
             <tr>
                 <th>Nom Entreprise</th>
-                <th>Nom Stagaire</th>
-                <th>Date Début</th>
-                <th>Date Fin</th>
-                <th>Année</th>
-                <th>Promotion</th>
+                <th>SIRET</th>
+                <th>Adresse</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <input type="hidden" value="1" />
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
-            </tr>
-            <tr>
-                <input type="hidden" value="2" />
-                <td>Jamie</td>
-                <td>Approved</td>
-                <td>Requires call</td>
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
-            </tr>
-            <tr>
-                <input type="hidden" value="3" />
-                <td>Jamie</td>
-                <td>Approved</td>
-                <td>Requires call</td>
-                <td>John</td>
-                <td>No Action</td>
-                <td>None</td>
-            </tr>
 
+	    {% set i = 0 %}
 
+	    {% for entreprise in entreprises %}
+		    {% set i = i+1 %}
+		    <tr>
+		        <input type="hidden" value="{{i}}" />
+		        <td>{{ entreprise.Nom }}</td>
+		        <td>{{ entreprise.SIRET }}</td>
+		        <td>{{ entreprise.Adresse }}</td>
+		    </tr>
+	    {% endfor %}
+         
             </tbody>
         </table>
 

@@ -2,25 +2,77 @@
 {% block content %}
     <div class="ui equal width left aligned padded grid stackable">
         <div class="row">
-            <div class="eight wide tablet four wide computer column">
-                <div class="ui horizontal segments">
-                    <div class="ui inverted teal segment center aligned">
+          <div class="eight wide tablet four wide computer column">
+            <div class="ui red card">
+		  <div class="content">
+		    <div class="header">Forum</div>
+		  </div>
+		  <div class="content">
+        <h4 class="ui sub header">Nombres de forums : {{countForum}}</h4>
 
-                        <div class="ui inverted  statistic">
-                            <div class="value">
-                                3,952
-                            </div>
-                            <div class="label">
-                                Nombre d'entreprise
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui inverted teal tertiary segment center aligned">
-                        <div id="sparkline1">
-                        </div>
-                    </div>
-                </div>
+		    <div class="ui small feed">
+		      <div class="event">
+  			<div class="content">
+          <h5 class="ui sub header">Pour l'année {{yearForum}} : {{currentForums}}</h5>
+  			  <div class="summary">
+            <div class="ui list">
+              <ul>
+                <li>Déroulé(s) : {{countPastForums}}</li>
+                <li>A venir : {{countFutureForums}}</li>
+              </ul>
             </div>
+  			  </div>
+  			</div>
+      </div>
+		      </div>
+          <h4 class="ui sub header">Nombre d'entreprises : </h4>
+		    </div>
+        <div class="extra content">
+          <button class="ui button">Recherche Avancée</button>
+        </div>
+		  </div>
+    </div>
+
+
+<div class="eight wide tablet four wide computer column">
+    <div class="ui orange card">
+
+      <div class="content">
+        <div class="header">Conférences</div>
+      </div>
+
+      <div class="content">
+        <h4 class="ui sub header">Nombres de Conférences : {{countConf}}</h4>
+      </div>
+
+      <div class="content">
+        <div class="ui small feed">
+          <div class="event">
+            <div class="content">
+              <h4 class="ui sub header">Pour l'année {{yearConference}} : {{currentConf}}</h4>
+              <div class="summary">
+                <div class="ui list">
+                  <ul>
+                    <li>Déroulé(s) : {{countPastConf}}</li>
+                    <li>A venir : {{countFutureConf}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <h4 class="ui sub header">Liste des entreprises : </h4>
+      </div>
+
+      <div class="extra content">
+        <button class="ui button">Recherche Avancée</button>
+      </div>
+
+    </div>
+</div>
 
             <div class="eight wide tablet four wide computer column">
                 <div class="ui horizontal segments">
