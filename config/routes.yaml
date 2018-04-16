@@ -1,27 +1,51 @@
 index:
     path: /
-    controller: App\Controller\AccueilController::affichage
+    controller: App\Controller\MainPageController::index
 
 connection:
     path: /connection
     controller: App\Controller\ConnectionController::index
 
-importation:
-    path: /importation
-    controller: App\Controller\ImportationController::index
+import:
+    path: /import
+    controller: App\Controller\ImportController::index
 
 pop_up:
     path: /pop_up
     controller: App\Controller\PopUpController::index
 
-recherche:
-    path: /recherche
-    controller: App\Controller\RechercheController::index
+search:
+    path: /search
+    controller: App\Controller\SearchEnterpriseController::index
+
+search_internship:
+    path: /search_internship
+    controller: App\Controller\SearchInternshipController::index
+
+search_enterprise:
+    path: /search_enterprise
+    controller: App\Controller\SearchEnterpriseController::searchEnterprise
+
+search_apprenticeship:
+    path: /search_apprenticeship
+    controller: App\Controller\SearchApprenticeshipController::index
+
+search_forum:
+    path: /search_forum
+    controller: App\Controller\SearchForumController::index
+
+search_convention:
+    path: /search_convention
+    controller: App\Controller\SearchConventionController::index
 
 aproposentreprise:
     path: /aproposentreprise
+<<<<<<< HEAD
     controller: App\Controller\AProposEntrepriseController::index
 
 recherche_entreprise:
     path: /recherche_entreprise
     controller: App\Controller\RechercheController::rechercheEntreprise
+=======
+    controller: App\Controller\AProposEntrepriseController::index
+>>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131

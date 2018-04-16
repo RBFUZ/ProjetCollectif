@@ -1,20 +1,40 @@
 <div class="ui visible left vertical sidebar menu no-border sidemenu">
 
-    <a href="dashboard-v1.html" class="ui medium image borderless">
+    <a href="{{ path ('index') }}" class="ui medium image borderless">
         <img src="/img/bg/5.png" />
     </a>
-    <a class="item title" href="{{ path('accueil') }}">
-        <b>Main</b>
+    <a class="item title" href="{{ path('index') }}">
+        <b>Vue globale</b>
     </a>
 
     <div class="ui accordion">
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Recherche
+        </div>
         <div class="content">
-            <a class="item" href="{{ path('recherche') }}">
-                Recherche
+            <a class="item" href="{{ path('search') }}">
+                Entreprise
             </a>
-            <a class="item" href="{{ path('importation') }}">
+            <a class="item" href="{{ path('search_apprenticeship') }}">
+                Apprentissage
+            </a>
+<<<<<<< HEAD
+=======
+            <a class="item" href="{{ path('search_forum') }}">
+                Forum
+            </a>
+            <a class="item" href="{{ path('search_convention') }}">
+                Conférence
+            </a>
+        </div>
+        <!-- -->
+        <div class="title">
+
+            <a class="item" href="{{ path('import') }}">
                 Importation
             </a>
+>>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131
         </div>
 
     </div>

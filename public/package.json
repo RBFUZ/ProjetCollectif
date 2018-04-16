@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "jquery-form": "^4.2.2",
+>>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131
     "vue": "^2.5.16"
   }
 }

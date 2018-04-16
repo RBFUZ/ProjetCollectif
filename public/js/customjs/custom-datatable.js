@@ -147,10 +147,5 @@
     }
 })(window, document);
 
-$(document).ready(function () {
-    var dtable = $('.table').DataTable({
-        "pagingType": "full_numbers_icon",
-        order: [1, 'desc'],
-    });
-});
+
 

@@ -4,6 +4,10 @@
     "require": {
         "php": "^7.1.3",
         "ext-iconv": "*",
+<<<<<<< HEAD
+=======
+        "doctrine/orm": "^2.6",
+>>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",
