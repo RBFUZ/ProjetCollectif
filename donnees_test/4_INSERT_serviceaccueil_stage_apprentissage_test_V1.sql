@@ -35,16 +35,17 @@ INSERT INTO service_accueil(nom_service,id_etablissement) VALUES
 ,('atelier',35)
 ,('informatique',40);
 
-INSERT INTO stage (id, date_debut_stage, date_fin_stage, annee_etude_stage, thematique_stage, sujet_stage, fonctions_taches_stage, details_projet_stage, duree_stage_semaines, duree_stage_heures, nb_jours_travail, commentaire_duree_stage, commentaire_stage, element_pedagogique, avantages_nature) VALUES
-(1, '2017-06-12', '2017-08-25', 4, 'Migration de données', 'Le stagiaire devra migrer des données depuis des fichier vers une interface web', 'Fonction de migration', 'RAS', 11, 385, 55, NULL, NULL, NULL, NULL),
-(2, '2017-06-12', '2017-08-25', 4, 'Developpement web', 'Developpement de site web de presentation', 'developpeur web', 'avec symfony3', 11, 385, 55, NULL, 'Ce stage sera sympatique', NULL, 'Tickets restos'),
-(3, '2017-06-12', '2017-08-04', 3, 'Assistance informatique', 'Assistance en tout genre, café, photocopies etc', 'Stagiaire lambda', 'Moca de préférence', 4, 140, 20, 'Ce stage est plutot court', NULL, NULL, 'dosettes de café offertes'),
-(4, '2017-06-12', '2017-08-04', 3, 'Tests', 'Tests de logiciels et d\'applications', 'Testeur débutant', NULL, 4, 140, 20, 'Ce stage est plutot court', NULL, NULL, NULL),
-(5, '2017-06-12', '2017-08-25', 4, 'Mecanique', 'Vissage de boulons et autre écrous', 'Mecanicien', 'Seulement utiliser des clés de 12', 11, 385, 55, NULL, NULL, NULL, 'Boite à outils fournie'),
-(6, '2017-04-03', '2017-08-04', 5, 'Arrangement d\'espace verts', 'Le stagiaire devra arranger la pelouse', 'Agent d\'entretien', NULL, 18, 630, 90, NULL, NULL, NULL, NULL),
-(7, '2017-04-03', '2017-08-04', 5, 'Refonte de systeme electrique', 'Le stagiaire devra refaire tout le systeme electrique de lentreprise en y repensant le schéma', 'Ingénieur électricien', NULL, 18, 630, 90, NULL, 'Cette mission est très importante', NULL, NULL),
-(8, '2017-06-12', '2017-08-04', 3, 'Remplissage d\'herbier', 'Remplissage de l\'herbier national des forêts', 'Ramasseur botanique', NULL, 4, 140, 20, NULL, NULL, NULL, 'Transports de forets en forets payés'),
-(9, '2017-04-03', '2017-08-11', 5, 'Projet de grande envergure', 'Projet de recherche et développement pour une grande entreprise', 'Responsable de projet informatique', NULL, 19, 665, 95, NULL, NULL, NULL, 'Tickets restos, 1 semaine de vancances libre');
+INSERT INTO stage (date_debut_stage, date_fin_stage, etranger, annee_etude_stage, thematique_stage, sujet_stage, fonctions_taches_stage, details_projet_stage, duree_stage_semaines, duree_stage_heures, nb_jours_travail, commentaire_duree_stage, commentaire_stage, element_pedagogique, avantages_nature) VALUES
+('2017-06-12', '2017-08-25', 0, 4, 'Migration de données', 'Le stagiaire devra migrer des données depuis des fichier vers une interface web', 'Fonction de migration', 'RAS', 11, 385, 55, NULL, NULL, NULL, NULL),
+('2017-06-12', '2017-08-25', 0, 4, 'Developpement web', 'Developpement de site web de presentation', 'developpeur web', 'avec symfony3', 11, 385, 55, NULL, 'Ce stage sera sympatique', NULL, 'Tickets restos'),
+('2017-06-12', '2017-08-04', 0, 3, 'Assistance informatique', 'Assistance en tout genre, café, photocopies etc', 'Stagiaire lambda', 'Moca de préférence', 4, 140, 20, 'Ce stage est plutot court', NULL, NULL, 'dosettes de café offertes'),
+('2017-06-12', '2017-08-04', 0, 3, 'Tests', 'Tests de logiciels et d\'applications', 'Testeur débutant', NULL, 4, 140, 20, 'Ce stage est plutot court', NULL, NULL, NULL),
+('2017-06-12', '2017-08-25', 0, 4, 'Mecanique', 'Vissage de boulons et autre écrous', 'Mecanicien', 'Seulement utiliser des clés de 12', 11, 385, 55, NULL, NULL, NULL, 'Boite à outils fournie'),
+('2017-04-03', '2017-08-04', 0, 5, 'Arrangement d\'espace verts', 'Le stagiaire devra arranger la pelouse', 'Agent d\'entretien', NULL, 18, 630, 90, NULL, NULL, NULL, NULL),
+('2017-04-03', '2017-08-04', 0, 5, 'Refonte de systeme electrique', 'Le stagiaire devra refaire tout le systeme electrique de lentreprise en y repensant le schéma', 'Ingénieur électricien', NULL, 18, 630, 90, NULL, 'Cette mission est très importante', NULL, NULL),
+('2017-06-12', '2017-08-04', 0, 3, 'Remplissage d\'herbier', 'Remplissage de l\'herbier national des forêts', 'Ramasseur botanique', NULL, 4, 140, 20, NULL, NULL, NULL, 'Transports de forets en forets payés'),
+('2017-04-03', '2017-08-11', 0, 5, 'Projet de grande envergure', 'Projet de recherche et développement pour une grande entreprise', 'Responsable de projet informatique', NULL, 19, 665, 95, NULL, NULL, NULL, 'Tickets restos, 1 semaine de vancances libre'),
+('2017-04-03', '2017-08-25', 1, 4, 'Brancher des ampoules', 'Brancher des ampoules', 'Brancheur d\'ampoules', NULL, 21, 735, 105, NULL, NULL, NULL, NULL); 
 
 INSERT INTO gratification(montant_gratification,unite_gratification,unite_duree_gratification) VALUES
  ('3,75','net','heure')
@@ -65,7 +66,8 @@ INSERT INTO convention_stage(date_creation,date_derniere_modification,type_conve
 ,('2017-04-11','2017-04-19',NULL,0,0,6,16,16,1,6,6,36,15,45,6,56,6,56,2,6)
 ,('2017-02-28','2017-02-28','OBLIGATOIRE',1,1,7,17,17,2,7,7,37,16,46,7,57,7,57,NULL,7)
 ,('2017-05-12','2017-05-26','OBLIGATOIRE',1,0,8,18,18,3,8,8,38,17,47,8,58,8,58,4,8)
-,('2017-03-02','2017-03-30',NULL,1,1,9,19,19,4,9,9,39,18,48,9,59,9,59,2,9);
+,('2017-03-02','2017-03-30',NULL,1,1,9,19,19,4,9,9,39,18,48,9,59,9,59,2,9)
+,('2017-03-01','2017-03-01','OBLIGATOIRE',1,1,10,16,16,1,96,13,43,14,44,NULL,NULL,NULL,NULL,NULL,NULL);
 
 INSERT INTO avenant(date_creation_avenant,objet_avenant,details_avenant,id_convention_stage) VALUES
  ('2017-06-05','Rallongement de date',NULL,1)
