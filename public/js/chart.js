@@ -61,6 +61,16 @@ $(document).ready(function () {
     lineChartApprendata2  = makeLineChartData(getYears('2005'),[23,2,12,3]);
     apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
 
+   
+    // disable department for forum and conference
+    $("#tab_etab").ready(function () {
+        if($("#tab_etab .active").attr("data-tab")==="fourth"||$("#tab_etab .active").attr("data-tab")==="third"){
+            $("#department_select").hide();
+        }
+        else{
+            $("#department_select").show();
+        }
+    })
     // taxe_apprentissage chartTotal
     lineChartTaxedataTotal  = makeLineChartData(getYears('2005'),[23,2,12,3]);
     taxe_apprentissageLineChartTotal = makeLineChart("line-area_taxeApprentissageTotal",lineChartTaxedataTotal);
@@ -173,8 +183,3 @@ $(document).ready(function () {
     })
 });
 
-var getDataForCharts = function (department) {
-    // get data from database
-    console.log(department)
-    return [1,2,3,4,5,6];
-}
