@@ -1,146 +1,3 @@
-var lineChartInterndata1 = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-
-var lineChartInterndata2 = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-
-var lineChartApprendata1 = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-var lineChartApprendata2 = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-var lineChartTaxedataTotal = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-var lineChartTaxedataDI = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-var lineChartTaxedataDII = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-var lineChartTaxedataDAE = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-var lineChartTaxedataDMS = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-var lineChartTaxedataDEE = {
-    labels: [],
-    datasets: [
-        {
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-
 function getYears(from) {
     var d1 = new Date(from),
         d2 = new Date(),
@@ -153,196 +10,166 @@ function getYears(from) {
     return yr;
 }
 
+var makeLineChartData = function (label,data) {
+    var lineChartData = {
+        labels: label,
+        datasets: [
+            {
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: data
+            }
+        ]
+    };
+    return lineChartData;
+}
+
+var makeLineChart = function (cxt,chartData) {
+    var cxt1 = document.getElementById(cxt).getContext("2d");
+    var lineChart = new Chart(cxt1).Line(chartData, {
+        responsive: true,
+        maintainAspectRatio: true
+    });
+    return lineChart;
+}
+
+// update data from database filter by department
+var getDataForCharts = function (department) {
+    // get data from database
+    console.log(department)
+    return [1,2,3,4,5,6];
+}
+
 $(document).ready(function () {
     // stage chart1
-    var cxt1 = document.getElementById("line-area1").getContext("2d");
-    lineChartInterndata1.labels = getYears('2005');
-    myLineChart1 = new Chart(cxt1).Line(lineChartInterndata1, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartInterndata1 = makeLineChartData(getYears('2005'),[1,2,3,4,52]);
+    myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
     // stage chart2
-    var cxt2 = document.getElementById("line-area2").getContext("2d");
-    lineChartInterndata2.labels = getYears('2005');
-    myLineChart2 = new Chart(cxt2).Line(lineChartInterndata2, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartInterndata2 = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    myLineChart2 = makeLineChart("line-area2",lineChartInterndata2);
 
     //apprentissage chart1
-    var apprentissage_cxt1 = document.getElementById("line-area-apprentissage1").getContext("2d");
-    lineChartApprendata1.labels = getYears('2005');
-    apprentissageLineChart1 = new Chart(apprentissage_cxt1).Line(lineChartApprendata1, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartApprendata1 = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
 
     //apprentissage chart2
-    var apprentissage_cxt2 = document.getElementById("line-area-apprentissage2").getContext("2d");
-    lineChartApprendata2.labels = getYears('2005');
-    apprentissageLineChart2 = new Chart(apprentissage_cxt2).Line(lineChartApprendata2, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartApprendata2  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
 
     // taxe_apprentissage chartTotal
-    var taxe_apprentissage_cxtTotal = document.getElementById("line-area_taxeApprentissageTotal").getContext("2d");
-    lineChartTaxedataTotal.labels = getYears('2005');
-    taxe_apprentissageLineChartTotal = new Chart(taxe_apprentissage_cxtTotal).Line(lineChartTaxedataTotal, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartTaxedataTotal  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    taxe_apprentissageLineChartTotal = makeLineChart("line-area_taxeApprentissageTotal",lineChartTaxedataTotal);
 
     // taxe_apprentissage chartDI
-    var taxe_apprentissage_cxtDI = document.getElementById("line-area_taxeApprentissageDI").getContext("2d");
-    lineChartTaxedataDI.labels = getYears('2005');
-    taxe_apprentissageLineChartDI = new Chart(taxe_apprentissage_cxtDI).Line(lineChartTaxedataDI, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartTaxedataDI  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    taxe_apprentissageLineChartDI = makeLineChart("line-area_taxeApprentissageDI",lineChartTaxedataDI);
 
     // taxe_apprentissage chartDII
-    var taxe_apprentissage_cxtDII = document.getElementById("line-area_taxeApprentissageDII").getContext("2d");
-    lineChartTaxedataDII.labels = getYears('2005');
-    taxe_apprentissageLineChartDII = new Chart(taxe_apprentissage_cxtDII).Line(lineChartTaxedataDII, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartTaxedataDII  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    taxe_apprentissageLineChartDII = makeLineChart("line-area_taxeApprentissageDII",lineChartTaxedataDII);
 
     // taxe_apprentissage chartDAE
-    var taxe_apprentissage_cxtDAE = document.getElementById("line-area_taxeApprentissageDAE").getContext("2d");
-    lineChartTaxedataDAE.labels = getYears('2005');
-    taxe_apprentissageLineChartDAE = new Chart(taxe_apprentissage_cxtDAE).Line(lineChartTaxedataDAE, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartTaxedataDAE  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    taxe_apprentissageLineChartDAE = makeLineChart("line-area_taxeApprentissageDAE",lineChartTaxedataDAE);
 
     // taxe_apprentissage chartDMS
-    var taxe_apprentissage_cxtDMS = document.getElementById("line-area_taxeApprentissageDMS").getContext("2d");
-    lineChartTaxedataDMS.labels = getYears('2005');
-    taxe_apprentissageLineChartDMS = new Chart(taxe_apprentissage_cxtDMS).Line(lineChartTaxedataDMS, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartTaxedataDMS  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    taxe_apprentissageLineChartDMS = makeLineChart("line-area_taxeApprentissageDMS",lineChartTaxedataDMS);
 
     // taxe_apprentissage chartDEE
-    var taxe_apprentissage_cxtDEE = document.getElementById("line-area_taxeApprentissageDEE").getContext("2d");
-    lineChartTaxedataDEE.labels = getYears('2005');
-    taxe_apprentissageLineChartDEE = new Chart(taxe_apprentissage_cxtDEE).Line(lineChartTaxedataDEE, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+    lineChartTaxedataDEE  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    taxe_apprentissageLineChartDEE = makeLineChart("line-area_taxeApprentissageDEE",lineChartTaxedataDEE);
 
+    // disable department for forum and conference
+    $("#tab_etab").ready(function () {
+        if($("#tab_etab .active").attr("data-tab")==="fourth"||$("#tab_etab .active").attr("data-tab")==="third"){
+            $("#department_select").hide();
+        }
+        else{
+            $("#department_select").show();
+        }
+    })
 
+    // tab clicked
     $('.menu .item').click(function () {
         // stage chart1
         myLineChart1.destroy();
-        myLineChart1 = new Chart(cxt1).Line(lineChartInterndata1, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
-
+        myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
         // stage chart2
         myLineChart2.destroy();
-        myLineChart2 = new Chart(cxt2).Line(lineChartInterndata2, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        myLineChart2 = makeLineChart("line-area2",lineChartInterndata2);
 
         // apprentissage chart1
         apprentissageLineChart1.destroy();
-        apprentissageLineChart1 = new Chart(apprentissage_cxt1).Line(lineChartApprendata1, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
 
         // apprentissage chart2
         apprentissageLineChart2.destroy();
-        apprentissageLineChart2 = new Chart(apprentissage_cxt2).Line(lineChartApprendata2, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
 
         // taxe_apprentissage chartTotal
         taxe_apprentissageLineChartTotal.destroy();
-        taxe_apprentissageLineChartTotal = new Chart(taxe_apprentissage_cxtTotal).Line(lineChartTaxedataTotal, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        taxe_apprentissageLineChartTotal = makeLineChart("line-area_taxeApprentissageTotal",lineChartTaxedataTotal);
 
         // taxe_apprentissage chartDI
         taxe_apprentissageLineChartDI.destroy();
-        taxe_apprentissageLineChartDI = new Chart(taxe_apprentissage_cxtDI).Line(lineChartTaxedataDI, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        taxe_apprentissageLineChartDI = makeLineChart("line-area_taxeApprentissageDI",lineChartTaxedataDI);
 
         // taxe_apprentissage chartDII
         taxe_apprentissageLineChartDII.destroy();
-        taxe_apprentissageLineChartDII = new Chart(taxe_apprentissage_cxtDII).Line(lineChartTaxedataDII, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        taxe_apprentissageLineChartDII = makeLineChart("line-area_taxeApprentissageDII",lineChartTaxedataDII);
 
         // taxe_apprentissage chartDAE
         taxe_apprentissageLineChartDAE.destroy();
-        taxe_apprentissageLineChartDAE = new Chart(taxe_apprentissage_cxtDAE).Line(lineChartTaxedataDAE, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        taxe_apprentissageLineChartDAE = makeLineChart("line-area_taxeApprentissageDAE",lineChartTaxedataDAE);
 
         // taxe_apprentissage chartDMS
         taxe_apprentissageLineChartDMS.destroy();
-        taxe_apprentissageLineChartDMS = new Chart(taxe_apprentissage_cxtDMS).Line(lineChartTaxedataDMS, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        taxe_apprentissageLineChartDMS = makeLineChart("line-area_taxeApprentissageDMS",lineChartTaxedataDMS);
 
         // taxe_apprentissage chartDEE
         taxe_apprentissageLineChartDEE.destroy();
-        taxe_apprentissageLineChartDEE = new Chart(taxe_apprentissage_cxtDEE).Line(lineChartTaxedataDEE, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        taxe_apprentissageLineChartDEE = makeLineChart("line-area_taxeApprentissageDEE",lineChartTaxedataDEE);
+
+        console.log($(this).text())
+        // disable the department select for forum and conference
+        if($(this).text()==="Forum" || $(this).text()==="Conférence") {
+            $("#department_select").hide();
+        }
+        else{
+            $("#department_select").show();
+        }
     });
 
+    // department change
     $("input[name='department']").change(function () {
         myLineChart1.destroy();
         // change data
         lineChartInterndata1.datasets[0].data = getDataForCharts($(this).val())
-        myLineChart1 = new Chart(cxt1).Line(lineChartInterndata1, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
-
+        myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
         // stage chart2
         myLineChart2.destroy();
         // change data
         lineChartInterndata2.datasets[0].data = getDataForCharts($(this).val())
-        myLineChart2 = new Chart(cxt2).Line(lineChartInterndata2, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        myLineChart2 = makeLineChart("line-area2",lineChartInterndata2);
 
         // apprentissage chart1
         apprentissageLineChart1.destroy();
         // change data
         lineChartApprendata1.datasets[0].data = getDataForCharts($(this).val())
-        apprentissageLineChart1 = new Chart(apprentissage_cxt1).Line(lineChartApprendata1, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
 
         // apprentissage chart2
         apprentissageLineChart2.destroy();
         // change data
         lineChartApprendata2.datasets[0].data = getDataForCharts($(this).val())
-        apprentissageLineChart2 = new Chart(apprentissage_cxt2).Line(lineChartApprendata2, {
-            responsive: true,
-            maintainAspectRatio: true
-        });
+        apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
     })
 });
 

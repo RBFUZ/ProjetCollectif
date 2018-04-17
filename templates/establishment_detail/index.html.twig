@@ -28,7 +28,9 @@
                                                 <div class="description">
                                                     <p>{{ establishment.idAdresse.idVille.idPays.nomFrFr }}</p>
                                                 </div>
-
+                                                <div class="extra">
+                                                    <div class="ui teal label"> {{ establishment.numSiret}}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -42,7 +44,7 @@
             <!--combo box-->
             <div class="row">
                 <div class="two wide column">
-                    <div class="ui selection dropdown">
+                    <div id="department_select" class="ui selection dropdown">
                         <input type="hidden" name="department" >
                         <i class="dropdown icon"></i>
                         <div class="default text">Département</div>
@@ -57,8 +59,7 @@
                 </div>
             </div>
 
-            <div class="row">
-
+            <div id="tab_etab" class="row">
                 <div class="sixteen wide column">
                     <div class="ui segments">
                         <div class="ui segment">
