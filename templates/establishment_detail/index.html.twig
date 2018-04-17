@@ -244,10 +244,118 @@
                                 </div>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="fourth">
-                                Fourth
+
+                                <!--table of intervenant-->
+                                <div class="ui equal width left aligned padded grid">
+                                    <div class="sixteen wide column">
+                                        <div class="ui segments">
+                                            <div class="ui segment">
+                                                <h3 class="ui header">Liste des intervenants</h3>
+                                            </div>
+                                            <div class="ui segment">
+                                                <table id="data_table_intervenant" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Nom</th>
+                                                        <th>Prénom</th>
+                                                        <th>Sujet</th>
+                                                        <th>Date</th>
+                                                        <th>Mail</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="fifth">
-                                Fifth
+
+                                <div class="row">
+                                    <div class="ui equal width center aligned padded grid">
+
+                                        <!--chart total-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Tous les départements</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageTotal"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="ui equal width left aligned padded grid">
+
+                                        <!--chart DI-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Informatique</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDI"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DII-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Informatique Industrielle</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDII"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DAE-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Aménagement et Environnement</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDAE"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DMS-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Mécanique et Systèmes</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDMS"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DEE-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Electronique et Energie</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDEE"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
