@@ -1,0 +1,47 @@
+{% extends 'base/base.html.twig' %}
+{% block title %}Recherche{% endblock %}
+
+{% block content %}
+
+<div class="ui grid">
+	<div class="four wide column">
+		<select class="ui fluid dropdown" name="nom_forum">
+			{% for f in forum %}
+				<option value="{{ f.libelleTypeForum }}">{{ f.libelleTypeForum }}</option>
+		    {% endfor %}
+		</select>
+	</div>
+	<div class="four wide column">
+		<button class="ui primary button" id="searchButton">Afficher</button>
+	</div>
+</div>
+
+<div class="ui one column stackable grid container">
+	<div class="column">
+    	<table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+        	<thead>
+            	<tr>
+            		<th>Nom Établissement</th>
+					<th>SIRET</th>
+            	</tr>
+            </thead>
+            <tbody>
+				{% for e in entreprise %}
+            	<tr>
+            		<td>{{ e.nomEntreprise }}</td>
+					<td>{{ e.numSiren }}</td>
+            	</tr>
+				{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="/js/customjs/custom-datatable.js"></script>
+    <script src="/js/search_forum.js"></script>
+{% endblock %}

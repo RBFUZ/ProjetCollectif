@@ -1,0 +1,99 @@
+
+{% extends 'base/base.html.twig' %}
+{% block title %}Recherche{% endblock %}
+
+{% block content %}
+    <div id="search_enterprise">
+
+<div class="ui three column stackable grid container">
+    <div class="column">
+        <div class="ui search selection dropdown">
+            <input type="hidden" name="nom_enterprise" id="nom" >
+            <i class="dropdown icon"></i>
+            <div class="default text">Établissement</div>
+            <div class="menu">
+                {% for e in enterprise %}
+                    <div class="item" data-value="{{e.nomEntreprise }}">{{e.nomEntreprise }}</div>
+                {% endfor %}
+                {#<div class="item" data-value="CNRS">CNRS</div>#}
+                {#<div class="item" data-value="EDF">EDF</div>#}
+                {#<div class="item" data-value="Google">Google</div>#}
+                {#<div class="item" data-value="Amazon">Amazon</div>#}
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <button class="ui primary button" v-on:click="get_data">Recherche</button>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="ui one left aligned column stackable grid container">
+    <div class="column">
+        {#<div class="ui search selection dropdown">#}
+            {#<input type="hidden" name="ville" >#}
+            {#<i class="dropdown icon"></i>#}
+            {#<div class="default text">Ville</div>#}
+            {#<div id="list_cities" class="menu" >#}
+                {#<div class="item"  data-value="Paris">Paris</div>#}
+
+            {#</div>#}
+        {#</div>#}
+    </div>
+
+</div>
+
+<div class="ui one column stackable grid container">
+    <div class="column">
+        <table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+
+                <th>Nom Établissement</th>
+                <th>Num Siren</th>
+                <th>Ville</th>
+                {#<th>Nom Entreprise</th>#}
+                {#<th>Commentaire Entreprise</th>#}
+            </tr>
+            </thead>
+            <tbody>
+            {#<tr>#}
+                {#<input type="hidden" value="1" />#}
+                {#<td>${e.nomentreprise}</td>#}
+                {#<td>${e.nomentreprise}</td>#}
+                {#<td>${e.id}</td>#}
+                {#<td>${e.id}</td>#}
+                {#<td>${e.id}</td>#}
+                {#<td>${e.id}</td>#}
+            {#</tr>#}
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+    </div>
+{% endblock %}
+    {% block js %}
+
+<!--Importer les javascript semantic et jquery-->
+        <script src="/plugins/datatable/jquery.dataTables.js"></script>
+<script src="/css/calendar.min.js"></script>
+
+        <script src="/js/customjs/custom-datatable.js"></script>
+        <script src="/js/recherche.js"></script>
+        <script>
+            $('.ui.form')
+                .form({
+                    fields: {
+                        number_siret : ['minLength[14]', 'empty']
+                    }
+                })
+            ;
+        </script>
+{% endblock %}
