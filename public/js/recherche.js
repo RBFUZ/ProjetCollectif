@@ -71,7 +71,6 @@ var recherche_entreprise = new Vue({
         get_data: function (event) { // the methods that you want to excute
             $("#data_table").show();
             dtable.ajax.reload();
-            $.
 
         }
     }
