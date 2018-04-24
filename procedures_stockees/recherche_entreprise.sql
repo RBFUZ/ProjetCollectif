@@ -149,9 +149,33 @@ DELIMITER $$
 -- ------------------------------------------------------------------------------
 CREATE PROCEDURE get_oldest_forum_year(IN pi_forum_type VARCHAR(45), OUT po_year YEAR)
 BEGIN
-	SELECT YEAR #PAS FINI !
+	SELECT YEAR(f.date_debut_forum) INTO po_year
+    FROM forum f, type_forum t
+    WHERE f.id_type_forum = t.id
+		AND t.libelle_type_forum = pi_forum_type;
 END $$
 DELIMITER ;
+
+
+
+-- ------------------------------------------------------------------------------
+-- 	Gets the years when the specified establishement participated 
+-- 		to a specified forum type
+-- ------------------------------------------------------------------------------
+SELECT YEAR(f.date_debut_forum) AS forum_participation_year
+FROM forum f, type_forum t, participation_forum p
+WHERE f.id_type_forum = t.id
+	AND p.id_forum = f.id
+    AND t.libelle_type_forum = [LIBELLE_TYPE_FORUM]
+    AND p.id_etablissement = [ID_ETABLISSEMENT];
     
 
-
+-- ------------------------------------------------------------------------------
+-- 	Gets the establishments participating to a specified forum type with the year
+-- ------------------------------------------------------------------------------
+SELECT e.nom_etablissement AS establishment, e.num_siret AS siret, YEAR(f.date_debut_forum) AS forum_year
+FROM forum f, participation_forum p, type_forum t, etablissement e
+WHERE f.id_type_forum = t.id
+	AND p.id_forum = f.id
+    AND p.id_etablissement = e.id
+    AND t.libelle_type_forum = [LIBELLE_TYPE_FORUM];
