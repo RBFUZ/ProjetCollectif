@@ -3,14 +3,6 @@
  * Look at the doc of Vuejs
  *
  */
-<<<<<<< HEAD
-
-var recherche_entreprise = new Vue({
-    el: '#recherche_entreprise', // the element that you want to control
-    data: {
-        entreprises:[], // the data to the twig
-        type:1
-=======
 $(document).ready(function() {
 
     dtable = $("#data_table").DataTable({
@@ -50,33 +42,16 @@ var recherche_entreprise = new Vue({
     data: {
         entreprises:[], // the data to the twig
         cities:[]
->>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131
     },
     delimiters: ['${', '}'],
     methods:{
         get_data: function (event) { // the methods that you want to excute
-<<<<<<< HEAD
-            var url = "/recherche_entreprise";
-            //empty the array
-            recherche_entreprise.entreprises.splice(0);
-            $.post(url,{
-                nom_entreprise:$("input[name='nom_entreprise']").val(),
-            },function(data){
-                // insert the data into array
-                for(i = 0;i<data.data.length;i++){
-                    Vue.set(recherche_entreprise.entreprises, i,  data.data[i])
-                }
-            });
-=======
             $("#data_table").show();
             dtable.ajax.reload();
->>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131
         }
     }
 });
 
-<<<<<<< HEAD
-=======
 $.get('city.json',function (data) {
     //console.log(data);
     //recherche_entreprise.cities = data;
@@ -90,4 +65,3 @@ $.get('city.json',function (data) {
 
 })
 
->>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131

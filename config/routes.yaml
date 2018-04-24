@@ -40,12 +40,4 @@ search_convention:
 
 aproposentreprise:
     path: /aproposentreprise
-<<<<<<< HEAD
     controller: App\Controller\AProposEntrepriseController::index
-
-recherche_entreprise:
-    path: /recherche_entreprise
-    controller: App\Controller\RechercheController::rechercheEntreprise
-=======
-    controller: App\Controller\AProposEntrepriseController::index
->>>>>>> 6c535d13996db2729651e6874ed0fbfb63ace131

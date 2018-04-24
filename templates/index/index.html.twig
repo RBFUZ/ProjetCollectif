@@ -2,135 +2,142 @@
 {% block content %}
     <div class="ui equal width left aligned padded grid stackable">
         <div class="row">
-          <div class="eight wide tablet four wide computer column">
+
+         <!-- card 1 : FORUM -->
+          <div class="eight wide tablet five wide computer column">
             <div class="ui red card">
-		  <div class="content">
-		    <div class="header">Forum</div>
-		  </div>
-		  <div class="content">
+          <div class="content">
+            <div class="header">Forum</div>
+          </div>
+          <div class="content">
         <h4 class="ui sub header">Nombres de forums : {{countForum}}</h4>
 
-		    <div class="ui small feed">
-		      <div class="event">
-  			<div class="content">
+            <div class="ui small feed">
+              <div class="event">
+            <div class="content">
           <h5 class="ui sub header">Pour l'année {{yearForum}} : {{currentForums}}</h5>
-  			  <div class="summary">
+              <div class="summary">
             <div class="ui list">
               <ul>
                 <li>Déroulé(s) : {{countPastForums}}</li>
                 <li>A venir : {{countFutureForums}}</li>
               </ul>
             </div>
-  			  </div>
-  			</div>
+              </div>
+            </div>
       </div>
-		      </div>
+              </div>
+              </div>
+        <div class="extra content">
           <h4 class="ui sub header">Nombre d'entreprises : </h4>
-		    </div>
+        </div>
         <div class="extra content">
           <button class="ui button">Recherche Avancée</button>
         </div>
-		  </div>
+          </div>
     </div>
 
+    <!-- card 2 : CONF -->
+    <div class="eight wide tablet five wide computer column">
+        <div class="ui orange card">
 
-<div class="eight wide tablet four wide computer column">
-    <div class="ui orange card">
+          <div class="content">
+            <div class="header">Conférences</div>
+          </div>
 
-      <div class="content">
-        <div class="header">Conférences</div>
-      </div>
+          <div class="content">
+            <h4 class="ui sub header">Nombres de Conférences : {{countConf}}</h4>
+          </div>
 
-      <div class="content">
-        <h4 class="ui sub header">Nombres de Conférences : {{countConf}}</h4>
-      </div>
-
-      <div class="content">
-        <div class="ui small feed">
-          <div class="event">
-            <div class="content">
-              <h4 class="ui sub header">Pour l'année {{yearConference}} : {{currentConf}}</h4>
-              <div class="summary">
-                <div class="ui list">
-                  <ul>
-                    <li>Déroulé(s) : {{countPastConf}}</li>
-                    <li>A venir : {{countFutureConf}}</li>
-                  </ul>
+          <div class="content">
+            <div class="ui small feed">
+              <div class="event">
+                <div class="content">
+                  <h4 class="ui sub header">Pour l'année {{yearConference}} : {{currentConf}}</h4>
+                  <div class="summary">
+                    <div class="ui list">
+                      <ul>
+                        <li>Déroulé(s) : {{countPastConf}}</li>
+                        <li>A venir : {{countFutureConf}}</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="content">
+            <h4 class="ui sub header">Liste des entreprises : </h4>
+          </div>
+
+          <div class="extra content">
+            <button class="ui button">Recherche Avancée</button>
+          </div>
+
         </div>
-      </div>
-
-      <div class="content">
-        <h4 class="ui sub header">Liste des entreprises : </h4>
-      </div>
-
-      <div class="extra content">
-        <button class="ui button">Recherche Avancée</button>
-      </div>
-
     </div>
-</div>
 
-            <div class="eight wide tablet four wide computer column">
-                <div class="ui horizontal segments">
-                    <div class="ui inverted red segment center aligned">
+    <!-- card 3 : ENTERPRISE -->
+    <div class="eight wide tablet five wide computer column">
+        <div class="ui yellow card">
 
-                        <div class="ui inverted statistic">
-                            <div class="value">
-                                3,952
-                            </div>
-                            <div class="label">
-                                Nombre d'entreprise
-                            </div>
-                        </div>
+          <div class="content">
+            <div class="header">Entreprises</div>
+          </div>
+
+          <div class="content">
+            <h4 class="ui sub header">Nombres d'Entreprises : {{enterpriseCount}}</h4>
+          </div>
+
+          <div class="content">
+            <div class="ui small feed">
+              <div class="event">
+                <div class="content">
+                  <h4 class="ui sub header">TOP 3 : </h4>
+                  <div class="summary">
+                    <div class="ui list">
+                      <ul>
+                        <li>Stage</li>
+                        <ol>
+                          <li>{{top3enterprise[0]["nom_entreprise"]}} : {{top3enterprise[0]["stage_count"]}}</li>
+                          <li>{{top3enterprise[1]["nom_entreprise"]}} : {{top3enterprise[1]["stage_count"]}}</li>
+                          <li>{{top3enterprise[2]["nom_entreprise"]}} : {{top3enterprise[2]["stage_count"]}}</li>
+                        </ol>
+                        <li>Apprentissage</li>
+                        <ol>
+                          <li>{{top3Apprenticeship[0]["nom_entreprise"]}} : {{top3Apprenticeship[0]["apprenticeship_count"]}}</li>
+                          <li>{{top3Apprenticeship[1]["nom_entreprise"]}} : {{top3Apprenticeship[1]["apprenticeship_count"]}}</li>
+                          <li>{{top3Apprenticeship[2]["nom_entreprise"]}} : {{top3Apprenticeship[2]["apprenticeship_count"]}}</li>
+                        </ol>
+                        <li>Forum</li>
+                        <ol>
+                          <li>{{top3forum[0]["nom_entreprise"]}} : {{top3forum[0]["forum_count"]}}</li>
+                          <li>{{top3forum[1]["nom_entreprise"]}} : {{top3forum[1]["forum_count"]}}</li>
+                          <li>{{top3forum[2]["nom_entreprise"]}} : {{top3forum[2]["forum_count"]}}</li>
+                        </ol>
+                        <li>Conférence</li>
+                        <ol>
+                          <li>{{top3conference[0]["nom_entreprise"]}} : {{top3conference[0]["conference_count"]}}</li>
+                          <li>{{top3conference[1]["nom_entreprise"]}} : {{top3conference[1]["conference_count"]}}</li>
+                          <li>{{top3conference[2]["nom_entreprise"]}} : {{top3conference[2]["conference_count"]}}</li>
+                        </ol>
+                      </ul>
                     </div>
-                    <div class="ui inverted red tertiary segment center aligned">
-                        <div id="sparkline2">
-                        </div>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="eight wide tablet four wide computer column">
-                <div class="ui horizontal segments">
-                    <div class="ui inverted blue segment center aligned">
+          </div>
 
-                        <div class="ui inverted statistic">
-                            <div class="value">
-                                3,112
-                            </div>
-                            <div class="label">
-                                Nombre d'entreprise
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui inverted blue tertiary segment center aligned">
-                        <div id="sparkline3">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="eight wide tablet four wide computer column">
-                <div class="ui horizontal segments">
-                    <div class="ui inverted green segment center aligned">
+          <div class="extra content">
+            <button class="ui button">Recherche Avancée</button>
+          </div>
 
-                        <div class="ui inverted statistic">
-                            <div class="value">
-                                9,582
-                            </div>
-                            <div class="label">
-                                Nombre d'entreprise
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui inverted green tertiary segment center aligned">
-                        <div id="sparkline4">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
+
+
         </div>
     </div>
 {% endblock %}
