@@ -41,3 +41,7 @@ search_convention:
 aproposentreprise:
     path: /aproposentreprise
     controller: App\Controller\AProposEntrepriseController::index
+
+establishment_detail:
+    path: /establishment/detail/{idEstablishment}
+    controller: App\Controller\EstablishmentDetailController::index

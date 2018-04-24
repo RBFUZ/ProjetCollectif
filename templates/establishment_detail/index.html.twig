@@ -1,0 +1,379 @@
+{% extends 'base/base.html.twig' %}
+{% block title %}Detail{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="ui equal width left aligned padded grid stackable">
+            <div class="row">
+                <div class="one column">
+                    <div class="ui segments">
+                        <div class="ui segment inverted blueli">
+                            <h3 class="ui header">
+                                L'Information d'Établissement
+                            </h3>
+                        </div>
+                        <div class="ui segment">
+                            <div class="column">
+                                <div class="ui segment">
+                                    <div class="ui link items">
+                                        <div class="item">
+                                            <div class="ui tiny image">
+                                                <img src="/img/company.png">
+                                            </div>
+                                            <div class="content">
+                                                <span class="header">{{ establishment.nomEtablissement }}</span>
+                                                <div class="meta">
+                                                    <span class="cinema">{{ establishment.idAdresse.adresse }}, {{ establishment.idAdresse.idVille.nomVille }}</span>
+                                                </div>
+                                                <div class="description">
+                                                    <p>{{ establishment.idAdresse.idVille.idPays.nomFrFr }}</p>
+                                                </div>
+                                                <div class="extra">
+                                                    <div class="ui teal label"> {{ establishment.numSiret}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--combo box-->
+            <div class="row">
+                <div class="two wide column">
+                    <div id="department_select" class="ui selection dropdown">
+                        <input type="hidden" name="department" >
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Département</div>
+                        <div id="list_cities" class="menu" >
+                            <div class="item"  data-value="ALL">Tous les départements</div>
+                            <div class="item"  data-value="DI">DI</div>
+                            <div class="item"  data-value="DSE">DSE</div>
+                            <div class="item"  data-value="DAE">DAE</div>
+                            <div class="item"  data-value="DMS">DMS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab_etab" class="row">
+                <div class="sixteen wide column">
+                    <div class="ui segments">
+                        <div class="ui segment">
+                            <div class="ui top attached tabular menu">
+                                <a class="active item red" data-tab="first">Stage</a>
+                                <a class="item teal" data-tab="second">Apprentissage</a>
+                                <a class="item blue" data-tab="third">Forum</a>
+                                <a class="item green" data-tab="fourth">Conférence</a>
+                                <a class="item yellow" data-tab="fifth">Taxe d'apprentissage</a>
+                            </div>
+                            <div class="ui bottom attached active tab segment" data-tab="first">
+                                <div class="row">
+                                    <div class="ui equal width left aligned padded grid">
+
+                                        <!--chart 1-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Nombre de stagaire</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area1"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart 2-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Gratification</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area2"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--table of student-->
+                                    <div class="ui equal width left aligned padded grid">
+                                        <div class="sixteen wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">List de stagaires</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <table id="data_table_intern" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Numéro étudiant</th>
+                                                            <th>Nom</th>
+                                                            <th>Prénom</th>
+                                                            <th>Professeur réferent</th>
+                                                            <th>Nom du tuteur</th>
+                                                            <th>Année stage</th>
+                                                            <th>Sujet</th>
+                                                            <th>Département</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--apprentissage-->
+                            <div class="ui bottom attached tab segment" data-tab="second">
+                                <div class="row">
+                                    <div class="ui equal width left aligned padded grid">
+
+                                        <!--chart 1-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Nombre d'apprentis</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area-apprentissage1"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart 2-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Gratification</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area-apprentissage2"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--table of student-->
+                                    <div class="ui equal width left aligned padded grid">
+                                        <div class="sixteen wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">List d'apprentis</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <table id="data_table_apprenti" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Numéro étudiant</th>
+                                                            <th>Nom</th>
+                                                            <th>Prénom</th>
+                                                            <th>Année</th>
+                                                            <th>Département</th>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui bottom attached tab segment" data-tab="third">
+                                <div class="ui equal width left aligned padded grid">
+                                <div class="row">
+                                    <div class="eight wide column">
+                                        <div class="ui segments">
+                                            <div class="ui segment">
+                                                <h3 class="ui header">Timeline</h3>
+                                            </div>
+                                            <div class="ui segment">
+                                                <div class="ui feed timeline">
+                                                    <div class="event">
+                                                        <div class="label">
+                                                            <img src="/img/avatar/people/Abraham.png">
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="summary">
+
+                                                                <h3 class="head">
+                                                                    2014
+                                                                </h3>
+                                                            </div>
+                                                            <div class="meta">
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="event">
+                                                        <div class="label">
+                                                            <img src="/img/avatar/people/Abraham.png">
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="summary">
+
+                                                                <h3 class="head">
+                                                                    2014
+                                                                </h3>
+                                                            </div>
+                                                            <div class="meta">
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="ui bottom attached tab segment" data-tab="fourth">
+
+                                <!--table of intervenant-->
+                                <div class="ui equal width left aligned padded grid">
+                                    <div class="sixteen wide column">
+                                        <div class="ui segments">
+                                            <div class="ui segment">
+                                                <h3 class="ui header">Liste des intervenants</h3>
+                                            </div>
+                                            <div class="ui segment">
+                                                <table id="data_table_intervenant" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Nom</th>
+                                                        <th>Prénom</th>
+                                                        <th>Sujet</th>
+                                                        <th>Date</th>
+                                                        <th>Mail</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="ui bottom attached tab segment" data-tab="fifth">
+
+                                <div class="row">
+                                    <div class="ui equal width center aligned padded grid">
+
+                                        <!--chart total-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Tous les départements</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageTotal"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="ui equal width left aligned padded grid">
+
+                                        <!--chart DI-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Informatique</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDI"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DII-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Informatique Industrielle</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDII"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DAE-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Aménagement et Environnement</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDAE"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DMS-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Mécanique et Systèmes</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDMS"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--chart DEE-->
+                                        <div class="eight wide column">
+                                            <div class="ui segments">
+                                                <div class="ui segment">
+                                                    <h3 class="ui header">Département Electronique et Energie</h3>
+                                                </div>
+                                                <div class="ui segment">
+                                                    <canvas id="line-area_taxeApprentissageDEE"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script >
+        $('.menu .item').tab();
+    </script>
+    <script src="/plugins/datatable/jquery.dataTables.js"></script>
+    <script src="/plugins/chartjs/Chart.min.js"></script>
+    <script src="/plugins/adress/jquery.address.js"></script>
+    <script src="/js/chart.js"></script>
+    <script src="/js/customjs/custom-datatable.js"></script>
+    <script src="/js/establishmentDetail.js"></script>
+{% endblock %}

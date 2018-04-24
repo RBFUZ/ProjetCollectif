@@ -12,29 +12,29 @@
 		</select>
 	</div>
 	<div class="four wide column">
-		<button class="ui primary button" id="searchButton">Recherche</button>
+		<button class="ui primary button" id="searchButton">Afficher</button>
 	</div>
 </div>
 
-
-<div id="toHide">
-	<div class="ui one column stackable grid container">
-		<div class="column">
-	    	<table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
-	        	<thead>
-	            	<tr>
-	            		<th>Nom Établissement</th>
-	            	</tr>
-	            </thead>
-	            <tbody>
-	            	{#<tr>#}
-	                	{#<input type="hidden" value="1" />#}
-	                	{#<td>${e.nomentreprise}</td>#}
-	            	{#</tr>#}
-	            </tbody>
-	        </table>
-	    </div>
-	</div>
+<div class="ui one column stackable grid container">
+	<div class="column">
+    	<table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+        	<thead>
+            	<tr>
+            		<th>Nom Établissement</th>
+					<th>SIRET</th>
+            	</tr>
+            </thead>
+            <tbody>
+				{% for e in entreprise %}
+            	<tr>
+            		<td>{{ e.nomEntreprise }}</td>
+					<td>{{ e.numSiren }}</td>
+            	</tr>
+				{% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {% endblock %}

@@ -4,37 +4,60 @@
  *
  */
 $(document).ready(function() {
-
     dtable = $("#data_table").DataTable({
-        data:[],
-        "language": {
+        language: {
             "emptyTable": "No result"
         },
-        "ajax":{
+        ajax:{
             "url":"/search_enterprise",
             "type":"post",
             "data":
                 function ( d ) {
                     d.nom_enterprise = $("input[name='nom_enterprise']").val();
-                    d.id_ville = $("input[name='ville']").val();
                 },
+            "complete": function(data) {
+                // $("#list_cities").empty();
+                // console.log(data["responseJSON"].data[0]);
+                // var d = data["responseJSON"].data;
+                // for(var i = 0;i<d.length;i++){
+                //     $("#list_cities").append('<div class="item"  data-value="'+d[i].idAdresse.idVille.id+'">'+d[i].idAdresse.idVille.nomVille+'</div>');
+                // }
+            }
         },
-        "columns": [
+        columns: [
 
         {data: 'nomEtablissement'},
         {data: 'numSiret'},
         {data: "idAdresse.idVille.nomVille"},
-        // {data: 'identreprise.nomentreprise'},
-        // {data: 'commentaireentreprise'}
         ],
 
-        rowCallback: function (row, data) {},
-        filter: false,
+
+        filter: true,
         info: false,
         ordering: true,
         processing: true,
-        retrieve: true
+        retrieve: true,
+
     });
+
+    // hide search bar
+    $(".dataTables_filter").hide();
+
+    // bind to new filter bar
+    $( "input[name='ville']").unbind().bind( 'change', function () {
+       // alert(11);
+        console.log(this.value);
+        dtable.columns(2).search(this.value).draw();
+    } );
+
+    // row click event
+    $('#data_table tbody').on('click', 'tr', function () {
+        var data = dtable.row( this ).data();
+
+        console.log(data);
+        window.location = "/establishment/detail/"+data.id;
+    } );
+
 } );
 
 var recherche_entreprise = new Vue({
@@ -48,6 +71,7 @@ var recherche_entreprise = new Vue({
         get_data: function (event) { // the methods that you want to excute
             $("#data_table").show();
             dtable.ajax.reload();
+
         }
     }
 });
