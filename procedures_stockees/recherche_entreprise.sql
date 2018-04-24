@@ -179,3 +179,33 @@ WHERE f.id_type_forum = t.id
 	AND p.id_forum = f.id
     AND p.id_etablissement = e.id
     AND t.libelle_type_forum = [LIBELLE_TYPE_FORUM];
+	
+-- ------------------------------------------------------------------------------
+-- 	Gets the firstname, the surname, the professional e-mail of all the conference partcipant with its date and subject
+-- 		for a given establishment id
+-- ------------------------------------------------------------------------------
+
+SELECT p.nom, p.prenom, c.sujet_conference, c.date_conference, ce.mail_professionnel
+FROM conference c, participe_conference pc, contact_etablissement ce, personne p
+WHERE c.id = pc.id_conference
+	AND pc.id_contact_etablissement = ce.id
+    AND ce.id_personne = p.id
+    AND c.id_etablissement = [ID_ETABLISSEMENT];
+    
+    
+-- ------------------------------------------------------------------------------
+-- 	Gets establishment name of all conference with its subject, date, speaker and speaker's email.	
+-- ------------------------------------------------------------------------------
+
+SELECT e.nom_etablissement, c.sujet_conference, c.date_conference, CONCAT(p.prenom,' ',p.nom) AS conferencier, ce.mail_professionnel
+FROM conference c, participe_conference pc, contact_etablissement ce, personne p, etablissement e
+WHERE e.id = c.id_etablissement
+	AND c.id = pc.id_conference
+	AND pc.id_contact_etablissement = ce.id
+    AND ce.id_personne = p.id
+ORDER BY e.nom_etablissement;
+
+
+    
+    
+
