@@ -1,10 +1,7 @@
 USE db_rel_ent_pol_tours;
 
 DROP PROCEDURE IF EXISTS display_apprenticeship_total_stats;
-DROP PROCEDURE IF EXISTS display_apprenticeship_stats_current_year;
-
 DELIMITER $$
-
 -- ------------------------------------------------------------------------------ 
 -- Displays the total number of apprenticeships in the database
 -- OUTPUT
@@ -16,8 +13,11 @@ BEGIN
 	SELECT COUNT(id) INTO po_total
 	FROM apprentissage;
 END$$
+DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS display_apprenticeship_stats_current_year;
+DELIMITER $$
 -- ------------------------------------------------------------------------------ 
 -- Displays apprenticeship stats for the current year on a specified date
 -- INPUT
@@ -55,7 +55,4 @@ BEGIN
     -- Total for current year
     SET po_total = v_total;
 END$$
-
-
-
 DELIMITER ;
