@@ -285,6 +285,15 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {% for c in convention %}
+                                                        <tr>
+                                                            <td>{{ c.idContactEtablissement[0].idPersonne.nom }}</td>
+                                                            <td>{{ c.idContactEtablissement[0].idPersonne.prenom }}</td>
+                                                            <td>{{ c.sujetConference }}</td>
+                                                            <td>{{ c.dateConference|date('Y-m-d') }}</td>
+                                                            <td>{{ c.idContactEtablissement[0].mailProfessionnel }}</td>
+                                                        </tr>
+                                                        {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
