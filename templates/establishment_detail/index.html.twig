@@ -113,14 +113,26 @@
                                                             <th>Numéro étudiant</th>
                                                             <th>Nom</th>
                                                             <th>Prénom</th>
-                                                            <th>Professeur réferent</th>
-                                                            <th>Nom du tuteur</th>
+                                                            <th>Tuteur pédagogique</th>
+                                                            <th>Tuteur professionnel</th>
                                                             <th>Année stage</th>
                                                             <th>Sujet</th>
                                                             <th>Département</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                            {% for t in trainee %}
+                                                        	<tr>
+                                                        		<td>{{ t.idEtudiant.numeroEtudiant }}</td>
+                                            					<td>{{ t.idEtudiant.idPersonne.nom }}</td>
+                                                                <td>{{ t.idEtudiant.idPersonne.prenom }}</td>
+                                                                <td>{{ t.idContactEtablissementTuteur.idPersonne.nom }}  {{ t.idContactEtablissementTuteur.idPersonne.prenom }}</td>
+                                                                <td>{{ t.idPersonnelPolytechTuteur.idPersonne.nom }}  {{ t.idPersonnelPolytechTuteur.idPersonne.prenom }}</td>
+                                                                <td>{{ t.idStage.dateDebutStage|date('Y') }}</td>
+                                                                <td>{{ t.idStage.sujetStage }}</td>
+                                                                <td>{{ t.idSpecialite.idDepartement.libelleDepartement }}</td>
+                                                        	</tr>
+                                            				{% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>

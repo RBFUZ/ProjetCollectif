@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Etablissement;
+use App\Entity\ConventionStage;
+
 class EstablishmentDetailController extends Controller
 {
     /**
@@ -14,9 +16,12 @@ class EstablishmentDetailController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Etablissement::class);
         $establishment = $repository->find($idEstablishment);
+
+        $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
+        $trainee = $repository_stage->findTraineeByEstablishment($idEstablishment);
+
         return $this->render('establishment_detail/index.html.twig', [
-            'establishment' => $establishment,
+            'establishment' => $establishment, 'trainee' => $trainee
         ]);
     }
-
 }
