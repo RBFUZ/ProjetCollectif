@@ -189,10 +189,18 @@
                                                             <th>Prénom</th>
                                                             <th>Année</th>
                                                             <th>Département</th>
-
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                            {% for a in apprenticeship %}
+                                                            <tr>
+                                                                <td>{{ a.idPersonneEtudiant.numeroEtudiant }}</td>
+                                                                <td>{{ a.idPersonneEtudiant.idPersonne.nom }}</td>
+                                                                <td>{{ a.idPersonneEtudiant.idPersonne.prenom }}</td>
+                                                                <td>{{ a.dateDebutApprentissage|date('Y') }}</td>
+                                                                <td>{{ a.idSpecialite.idDepartement.libelleDepartement }}</td>
+                                                            </tr>
+                                                            {% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>

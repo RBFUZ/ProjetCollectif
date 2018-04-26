@@ -2,31 +2,18 @@ var dtable_intern = $("#data_table_intern").DataTable({
     language: {
         "emptyTable": "No result"
     },
-    // ajax:{
-    //     "url":"/search_enterprise",
-    //     "type":"post",
-    //     "data":
-    //         function ( d ) {
-    //             d.nom_enterprise = $("input[name='nom_enterprise']").val();
-    //         },
-    //     "complete": function(data) {
-    //         // $("#list_cities").empty();
-    //         // console.log(data["responseJSON"].data[0]);
-    //         // var d = data["responseJSON"].data;
-    //         // for(var i = 0;i<d.length;i++){
-    //         //     $("#list_cities").append('<div class="item"  data-value="'+d[i].idAdresse.idVille.id+'">'+d[i].idAdresse.idVille.nomVille+'</div>');
-    //         // }
-    //     }
-    // },
     columns: [
-
-        {data: 'nomEtablissement'},
-        {data: 'numSiret'},
-        {data: "idAdresse.idVille.nomVille"},
+        {data: 'idEtudiant.numeroEtudiant'},
+        {data: 'idEtudiant.idPersonne.nom'},
+        {data: "idEtudiant.idPersonne.prenom"},
+        {data: "idContactEtablissementTuteur.idPersonne.nom"},
+        {data: "idPersonnelPolytechTuteur.idPersonne.nom"},
+        {data: "idStage.dateDebutStage"},
+        {data: "idStage.sujetStage"},
+        {data: "idSpecialite.idDepartement.libelleDepartement"},
     ],
 
-
-    filter: false,
+    filter: true,
     info: false,
     ordering: true,
     processing: true,
@@ -38,31 +25,16 @@ var dtable_apprenti = $("#data_table_apprenti").DataTable({
     language: {
         "emptyTable": "No result"
     },
-    // ajax:{
-    //     "url":"/search_enterprise",
-    //     "type":"post",
-    //     "data":
-    //         function ( d ) {
-    //             d.nom_enterprise = $("input[name='nom_enterprise']").val();
-    //         },
-    //     "complete": function(data) {
-    //         // $("#list_cities").empty();
-    //         // console.log(data["responseJSON"].data[0]);
-    //         // var d = data["responseJSON"].data;
-    //         // for(var i = 0;i<d.length;i++){
-    //         //     $("#list_cities").append('<div class="item"  data-value="'+d[i].idAdresse.idVille.id+'">'+d[i].idAdresse.idVille.nomVille+'</div>');
-    //         // }
-    //     }
-    // },
     columns: [
 
-        {data: 'nomEtablissement'},
-        {data: 'numSiret'},
-        {data: "idAdresse.idVille.nomVille"},
+        {data: 'idEtudiant.numeroEtudiant'},
+        {data: 'idEtudiant.idPersonne.nom'},
+        {data: "idEtudiant.idPersonne.prenom"},
+        {data: "dateDebutApprentissage"},
+        {data: "idSpecialite.idDepartement.libelleDepartement"},
     ],
 
-
-    filter: false,
+    filter: true,
     info: false,
     ordering: true,
     processing: true,

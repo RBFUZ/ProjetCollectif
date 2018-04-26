@@ -21,7 +21,7 @@ $(document).ready(function(){
 	        ],
 
 	        rowCallback: function (row, data) {},
-	        filter: false,
+	        filter: true,
 	        info: false,
 	        ordering: true,
 	        processing: true,
