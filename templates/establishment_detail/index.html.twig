@@ -217,7 +217,7 @@
                                     <div class="eight wide column">
                                         <div class="ui segments">
                                             <div class="ui segment">
-                                                <h3 class="ui header">Timeline</h3>
+                                                <h3 class="ui header">Forum des entreprises</h3>
                                             </div>
                                             <div class="ui segment">
                                                 <div class="ui feed timeline">
@@ -287,11 +287,13 @@
                                                     <tbody>
                                                         {% for c in convention %}
                                                         <tr>
-                                                            <td>{{ c.idContactEtablissement[0].idPersonne.nom }}</td>
-                                                            <td>{{ c.idContactEtablissement[0].idPersonne.prenom }}</td>
-                                                            <td>{{ c.sujetConference }}</td>
-                                                            <td>{{ c.dateConference|date('Y-m-d') }}</td>
-                                                            <td>{{ c.idContactEtablissement[0].mailProfessionnel }}</td>
+                                                            {% for contact in c.idContactEtablissement %}
+                                                                <td>{{ contact.idPersonne.nom }}</td>
+                                                                <td>{{ contact.idPersonne.prenom }}</td>
+                                                                <td>{{ c.sujetConference }}</td>
+                                                                <td>{{ c.dateConference|date('Y-m-d') }}</td>
+                                                                <td>{{ contact.mailProfessionnel }}</td>
+                                                            {% endfor %}
                                                         </tr>
                                                         {% endfor %}
                                                     </tbody>
