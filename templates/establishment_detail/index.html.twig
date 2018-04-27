@@ -216,19 +216,20 @@
                                     <div class="row">
 
                                         {% for t in type_forum %}
-                                            {% set idx = loop.index0 %}
+                                            {% set idx_type_forum = loop.index0 %}
                                             <div class="four wide column">
                                                 <div class="ui segments">
                                                     <div class="ui segment">
                                                         <h3 class="ui header">{{ t.libelleTypeForum }}</h3>
                                                     </div>
-
-                                                    {% for f in forum[idx] %}
                                                         <div class="ui segment">
                                                             <div class="ui feed timeline">
+
+                                                            {% for f in forum[idx_type_forum] %}
+                                                                {% set idx_forum = loop.index0 %}
                                                                 <div class="event">
                                                                     <div class="label">
-                                                                        <img src="/img/greenCheck.png">
+                                                                        <img src=" {{ logo[idx_type_forum][idx_forum] }} ">
                                                                     </div>
                                                                     <div class="content">
                                                                         <div class="summary">
@@ -239,14 +240,12 @@
                                                                         <div class="meta"></div>
                                                                     </div>
                                                                 </div>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
-                                                    {% endfor %}
-
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        {% endfor %}
-
+                                            {% endfor %}
                                     </div>
                                 </div>
                             </div>

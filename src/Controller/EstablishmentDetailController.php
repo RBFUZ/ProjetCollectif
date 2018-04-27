@@ -22,7 +22,6 @@ class EstablishmentDetailController extends Controller
     {
         $session = new Session();
 
-
         $session->set('etabid', $idEstablishment);
 
         $repository = $this->getDoctrine()->getRepository(Etablissement::class);
@@ -42,6 +41,7 @@ class EstablishmentDetailController extends Controller
 
         $type_forum = $this->checkIfForumCreateOrNot($type_forum); // // Supprime les types de forum du tableau quand aucun forum de ce type n'a été ajouté
         $years_forum = $this->fillYearForumUntilToday($type_forum); // Remplir les années de la plus ancienne jusqu'a aujourd'hui
+        $logo = $this->fillPathLogo($type_forum, $years_forum); // Remplir le tableau avec le chemin du logo V vert ou croix rouge on fonction de l'année
 
         return $this->render('establishment_detail/index.html.twig', [
             'establishment' => $establishment,
@@ -49,7 +49,8 @@ class EstablishmentDetailController extends Controller
             'apprenticeship' => $apprenticeship,
             'convention' => $convention,
             'type_forum' => $type_forum,
-            'forum' => $years_forum
+            'forum' => $years_forum,
+            'logo' => $logo
         ]);
     }
 
@@ -71,8 +72,9 @@ class EstablishmentDetailController extends Controller
 
     public function checkIfForumCreateOrNot($type_forum): array
     {
+        $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
+
         foreach ($type_forum as $key=>$type) {
-            $repository_forum = $this->getDoctrine()->getRepository(Forum::class); // Récupération de l'année la plus ancienne (forum)
             $forum = $repository_forum->checkIfForumExist($type->getId());
 
             if (count($forum) == 0) {
@@ -85,10 +87,10 @@ class EstablishmentDetailController extends Controller
     public function fillYearForumUntilToday($type_forum): array
     {
         $years_array_all_forum = array(); // Contiendra l'ensemble des années pour chacun des types de forum (tableau deux dimensions)
+        $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
 
         foreach ($type_forum as $key=>$type) {
-            $repository_forum = $this->getDoctrine()->getRepository(Forum::class); // Récupération de l'année la plus ancienne (forum)
-            $forum = $repository_forum->getOldestForum($type->getId());
+            $forum = $repository_forum->getOldestForum($type->getId()); // Récupération de l'année la plus ancienne (forum)
 
             $oldest_year = date_format($forum[0]['dateDebutForum'], "Y"); // Extraire l'année de la date reçu
             $current_year = date("Y"); // Année courante
@@ -102,5 +104,22 @@ class EstablishmentDetailController extends Controller
             array_push($years_array_all_forum, $year_array_one_forum);
         }
         return $years_array_all_forum;
+    }
+
+    public function fillPathLogo($type_forum, $years_forum): array
+    {
+        $logo_array_all_forum = array(); // Contiendra les chemins des logos pour l'ensemble des année pour chaque forum
+        $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
+
+        foreach ($type_forum as $key=>$type) {
+            $logo_array_one_forum = array();
+            foreach ($years_forum[$key] as $year) {
+                $one_path = $repository_forum->checkIfForumByYear($type, $year);
+                array_push($logo_array_one_forum, $one_path);
+            }
+            array_push($logo_array_all_forum, $logo_array_one_forum);
+        }
+
+        return $logo_array_all_forum;
     }
 }
