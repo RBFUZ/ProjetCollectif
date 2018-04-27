@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Forum
  *
  * @ORM\Table(name="forum", indexes={@ORM\Index(name="fk_Forum_TypeForum1_idx", columns={"id_type_forum"}), @ORM\Index(name="fk_Forum_Adresse1_idx", columns={"id_adresse"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ForumRepository")
  */
 class Forum
 {

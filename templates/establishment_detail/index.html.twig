@@ -213,55 +213,41 @@
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="third">
                                 <div class="ui equal width left aligned padded grid">
-                                <div class="row">
-                                    <div class="eight wide column">
-                                        <div class="ui segments">
-                                            <div class="ui segment">
-                                                <h3 class="ui header">Forum des entreprises</h3>
-                                            </div>
-                                            <div class="ui segment">
-                                                <div class="ui feed timeline">
-                                                    <div class="event">
-                                                        <div class="label">
-                                                            <img src="/img/avatar/people/Abraham.png">
-                                                        </div>
-                                                        <div class="content">
-                                                            <div class="summary">
+                                    <div class="row">
 
-                                                                <h3 class="head">
-                                                                    2014
-                                                                </h3>
-                                                            </div>
-                                                            <div class="meta">
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="event">
-                                                        <div class="label">
-                                                            <img src="/img/avatar/people/Abraham.png">
-                                                        </div>
-                                                        <div class="content">
-                                                            <div class="summary">
-
-                                                                <h3 class="head">
-                                                                    2014
-                                                                </h3>
-                                                            </div>
-                                                            <div class="meta">
-
-                                                            </div>
-
-                                                        </div>
+                                        {% for t in type_forum %}
+                                            {% set idx = loop.index0 %}
+                                            <div class="four wide column">
+                                                <div class="ui segments">
+                                                    <div class="ui segment">
+                                                        <h3 class="ui header">{{ t.libelleTypeForum }}</h3>
                                                     </div>
 
+                                                    {% for f in forum[idx] %}
+                                                        <div class="ui segment">
+                                                            <div class="ui feed timeline">
+                                                                <div class="event">
+                                                                    <div class="label">
+                                                                        <img src="/img/greenCheck.png">
+                                                                    </div>
+                                                                    <div class="content">
+                                                                        <div class="summary">
+                                                                            <h3 class="head">
+                                                                                {{ f }}
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="meta"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
 
                                                 </div>
                                             </div>
-                                        </div>
+                                        {% endfor %}
+
                                     </div>
-                                </div>
                                 </div>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="fourth">
