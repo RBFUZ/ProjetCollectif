@@ -9,6 +9,7 @@ use App\Entity\Etablissement;
 use App\Entity\ConventionStage;
 use App\Entity\Apprentissage;
 use App\Entity\Conference;
+use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\TypeForum;
 use App\Entity\Forum;
 
@@ -19,6 +20,11 @@ class EstablishmentDetailController extends Controller
      */
     public function index($idEstablishment)
     {
+        $session = new Session();
+
+
+        $session->set('etabid', $idEstablishment);
+
         $repository = $this->getDoctrine()->getRepository(Etablissement::class);
         $establishment = $repository->find($idEstablishment);
 
@@ -46,6 +52,22 @@ class EstablishmentDetailController extends Controller
             'forum' => $years_forum
         ]);
     }
+
+    /**
+     * @Route("/establishment/minStageYear", name="min_stage_year")
+     */
+    public function getOldestStageYear()
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
+        $cov = $repository_stage->findOldestYear($idEstablishment);
+        $year = strtok($cov[0]["date"], '-');
+        //var_dump($cov);
+        return $this->json(array("data"=>$year));
+    }
+
+
 
     public function checkIfForumCreateOrNot($type_forum): array
     {

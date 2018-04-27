@@ -17,4 +17,18 @@ class ConventionStageRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function findOldestYear($idEstablishment)
+    {
+        $sql = "SELECT MIN(cov.dateCreation) as date
+            FROM App\Entity\ConventionStage cov JOIN cov.idEtablissement etab
+            WHERE etab.id = ".$idEstablishment;
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            );
+
+        return $query->getResult();
+    }
 }
