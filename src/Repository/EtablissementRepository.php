@@ -14,12 +14,12 @@ class EtablissementRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findEtablissementByEnterpriseName($enterprise_name){
 
-        $sql = "SELECT etab FROM App\Entity\Etablissement etab JOIN etab.idEntreprise ent WHERE ent.nomEntreprise = '".$enterprise_name."'";
+        $sql = "SELECT etab FROM App\Entity\Etablissement etab JOIN etab.idEntreprise ent WHERE ent.nomEntreprise = :ent_name";
         //echo $sql;
         $query =  $this->getEntityManager()
             ->createQuery(
                 $sql
-            );
+            )->setParameter("ent_name",$enterprise_name);
 
         return $query->getResult();
     }
