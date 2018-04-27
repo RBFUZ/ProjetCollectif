@@ -9,7 +9,7 @@ function getYears(from) {
 
     return yr;
 }
-
+// make chart data
 var makeLineChartData = function (label,data) {
     var lineChartData = {
         labels: label,
@@ -27,7 +27,7 @@ var makeLineChartData = function (label,data) {
     };
     return lineChartData;
 }
-
+// make chart
 var makeLineChart = function (cxt,chartData) {
     var cxt1 = document.getElementById(cxt).getContext("2d");
     var lineChart = new Chart(cxt1).Line(chartData, {
@@ -35,6 +35,27 @@ var makeLineChart = function (cxt,chartData) {
         maintainAspectRatio: true
     });
     return lineChart;
+}
+// get the min years
+var getMinStageYears = function () {
+    var url = "/establishment/minStageYear";
+    var year = "2005";
+    $.ajax({
+
+        type:'get',
+
+        url:url,
+
+        async:false,
+
+        success:function (data){
+            if(data.data){
+                year =  data.data;
+            }
+
+        }
+    });
+    return year;
 }
 
 // update data from database filter by department
@@ -45,12 +66,13 @@ var getDataForCharts = function (department) {
 }
 
 $(document).ready(function () {
+   var minStageYear = getMinStageYears();
     // stage chart1
-    lineChartInterndata1 = makeLineChartData(getYears('2005'),[1,2,3,4,52]);
+    lineChartInterndata1 = makeLineChartData(getYears(minStageYear),[1,2,3,4,52]);
     myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
     // stage chart2
-    lineChartInterndata2 = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartInterndata2 = makeLineChartData(getYears(minStageYear),[23,2,12,3]);
     myLineChart2 = makeLineChart("line-area2",lineChartInterndata2);
 
     //apprentissage chart1
