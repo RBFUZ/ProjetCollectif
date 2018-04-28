@@ -10,11 +10,8 @@ use App\Entity\Ville;
 use App\Entity\Entreprise;
 use App\Entity\Etablissement;
 
-
-
 class SearchEnterpriseController extends Controller
 {
-
     private function loadEnterprise()
     {
         $repository = $this->getDoctrine()->getRepository(Entreprise::class);
@@ -42,32 +39,11 @@ class SearchEnterpriseController extends Controller
     public function searchEnterprise(Request $request)
     {
         $etablissement = array();
+        $nom = $request->request->get("nom_enterprise"); // get parametter
 
-        // get parametter
-        $nom = $request->request->get("nom_enterprise");
-        $id_ville = $request->request->get("id_ville");
+        $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
+        $etablissement = $repository_etab->findEtablissementByEnterpriseName($nom);
 
-
-        // by name
-        if($nom != "" &&$id_ville==""){
-
-            $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
-            $etablissement = $repository_etab->findEtablissementByEnterpriseName($nom);
-        }
-
-        // by name and city
-        if($nom != "" &&$id_ville!=""){
-
-            $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
-            $etablissement = $repository_etab->findEtablissementByEnterpriseNameAndCity($nom,$id_ville);
-        }
-
-        // by city
-        if($nom == "" &&$id_ville!=""){
-
-            $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
-            $etablissement = $repository_etab->findEtablissementByCity($id_ville);
-        }
         return $this->json(array('data' => $etablissement));
     }
 }
