@@ -64,11 +64,76 @@ class EstablishmentDetailController extends Controller
         $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
         $cov = $repository_stage->findOldestYear($idEstablishment);
         $year = strtok($cov[0]["date"], '-');
-        //var_dump($cov);
         return $this->json(array("data"=>$year));
     }
 
+    /**
+     * @Route("/establishment/countStageEachYear", name="count_stage_each_year")
+     */
+    public function getCountStageEachYear()
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
+        $year = $repository_stage->findOldestYear($idEstablishment);
 
+        if ($year[0]["date"] == null) {
+            $year = "2010";
+        } else {
+            $year = strtok($year[0]["date"], '-');
+        }
+
+        $current_year = date("Y"); // Année courante
+        $count_stage_each_year_array = array();
+
+        for ($i = $year; $i <= $current_year; $i++) {
+            $count_stage_one_year = $repository_stage->countStageForOneYear($idEstablishment, $i);
+            array_push($count_stage_each_year_array, $count_stage_one_year[0]['nbStage']);
+        }
+
+        return $this->json(array("data"=>$count_stage_each_year_array));
+    }
+
+    /**
+     * @Route("/establishment/minApprentissageYear", name="min_apprentissage_year")
+     */
+    public function getOldestApprentissageYear()
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $repository_apprenticeship = $this->getDoctrine()->getRepository(Apprentissage::class);
+        $app = $repository_apprenticeship->findOldestYear($idEstablishment);
+        $year = strtok($app[0]["date"], '-');
+        return $this->json(array("data"=>$year));
+    }
+
+    /**
+     * @Route("/establishment/countApprenticeshipEachYear", name="count_apprenticeship_each_year")
+     */
+    public function getCountApprenticeshipEachYear()
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $repository_apprenticeship = $this->getDoctrine()->getRepository(Apprentissage::class);
+        $year = $repository_apprenticeship->findOldestYear($idEstablishment);
+
+        if ($year[0]["date"] == null) {
+            $year = "2010";
+        } else {
+            $year = strtok($year[0]["date"], '-');
+        }
+
+        $current_year = date("Y"); // Année courante
+        $count_apprenticeship_each_year_array = array();
+
+        // Over each years
+        for ($i = $year; $i <= $current_year; $i++) {
+            $count_apprenticeship_one_year = $repository_apprenticeship->countApprenticeshipForOneYear($idEstablishment, $i);
+            array_push($count_apprenticeship_each_year_array, $count_apprenticeship_one_year[0]['nbApprenticeship']);
+        }
+
+        return $this->json(array("data"=>$count_apprenticeship_each_year_array));
+    }
 
     public function checkIfForumCreateOrNot($type_forum): array
     {

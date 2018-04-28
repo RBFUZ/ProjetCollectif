@@ -36,10 +36,11 @@ var makeLineChart = function (cxt,chartData) {
     });
     return lineChart;
 }
+
 // get the min years
 var getMinStageYears = function () {
     var url = "/establishment/minStageYear";
-    var year = "2005";
+    var year = "2010";
     $.ajax({
 
         type:'get',
@@ -48,14 +49,76 @@ var getMinStageYears = function () {
 
         async:false,
 
-        success:function (data){
-            if(data.data){
+        success:function (data) {
+            if(data.data) {
                 year =  data.data;
             }
-
         }
     });
     return year;
+}
+
+// get the number of trainee for each year
+var getCountStageEachYear = function () {
+    var url = "/establishment/countStageEachYear";
+    var counter = [];
+    $.ajax({
+
+        type:'get',
+
+        url:url,
+
+        async:false,
+
+        success:function (data) {
+            if(data.data) {
+                counter =  data.data;
+            }
+        }
+    });
+    return counter;
+}
+
+// gets the min year of apprenticeship for one enterprise
+var getMinApprenticeshipYears = function() {
+    var url = "/establishment/minApprentissageYear";
+    var year = "2010";
+    $.ajax({
+
+        type:'get',
+
+        url:url,
+
+        async:false,
+
+        success:function (data) {
+            if(data.data) {
+                year =  data.data;
+            }
+        }
+    });
+    return year;
+}
+
+// get the number of apprenticeship for each year
+var getCountApprenticeshipEachYear = function () {
+    var url = "/establishment/countApprenticeshipEachYear";
+    var counter = [];
+    $.ajax({
+
+        type:'get',
+
+        url:url,
+
+        async:false,
+
+        success:function (data) {
+            if(data.data) {
+                counter =  data.data;
+            }
+        }
+    });
+    return counter;
 }
 
 // update data from database filter by department
@@ -67,8 +130,10 @@ var getDataForCharts = function (department) {
 
 $(document).ready(function () {
    var minStageYear = getMinStageYears();
+   var minApprenticeshipYear = getMinApprenticeshipYears();
+
     // stage chart1
-    lineChartInterndata1 = makeLineChartData(getYears(minStageYear),[1,2,3,4,52]);
+    lineChartInterndata1 = makeLineChartData(getYears(minStageYear), getCountStageEachYear());
     myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
     // stage chart2
@@ -76,14 +141,14 @@ $(document).ready(function () {
     myLineChart2 = makeLineChart("line-area2",lineChartInterndata2);
 
     //apprentissage chart1
-    lineChartApprendata1 = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartApprendata1 = makeLineChartData(getYears(minApprenticeshipYear), getCountApprenticeshipEachYear());
     apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
 
     //apprentissage chart2
-    lineChartApprendata2  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartApprendata2  = makeLineChartData(getYears(minApprenticeshipYear),[23,2,12,3]);
     apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
 
-   
+
     // disable department for forum and conference
     $("#tab_etab").ready(function () {
         if($("#tab_etab .active").attr("data-tab")==="fourth"||$("#tab_etab .active").attr("data-tab")==="third"){
@@ -204,4 +269,3 @@ $(document).ready(function () {
         apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
     })
 });
-
