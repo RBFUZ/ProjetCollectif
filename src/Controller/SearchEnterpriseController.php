@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ConventionStage;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -38,12 +39,40 @@ class SearchEnterpriseController extends Controller
      */
     public function searchEnterprise(Request $request)
     {
-        $etablissement = array();
+        $data = array();
         $nom = $request->request->get("nom_enterprise"); // get parametter
 
         $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
         $etablissement = $repository_etab->findEtablissementByEnterpriseName($nom);
 
-        return $this->json(array('data' => $etablissement));
+        $repository_conv = $this->getDoctrine()->getRepository(ConventionStage::class);
+
+        foreach ($etablissement as $etab)
+        {
+            $result = array();
+            // find stage.
+            $convention = $repository_conv->findTraineeByEstablishment($etab->getId());
+
+            //make one json object
+            $result["id"]  = $etab->getId();
+            $result["nomEtablissement"] = $etab->getNomEtablissement();
+            $result["numSiret"] = $etab->getNumSiret();
+            $result["ville"] = $etab->getIdAdresse()->getIdVille()->getNomVille();
+            $result["nbStages"] = count($convention);
+
+            // requetes a faire
+            $result["nbApprenti"] = 0;
+            $result["vaca"] = 0;
+            $result["nbConferencier"] = 0;
+            $result["taxNow"] = 0;
+            $result["tax4Years"] = 0;
+            //
+            
+            // add into data
+            $data[] = $result;
+
+        }
+
+        return $this->json(array('data' => $data));
     }
 }

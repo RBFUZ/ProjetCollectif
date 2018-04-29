@@ -19,7 +19,13 @@ $(document).ready(function() {
         columns: [
             {data: 'nomEtablissement'},
             {data: 'numSiret'},
-            {data: "idAdresse.idVille.nomVille"},
+            {data: "ville"},
+            {data: "nbStages"},
+            {data: "nbApprenti"},
+            {data: "vaca"},
+            {data: "nbConferencier"},
+            {data: "taxNow"},
+            {data: "tax4Years"}
         ],
 
         filter: false,
@@ -27,6 +33,8 @@ $(document).ready(function() {
         ordering: true,
         processing: true,
         retrieve: true,
+        autoWidth:true,
+
 
     });
 
