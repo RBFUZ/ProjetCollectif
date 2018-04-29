@@ -240,6 +240,9 @@ $(document).ready(function () {
     lineChartInterndata1 = makeLineChartData(getYears(minStageYear), "Nombre de stagiaires / an", "Nombre de stagiaires", getCountStageEachYear());
     myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
+    lineChartInterndata2 = makeBarChartData(getYears(minStageYear), [23,2,12,3]);
+    myLineChart2 = makeBarChart("line-area2",lineChartInterndata2);
+
     // stage chart2
     lineChartInterndata2 = makeBarChartData(getYears(minStageYear), getCountStageMoneyEachYear(), getCountStageEachYear());
     myLineChart2 = makeBarChart("line-area2",lineChartInterndata2);
