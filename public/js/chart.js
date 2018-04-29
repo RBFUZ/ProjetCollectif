@@ -12,29 +12,101 @@ function getYears(from) {
 // make chart data
 var makeLineChartData = function (label,data) {
     var lineChartData = {
-        labels: label,
-        datasets: [
-            {
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: data
-            }
-        ]
-    };
+			type: 'line',
+			data: {
+				labels: label,
+				datasets: [{
+					label: 'Nombre de stagiaires / an',
+                    backgroundColor: "rgba(151,187,205,0.2)",
+					borderColor: "rgba(48, 144, 211, 0.5)",
+					data: data,
+					fill: true,
+				}]
+			},
+			options: {
+				responsive: true,
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Années'
+						}
+					}],
+					yAxes: [{
+                        ticks: {
+                            min: 0,
+                        },
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Nombre de staigaires'
+						}
+					}]
+				}
+			}
+		};
     return lineChartData;
 }
+
 // make chart
-var makeLineChart = function (cxt,chartData) {
-    var cxt1 = document.getElementById(cxt).getContext("2d");
-    var lineChart = new Chart(cxt1).Line(chartData, {
-        responsive: true,
-        maintainAspectRatio: true
-    });
+var makeLineChart = function (canvas,chartData) {
+
+    var ctx = document.getElementById(canvas).getContext('2d');
+	var lineChart = new Chart(ctx, chartData);
+
     return lineChart;
+}
+
+// make bar chart
+var makeBarChart = function (cxt,chartData) {
+    var ctx = document.getElementById(cxt).getContext('2d');
+    var lineChart = new Chart(ctx, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					},
+					responsive: true,
+					scales: {
+						xAxes: [{
+							stacked: true,
+						}],
+						yAxes: [{
+							stacked: true
+						}]
+					}
+				}
+			});
+    return lineChart;
+}
+
+// make bar chart data
+var makeBarChartData = function (label,data) {
+    var barChartData = {
+		labels: label,
+		datasets: [{
+			label: 'Gratification obtenue',
+			backgroundColor: "rgba(48, 144, 211, 0.5)",
+			stack: 'Stack 0',
+			data: [1,2,3,4,5,6,5]
+		}, {
+            label: 'Total stage',
+			backgroundColor: "rgba(140, 205, 249, 0.5)",
+			stack: 'Stack 0',
+			data: [6,7,8,9,10,6,10]
+        }]};
+    return barChartData;
 }
 
 // get the min years
@@ -137,16 +209,16 @@ $(document).ready(function () {
     myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
     // stage chart2
-    lineChartInterndata2 = makeLineChartData(getYears(minStageYear),[23,2,12,3]);
-    myLineChart2 = makeLineChart("line-area2",lineChartInterndata2);
+    lineChartInterndata2 = makeBarChartData(getYears(minStageYear), [23,2,12,3]);
+    myLineChart2 = makeBarChart("line-area2",lineChartInterndata2);
 
     //apprentissage chart1
     lineChartApprendata1 = makeLineChartData(getYears(minApprenticeshipYear), getCountApprenticeshipEachYear());
     apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
 
     //apprentissage chart2
-    lineChartApprendata2  = makeLineChartData(getYears(minApprenticeshipYear),[23,2,12,3]);
-    apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
+    lineChartApprendata2  = makeBarChartData(getYears(minApprenticeshipYear),[23,2,12,3]);
+    apprentissageLineChart2 = makeBarChart("line-area-apprentissage2",lineChartApprendata2);
 
 
     // disable department for forum and conference
@@ -200,7 +272,7 @@ $(document).ready(function () {
 
         // stage chart2
         myLineChart2.destroy();
-        myLineChart2 = makeLineChart("line-area2",lineChartInterndata2);
+        myLineChart2 = makeBarChart("line-area2",lineChartInterndata2);
 
         // apprentissage chart1
         apprentissageLineChart1.destroy();
@@ -208,7 +280,7 @@ $(document).ready(function () {
 
         // apprentissage chart2
         apprentissageLineChart2.destroy();
-        apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
+        apprentissageLineChart2 = makeBarChart("line-area-apprentissage2",lineChartApprendata2);
 
         // taxe_apprentissage chartTotal
         taxe_apprentissageLineChartTotal.destroy();
