@@ -95,6 +95,33 @@ class EstablishmentDetailController extends Controller
     }
 
     /**
+     * @Route("/establishment/countStageMoneyEachYear", name="count_stage_money_each_year")
+     */
+    public function getCountStageMoneyEachYear()
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
+        $year = $repository_stage->findOldestYear($idEstablishment);
+
+        if ($year[0]["date"] == null) {
+            $year = "2010";
+        } else {
+            $year = strtok($year[0]["date"], '-');
+        }
+
+        $current_year = date("Y"); // Année courante
+        $count_stage_each_year_array = array();
+
+        for ($i = $year; $i <= $current_year; $i++) {
+            $count_stage_one_year = $repository_stage->countStageMoneyForOneYear($idEstablishment, $i);
+            array_push($count_stage_each_year_array, $count_stage_one_year[0]['nbStage']);
+        }
+
+        return $this->json(array("data"=>$count_stage_each_year_array));
+    }
+
+    /**
      * @Route("/establishment/minApprentissageYear", name="min_apprentissage_year")
      */
     public function getOldestApprentissageYear()

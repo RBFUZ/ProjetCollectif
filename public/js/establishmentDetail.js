@@ -8,7 +8,7 @@ var dtable_intern = $("#data_table_intern").DataTable({
         {data: "idEtudiant.idPersonne.prenom"},
         {data: "idContactEtablissementTuteur.idPersonne.nom"},
         {data: "idPersonnelPolytechTuteur.idPersonne.nom"},
-        {data: "idStage.dateDebutStage"},
+        {data: "dateCreation"},
         {data: "idStage.sujetStage"},
         {data: "idSpecialite.idDepartement.libelleDepartement"},
     ],

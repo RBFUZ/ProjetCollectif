@@ -83,7 +83,7 @@ var makeBarChart = function (cxt,chartData) {
 							stacked: true,
 						}],
 						yAxes: [{
-							stacked: true
+							stacked: false
 						}]
 					}
 				}
@@ -92,19 +92,19 @@ var makeBarChart = function (cxt,chartData) {
 }
 
 // make bar chart data
-var makeBarChartData = function (label,data) {
+var makeBarChartData = function (label,data1, data2) {
     var barChartData = {
 		labels: label,
 		datasets: [{
 			label: 'Gratification obtenue',
 			backgroundColor: "rgba(48, 144, 211, 0.5)",
 			stack: 'Stack 0',
-			data: [1,2,3,4,5,6,5]
+			data: data1
 		}, {
             label: 'Total stage',
 			backgroundColor: "rgba(140, 205, 249, 0.5)",
 			stack: 'Stack 0',
-			data: [6,7,8,9,10,6,10]
+			data: data2
         }]};
     return barChartData;
 }
@@ -133,6 +133,27 @@ var getMinStageYears = function () {
 // get the number of trainee for each year
 var getCountStageEachYear = function () {
     var url = "/establishment/countStageEachYear";
+    var counter = [];
+    $.ajax({
+
+        type:'get',
+
+        url:url,
+
+        async:false,
+
+        success:function (data) {
+            if(data.data) {
+                counter =  data.data;
+            }
+        }
+    });
+    return counter;
+}
+
+// get the number of trainee for each year
+var getCountStageMoneyEachYear = function () {
+    var url = "/establishment/countStageMoneyEachYear";
     var counter = [];
     $.ajax({
 
@@ -209,7 +230,7 @@ $(document).ready(function () {
     myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
     // stage chart2
-    lineChartInterndata2 = makeBarChartData(getYears(minStageYear), [23,2,12,3]);
+    lineChartInterndata2 = makeBarChartData(getYears(minStageYear), getCountStageMoneyEachYear(), getCountStageEachYear());
     myLineChart2 = makeBarChart("line-area2",lineChartInterndata2);
 
     //apprentissage chart1
@@ -217,7 +238,7 @@ $(document).ready(function () {
     apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
 
     //apprentissage chart2
-    lineChartApprendata2  = makeBarChartData(getYears(minApprenticeshipYear),[23,2,12,3]);
+    lineChartApprendata2  = makeBarChartData(getYears(minApprenticeshipYear), getCountApprenticeshipEachYear(), [1,2,3,3]);
     apprentissageLineChart2 = makeBarChart("line-area-apprentissage2",lineChartApprendata2);
 
 
