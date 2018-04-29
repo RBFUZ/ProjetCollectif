@@ -9,9 +9,10 @@ use App\Entity\Etablissement;
 use App\Entity\ConventionStage;
 use App\Entity\Apprentissage;
 use App\Entity\Conference;
-use Symfony\Component\HttpFoundation\Session\Session;
 use App\Entity\TypeForum;
 use App\Entity\Forum;
+use App\Entity\VerseTaxeApprentissage;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class EstablishmentDetailController extends Controller
 {
@@ -206,5 +207,40 @@ class EstablishmentDetailController extends Controller
         }
 
         return $logo_array_all_forum;
+    }
+
+    /**
+     * @Route("/establishment/minTaxeYear", name="min_taxe_year")
+     */
+    public function getOldestTaxeYear()
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
+        $cov = $repository_taxe->findOldestYear($idEstablishment);
+        $year = $this->extractYear($cov);
+        return $this->json(array("data"=>$year));
+    }
+
+    /**
+     * @Route("/establishment/countTaxeEachYear", name="count_taxe_each_year")
+     */
+    public function countTaxeEachYear()
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
+        $year = $repository_taxe->findOldestYear($idEstablishment);
+        $year = $this->extractYear($year);
+        $current_year = date("Y"); // Année courante
+        $count_taxe_each_year_array = array();
+
+        // Over each years
+        for ($i = $year; $i <= $current_year; $i++) {
+            $count_taxe_one_year = $repository_taxe->countTaxeEachYear($idEstablishment, $i);
+            array_push($count_taxe_each_year_array, $count_taxe_one_year[0]['amount']);
+        }
+
+        return $this->json(array("data"=>$count_taxe_each_year_array));
     }
 }
