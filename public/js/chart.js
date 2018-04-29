@@ -10,13 +10,13 @@ function getYears(from) {
     return yr;
 }
 // make chart data
-var makeLineChartData = function (label,data) {
+var makeLineChartData = function (year, mainLabel, label, data) {
     var lineChartData = {
 			type: 'line',
 			data: {
-				labels: label,
+				labels: year,
 				datasets: [{
-					label: 'Nombre de stagiaires / an',
+					label: mainLabel,
                     backgroundColor: "rgba(151,187,205,0.2)",
 					borderColor: "rgba(48, 144, 211, 0.5)",
 					data: data,
@@ -48,7 +48,7 @@ var makeLineChartData = function (label,data) {
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'Nombre de staigaires'
+							labelString: label
 						}
 					}]
 				}
@@ -81,9 +81,20 @@ var makeBarChart = function (cxt,chartData) {
 					scales: {
 						xAxes: [{
 							stacked: true,
+                            scaleLabel: {
+    							display: true,
+    							labelString: 'Années'
+    						}
 						}],
 						yAxes: [{
-							stacked: false
+                            ticks: {
+                                min: 0,
+                            },
+							stacked: false,
+                            scaleLabel: {
+    							display: true,
+    							labelString: 'Nombre'
+    						}
 						}]
 					}
 				}
@@ -101,7 +112,7 @@ var makeBarChartData = function (label,data1, data2) {
 			stack: 'Stack 0',
 			data: data1
 		}, {
-            label: 'Total stage',
+            label: 'Total de stages effectués',
 			backgroundColor: "rgba(140, 205, 249, 0.5)",
 			stack: 'Stack 0',
 			data: data2
@@ -226,7 +237,7 @@ $(document).ready(function () {
    var minApprenticeshipYear = getMinApprenticeshipYears();
 
     // stage chart1
-    lineChartInterndata1 = makeLineChartData(getYears(minStageYear), getCountStageEachYear());
+    lineChartInterndata1 = makeLineChartData(getYears(minStageYear), "Nombre de stagiaires / an", "Nombre de stagiaires", getCountStageEachYear());
     myLineChart1 = makeLineChart("line-area1",lineChartInterndata1);
 
     // stage chart2
@@ -234,12 +245,8 @@ $(document).ready(function () {
     myLineChart2 = makeBarChart("line-area2",lineChartInterndata2);
 
     //apprentissage chart1
-    lineChartApprendata1 = makeLineChartData(getYears(minApprenticeshipYear), getCountApprenticeshipEachYear());
+    lineChartApprendata1 = makeLineChartData(getYears(minApprenticeshipYear), "Nombre d'apprentis / an", "Nombre d'apprentis", getCountApprenticeshipEachYear());
     apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
-
-    //apprentissage chart2
-    lineChartApprendata2  = makeBarChartData(getYears(minApprenticeshipYear), getCountApprenticeshipEachYear(), [1,2,3,3]);
-    apprentissageLineChart2 = makeBarChart("line-area-apprentissage2",lineChartApprendata2);
 
 
     // disable department for forum and conference
@@ -252,27 +259,27 @@ $(document).ready(function () {
         }
     })
     // taxe_apprentissage chartTotal
-    lineChartTaxedataTotal  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartTaxedataTotal  = makeLineChartData(getYears('2005'), "Taxe d'apprentissage / an", "Montant en €", [23,2,12,3]);
     taxe_apprentissageLineChartTotal = makeLineChart("line-area_taxeApprentissageTotal",lineChartTaxedataTotal);
 
     // taxe_apprentissage chartDI
-    lineChartTaxedataDI  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartTaxedataDI  = makeLineChartData(getYears('2005'), "Taxe d'apprentissage / an", "Montant en €", [23,2,12,3]);
     taxe_apprentissageLineChartDI = makeLineChart("line-area_taxeApprentissageDI",lineChartTaxedataDI);
 
     // taxe_apprentissage chartDII
-    lineChartTaxedataDII  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartTaxedataDII  = makeLineChartData(getYears('2005'),"Taxe d'apprentissage / an", "Montant en €", [23,2,12,3]);
     taxe_apprentissageLineChartDII = makeLineChart("line-area_taxeApprentissageDII",lineChartTaxedataDII);
 
     // taxe_apprentissage chartDAE
-    lineChartTaxedataDAE  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartTaxedataDAE  = makeLineChartData(getYears('2005'), "Taxe d'apprentissage / an", "Montant en €", [23,2,12,3]);
     taxe_apprentissageLineChartDAE = makeLineChart("line-area_taxeApprentissageDAE",lineChartTaxedataDAE);
 
     // taxe_apprentissage chartDMS
-    lineChartTaxedataDMS  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartTaxedataDMS  = makeLineChartData(getYears('2005'), "Taxe d'apprentissage / an", "Montant en €", [23,2,12,3]);
     taxe_apprentissageLineChartDMS = makeLineChart("line-area_taxeApprentissageDMS",lineChartTaxedataDMS);
 
     // taxe_apprentissage chartDEE
-    lineChartTaxedataDEE  = makeLineChartData(getYears('2005'),[23,2,12,3]);
+    lineChartTaxedataDEE  = makeLineChartData(getYears('2005'), "Taxe d'apprentissage / an", "Montant en €", [23,2,12,3]);
     taxe_apprentissageLineChartDEE = makeLineChart("line-area_taxeApprentissageDEE",lineChartTaxedataDEE);
 
     // disable department for forum and conference
@@ -298,10 +305,6 @@ $(document).ready(function () {
         // apprentissage chart1
         apprentissageLineChart1.destroy();
         apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
-
-        // apprentissage chart2
-        apprentissageLineChart2.destroy();
-        apprentissageLineChart2 = makeBarChart("line-area-apprentissage2",lineChartApprendata2);
 
         // taxe_apprentissage chartTotal
         taxe_apprentissageLineChartTotal.destroy();
@@ -354,11 +357,5 @@ $(document).ready(function () {
         // change data
         lineChartApprendata1.datasets[0].data = getDataForCharts($(this).val())
         apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
-
-        // apprentissage chart2
-        apprentissageLineChart2.destroy();
-        // change data
-        lineChartApprendata2.datasets[0].data = getDataForCharts($(this).val())
-        apprentissageLineChart2 = makeLineChart("line-area-apprentissage2",lineChartApprendata2);
     })
 });

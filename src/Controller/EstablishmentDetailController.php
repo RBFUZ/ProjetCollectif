@@ -54,6 +54,17 @@ class EstablishmentDetailController extends Controller
         ]);
     }
 
+    public function extractYear($year)
+    {
+        if ($year[0]["date"] == null) {
+            $year = "2010";
+        } else {
+            $year = strtok($year[0]["date"], '-');
+        }
+
+        return $year;
+    }
+
     /**
      * @Route("/establishment/minStageYear", name="min_stage_year")
      */
@@ -63,7 +74,7 @@ class EstablishmentDetailController extends Controller
         $idEstablishment = $session->get('etabid');
         $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
         $cov = $repository_stage->findOldestYear($idEstablishment);
-        $year = strtok($cov[0]["date"], '-');
+        $year = $this->extractYear($cov);
         return $this->json(array("data"=>$year));
     }
 
@@ -76,13 +87,7 @@ class EstablishmentDetailController extends Controller
         $idEstablishment = $session->get('etabid');
         $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
         $year = $repository_stage->findOldestYear($idEstablishment);
-
-        if ($year[0]["date"] == null) {
-            $year = "2010";
-        } else {
-            $year = strtok($year[0]["date"], '-');
-        }
-
+        $year = $this->extractYear($year);
         $current_year = date("Y"); // Année courante
         $count_stage_each_year_array = array();
 
@@ -103,13 +108,7 @@ class EstablishmentDetailController extends Controller
         $idEstablishment = $session->get('etabid');
         $repository_stage = $this->getDoctrine()->getRepository(ConventionStage::class);
         $year = $repository_stage->findOldestYear($idEstablishment);
-
-        if ($year[0]["date"] == null) {
-            $year = "2010";
-        } else {
-            $year = strtok($year[0]["date"], '-');
-        }
-
+        $year = $this->extractYear($year);
         $current_year = date("Y"); // Année courante
         $count_stage_each_year_array = array();
 
@@ -130,7 +129,7 @@ class EstablishmentDetailController extends Controller
         $idEstablishment = $session->get('etabid');
         $repository_apprenticeship = $this->getDoctrine()->getRepository(Apprentissage::class);
         $app = $repository_apprenticeship->findOldestYear($idEstablishment);
-        $year = strtok($app[0]["date"], '-');
+        $year = $this->extractYear($app);
         return $this->json(array("data"=>$year));
     }
 
@@ -143,13 +142,7 @@ class EstablishmentDetailController extends Controller
         $idEstablishment = $session->get('etabid');
         $repository_apprenticeship = $this->getDoctrine()->getRepository(Apprentissage::class);
         $year = $repository_apprenticeship->findOldestYear($idEstablishment);
-
-        if ($year[0]["date"] == null) {
-            $year = "2010";
-        } else {
-            $year = strtok($year[0]["date"], '-');
-        }
-
+        $year = $this->extractYear($year);
         $current_year = date("Y"); // Année courante
         $count_apprenticeship_each_year_array = array();
 
