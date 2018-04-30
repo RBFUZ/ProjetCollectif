@@ -26,16 +26,7 @@ $(document).ready(function(){
     });
 });
 
-var list_forum = new Vue({
-    el: '#search_forum_custom', // the element that you want to control
-    data: {
-        establishment:[], // the data to the twig
-    },
-    delimiters: ['${', '}'],
-    methods:{
-        get_data: function (event) { // the methods that you want to execute
-            $("#data_table").show();
-            dtable.ajax.reload();
-        }
-    }
+$("#myButton").click(function() {
+	$("#data_table").show();
+	dtable.ajax.reload();
 });
