@@ -209,6 +209,13 @@ class EstablishmentDetailController extends Controller
         return $logo_array_all_forum;
     }
 
+    public function getIdEnterpriseForOneEtablishment($idEstablishment)
+    {
+        $repository_establishment = $this->getDoctrine()->getRepository(Etablissement::class);
+        $idEnterprise = $repository_establishment->getEnterpriseByEtablishment($idEstablishment);
+        return $idEnterprise[0]['id'];
+    }
+
     /**
      * @Route("/establishment/minTaxeYear", name="min_taxe_year")
      */
@@ -216,8 +223,9 @@ class EstablishmentDetailController extends Controller
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
+        $idEnterprise = $this->getIdEnterpriseForOneEtablishment($idEstablishment);
         $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
-        $cov = $repository_taxe->findOldestYear($idEstablishment);
+        $cov = $repository_taxe->findOldestYear($idEnterprise);
         $year = $this->extractYear($cov);
         return $this->json(array("data"=>$year));
     }
@@ -229,15 +237,19 @@ class EstablishmentDetailController extends Controller
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
+        $idEnterprise = $this->getIdEnterpriseForOneEtablishment($idEstablishment);
         $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
-        $year = $repository_taxe->findOldestYear($idEstablishment);
+        $year = $repository_taxe->findOldestYear($idEnterprise);
         $year = $this->extractYear($year);
         $current_year = date("Y"); // Année courante
         $count_taxe_each_year_array = array();
 
         // Over each years
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_taxe_one_year = $repository_taxe->countTaxeEachYear($idEstablishment, $i);
+            $count_taxe_one_year = $repository_taxe->countTaxeEachYear($idEnterprise, $i);
+            if ($count_taxe_one_year[0]['amount'] == null) {
+                $count_taxe_one_year[0]['amount'] = 0;
+            }
             array_push($count_taxe_each_year_array, $count_taxe_one_year[0]['amount']);
         }
 
