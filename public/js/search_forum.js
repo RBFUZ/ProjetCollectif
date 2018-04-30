@@ -24,9 +24,20 @@ $(document).ready(function(){
         retrieve: true,
 		autoWidth:true,
     });
-});
 
-$("#myButton").click(function() {
-	$("#data_table").show();
-	dtable.ajax.reload();
+
+	// row click event
+	$("#libelleDropDown").dropdown({
+	    onChange: function (val) {
+			// Requete SQL qui retourne l'année la plus ancienne pour ce forum (val)
+	        alert(val);
+	    }
+	});
+
+	$("#myButton").click(function() {
+		$("#data_table").show();
+		dtable.ajax.reload();
+
+		$('#myDropDown').append('<div class="item" data-value="2">Autre</div>');
+	});
 });

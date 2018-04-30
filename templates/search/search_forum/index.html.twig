@@ -5,7 +5,7 @@
 <div id="search_forum_custom">
 	<div class="ui three column stackable grid container">
 		<div class="four wide column">
-			<div class="ui search selection dropdown">
+			<div class="ui search selection dropdown" id="libelleDropDown">
 				<input type="hidden" name="nom_forum" id="nom" >
 				<i class="dropdown icon"></i>
 				<div class="default text">Nom du forum</div>
@@ -13,6 +13,16 @@
 					{% for f in forum %}
 						<div class="item" data-value="{{ f.libelleTypeForum }}">{{ f.libelleTypeForum }}</div>
 					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="four wide column">
+			<div class="ui selection dropdown">
+				<input type="hidden" name="Annee">
+				<i class="dropdown icon"></i>
+				<div class="default text">Année</div>
+				<div class="menu" id="myDropDown">
+					<div class="item" data-value="0">{{ "now" |date("Y") }}</div>
 				</div>
 			</div>
 		</div>
