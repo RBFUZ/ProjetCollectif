@@ -1,9 +1,8 @@
 ﻿'use strict'
 
 $(document).ready(function () {
-
     //loadhtml();
-    //paceLoading();
+    paceLoading();
     butonactions();
     //hamburger();
     tabactions();
@@ -14,7 +13,7 @@ $(document).ready(function () {
     cardhoveractions();
     //colorize();
     $(".ui.accordion").accordion();//accordion trigger
-    //$(".ui.rating").rating();//rating trigger
+    $(".ui.rating").rating();//rating trigger
     $(".ui.dropdown").dropdown();//dropdown and select trigger
 
     //sidebar trigger
@@ -125,7 +124,7 @@ function loadhtml() {
             $(".sidemenu").niceScroll({ cursorcolor: "#ddd", cursorwidth: 5, cursorborderradius: 0, cursorborder: 0, scrollspeed: 50, autohidemode: true, zindex: 9999999, bouncescroll: true });//sidebar scrool trigger by nicescroll
         });
         $(".navbarmenu").load("html/loadnavbar.html", function () {
-            //hamburger();
+            hamburger();
             $(".ui.dropdown").dropdown();
         });
         $("#toc").load("html/loadmobilside.html", function () {

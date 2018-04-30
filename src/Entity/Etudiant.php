@@ -24,20 +24,6 @@ class Etudiant
     /**
      * @var int
      *
-     * @ORM\Column(name="numero_etudiant", type="integer", nullable=false)
-     */
-    private $numeroEtudiant;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail_etudiant", type="string", length=100, nullable=false)
-     */
-    private $mailEtudiant;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="annee_etude", type="integer", nullable=false)
      */
     private $anneeEtude;
@@ -45,9 +31,23 @@ class Etudiant
     /**
      * @var bool
      *
-     * @ORM\Column(name="diplome", type="boolean", nullable=false, options={"comment"="TRUE si diplomé, FAUX autrement"})
+     * @ORM\Column(name="diplome", type="boolean", nullable=false, options={"comment"="1 si diplomé, 0 autrement"})
      */
-    private $diplome;
+    private $diplome = '0';
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="numero_etudiant", type="integer", nullable=true)
+     */
+    private $numeroEtudiant;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="mail_etudiant", type="string", length=100, nullable=true)
+     */
+    private $mailEtudiant;
 
     /**
      * @var \DateTime|null
@@ -129,54 +129,6 @@ class Etudiant
     }
 
     /**
-     * Set numeroEtudiant.
-     *
-     * @param int $numeroEtudiant
-     *
-     * @return Etudiant
-     */
-    public function setNumeroEtudiant($numeroEtudiant)
-    {
-        $this->numeroEtudiant = $numeroEtudiant;
-
-        return $this;
-    }
-
-    /**
-     * Get numeroEtudiant.
-     *
-     * @return int
-     */
-    public function getNumeroEtudiant()
-    {
-        return $this->numeroEtudiant;
-    }
-
-    /**
-     * Set mailEtudiant.
-     *
-     * @param string $mailEtudiant
-     *
-     * @return Etudiant
-     */
-    public function setMailEtudiant($mailEtudiant)
-    {
-        $this->mailEtudiant = $mailEtudiant;
-
-        return $this;
-    }
-
-    /**
-     * Get mailEtudiant.
-     *
-     * @return string
-     */
-    public function getMailEtudiant()
-    {
-        return $this->mailEtudiant;
-    }
-
-    /**
      * Set anneeEtude.
      *
      * @param int $anneeEtude
@@ -222,6 +174,54 @@ class Etudiant
     public function getDiplome()
     {
         return $this->diplome;
+    }
+
+    /**
+     * Set numeroEtudiant.
+     *
+     * @param int|null $numeroEtudiant
+     *
+     * @return Etudiant
+     */
+    public function setNumeroEtudiant($numeroEtudiant = null)
+    {
+        $this->numeroEtudiant = $numeroEtudiant;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroEtudiant.
+     *
+     * @return int|null
+     */
+    public function getNumeroEtudiant()
+    {
+        return $this->numeroEtudiant;
+    }
+
+    /**
+     * Set mailEtudiant.
+     *
+     * @param string|null $mailEtudiant
+     *
+     * @return Etudiant
+     */
+    public function setMailEtudiant($mailEtudiant = null)
+    {
+        $this->mailEtudiant = $mailEtudiant;
+
+        return $this;
+    }
+
+    /**
+     * Get mailEtudiant.
+     *
+     * @return string|null
+     */
+    public function getMailEtudiant()
+    {
+        return $this->mailEtudiant;
     }
 
     /**

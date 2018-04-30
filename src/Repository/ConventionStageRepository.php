@@ -62,5 +62,4 @@ class ConventionStageRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
-
 }

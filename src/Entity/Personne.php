@@ -50,6 +50,13 @@ class Personne
     private $codeSexe;
 
     /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="date_naissance", type="date", nullable=true)
+     */
+    private $dateNaissance;
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="nationalite", type="string", length=100, nullable=true)
@@ -194,6 +201,30 @@ class Personne
     public function getCodeSexe()
     {
         return $this->codeSexe;
+    }
+
+    /**
+     * Set dateNaissance.
+     *
+     * @param \DateTime|null $dateNaissance
+     *
+     * @return Personne
+     */
+    public function setDateNaissance($dateNaissance = null)
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    /**
+     * Get dateNaissance.
+     *
+     * @return \DateTime|null
+     */
+    public function getDateNaissance()
+    {
+        return $this->dateNaissance;
     }
 
     /**

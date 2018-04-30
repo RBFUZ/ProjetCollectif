@@ -22,6 +22,13 @@ class EstEmploye
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="fonction", type="string", length=255, nullable=false, options={"default"="Employé(e)"})
+     */
+    private $fonction = 'Employé(e)';
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_debut_emploi", type="date", nullable=false)
@@ -34,13 +41,6 @@ class EstEmploye
      * @ORM\Column(name="date_fin_emploi", type="date", nullable=true)
      */
     private $dateFinEmploi;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fonction", type="string", length=255, nullable=false)
-     */
-    private $fonction;
 
     /**
      * @var \App\Entity\ContactEtablissement
@@ -73,6 +73,30 @@ class EstEmploye
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set fonction.
+     *
+     * @param string $fonction
+     *
+     * @return EstEmploye
+     */
+    public function setFonction($fonction)
+    {
+        $this->fonction = $fonction;
+
+        return $this;
+    }
+
+    /**
+     * Get fonction.
+     *
+     * @return string
+     */
+    public function getFonction()
+    {
+        return $this->fonction;
     }
 
     /**
@@ -121,30 +145,6 @@ class EstEmploye
     public function getDateFinEmploi()
     {
         return $this->dateFinEmploi;
-    }
-
-    /**
-     * Set fonction.
-     *
-     * @param string $fonction
-     *
-     * @return EstEmploye
-     */
-    public function setFonction($fonction)
-    {
-        $this->fonction = $fonction;
-
-        return $this;
-    }
-
-    /**
-     * Get fonction.
-     *
-     * @return string
-     */
-    public function getFonction()
-    {
-        return $this->fonction;
     }
 
     /**

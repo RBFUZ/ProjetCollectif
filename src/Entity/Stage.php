@@ -36,30 +36,37 @@ class Stage
     private $dateFinStage;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="annee_etude_stage", type="integer", nullable=false)
+     * @ORM\Column(name="etranger", type="boolean", nullable=false)
+     */
+    private $etranger = '0';
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="annee_etude_stage", type="integer", nullable=true)
      */
     private $anneeEtudeStage;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="thematique_stage", type="string", length=255, nullable=false)
+     * @ORM\Column(name="thematique_stage", type="string", length=255, nullable=true)
      */
     private $thematiqueStage;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="sujet_stage", type="string", length=255, nullable=false)
+     * @ORM\Column(name="sujet_stage", type="string", length=255, nullable=true)
      */
     private $sujetStage;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="fonctions_taches_stage", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="fonctions_taches_stage", type="text", length=65535, nullable=true)
      */
     private $fonctionsTachesStage;
 
@@ -71,23 +78,23 @@ class Stage
     private $detailsProjetStage;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="duree_stage_semaines", type="integer", nullable=false)
+     * @ORM\Column(name="duree_stage_semaines", type="integer", nullable=true)
      */
     private $dureeStageSemaines;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="duree_stage_heures", type="integer", nullable=false)
+     * @ORM\Column(name="duree_stage_heures", type="integer", nullable=true)
      */
     private $dureeStageHeures;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="nb_jours_travail", type="integer", nullable=false)
+     * @ORM\Column(name="nb_jours_travail", type="integer", nullable=true)
      */
     private $nbJoursTravail;
 
@@ -180,13 +187,37 @@ class Stage
     }
 
     /**
-     * Set anneeEtudeStage.
+     * Set etranger.
      *
-     * @param int $anneeEtudeStage
+     * @param bool $etranger
      *
      * @return Stage
      */
-    public function setAnneeEtudeStage($anneeEtudeStage)
+    public function setEtranger($etranger)
+    {
+        $this->etranger = $etranger;
+
+        return $this;
+    }
+
+    /**
+     * Get etranger.
+     *
+     * @return bool
+     */
+    public function getEtranger()
+    {
+        return $this->etranger;
+    }
+
+    /**
+     * Set anneeEtudeStage.
+     *
+     * @param int|null $anneeEtudeStage
+     *
+     * @return Stage
+     */
+    public function setAnneeEtudeStage($anneeEtudeStage = null)
     {
         $this->anneeEtudeStage = $anneeEtudeStage;
 
@@ -196,7 +227,7 @@ class Stage
     /**
      * Get anneeEtudeStage.
      *
-     * @return int
+     * @return int|null
      */
     public function getAnneeEtudeStage()
     {
@@ -206,11 +237,11 @@ class Stage
     /**
      * Set thematiqueStage.
      *
-     * @param string $thematiqueStage
+     * @param string|null $thematiqueStage
      *
      * @return Stage
      */
-    public function setThematiqueStage($thematiqueStage)
+    public function setThematiqueStage($thematiqueStage = null)
     {
         $this->thematiqueStage = $thematiqueStage;
 
@@ -220,7 +251,7 @@ class Stage
     /**
      * Get thematiqueStage.
      *
-     * @return string
+     * @return string|null
      */
     public function getThematiqueStage()
     {
@@ -230,11 +261,11 @@ class Stage
     /**
      * Set sujetStage.
      *
-     * @param string $sujetStage
+     * @param string|null $sujetStage
      *
      * @return Stage
      */
-    public function setSujetStage($sujetStage)
+    public function setSujetStage($sujetStage = null)
     {
         $this->sujetStage = $sujetStage;
 
@@ -244,7 +275,7 @@ class Stage
     /**
      * Get sujetStage.
      *
-     * @return string
+     * @return string|null
      */
     public function getSujetStage()
     {
@@ -254,11 +285,11 @@ class Stage
     /**
      * Set fonctionsTachesStage.
      *
-     * @param string $fonctionsTachesStage
+     * @param string|null $fonctionsTachesStage
      *
      * @return Stage
      */
-    public function setFonctionsTachesStage($fonctionsTachesStage)
+    public function setFonctionsTachesStage($fonctionsTachesStage = null)
     {
         $this->fonctionsTachesStage = $fonctionsTachesStage;
 
@@ -268,7 +299,7 @@ class Stage
     /**
      * Get fonctionsTachesStage.
      *
-     * @return string
+     * @return string|null
      */
     public function getFonctionsTachesStage()
     {
@@ -302,11 +333,11 @@ class Stage
     /**
      * Set dureeStageSemaines.
      *
-     * @param int $dureeStageSemaines
+     * @param int|null $dureeStageSemaines
      *
      * @return Stage
      */
-    public function setDureeStageSemaines($dureeStageSemaines)
+    public function setDureeStageSemaines($dureeStageSemaines = null)
     {
         $this->dureeStageSemaines = $dureeStageSemaines;
 
@@ -316,7 +347,7 @@ class Stage
     /**
      * Get dureeStageSemaines.
      *
-     * @return int
+     * @return int|null
      */
     public function getDureeStageSemaines()
     {
@@ -326,11 +357,11 @@ class Stage
     /**
      * Set dureeStageHeures.
      *
-     * @param int $dureeStageHeures
+     * @param int|null $dureeStageHeures
      *
      * @return Stage
      */
-    public function setDureeStageHeures($dureeStageHeures)
+    public function setDureeStageHeures($dureeStageHeures = null)
     {
         $this->dureeStageHeures = $dureeStageHeures;
 
@@ -340,7 +371,7 @@ class Stage
     /**
      * Get dureeStageHeures.
      *
-     * @return int
+     * @return int|null
      */
     public function getDureeStageHeures()
     {
@@ -350,11 +381,11 @@ class Stage
     /**
      * Set nbJoursTravail.
      *
-     * @param int $nbJoursTravail
+     * @param int|null $nbJoursTravail
      *
      * @return Stage
      */
-    public function setNbJoursTravail($nbJoursTravail)
+    public function setNbJoursTravail($nbJoursTravail = null)
     {
         $this->nbJoursTravail = $nbJoursTravail;
 
@@ -364,7 +395,7 @@ class Stage
     /**
      * Get nbJoursTravail.
      *
-     * @return int
+     * @return int|null
      */
     public function getNbJoursTravail()
     {

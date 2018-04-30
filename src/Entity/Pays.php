@@ -22,30 +22,30 @@ class Pays
     private $id;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="code", type="integer", nullable=false)
+     * @ORM\Column(name="code", type="integer", nullable=true)
      */
     private $code;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="alpha2", type="string", length=2, nullable=false)
+     * @ORM\Column(name="alpha2", type="string", length=2, nullable=true)
      */
     private $alpha2;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="alpha3", type="string", length=3, nullable=false)
+     * @ORM\Column(name="alpha3", type="string", length=3, nullable=true)
      */
     private $alpha3;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="nom_en_gb", type="string", length=45, nullable=false)
+     * @ORM\Column(name="nom_en_gb", type="string", length=45, nullable=true)
      */
     private $nomEnGb;
 
@@ -71,11 +71,11 @@ class Pays
     /**
      * Set code.
      *
-     * @param int $code
+     * @param int|null $code
      *
      * @return Pays
      */
-    public function setCode($code)
+    public function setCode($code = null)
     {
         $this->code = $code;
 
@@ -85,7 +85,7 @@ class Pays
     /**
      * Get code.
      *
-     * @return int
+     * @return int|null
      */
     public function getCode()
     {
@@ -95,11 +95,11 @@ class Pays
     /**
      * Set alpha2.
      *
-     * @param string $alpha2
+     * @param string|null $alpha2
      *
      * @return Pays
      */
-    public function setAlpha2($alpha2)
+    public function setAlpha2($alpha2 = null)
     {
         $this->alpha2 = $alpha2;
 
@@ -109,7 +109,7 @@ class Pays
     /**
      * Get alpha2.
      *
-     * @return string
+     * @return string|null
      */
     public function getAlpha2()
     {
@@ -119,11 +119,11 @@ class Pays
     /**
      * Set alpha3.
      *
-     * @param string $alpha3
+     * @param string|null $alpha3
      *
      * @return Pays
      */
-    public function setAlpha3($alpha3)
+    public function setAlpha3($alpha3 = null)
     {
         $this->alpha3 = $alpha3;
 
@@ -133,7 +133,7 @@ class Pays
     /**
      * Get alpha3.
      *
-     * @return string
+     * @return string|null
      */
     public function getAlpha3()
     {
@@ -143,11 +143,11 @@ class Pays
     /**
      * Set nomEnGb.
      *
-     * @param string $nomEnGb
+     * @param string|null $nomEnGb
      *
      * @return Pays
      */
-    public function setNomEnGb($nomEnGb)
+    public function setNomEnGb($nomEnGb = null)
     {
         $this->nomEnGb = $nomEnGb;
 
@@ -157,7 +157,7 @@ class Pays
     /**
      * Get nomEnGb.
      *
-     * @return string
+     * @return string|null
      */
     public function getNomEnGb()
     {

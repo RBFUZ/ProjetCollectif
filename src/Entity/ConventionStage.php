@@ -36,25 +36,25 @@ class ConventionStage
     private $dateDerniereModification;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="validee", type="boolean", nullable=false, options={"default"="1"})
+     */
+    private $validee = '1';
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="validee_pedagogiquement", type="boolean", nullable=false, options={"default"="1"})
+     */
+    private $valideePedagogiquement = '1';
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="type_convention", type="string", length=45, nullable=true, options={"comment"="Obligatoire, non obligatoire, ..."})
      */
     private $typeConvention;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="validee", type="boolean", nullable=false)
-     */
-    private $validee;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="validee_pedagogiquement", type="boolean", nullable=false)
-     */
-    private $valideePedagogiquement;
 
     /**
      * @var \App\Entity\ContactEtablissement
@@ -222,30 +222,6 @@ class ConventionStage
     }
 
     /**
-     * Set typeConvention.
-     *
-     * @param string|null $typeConvention
-     *
-     * @return ConventionStage
-     */
-    public function setTypeConvention($typeConvention = null)
-    {
-        $this->typeConvention = $typeConvention;
-
-        return $this;
-    }
-
-    /**
-     * Get typeConvention.
-     *
-     * @return string|null
-     */
-    public function getTypeConvention()
-    {
-        return $this->typeConvention;
-    }
-
-    /**
      * Set validee.
      *
      * @param bool $validee
@@ -291,6 +267,30 @@ class ConventionStage
     public function getValideePedagogiquement()
     {
         return $this->valideePedagogiquement;
+    }
+
+    /**
+     * Set typeConvention.
+     *
+     * @param string|null $typeConvention
+     *
+     * @return ConventionStage
+     */
+    public function setTypeConvention($typeConvention = null)
+    {
+        $this->typeConvention = $typeConvention;
+
+        return $this;
+    }
+
+    /**
+     * Get typeConvention.
+     *
+     * @return string|null
+     */
+    public function getTypeConvention()
+    {
+        return $this->typeConvention;
     }
 
     /**

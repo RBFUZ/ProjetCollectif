@@ -23,6 +23,7 @@ class VerseTaxeApprentissageRepository extends \Doctrine\ORM\EntityRepository
     {
         // Get the amount of money for each year and for one establishment
         $entityManager = $this->getEntityManager();
+
         $query = $entityManager->createQuery(
         'SELECT SUM(taxe.montantTaxe) as amount
             FROM App\Entity\VerseTaxeApprentissage taxe JOIN taxe.idEtablissement etab

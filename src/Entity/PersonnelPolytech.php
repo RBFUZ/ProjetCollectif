@@ -24,16 +24,16 @@ class PersonnelPolytech
     /**
      * @var string
      *
-     * @ORM\Column(name="mail_universitaire", type="string", length=100, nullable=false)
+     * @ORM\Column(name="fonction", type="string", length=255, nullable=false, options={"default"="Personnel Polytech"})
      */
-    private $mailUniversitaire;
+    private $fonction = 'Personnel Polytech';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="fonction", type="string", length=255, nullable=false)
+     * @ORM\Column(name="mail_universitaire", type="string", length=100, nullable=true)
      */
-    private $fonction;
+    private $mailUniversitaire;
 
     /**
      * @var \App\Entity\Departement
@@ -98,30 +98,6 @@ class PersonnelPolytech
     }
 
     /**
-     * Set mailUniversitaire.
-     *
-     * @param string $mailUniversitaire
-     *
-     * @return PersonnelPolytech
-     */
-    public function setMailUniversitaire($mailUniversitaire)
-    {
-        $this->mailUniversitaire = $mailUniversitaire;
-
-        return $this;
-    }
-
-    /**
-     * Get mailUniversitaire.
-     *
-     * @return string
-     */
-    public function getMailUniversitaire()
-    {
-        return $this->mailUniversitaire;
-    }
-
-    /**
      * Set fonction.
      *
      * @param string $fonction
@@ -143,6 +119,30 @@ class PersonnelPolytech
     public function getFonction()
     {
         return $this->fonction;
+    }
+
+    /**
+     * Set mailUniversitaire.
+     *
+     * @param string|null $mailUniversitaire
+     *
+     * @return PersonnelPolytech
+     */
+    public function setMailUniversitaire($mailUniversitaire = null)
+    {
+        $this->mailUniversitaire = $mailUniversitaire;
+
+        return $this;
+    }
+
+    /**
+     * Get mailUniversitaire.
+     *
+     * @return string|null
+     */
+    public function getMailUniversitaire()
+    {
+        return $this->mailUniversitaire;
     }
 
     /**

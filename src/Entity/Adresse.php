@@ -29,18 +29,18 @@ class Adresse
     private $adresse;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="complement_adresse", type="string", length=255, nullable=true)
-     */
-    private $complementAdresse;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="code_postal", type="string", length=45, nullable=false)
      */
     private $codePostal;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="complement_adresse", type="string", length=255, nullable=true)
+     */
+    private $complementAdresse;
 
     /**
      * @var \App\Entity\Ville
@@ -89,30 +89,6 @@ class Adresse
     }
 
     /**
-     * Set complementAdresse.
-     *
-     * @param string|null $complementAdresse
-     *
-     * @return Adresse
-     */
-    public function setComplementAdresse($complementAdresse = null)
-    {
-        $this->complementAdresse = $complementAdresse;
-
-        return $this;
-    }
-
-    /**
-     * Get complementAdresse.
-     *
-     * @return string|null
-     */
-    public function getComplementAdresse()
-    {
-        return $this->complementAdresse;
-    }
-
-    /**
      * Set codePostal.
      *
      * @param string $codePostal
@@ -134,6 +110,30 @@ class Adresse
     public function getCodePostal()
     {
         return $this->codePostal;
+    }
+
+    /**
+     * Set complementAdresse.
+     *
+     * @param string|null $complementAdresse
+     *
+     * @return Adresse
+     */
+    public function setComplementAdresse($complementAdresse = null)
+    {
+        $this->complementAdresse = $complementAdresse;
+
+        return $this;
+    }
+
+    /**
+     * Get complementAdresse.
+     *
+     * @return string|null
+     */
+    public function getComplementAdresse()
+    {
+        return $this->complementAdresse;
     }
 
     /**

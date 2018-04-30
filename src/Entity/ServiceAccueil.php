@@ -24,9 +24,9 @@ class ServiceAccueil
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_service", type="string", length=100, nullable=false)
+     * @ORM\Column(name="nom_service", type="string", length=100, nullable=false, options={"default"="Service d'accueil"})
      */
-    private $nomService;
+    private $nomService = 'Service d\'accueil';
 
     /**
      * @var \App\Entity\Etablissement

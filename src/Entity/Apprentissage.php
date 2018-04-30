@@ -22,6 +22,20 @@ class Apprentissage
     private $id;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="etranger", type="boolean", nullable=false)
+     */
+    private $etranger = '0';
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="duree_apprentissage_annees", type="integer", nullable=false, options={"default"="3","comment"="1 an, 3 ans, etc."})
+     */
+    private $dureeApprentissageAnnees = '3';
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_debut_apprentissage", type="date", nullable=false)
@@ -29,25 +43,11 @@ class Apprentissage
     private $dateDebutApprentissage;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTime
      *
-     * @ORM\Column(name="date_fin_apprentissage", type="date", nullable=true)
+     * @ORM\Column(name="date_fin_apprentissage", type="date", nullable=false)
      */
     private $dateFinApprentissage;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="duree_apprentissage_annees", type="integer", nullable=false, options={"comment"="1 an, 3 ans, etc."})
-     */
-    private $dureeApprentissageAnnees;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="etranger", type="boolean", nullable=false)
-     */
-    private $etranger;
 
     /**
      * @var string|null
@@ -110,51 +110,27 @@ class Apprentissage
     }
 
     /**
-     * Set dateDebutApprentissage.
+     * Set etranger.
      *
-     * @param \DateTime $dateDebutApprentissage
+     * @param bool $etranger
      *
      * @return Apprentissage
      */
-    public function setDateDebutApprentissage($dateDebutApprentissage)
+    public function setEtranger($etranger)
     {
-        $this->dateDebutApprentissage = $dateDebutApprentissage;
+        $this->etranger = $etranger;
 
         return $this;
     }
 
     /**
-     * Get dateDebutApprentissage.
+     * Get etranger.
      *
-     * @return \DateTime
+     * @return bool
      */
-    public function getDateDebutApprentissage()
+    public function getEtranger()
     {
-        return $this->dateDebutApprentissage;
-    }
-
-    /**
-     * Set dateFinApprentissage.
-     *
-     * @param \DateTime|null $dateFinApprentissage
-     *
-     * @return Apprentissage
-     */
-    public function setDateFinApprentissage($dateFinApprentissage = null)
-    {
-        $this->dateFinApprentissage = $dateFinApprentissage;
-
-        return $this;
-    }
-
-    /**
-     * Get dateFinApprentissage.
-     *
-     * @return \DateTime|null
-     */
-    public function getDateFinApprentissage()
-    {
-        return $this->dateFinApprentissage;
+        return $this->etranger;
     }
 
     /**
@@ -182,27 +158,51 @@ class Apprentissage
     }
 
     /**
-     * Set etranger.
+     * Set dateDebutApprentissage.
      *
-     * @param bool $etranger
+     * @param \DateTime $dateDebutApprentissage
      *
      * @return Apprentissage
      */
-    public function setEtranger($etranger)
+    public function setDateDebutApprentissage($dateDebutApprentissage)
     {
-        $this->etranger = $etranger;
+        $this->dateDebutApprentissage = $dateDebutApprentissage;
 
         return $this;
     }
 
     /**
-     * Get etranger.
+     * Get dateDebutApprentissage.
      *
-     * @return bool
+     * @return \DateTime
      */
-    public function getEtranger()
+    public function getDateDebutApprentissage()
     {
-        return $this->etranger;
+        return $this->dateDebutApprentissage;
+    }
+
+    /**
+     * Set dateFinApprentissage.
+     *
+     * @param \DateTime $dateFinApprentissage
+     *
+     * @return Apprentissage
+     */
+    public function setDateFinApprentissage($dateFinApprentissage)
+    {
+        $this->dateFinApprentissage = $dateFinApprentissage;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFinApprentissage.
+     *
+     * @return \DateTime
+     */
+    public function getDateFinApprentissage()
+    {
+        return $this->dateFinApprentissage;
     }
 
     /**

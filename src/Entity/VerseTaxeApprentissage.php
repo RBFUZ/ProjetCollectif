@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * VerseTaxeApprentissage
  *
- * @ORM\Table(name="verse_taxe_apprentissage", indexes={@ORM\Index(name="fk_VerseTaxeApprentissage_Etablissement1_idx", columns={"id_etablissement"}), @ORM\Index(name="IDX_BBC2644AD9649694", columns={"id_departement"})})
+ * @ORM\Table(name="verse_taxe_apprentissage", indexes={@ORM\Index(name="fk_verse_taxe_apprentissage_entreprise1_idx", columns={"id_entreprise"}), @ORM\Index(name="IDX_BBC2644AD9649694", columns={"id_departement"})})
  * @ORM\Entity(repositoryClass="App\Repository\VerseTaxeApprentissageRepository")
  */
 class VerseTaxeApprentissage
@@ -48,16 +48,16 @@ class VerseTaxeApprentissage
     private $idDepartement;
 
     /**
-     * @var \App\Entity\Etablissement
+     * @var \App\Entity\Entreprise
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="App\Entity\Etablissement")
+     * @ORM\OneToOne(targetEntity="App\Entity\Entreprise")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_etablissement", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_entreprise", referencedColumnName="id")
      * })
      */
-    private $idEtablissement;
+    private $idEntreprise;
 
 
 
@@ -158,26 +158,26 @@ class VerseTaxeApprentissage
     }
 
     /**
-     * Set idEtablissement.
+     * Set idEntreprise.
      *
-     * @param \App\Entity\Etablissement $idEtablissement
+     * @param \App\Entity\Entreprise $idEntreprise
      *
      * @return VerseTaxeApprentissage
      */
-    public function setIdEtablissement(\App\Entity\Etablissement $idEtablissement)
+    public function setIdEntreprise(\App\Entity\Entreprise $idEntreprise)
     {
-        $this->idEtablissement = $idEtablissement;
+        $this->idEntreprise = $idEntreprise;
 
         return $this;
     }
 
     /**
-     * Get idEtablissement.
+     * Get idEntreprise.
      *
-     * @return \App\Entity\Etablissement
+     * @return \App\Entity\Entreprise
      */
-    public function getIdEtablissement()
+    public function getIdEntreprise()
     {
-        return $this->idEtablissement;
+        return $this->idEntreprise;
     }
 }
