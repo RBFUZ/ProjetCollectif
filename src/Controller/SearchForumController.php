@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\TypeForum;
 use App\Entity\ParticipationForum;
+use App\Entity\Forum;
 
 class SearchForumController extends Controller
 {
@@ -39,5 +40,17 @@ class SearchForumController extends Controller
         $repository_forum = $this->getDoctrine()->getRepository(ParticipationForum::class);
         $forum = $repository_forum->findEtablissementByForum($nom);
         return $this->json(array('data' => $forum));
+    }
+
+    /**
+     * @Route("/search_forum_year", name="search_forum_year")
+     */
+    public function getOldestForum(Request $request)
+    {
+        $nom = $request->request->get("nom_forum"); // get parametter
+
+        $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
+        $data = $repository_forum->getOldestForum($nom);
+        return $this->json(array('data' => $data));
     }
 }

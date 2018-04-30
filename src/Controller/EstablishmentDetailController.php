@@ -176,7 +176,7 @@ class EstablishmentDetailController extends Controller
         $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
 
         foreach ($type_forum as $key=>$type) {
-            $forum = $repository_forum->getOldestForum($type->getId()); // Récupération de l'année la plus ancienne (forum)
+            $forum = $repository_forum->getOldestForum($type->getLibelleTypeForum()); // Récupération de l'année la plus ancienne (forum)
 
             $oldest_year = date_format($forum[0]['dateDebutForum'], "Y"); // Extraire l'année de la date reçu
             $current_year = date("Y"); // Année courante

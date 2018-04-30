@@ -29,15 +29,26 @@ $(document).ready(function(){
 	// row click event
 	$("#libelleDropDown").dropdown({
 	    onChange: function (val) {
-			// Requete SQL qui retourne l'année la plus ancienne pour ce forum (val)
-	        alert(val);
+			var year = new Date().getFullYear();
+		    $.ajax({
+		        type:'get',
+		        url: "/search_forum_year",
+		        async:false,
+				function ( d ) {
+					d.nom_forum = val;
+				},
+		        success:function (data) {
+		            if(data.data) {
+		                year =  data.data;
+						$('#myDropDown').append('<div class="item" data-value="2">'+year+'</div>');
+		            }
+		        }
+		    });
 	    }
 	});
 
 	$("#myButton").click(function() {
 		$("#data_table").show();
 		dtable.ajax.reload();
-
-		$('#myDropDown').append('<div class="item" data-value="2">Autre</div>');
 	});
 });

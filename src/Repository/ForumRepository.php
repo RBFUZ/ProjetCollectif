@@ -6,16 +6,16 @@ use Doctrine\ORM\EntityRepository;
 
 class ForumRepository extends EntityRepository
 {
-    public function getOldestForum($idTypeForum): array
+    public function getOldestForum($typeForum): array
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
         'SELECT for.dateDebutForum
             FROM App\Entity\Forum for JOIN for.idTypeForum type
-            WHERE type.id = :idTypeForum
+            WHERE type.libelleTypeForum = :typeForum
             ORDER BY for.dateDebutForum ASC'
-    )->setParameter('idTypeForum', $idTypeForum)->setMaxResults(1);
+    )->setParameter('typeForum', $typeForum)->setMaxResults(1);
 
         return $query->getResult();
     }
