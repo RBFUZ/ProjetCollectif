@@ -7,20 +7,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\TypeForum;
-use App\Entity\Entreprise;
+use App\Entity\ParticipationForum;
 
 class SearchForumController extends Controller
 {
     /**
-     * @Route("/search/forum", name="search_forum")
+     * @Route("/search_forum", name="search_forum")
      */
     public function index()
     {
         $forum = $this->loadTypeForum();
-        $entreprise = $this->loadAllEntreprise();
 
         return $this->render('search/search_forum/index.html.twig', array(
-            "forum"=>$forum, "entreprise"=>$entreprise
+            "forum"=>$forum
         ));
     }
 
@@ -30,9 +29,15 @@ class SearchForumController extends Controller
         return $repository->findAll();
     }
 
-    private function loadAllEntreprise()
+    /**
+     * @Route("/search_forum_custom", name="search_forum_custom")
+     */
+    public function loadEtablishment(Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository(Entreprise::class);
-        return $repository->findAll();
+        $nom = $request->request->get("nom_forum"); // get parametter
+
+        $repository_forum = $this->getDoctrine()->getRepository(ParticipationForum::class);
+        $forum = $repository_forum->findEtablissementByForum($nom);
+        return $this->json(array('data' => $forum));
     }
 }

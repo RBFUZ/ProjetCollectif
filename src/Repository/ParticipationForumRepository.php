@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class ParticipationForumRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findEtablissementByForum($forum)
+    {
+        $entityManager = $this->getEntityManager();
+        $string = "Forum des entreprises Polytech Tours";
+
+        $query = $entityManager->createQuery(
+        'SELECT par_for
+                FROM App\Entity\ParticipationForum par_for
+                JOIN par_for.idForum forum
+                JOIN forum.idTypeForum type_forum
+                WHERE type_forum.libelleTypeForum = :nom_forum'
+        )->setParameter('nom_forum', $forum);
+
+        return $query->getResult();
+    }
 }

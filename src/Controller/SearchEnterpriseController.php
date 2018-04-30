@@ -55,8 +55,7 @@ class SearchEnterpriseController extends Controller
         $repository_vaca = $this->getDoctrine()->getRepository(EffectueVacation::class);
         $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
 
-        foreach ($etablissement as $etab)
-        {
+        foreach ($etablissement as $etab) {
             $result = array();
             // find stage.
             $convention = $repository_conv->findTraineeByEstablishment($etab->getId());
@@ -76,8 +75,7 @@ class SearchEnterpriseController extends Controller
 
             $conferences = $repository_conf->findConventionByEstablishment($etab->getId());
             $count = 0;
-            foreach ($conferences as $conf)
-            {
+            foreach ($conferences as $conf) {
                 $count+=count($conf->getIdContactEtablissement());
             }
             $result["nbConferencier"] = $count;
@@ -89,7 +87,6 @@ class SearchEnterpriseController extends Controller
 
             // add into data
             $data[] = $result;
-
         }
 
         return $this->json(array('data' => $data));
