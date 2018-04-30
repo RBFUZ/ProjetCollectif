@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Conference
  *
  * @ORM\Table(name="conference", indexes={@ORM\Index(name="fk_Conference_Etablissement1_idx", columns={"id_etablissement"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ConferenceRepository")
  */
 class Conference
 {
@@ -20,6 +20,20 @@ class Conference
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sujet_conference", type="string", length=255, nullable=false)
+     */
+    private $sujetConference;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="annulee", type="boolean", nullable=false)
+     */
+    private $annulee = '0';
 
     /**
      * @var \DateTime
@@ -41,20 +55,6 @@ class Conference
      * @ORM\Column(name="heure_fin_conference", type="time", nullable=true)
      */
     private $heureFinConference;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="sujet_conference", type="string", length=255, nullable=false)
-     */
-    private $sujetConference;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="annulee", type="boolean", nullable=false)
-     */
-    private $annulee;
 
     /**
      * @var \App\Entity\Etablissement
@@ -99,6 +99,54 @@ class Conference
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set sujetConference.
+     *
+     * @param string $sujetConference
+     *
+     * @return Conference
+     */
+    public function setSujetConference($sujetConference)
+    {
+        $this->sujetConference = $sujetConference;
+
+        return $this;
+    }
+
+    /**
+     * Get sujetConference.
+     *
+     * @return string
+     */
+    public function getSujetConference()
+    {
+        return $this->sujetConference;
+    }
+
+    /**
+     * Set annulee.
+     *
+     * @param bool $annulee
+     *
+     * @return Conference
+     */
+    public function setAnnulee($annulee)
+    {
+        $this->annulee = $annulee;
+
+        return $this;
+    }
+
+    /**
+     * Get annulee.
+     *
+     * @return bool
+     */
+    public function getAnnulee()
+    {
+        return $this->annulee;
     }
 
     /**
@@ -171,54 +219,6 @@ class Conference
     public function getHeureFinConference()
     {
         return $this->heureFinConference;
-    }
-
-    /**
-     * Set sujetConference.
-     *
-     * @param string $sujetConference
-     *
-     * @return Conference
-     */
-    public function setSujetConference($sujetConference)
-    {
-        $this->sujetConference = $sujetConference;
-
-        return $this;
-    }
-
-    /**
-     * Get sujetConference.
-     *
-     * @return string
-     */
-    public function getSujetConference()
-    {
-        return $this->sujetConference;
-    }
-
-    /**
-     * Set annulee.
-     *
-     * @param bool $annulee
-     *
-     * @return Conference
-     */
-    public function setAnnulee($annulee)
-    {
-        $this->annulee = $annulee;
-
-        return $this;
-    }
-
-    /**
-     * Get annulee.
-     *
-     * @return bool
-     */
-    public function getAnnulee()
-    {
-        return $this->annulee;
     }
 
     /**

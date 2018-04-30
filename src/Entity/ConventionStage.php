@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ConventionStage
  *
  * @ORM\Table(name="convention_stage", indexes={@ORM\Index(name="fk_ConventionStage_Stage1_idx", columns={"id_stage"}), @ORM\Index(name="fk_ConventionStage_Gratification1_idx", columns={"id_gratification"}), @ORM\Index(name="fk_ConventionStage_Etudiant1_idx", columns={"id_etudiant", "id_personne_etudiant"}), @ORM\Index(name="fk_ConventionStage_Specialite1_idx", columns={"id_specialite"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech1_idx", columns={"id_personnel_polytech_tuteur", "id_personne_personnel_polytech_tuteur"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech2_idx", columns={"id_personnel_polytech_charge_suivi", "id_personne_personnel_polytech_charge_suivi"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement1_idx", columns={"id_contact_etablissement_tuteur", "id_personne_contact_etablissement_tuteur"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement2_idx", columns={"id_contact_etablissement_signataire", "id_personne_contact_etablissement_signataire"}), @ORM\Index(name="fk_ConventionStage_Etablissement1_idx", columns={"id_etablissement"}), @ORM\Index(name="fk_ConventionStage_ServiceAccueil1_idx", columns={"id_service_accueil"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ConventionStageRepository")
  */
 class ConventionStage
 {
@@ -36,25 +36,25 @@ class ConventionStage
     private $dateDerniereModification;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="validee", type="boolean", nullable=false, options={"default"="1"})
+     */
+    private $validee = '1';
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="validee_pedagogiquement", type="boolean", nullable=false, options={"default"="1"})
+     */
+    private $valideePedagogiquement = '1';
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="type_convention", type="string", length=45, nullable=true, options={"comment"="Obligatoire, non obligatoire, ..."})
      */
     private $typeConvention;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="validee", type="boolean", nullable=false)
-     */
-    private $validee;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="validee_pedagogiquement", type="boolean", nullable=false)
-     */
-    private $valideePedagogiquement;
 
     /**
      * @var \App\Entity\ContactEtablissement
@@ -222,30 +222,6 @@ class ConventionStage
     }
 
     /**
-     * Set typeConvention.
-     *
-     * @param string|null $typeConvention
-     *
-     * @return ConventionStage
-     */
-    public function setTypeConvention($typeConvention = null)
-    {
-        $this->typeConvention = $typeConvention;
-
-        return $this;
-    }
-
-    /**
-     * Get typeConvention.
-     *
-     * @return string|null
-     */
-    public function getTypeConvention()
-    {
-        return $this->typeConvention;
-    }
-
-    /**
      * Set validee.
      *
      * @param bool $validee
@@ -291,6 +267,30 @@ class ConventionStage
     public function getValideePedagogiquement()
     {
         return $this->valideePedagogiquement;
+    }
+
+    /**
+     * Set typeConvention.
+     *
+     * @param string|null $typeConvention
+     *
+     * @return ConventionStage
+     */
+    public function setTypeConvention($typeConvention = null)
+    {
+        $this->typeConvention = $typeConvention;
+
+        return $this;
+    }
+
+    /**
+     * Get typeConvention.
+     *
+     * @return string|null
+     */
+    public function getTypeConvention()
+    {
+        return $this->typeConvention;
     }
 
     /**

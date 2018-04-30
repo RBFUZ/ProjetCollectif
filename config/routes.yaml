@@ -34,6 +34,10 @@ search_forum:
     path: /search_forum
     controller: App\Controller\SearchForumController::index
 
+search_forum_custom:
+    path: /search_forum_custom
+    controller: App\Controller\SearchForumController::loadEtablishment
+
 search_convention:
     path: /search_convention
     controller: App\Controller\SearchConventionController::index

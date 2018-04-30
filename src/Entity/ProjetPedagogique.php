@@ -31,9 +31,9 @@ class ProjetPedagogique
     /**
      * @var string
      *
-     * @ORM\Column(name="intitule_projet", type="string", length=255, nullable=false)
+     * @ORM\Column(name="intitule_projet", type="string", length=255, nullable=false, options={"default"="Projet pédagogique"})
      */
-    private $intituleProjet;
+    private $intituleProjet = 'Projet pédagogique';
 
     /**
      * @var string|null

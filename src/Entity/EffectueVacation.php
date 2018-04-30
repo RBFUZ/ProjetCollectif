@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * EffectueVacation
  *
  * @ORM\Table(name="effectue_vacation", indexes={@ORM\Index(name="fk_EffectueVacation_ContactEtablissement1_idx", columns={"id_contact_etablissement", "id_personne_contact_etablissement"}), @ORM\Index(name="fk_EffectueVacation_Etablissement1_idx", columns={"id_etablissement"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EffectueVacationRepository")
  */
 class EffectueVacation
 {
@@ -36,9 +36,9 @@ class EffectueVacation
     private $dateFinVacation;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="volume_horaire", type="integer", nullable=false)
+     * @ORM\Column(name="volume_horaire", type="integer", nullable=true)
      */
     private $volumeHoraire;
 
@@ -133,11 +133,11 @@ class EffectueVacation
     /**
      * Set volumeHoraire.
      *
-     * @param int $volumeHoraire
+     * @param int|null $volumeHoraire
      *
      * @return EffectueVacation
      */
-    public function setVolumeHoraire($volumeHoraire)
+    public function setVolumeHoraire($volumeHoraire = null)
     {
         $this->volumeHoraire = $volumeHoraire;
 
@@ -147,7 +147,7 @@ class EffectueVacation
     /**
      * Get volumeHoraire.
      *
-     * @return int
+     * @return int|null
      */
     public function getVolumeHoraire()
     {

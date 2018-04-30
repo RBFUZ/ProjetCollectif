@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TypeForum
  *
  * @ORM\Table(name="type_forum")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TypeForumRepository")
  */
 class TypeForum
 {

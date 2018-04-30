@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Entreprise
  *
  * @ORM\Table(name="entreprise")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\EntrepriseRepository")
  */
 class Entreprise
 {
@@ -29,18 +29,18 @@ class Entreprise
     private $nomEntreprise;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="statut_juridique", type="string", length=45, nullable=false, options={"default"="Inconnu"})
+     */
+    private $statutJuridique = 'Inconnu';
+
+    /**
      * @var string|null
      *
      * @ORM\Column(name="num_siren", type="string", length=9, nullable=true)
      */
     private $numSiren;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="statut_juridique", type="string", length=45, nullable=false)
-     */
-    private $statutJuridique;
 
     /**
      * @var string|null
@@ -93,30 +93,6 @@ class Entreprise
     }
 
     /**
-     * Set numSiren.
-     *
-     * @param string|null $numSiren
-     *
-     * @return Entreprise
-     */
-    public function setNumSiren($numSiren = null)
-    {
-        $this->numSiren = $numSiren;
-
-        return $this;
-    }
-
-    /**
-     * Get numSiren.
-     *
-     * @return string|null
-     */
-    public function getNumSiren()
-    {
-        return $this->numSiren;
-    }
-
-    /**
      * Set statutJuridique.
      *
      * @param string $statutJuridique
@@ -138,6 +114,30 @@ class Entreprise
     public function getStatutJuridique()
     {
         return $this->statutJuridique;
+    }
+
+    /**
+     * Set numSiren.
+     *
+     * @param string|null $numSiren
+     *
+     * @return Entreprise
+     */
+    public function setNumSiren($numSiren = null)
+    {
+        $this->numSiren = $numSiren;
+
+        return $this;
+    }
+
+    /**
+     * Get numSiren.
+     *
+     * @return string|null
+     */
+    public function getNumSiren()
+    {
+        return $this->numSiren;
     }
 
     /**

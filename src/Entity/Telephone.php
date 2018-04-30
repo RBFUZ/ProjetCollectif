@@ -31,9 +31,9 @@ class Telephone
     /**
      * @var string
      *
-     * @ORM\Column(name="type_telephone", type="string", length=45, nullable=false)
+     * @ORM\Column(name="type_telephone", type="string", length=45, nullable=false, options={"default"="Fixe"})
      */
-    private $typeTelephone;
+    private $typeTelephone = 'Fixe';
 
     /**
      * @var string|null
