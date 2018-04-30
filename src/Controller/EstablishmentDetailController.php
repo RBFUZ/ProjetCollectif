@@ -255,4 +255,30 @@ class EstablishmentDetailController extends Controller
 
         return $this->json(array("data"=>$count_taxe_each_year_array));
     }
+
+    /**
+     * @Route("/establishment/countTaxeEachYear/{libelleDepartment}", name="count_taxe_each_year_per_department")
+     */
+    public function countTaxeEachYearByDepartment($libelleDepartment)
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $idEnterprise = $this->getIdEnterpriseForOneEtablishment($idEstablishment);
+        $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
+        $year = $repository_taxe->findOldestYear($idEnterprise);
+        $year = $this->extractYear($year);
+        $current_year = date("Y"); // Année courante
+        $count_taxe_each_year_array = array();
+
+        // Over each years
+        for ($i = $year; $i <= $current_year; $i++) {
+            $count_taxe_one_year = $repository_taxe->countTaxeEachYearForOneDepartment($idEnterprise, $i, $libelleDepartment);
+            if ($count_taxe_one_year[0]['amount'] == null) {
+                $count_taxe_one_year[0]['amount'] = 0;
+            }
+            array_push($count_taxe_each_year_array, $count_taxe_one_year[0]['amount']);
+        }
+
+        return $this->json(array("data"=>$count_taxe_each_year_array));
+    }
 }

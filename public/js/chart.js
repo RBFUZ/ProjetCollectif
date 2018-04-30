@@ -183,23 +183,23 @@ $(document).ready(function () {
     taxe_apprentissageLineChartTotal = makeLineChart("line-area_taxeApprentissageTotal",lineChartTaxedataTotal);
 
     // taxe_apprentissage chartDI
-    lineChartTaxedataDI  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, [23,2,12,3]);
+    lineChartTaxedataDI  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, getInformationFromController("/establishment/countTaxeEachYear/DI"));
     taxe_apprentissageLineChartDI = makeLineChart("line-area_taxeApprentissageDI",lineChartTaxedataDI);
 
     // taxe_apprentissage chartDII
-    lineChartTaxedataDII  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, [23,2,12,3]);
+    lineChartTaxedataDII  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, getInformationFromController("/establishment/countTaxeEachYear/DII"));
     taxe_apprentissageLineChartDII = makeLineChart("line-area_taxeApprentissageDII",lineChartTaxedataDII);
 
     // taxe_apprentissage chartDAE
-    lineChartTaxedataDAE  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, [23,2,12,3]);
+    lineChartTaxedataDAE  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, getInformationFromController("/establishment/countTaxeEachYear/DAE"));
     taxe_apprentissageLineChartDAE = makeLineChart("line-area_taxeApprentissageDAE",lineChartTaxedataDAE);
 
     // taxe_apprentissage chartDMS
-    lineChartTaxedataDMS  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, [23,2,12,3]);
+    lineChartTaxedataDMS  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, getInformationFromController("/establishment/countTaxeEachYear/DMS"));
     taxe_apprentissageLineChartDMS = makeLineChart("line-area_taxeApprentissageDMS",lineChartTaxedataDMS);
 
     // taxe_apprentissage chartDEE
-    lineChartTaxedataDEE  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, [23,2,12,3]);
+    lineChartTaxedataDEE  = makeLineChartData(getYears(minTaxeYear), mainLabel, label, getInformationFromController("/establishment/countTaxeEachYear/DEE"));
     taxe_apprentissageLineChartDEE = makeLineChart("line-area_taxeApprentissageDEE",lineChartTaxedataDEE);
 
     // disable department for forum and conference
