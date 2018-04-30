@@ -41964,17 +41964,17 @@ INSERT INTO gratification(montant_gratification,unite_gratification,unite_duree_
 ,('577,5','net','mois')
 ,('800,8','brut','mois');
 
-INSERT INTO convention_stage(date_creation,date_derniere_modification,type_convention,validee,validee_pedagogiquement,id_stage,id_etudiant,id_personne_etudiant,id_specialite,id_etablissement,id_personnel_polytech_tuteur,id_personne_personnel_polytech_tuteur,id_personnel_polytech_charge_suivi,id_personne_personnel_polytech_charge_suivi,id_contact_etablissement_tuteur,id_personne_contact_etablissement_tuteur,id_contact_etablissement_signataire,id_personne_contact_etablissement_signataire,id_gratification,id_service_accueil) VALUES
- ('2017-04-09','2017-05-09','OBLIGATOIRE',1,0,1,11,11,1,1,1,31,10,40,1,51,1,51,1,1)
-,('2017-03-16','2017-03-16','OBLIGATOIRE',0,0,2,12,12,2,2,2,32,11,41,2,52,2,52,NULL,2)
-,('2017-03-02','2017-03-02','OBLIGATOIRE',1,1,3,13,13,3,3,3,33,12,42,3,53,3,53,3,3)
-,('2017-04-15','2017-04-15',NULL,0,0,4,14,14,4,4,4,34,13,43,4,54,4,54,NULL,4)
-,('2017-03-12','2017-05-12','OBLIGATOIRE',1,1,5,15,15,5,5,5,35,14,44,5,55,5,55,4,5)
-,('2017-04-11','2017-04-19',NULL,0,0,6,16,16,1,6,6,36,15,45,6,56,6,56,2,6)
-,('2017-02-28','2017-02-28','OBLIGATOIRE',1,1,7,17,17,2,7,7,37,16,46,7,57,7,57,NULL,7)
-,('2017-05-12','2017-05-26','OBLIGATOIRE',1,0,8,18,18,3,8,8,38,17,47,8,58,8,58,4,8)
-,('2017-03-02','2017-03-30',NULL,1,1,9,19,19,4,9,9,39,18,48,9,59,9,59,2,9)
-,('2017-03-01','2017-03-01','OBLIGATOIRE',1,1,10,16,16,1,96,13,43,14,44,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO convention_stage(numero_convention,date_creation,date_derniere_modification,type_convention,validee,validee_pedagogiquement,id_stage,id_etudiant,id_personne_etudiant,id_specialite,id_etablissement,id_personnel_polytech_tuteur,id_personne_personnel_polytech_tuteur,id_personnel_polytech_charge_suivi,id_personne_personnel_polytech_charge_suivi,id_contact_etablissement_tuteur,id_personne_contact_etablissement_tuteur,id_contact_etablissement_signataire,id_personne_contact_etablissement_signataire,id_gratification,id_service_accueil) VALUES
+ (1,'2017-04-09','2017-05-09','OBLIGATOIRE',1,0,1,11,11,1,1,1,31,10,40,1,51,1,51,1,1)
+,(2,'2017-03-16','2017-03-16','OBLIGATOIRE',0,0,2,12,12,2,2,2,32,11,41,2,52,2,52,NULL,2)
+,(3,'2017-03-02','2017-03-02','OBLIGATOIRE',1,1,3,13,13,3,3,3,33,12,42,3,53,3,53,3,3)
+,(4,'2017-04-15','2017-04-15',NULL,0,0,4,14,14,4,4,4,34,13,43,4,54,4,54,NULL,4)
+,(5,'2017-03-12','2017-05-12','OBLIGATOIRE',1,1,5,15,15,5,5,5,35,14,44,5,55,5,55,4,5)
+,(6,'2017-04-11','2017-04-19',NULL,0,0,6,16,16,1,6,6,36,15,45,6,56,6,56,2,6)
+,(7,'2017-02-28','2017-02-28','OBLIGATOIRE',1,1,7,17,17,2,7,7,37,16,46,7,57,7,57,NULL,7)
+,(8,'2017-05-12','2017-05-26','OBLIGATOIRE',1,0,8,18,18,3,8,8,38,17,47,8,58,8,58,4,8)
+,(9,'2017-03-02','2017-03-30',NULL,1,1,9,19,19,4,9,9,39,18,48,9,59,9,59,2,9)
+,(10,'2017-03-01','2017-03-01','OBLIGATOIRE',1,1,10,16,16,1,96,13,43,14,44,NULL,NULL,NULL,NULL,NULL,NULL);
 
 INSERT INTO avenant(date_creation_avenant,objet_avenant,details_avenant,id_convention_stage) VALUES
  ('2017-06-05','Rallongement de date',NULL,1)
