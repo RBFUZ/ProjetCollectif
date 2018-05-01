@@ -18,7 +18,7 @@ $(document).ready(function(){
         ],
 
         filter: true,
-        info: false,
+        info: true,
         ordering: true,
         processing: true,
         retrieve: true,

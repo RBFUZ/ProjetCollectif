@@ -14,7 +14,7 @@ var dtable_intern = $("#data_table_intern").DataTable({
     ],
 
     filter: true,
-    info: false,
+    info: true,
     ordering: true,
     processing: true,
     retrieve: true,
@@ -35,7 +35,7 @@ var dtable_apprenti = $("#data_table_apprenti").DataTable({
     ],
 
     filter: true,
-    info: false,
+    info: true,
     ordering: true,
     processing: true,
     retrieve: true,
@@ -55,7 +55,7 @@ var dtable_intervenant = $("#data_table_intervenant").DataTable({
     ],
 
     filter: true,
-    info: false,
+    info: true,
     ordering: true,
     processing: true,
     retrieve: true,
