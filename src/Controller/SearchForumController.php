@@ -47,10 +47,17 @@ class SearchForumController extends Controller
      */
     public function getOldestForum(Request $request)
     {
-        $nom = $request->request->get("nom_forum"); // get parametter
+        $nom = $request->request->get("libelleTypeForum"); // get parametter
 
         $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
         $data = $repository_forum->getOldestForum($nom);
+
+        if ($data[0]["date"] == null) {
+            $data = null;
+        } else {
+            $data = strtok($data[0]["date"], '-');
+        }
+
         return $this->json(array('data' => $data));
     }
 }

@@ -31,16 +31,14 @@ $(document).ready(function(){
 	    onChange: function (val) {
 			var year = new Date().getFullYear();
 		    $.ajax({
-		        type:'get',
+		        type:'post',
 		        url: "/search_forum_year",
 		        async:false,
-				function ( d ) {
-					d.nom_forum = val;
-				},
+				data:{"libelleTypeForum":val},
 		        success:function (data) {
 		            if(data.data) {
 		                year =  data.data;
-						$('#myDropDown').append('<div class="item" data-value="2">'+year+'</div>');
+						$('#myDropDown').append('<div class="item">'+year+'</div>');
 		            }
 		        }
 		    });

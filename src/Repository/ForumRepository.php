@@ -11,10 +11,9 @@ class ForumRepository extends EntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-        'SELECT for.dateDebutForum
+        'SELECT MIN(for.dateDebutForum) as date
             FROM App\Entity\Forum for JOIN for.idTypeForum type
-            WHERE type.libelleTypeForum = :typeForum
-            ORDER BY for.dateDebutForum ASC'
+            WHERE type.libelleTypeForum = :typeForum'
     )->setParameter('typeForum', $typeForum)->setMaxResults(1);
 
         return $query->getResult();
