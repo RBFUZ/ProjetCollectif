@@ -12,6 +12,7 @@ use App\Entity\Conference;
 use App\Entity\TypeForum;
 use App\Entity\Forum;
 use App\Entity\VerseTaxeApprentissage;
+use App\Entity\Departement;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class EstablishmentDetailController extends Controller
@@ -40,6 +41,9 @@ class EstablishmentDetailController extends Controller
         $repository_type_forum = $this->getDoctrine()->getRepository(TypeForum::class);
         $type_forum = $repository_type_forum->findAll();
 
+        $repository_departement = $this->getDoctrine()->getRepository(Departement::class);
+        $department = $repository_departement->findAll();
+
         $type_forum = $this->checkIfForumCreateOrNot($type_forum); // // Supprime les types de forum du tableau quand aucun forum de ce type n'a été ajouté
         $years_forum = $this->fillYearForumUntilToday($type_forum); // Remplir les années de la plus ancienne jusqu'a aujourd'hui
         $logo = $this->fillPathLogo($type_forum, $years_forum); // Remplir le tableau avec le chemin du logo V vert ou croix rouge on fonction de l'année
@@ -51,7 +55,8 @@ class EstablishmentDetailController extends Controller
             'convention' => $convention,
             'type_forum' => $type_forum,
             'forum' => $years_forum,
-            'logo' => $logo
+            'logo' => $logo,
+            'department' => $department
         ]);
     }
 

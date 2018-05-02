@@ -46,8 +46,9 @@
                 <div class="two wide column" id="hide_dropdown_depart">
                      <select class="ui dropdown" id="department_select" name="depart">
                         <option value="all">Tous les départements</option>
-                        <option value="DI">DI</option>
-                        <option value="DII">DII</option>
+                        {% for d in department %}
+                            <option value="{{ d.libelleDepartement }}">{{ d.libelleDepartement }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
