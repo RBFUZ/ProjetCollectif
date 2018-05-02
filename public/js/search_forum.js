@@ -30,7 +30,8 @@ $(document).ready(function(){
 	// row click event
 	$("#libelleDropDown").dropdown({
 	    onChange: function (val) {
-			var year = new Date().getFullYear();
+			var current_year = new Date().getFullYear();
+			var year = current_year;
 		    $.ajax({
 		        type:'post',
 		        url: "/search_forum_year",
@@ -41,7 +42,11 @@ $(document).ready(function(){
 		                year =  data.data;
 						$('.ui.dropdown.dp_year').removeClass("disabled");
 						$('#dropdown_year option').remove(); // Remove all items from the dropdown
-						$('#dropdown_year').append('<option value="'+year+'">'+year+'</option>'); // Add the item to the dropdown
+
+						for (var loop = year; loop <= current_year; loop++) {
+							$('#dropdown_year').append('<option value="'+loop+'">'+loop+'</option>'); // Add the item to the dropdown
+						}
+
 						$('.ui.dropdown').dropdown('refresh'); // Refresh items of the dropdown
 		            }
 		        }
