@@ -61,3 +61,12 @@ var dtable_intervenant = $("#data_table_intervenant").DataTable({
     retrieve: true,
 
 });
+
+$(document).ready(function(){
+    // row click event
+	$("#department_select").dropdown({
+	    onChange: function (val) {
+			alert(11);
+	    }
+	});
+});

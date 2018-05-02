@@ -43,19 +43,12 @@
 
             <!--combo box-->
             <div class="row">
-                <div class="two wide column">
-                    <div id="department_select" class="ui selection dropdown">
-                        <input type="hidden" name="department" >
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Département</div>
-                        <div id="list_cities" class="menu" >
-                            <div class="item"  data-value="ALL">Tous les départements</div>
-                            <div class="item"  data-value="DI">DI</div>
-                            <div class="item"  data-value="DSE">DSE</div>
-                            <div class="item"  data-value="DAE">DAE</div>
-                            <div class="item"  data-value="DMS">DMS</div>
-                        </div>
-                    </div>
+                <div class="two wide column" id="hide_dropdown_depart">
+                     <select class="ui dropdown" id="department_select" name="depart">
+                        <option value="all">Tous les départements</option>
+                        <option value="DI">DI</option>
+                        <option value="DII">DII</option>
+                    </select>
                 </div>
             </div>
 

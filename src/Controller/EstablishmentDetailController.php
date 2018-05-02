@@ -80,9 +80,9 @@ class EstablishmentDetailController extends Controller
     }
 
     /**
-     * @Route("/establishment/countStageEachYear", name="count_stage_each_year")
+     * @Route("/establishment/countStageEachYear/{department}", name="count_stage_each_year")
      */
-    public function getCountStageEachYear()
+    public function getCountStageEachYear($department)
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
@@ -93,7 +93,7 @@ class EstablishmentDetailController extends Controller
         $count_stage_each_year_array = array();
 
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_stage_one_year = $repository_stage->countStageForOneYear($idEstablishment, $i);
+            $count_stage_one_year = $repository_stage->countStageForOneYear($idEstablishment, $i, $department);
             array_push($count_stage_each_year_array, $count_stage_one_year[0]['nbStage']);
         }
 
@@ -101,9 +101,9 @@ class EstablishmentDetailController extends Controller
     }
 
     /**
-     * @Route("/establishment/countStageMoneyEachYear", name="count_stage_money_each_year")
+     * @Route("/establishment/countStageMoneyEachYear/{department}", name="count_stage_money_each_year")
      */
-    public function getCountStageMoneyEachYear()
+    public function getCountStageMoneyEachYear($department)
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
@@ -114,7 +114,7 @@ class EstablishmentDetailController extends Controller
         $count_stage_each_year_array = array();
 
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_stage_one_year = $repository_stage->countStageMoneyForOneYear($idEstablishment, $i);
+            $count_stage_one_year = $repository_stage->countStageMoneyForOneYear($idEstablishment, $i, $department);
             array_push($count_stage_each_year_array, $count_stage_one_year[0]['nbStage']);
         }
 
@@ -135,9 +135,9 @@ class EstablishmentDetailController extends Controller
     }
 
     /**
-     * @Route("/establishment/countApprenticeshipEachYear", name="count_apprenticeship_each_year")
+     * @Route("/establishment/countApprenticeshipEachYear/{department}", name="count_apprenticeship_each_year")
      */
-    public function getCountApprenticeshipEachYear()
+    public function getCountApprenticeshipEachYear($department)
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
@@ -149,7 +149,7 @@ class EstablishmentDetailController extends Controller
 
         // Over each years
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_apprenticeship_one_year = $repository_apprenticeship->countApprenticeshipForOneYear($idEstablishment, $i);
+            $count_apprenticeship_one_year = $repository_apprenticeship->countApprenticeshipForOneYear($idEstablishment, $i, $department);
             array_push($count_apprenticeship_each_year_array, $count_apprenticeship_one_year[0]['nbApprenticeship']);
         }
 
