@@ -25,6 +25,7 @@ $(document).ready(function(){
 		autoWidth:true,
     });
 
+	$('.ui.dropdown.dp_year').addClass("disabled"); // Disable year dropdown before selecting forum label.
 
 	// row click event
 	$("#libelleDropDown").dropdown({
@@ -38,7 +39,10 @@ $(document).ready(function(){
 		        success:function (data) {
 		            if(data.data) {
 		                year =  data.data;
-						$('#myDropDown').append('<div class="item">'+year+'</div>');
+						$('.ui.dropdown.dp_year').removeClass("disabled");
+						$('#dropdown_year option').remove(); // Remove all items from the dropdown
+						$('#dropdown_year').append('<option value="'+year+'">'+year+'</option>'); // Add the item to the dropdown
+						$('.ui.dropdown').dropdown('refresh'); // Refresh items of the dropdown
 		            }
 		        }
 		    });
