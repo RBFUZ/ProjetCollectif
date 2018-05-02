@@ -1,7 +1,6 @@
 
 {% extends 'base/base.html.twig' %}
 {% block title %}Importation{% endblock %}
-{% block body %}
 {% block content %}
 
 	<div class="ui container">
@@ -18,24 +17,24 @@
 							<form class="ui form">
 								<div class="field">
 									<label>Type de fichier</label>
-									<select class="ui fluid dropdown">
+									<select id="type" class="ui fluid dropdown">
 										<option value="">Type
-										<option>Stage
-										<option>Alternance
-										<option>Taxe
-										<option>Intervenant
-										<option>Tout le tralala
+										<option value="Stage">Stage
+										<option value="Alternance">Alternance
+										<option value="Taxe">Taxe
+										<option value="Intervenant">Intervenant
+										<option value="Tout">Tout le tralala
 									</select>
 								</div>
 								<div class="field">
 									<label>Choisir le fichier</label>
-									<input class="inverted ui" type="file" accept=".xls, .xlsx"></input>
+									<input onchange="importf(this)" id="file" class="inverted ui" type="file" accept=".xls, .xlsx"></input>
 								</div>
 
 								<div class="ui buttons">
 									<a class="ui button" href="{{ path('index') }}">Annuler</a>
 									<div class="or"></div>
-									<a class="ui positive button active" href="{{ path('index') }}">Importer</a>
+									<a id="file_submit" class="ui positive button active" >Importer</a>
 								</div>
 							</form>
 
@@ -47,8 +46,11 @@
 
 		</div>
 	</div>
-
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/css/semantic-ui/semantic.min.js"></script>
 {% endblock %}
+	{% block js %}
+
+	<script lang="javascript" src="node_modules/xlsx/dist/xlsx.full.min.js"></script>
+	{#<script src="/node_modules/excel-as-json/lib/excel-as-json.js"></script>#}
+	<script src="/js/importation.js"></script>
+
 {% endblock %}
