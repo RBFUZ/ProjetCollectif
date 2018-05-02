@@ -76,9 +76,45 @@ class MainPageController extends Controller
         }
 
 
-        /************ ENTREPRISE ************/
+        /************ ENTERPRISE ************/
+
+        // get all enterprises
+        $em = $this->getDoctrine()->getManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("SELECT count(*) as count FROM entreprise");
+        $statement->execute();
+        $enterprisesCount = $statement->fetchAll();
+
+        // get last year stage
+        $statement = $connection->prepare("SELECT MAX(YEAR(date_debut_stage)) as latestyear FROM stage");
+        $statement->execute();
+        $latestyearinternship = $statement->fetchAll();
+
+        // get best enterprise by stage
+        $statement = $connection->prepare("SELECT nom_entreprise, count(convention_stage.id) AS stage_count FROM convention_stage, stage, etablissement, entreprise WHERE convention_stage.id_stage = stage.id AND convention_stage.id_etablissement = etablissement.id AND etablissement.id_entreprise = entreprise.id GROUP BY id_entreprise ORDER BY count(id_entreprise ) DESC LIMIT 3");
+        $statement->execute();
+        $top3Enterprise = $statement->fetchAll();
+
+        // get best enterprise by Apprentissage
+        $statement = $connection->prepare("SELECT nom_entreprise, count(apprentissage.id) AS apprenticeship_count FROM apprentissage, etablissement, entreprise  WHERE apprentissage.id_etablissement = etablissement.id AND etablissement.id_entreprise = entreprise.id GROUP BY id_entreprise ORDER BY count(id_entreprise ) DESC LIMIT 3");
+        $statement->execute();
+        $top3Apprenticeship = $statement->fetchAll();
+
+        // get best enterprise by forum
+        $statement = $connection->prepare("SELECT nom_entreprise, count(participation_forum.id) AS forum_count FROM participation_forum, etablissement, entreprise  WHERE participation_forum.id_etablissement = etablissement.id AND etablissement.id_entreprise = entreprise.id GROUP BY id_entreprise ORDER BY count(id_entreprise ) DESC LIMIT 3");
+        $statement->execute();
+        $top3forum = $statement->fetchAll();
+
+        //get best entreprise by conference
+        $statement = $connection->prepare("SELECT nom_entreprise, count(conference.id) AS conference_count FROM conference, etablissement, entreprise  WHERE conference.id_etablissement = etablissement.id AND etablissement.id_entreprise = entreprise.id GROUP BY id_entreprise ORDER BY count(id_entreprise ) DESC LIMIT 3");
+        $statement->execute();
+        $top3conference = $statement->fetchAll();
 
 
+
+
+        // print_r($top3Enterprise);
+        // echo($top3Enterprise);
 
 
         return $this->render('index/index.html.twig', array(
@@ -93,7 +129,11 @@ class MainPageController extends Controller
           'currentConf' => count($currentConf),
           'countPastConf' => count($currentPastConf),
           'countFutureConf' => count($currentFutureConf),
-
+          'enterpriseCount' => $enterprisesCount[0]['count'],
+          'top3enterprise' => $top3Enterprise,
+          'top3Apprenticeship'=> $top3Apprenticeship,
+          'top3forum' => $top3forum,
+          'top3conference' => $top3conference,
         ));
     }
 }
