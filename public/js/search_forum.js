@@ -10,6 +10,7 @@ $(document).ready(function(){
             "data":
                 function ( d ) {
                     d.nom_forum = $("input[name='nom_forum']").val();
+					d.annee = $('.ui.dropdown.dp_year').dropdown('get value');
                 },
         },
         "columns": [

@@ -35,10 +35,11 @@ class SearchForumController extends Controller
      */
     public function loadEtablishment(Request $request)
     {
-        $nom = $request->request->get("nom_forum"); // get parametter
+        $name = $request->request->get("nom_forum"); // get the name of the forum
+        $year = $request->request->get("annee"); // get the year selected by the user
 
         $repository_forum = $this->getDoctrine()->getRepository(ParticipationForum::class);
-        $forum = $repository_forum->findEtablissementByForum($nom);
+        $forum = $repository_forum->findEtablissementByForum($name, $year);
         return $this->json(array('data' => $forum));
     }
 
@@ -47,10 +48,10 @@ class SearchForumController extends Controller
      */
     public function getOldestForum(Request $request)
     {
-        $nom = $request->request->get("libelleTypeForum"); // get parametter
+        $name = $request->request->get("libelleTypeForum"); // get parametter
 
         $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
-        $data = $repository_forum->getOldestForum($nom);
+        $data = $repository_forum->getOldestForum($name);
 
         if ($data[0]["date"] == null) {
             $data = null;
