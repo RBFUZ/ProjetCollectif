@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180503132531 extends AbstractMigration
+class Version20180503225944 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -73,7 +73,6 @@ class Version20180503132531 extends AbstractMigration
         $this->addSql('ALTER TABLE specialite CHANGE id_departement id_departement INT DEFAULT NULL');
         $this->addSql('ALTER TABLE stage ADD etranger TINYINT(1) NOT NULL, CHANGE annee_etude_stage annee_etude_stage INT DEFAULT NULL, CHANGE thematique_stage thematique_stage VARCHAR(255) DEFAULT NULL, CHANGE sujet_stage sujet_stage VARCHAR(255) DEFAULT NULL, CHANGE fonctions_taches_stage fonctions_taches_stage TEXT DEFAULT NULL, CHANGE duree_stage_semaines duree_stage_semaines INT DEFAULT NULL, CHANGE duree_stage_heures duree_stage_heures INT DEFAULT NULL, CHANGE nb_jours_travail nb_jours_travail INT DEFAULT NULL');
         $this->addSql('ALTER TABLE telephone CHANGE type_telephone type_telephone VARCHAR(45) DEFAULT \'Fixe\' NOT NULL');
-        $this->addSql('ALTER TABLE user ADD email VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE verse_taxe_apprentissage DROP FOREIGN KEY fk_VerseTaxeApprentissage_Departement1');
         $this->addSql('ALTER TABLE verse_taxe_apprentissage DROP FOREIGN KEY fk_VerseTaxeApprentissage_Etablissement1');
         $this->addSql('DROP INDEX fk_VerseTaxeApprentissage_Etablissement1_idx ON verse_taxe_apprentissage');
@@ -151,7 +150,6 @@ class Version20180503132531 extends AbstractMigration
         $this->addSql('ALTER TABLE specialite CHANGE id_departement id_departement INT NOT NULL');
         $this->addSql('ALTER TABLE stage DROP etranger, CHANGE annee_etude_stage annee_etude_stage INT NOT NULL, CHANGE thematique_stage thematique_stage VARCHAR(255) NOT NULL COLLATE utf8_general_ci, CHANGE sujet_stage sujet_stage VARCHAR(255) NOT NULL COLLATE utf8_general_ci, CHANGE fonctions_taches_stage fonctions_taches_stage TEXT NOT NULL COLLATE utf8_general_ci, CHANGE duree_stage_semaines duree_stage_semaines INT NOT NULL, CHANGE duree_stage_heures duree_stage_heures INT NOT NULL, CHANGE nb_jours_travail nb_jours_travail INT NOT NULL');
         $this->addSql('ALTER TABLE telephone CHANGE type_telephone type_telephone VARCHAR(45) NOT NULL COLLATE utf8_general_ci');
-        $this->addSql('ALTER TABLE user DROP email');
         $this->addSql('ALTER TABLE verse_taxe_apprentissage DROP FOREIGN KEY FK_BBC2644AD9649694');
         $this->addSql('ALTER TABLE verse_taxe_apprentissage DROP FOREIGN KEY FK_BBC2644AA8937AB7');
         $this->addSql('DROP INDEX fk_verse_taxe_apprentissage_entreprise1_idx ON verse_taxe_apprentissage');

@@ -25,21 +25,26 @@
                 <div class="ui segments">
                     <div class="ui segment inverted nightli">
                         <h3 class="ui header">
-                            Connexion
+                            Inscription
                         </h3>
                     </div>
                     {{ form_start(form, {attr: {class: 'ui large form'} }) }}
                     <div class="ui divider"></div>
+
+                    {% if form.name.vars.errors|length > 0 %}
+                    <div class="field error">
+                    {% else %}
                     <div class="field">
+                    {% endif %}
                         <div class="ui left icon input">
-                            <i class="user icon"></i>
+                            <i class="edit icon"></i>
                                 {{ form_widget(form.name, {attr: {placeholder: 'Nom...'} }) }}
                         </div>
                     </div>
 
                     <div class="ui divider"></div>
 
-                    {% if form.name.vars.errors|length > 0 %}
+                    {% if form.username.vars.errors|length > 0 %}
                     <div class="field error">
                     {% else %}
                     <div class="field">
@@ -53,7 +58,18 @@
 
                     <div class="ui divider"></div>
 
+                    {% if form.email.vars.errors|length > 0 %}
+                    <div class="field error">
+                    {% else %}
+                    <div class="field">
+                    {% endif %}
+                        <div class="ui left icon input">
+                            <i class="at icon"></i>
+                            {{ form_widget(form.email, {attr: {placeholder: "Email..."} }) }}
+                        </div>
+                    </div>
 
+                    <div class="ui divider"></div>
                     {% if form.password.first.vars.errors|length > 0 %}
                     <div class="field error">
                     {% else %}
@@ -80,6 +96,7 @@
 
                     <button type="submit" class="ui primary fluid submit button">S'inscrire !</button>
                     {{ form_end(form) }}
+                        {% if (form.name.vars.errors|length > 0) or (form.username.vars.errors|length > 0) or (form.email.vars.errors|length > 0)or (form.password.first.vars.errors|length > 0) or (form.password.second.vars.errors|length > 0)%}
                         <div class="ui error message">
                             <ul class="er">
                                 {% for error in form.name.vars.errors %}
@@ -88,14 +105,18 @@
                                 {% for error in form.username.vars.errors %}
                                     <li> {{ error.message }}</li>
                                 {% endfor %}
-                                {% for error in form.password.first.vars.errors %}
+                                {% for error in form.email.vars.errors %}
                                     <li> {{ error.message }}</li>
+                                {% endfor %}
+                                {% for error in form.password.first.vars.errors %}
+                                    <li> Les mots de passes ne correspondent pas</li>
                                 {% endfor %}
                                 {% for error in form.password.second.vars.errors %}
                                     <li> {{ error.message }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
+                        {% endif %}
                 </div>
 
             </div>
