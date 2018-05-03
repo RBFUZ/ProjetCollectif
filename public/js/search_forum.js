@@ -14,8 +14,8 @@ $(document).ready(function(){
                 },
         },
         "columns": [
-        	{data: 'idEtablissement.nomEtablissement'},
-			{data: 'idEtablissement.numSiret'},
+        	{data: 'nomEtablissement'},
+			{data: 'numSiret'},
         ],
 
         filter: true,

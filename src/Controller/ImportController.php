@@ -27,11 +27,11 @@ class ImportController extends Controller
         $type = $request->request->get("type");
 
         // convert to json
-        $json_data = json_decode($data);
+        $json_data = json_decode($data,true);
 
         // use like this
-        //$json_data[0]; get the first object
-        //$json_data[0]->NOM；get the name of the first object
+        //$json_data[0]; //get the first object
+        var_dump($json_data[9]["Fonction \"carte de visite\""]);//get the name of the first object
         /**
          * structure of data
          * [

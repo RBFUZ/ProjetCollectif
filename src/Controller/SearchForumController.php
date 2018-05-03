@@ -40,7 +40,16 @@ class SearchForumController extends Controller
 
         $repository_forum = $this->getDoctrine()->getRepository(ParticipationForum::class);
         $forum = $repository_forum->findEtablissementByForum($name, $year);
-        return $this->json(array('data' => $forum));
+        $data = array();
+        foreach ($forum as $f)
+        {
+            $result = array();
+            $result["id"]  = $f->getId();
+            $result["nomEtablissement"] = $f->getIdEtablissement()->getNomEtablissement();
+            $result["numSiret"] = $f->getIdEtablissement()->getNumSiret();
+            $data[] = $result;
+        }
+        return $this->json(array('data' => $data));
     }
 
     /**

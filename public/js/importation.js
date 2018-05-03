@@ -1,6 +1,6 @@
 var wb;
 var rABS = false;
-var result;
+var result = null;
 function importf(obj) {
     if(!obj.files) {
         return;
@@ -19,6 +19,7 @@ function importf(obj) {
             });
         }
         result = JSON.stringify( XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]) );
+
     };
     if(rABS) {
         reader.readAsArrayBuffer(f);
@@ -37,6 +38,7 @@ function fixdata(data) {
 }
 
 $("#file_submit").click(function () {
+    console.log(result);
     if($("#type").val()===""||result===null){
         alert("Il faut choisir un type un un fichier!");
     }
