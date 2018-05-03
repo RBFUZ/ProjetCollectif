@@ -286,4 +286,15 @@ class EstablishmentDetailController extends Controller
 
         return $this->json(array("data"=>$count_taxe_each_year_array));
     }
+
+    /**
+     * @Route("/establishment/list_department", name="list_department")
+     */
+    public function getListDepartment()
+    {
+        $repository_department = $this->getDoctrine()->getRepository(Departement::class);
+        $list_departments = $repository_department->getAllDepartment();
+
+        return $this->json(array("data"=>$list_departments));
+    }
 }
