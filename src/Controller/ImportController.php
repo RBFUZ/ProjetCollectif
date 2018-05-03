@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Entreprise;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,5 +54,23 @@ class ImportController extends Controller
          */
         // return excute status, if succeed, return 200, else return 500
         return $this->json(array('status' => 200));
+    }
+
+    private function parserForumData($forum):int
+    {
+        foreach($forum as $data)
+        {
+            try
+            {
+                $nom_etablissement = $data["Dénomination"];
+                $rep_ent = $this->getDoctrine()->getRepository(Entreprise::class);
+                $ent = $rep_ent->findEnterpriseByName($nom_etablissement);
+            }
+            catch (\Exception $exc)
+            {
+                return 500;
+            }
+        }
+
     }
 }
