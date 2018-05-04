@@ -23,8 +23,17 @@
 										<option value="Alternance">Alternance
 										<option value="Taxe">Taxe
 										<option value="Intervenant">Intervenant
-										<option value="Tout">Tout le tralala
+										<option value="Forum">Forum
 									</select>
+								</div>
+								<div id="forum_date" style="display: none" class="field">
+									<label>Date de Forum</label>
+									<div class="ui calendar">
+										<div class="ui input left icon">
+											<i class="calendar icon"></i>
+											<input id="date" type="text" placeholder="Date">
+										</div>
+									</div>
 								</div>
 								<div class="field">
 									<label>Choisir le fichier</label>
@@ -51,6 +60,14 @@
 
 	<script lang="javascript" src="node_modules/xlsx/dist/xlsx.full.min.js"></script>
 	{#<script src="/node_modules/excel-as-json/lib/excel-as-json.js"></script>#}
-	<script src="/js/importation.js"></script>
+		<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+
+		<script src="/js/importation.js"></script>
+		<script>
+
+            $('#forum_date').calendar({
+                type: 'date'
+            });
+		</script>
 
 {% endblock %}

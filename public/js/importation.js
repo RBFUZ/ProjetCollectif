@@ -37,6 +37,16 @@ function fixdata(data) {
     return o;
 }
 
+$("#type").on("change",function(){
+    console.log();
+    if($("#type").val()==="Forum")
+    {
+        $("#forum_date").show();
+    }
+    else{
+        $("#forum_date").hide();
+    }
+});
 $("#file_submit").click(function () {
     console.log(result);
     if($("#type").val()===""||result===null){
@@ -46,7 +56,8 @@ $("#file_submit").click(function () {
         $.post("/import/data",
             {
                 "data":result,
-                "type":$("#type").val()
+                "type":$("#type").val(),
+                "date_forum":$("#date").val()
             },
             function (data) {
                 if(data.status===200){

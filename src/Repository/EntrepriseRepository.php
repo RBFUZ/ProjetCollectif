@@ -18,17 +18,16 @@ class EntrepriseRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function findEnterpriseByName($nameEnterprise):\App\Entity\Entreprise
+    public function findEnterpriseByName($nameEnterprise)
     {
-        $sql = "SELECT ent
-            FROM App\Entity\Entreprise ent 
-            WHERE ent.nomEntreprise = ".$nameEnterprise;
+        $sql = "SELECT ent FROM App\Entity\Entreprise ent 
+            WHERE ent.nomEntreprise = :nom";
 
         $query =  $this->getEntityManager()
             ->createQuery(
                 $sql
-            );
+            )->setParameter("nom",strtoupper($nameEnterprise));
 
-        return $query->getResult();
+        return $query->getOneOrNullResult();
     }
 }
