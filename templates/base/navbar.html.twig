@@ -10,6 +10,10 @@
             <div class="menu">
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="item" href="{{ path('admin') }}">Admin</a>
+                    {% endif %}
+                    <a class="item" href="{{ path('profile') }}">Profile</a>
                     <a class="item" href="{{ path('security_logout') }}">Deconnexion</a>
                 {% else %}
                     <a class="item" href="{{ path('connection') }}">Connexion</a>
