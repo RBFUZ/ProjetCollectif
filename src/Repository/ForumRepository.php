@@ -53,4 +53,17 @@ class ForumRepository extends EntityRepository
             return "/img/greenCheck.png";
         }
     }
+
+    public function findForumByName($nameForum)
+    {
+        $sql = "SELECT for  FROM App\Entity\Forum for
+            WHERE UPPER(for.nomForum) = :nom";
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            )->setParameter("nom",strtoupper($nameForum));
+
+        return $query->getOneOrNullResult();
+    }
 }

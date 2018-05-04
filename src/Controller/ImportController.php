@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Adresse;
+use App\Entity\ContactEtablissement;
 use App\Entity\Entreprise;
 use App\Entity\Etablissement;
 use App\Entity\Forum;
+use App\Entity\ParticipationForum;
 use App\Entity\Pays;
+use App\Entity\Telephone;
+use App\Entity\TypeForum;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,15 +38,20 @@ class ImportController extends Controller
         $type = $request->request->get("type");
 
         $date_forum = $request->request->get("date_forum");
-        if($date_forum=="")
+
+        if($date_forum == "")
         {
-            $date_forum = date("Y");
+            $date_forum = date("d-m-Y");
         }
 
         // convert to json
         $json_data = json_decode($data,true);
 
-        $this->parserForumData($json_data,$date_forum);
+        if($type=="Forum")
+        {
+            $this->parserForumData($json_data,$date_forum);
+        }
+
         // use like this
         //$json_data[0]; //get the first object
         //var_dump($json_data[9]["Fonction \"carte de visite\""]);//get the name of the first object
@@ -69,21 +78,52 @@ class ImportController extends Controller
         return $this->json(array('status' => 200));
     }
 
-    private function parserForumData($forum,$date_forum)
+    private function parserForumData($forums,$date_forum)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $name_temp = "";
         $address_temp = "";
         $cp_temp = "";
         $city_temp ="";
-        foreach($forum as $data)
+        $nom = "";
+        $nom_temp = "";
+        $prenom = "";
+        $prenom_temp = "";
+        $tel = "";
+        $tel_temp = "";
+        $mail_pro = "";
+        $mail_pro_temp = "";
+        $sector = "";
+
+        $year = date_create_from_format("d-m-Y",$date_forum);
+        $name_forum = "Forum des entreprises ".$year->format('Y');
+
+        $rep_forum = $this->getDoctrine()->getRepository(Forum::class);
+        $forum = $rep_forum->findForumByName($name_forum);
+        if($forum==NULL) {
+            // create forum
+            $forum = new Forum();
+            $rep_address = $this->getDoctrine()->getRepository(Adresse::class);
+            $rep_type_forum = $this->getDoctrine()->getRepository(TypeForum::class);
+            $forum->setIdAdresse($rep_address->find(169));
+
+            $forum->setDateDebutForum($year);
+            $forum->setDateFinForum($year);
+            $forum->setIdTypeForum($rep_type_forum->find(1));
+            $forum->setNomForum($name_forum);
+
+            $entityManager->persist($forum);
+            $entityManager->flush();
+        }
+        ///
+
+        foreach($forums as $data)
         {
-
-
             try
             {
                 $nom_etablissement = $data["Dénomination"];
                 $name_temp = $data["Dénomination"];
+                $sector = $data["Secteur d'activité"];
             }
             catch (\Exception $exc)
             {
@@ -102,51 +142,180 @@ class ImportController extends Controller
                 $entityManager->persist($ent);
                 $entityManager->flush();
             }
-            // create etablissement
-            $etab = new Etablissement();
-            $etab->setNomEtablissement($nom_etablissement);
-            $etab->setIdEntreprise($ent);
 
-            // get address
-            $address = "";
-            $cp = "";
-            $city="";
-
-            try
+            // check etablissement exist or not
+            $rep_etab = $this->getDoctrine()->getRepository(Etablissement::class);
+            $nom_etablissement = strtoupper(trim($nom_etablissement));
+            $etab = $rep_etab->findOneBy(["nomEtablissement"=>$nom_etablissement]);
+            if($etab ==NULL)
             {
-                $address = $data["Adresse"];
-                $address_temp = $data["Adresse"];
-                $cp = $data["Code Postal"];
-                $cp_temp = $data["Code Postal"];
-                $city = $data["Ville"];
-                $city_temp = $data["Ville"];
+                // create etablissement
+                $etab = new Etablissement();
+                $etab->setNomEtablissement($nom_etablissement);
+                $etab->setIdEntreprise($ent);
 
+                // get address
+                $address = "";
+                $cp = "";
+                $city="";
+
+                try
+                {
+                    $address = $data["Adresse"];
+                    $address_temp = $data["Adresse"];
+                    $cp = $data["Code Postal"];
+                    $cp_temp = $data["Code Postal"];
+                    $city = $data["Ville"];
+                    $city_temp = $data["Ville"];
+
+
+                }
+                catch (\Exception $exc)
+                {
+                    $address = $address_temp;
+                    $cp = $cp_temp;
+                    $city=$city_temp;
+                }
+                $address = trim($address);
+                $cp = trim($cp);
+                $city = trim($city);
+                $add = $this->makeAddress($address,$city,$cp);
+                /////
+                //save etablissement
+                $etab->setIdAdresse($add);
+                $etab->setSecteursActivites($sector);
+                $entityManager->persist($etab);
+                $entityManager->flush();
+                ////
+            }
+
+
+            //create  person
+
+            try{
+                $nom = $data["Nom"];
+                $nom_temp = $data["Nom"];
+                $prenom = $data["Prénom"];
+                $prenom_temp = $data["Prénom"];
+                $tel = $data["Téléphone"];
+                $tel_temp = $data["Téléphone"];
             }
             catch (\Exception $exc)
             {
-                $address = $address_temp;
-
-                $cp = $cp_temp;
-                $city=$city_temp;
+                $nom = $nom_temp;
+                $prenom = $prenom_temp;
+                $tel = $tel_temp;
             }
-            $address = trim($address);
-            $cp = trim($cp);
-            $city = trim($city);
-            $add = $this->makeAddress($address,$city,$cp);
-            /////
-            $etab->setIdAdresse($add);
-            $entityManager->persist($etab);
-            $entityManager->flush();
-            ////
-            // create forum
-            $forum = new Forum();
-            $rep_address = $this->getDoctrine()->getRepository(Adresse::class);
-            $forum->setIdAdresse($rep_address->find(169));
+            $nom = trim(strtoupper($nom));
+            $prenom = trim(strtoupper($prenom));
+            $tel = str_replace(" ","-",trim($tel));
+            $tel = str_replace(".","-",trim($tel));
+            $rep_person = $this->getDoctrine()->getRepository(Personne::class);
+            $person = $rep_person->findPersonByName($nom,$prenom);
+            if($person==NULL)
+            {
+                $person = new Personne();
+                $person->setNom(mb_convert_case($nom, MB_CASE_TITLE, "UTF-8"));
+                $person->setPrenom(mb_convert_case($prenom, MB_CASE_TITLE, "UTF-8"));
+                $entityManager->persist($person);
+                $entityManager->flush();
+
+                $rep_tel = $this->getDoctrine()->getRepository(Telephone::class);
+
+                $tel_objet = $rep_tel->findOneBy(["numTelephone"=>$tel]);
+
+                if($tel_objet==NULL)
+                {
+                    $tel_objet = new Telephone();
+                    $tel_objet->setNumTelephone($tel);
+                    $tel_objet->addIdPersonne($person);
+                    $entityManager->persist($tel_objet);
+                    $entityManager->flush();
+
+                }
+                var_dump($tel_objet->getId());
+                $person->addIdTelephone($tel_objet);
+                $entityManager->persist($person);
+                $entityManager->flush();
+            }
+            ///
+
+            //create contact etablissement
+            $rep_contact_etab = $this->getDoctrine()->getRepository(ContactEtablissement::class);
+            $contact_etab = $rep_contact_etab->findOneBy(["idPersonne"=>$person]);
+            if($contact_etab==NULL)
+            {
+                $id = $rep_contact_etab->findMaxId();
+                $contact_etab = new ContactEtablissement();
+                $contact_etab->setIdPersonne($person);
+                $contact_etab->setId(((int)$id[1])+1);
+                try{
+                    $mail_pro = $data["E-mail direct"];
+                    $mail_pro_temp = $data["E-mail direct"];
+                }
+                catch (\Exception $exc)
+                {
+                    $mail_pro = $mail_pro_temp;
+                }
+
+                $contact_etab->setMailProfessionnel($mail_pro);
+
+                //save
+                $entityManager->persist($contact_etab);
+                $entityManager->flush();
+            }
+            ///
+
+            // create participation
+            $rep_participe = $this->getDoctrine()->getRepository(ParticipationForum::class);
+            $participe_forum = $rep_participe->findOneBy(["idForum"=>$forum,"idEtablissement"=>$etab]);
+            if($participe_forum==NULL)
+            {
+                // add to participation
+                $participe_forum = new ParticipationForum();
+                $participe_forum->setIdForum($forum);
+                $participe_forum->setIdEtablissement($etab);
+                $participe_forum->setIdContactEtablissement($contact_etab);
+
+                $rec_stagaire = "";
+                $rec_diplome = "";
+                $rec_apprenti = "";
+                $rec_fillere = "";
+                $commentaire = "";
+                $niveau = "";
+                try{
+                    $rec_stagaire = $data["Recruter stagiaires"];
+                    $rec_diplome = $data["Recruter diplômés"];
+                    $rec_apprenti = $data["Recruter apprentis"];
+                    $rec_fillere = $data["Filières recherchées"];
+                    $niveau = $data["Niveau d'études recherché"];
+                    $commentaire = $data["Remarques / Besoins"];
+                }catch (\Exception $e)
+                {
+                    $rec_stagaire = "";
+                    $rec_diplome = "";
+                    $rec_apprenti = "";
+                    $rec_fillere = "";
+                    $commentaire = "";
+                    $niveau = "";
+                }
+                $participe_forum->setRecruteStagiaire($rec_stagaire);
+                $participe_forum->setRecruteApprentis($rec_apprenti);
+                $participe_forum->setRecruteDiplome($rec_diplome);
+                $participe_forum->setFilieresRecherchees($rec_fillere);
+                $participe_forum->setNiveauxEtudesRecherches($niveau);
+                $participe_forum->setCommentaireParticipation($commentaire);
+
+                //save
+                $entityManager->persist($participe_forum);
+                $entityManager->flush();
+            }
+
 
         }
     }
 
-    private function makeAddress($address,$city_name,$cp,$comp=NULL)
+    private function makeAddress($address,$city_name,$cp,$comp = NULL)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $add = new Adresse();

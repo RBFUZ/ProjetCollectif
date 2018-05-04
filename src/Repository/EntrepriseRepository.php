@@ -21,7 +21,7 @@ class EntrepriseRepository extends \Doctrine\ORM\EntityRepository
     public function findEnterpriseByName($nameEnterprise)
     {
         $sql = "SELECT ent FROM App\Entity\Entreprise ent 
-            WHERE ent.nomEntreprise = :nom";
+            WHERE UPPER(ent.nomEntreprise) = :nom";
 
         $query =  $this->getEntityManager()
             ->createQuery(
