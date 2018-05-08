@@ -48,27 +48,66 @@ $("#type").on("change",function(){
     }
 });
 $("#file_submit").click(function () {
-    console.log(result);
+    var that = $(this);
+    //console.log(result);
     if($("#type").val()===""||result===null){
         alert("Il faut choisir un type un un fichier!");
     }
     else{
-        $.post("/import/data",
-            {
-                "data":result,
-                "type":$("#type").val(),
-                "date_forum":$("#date").val()
-            },
-            function (data) {
-                if(data.status===200){
-                    alert("Réussi!");
-                    // refresh the page
-                    //location.reload();
-                }
-                else{
+        $(this).attr('disabled','disabled');
+        // forum
+        if($("#type").val()==="Forum"){
+            $.ajax({
+                url: "/import/forum",
+                type:"post",
+                data: {
+                    "data":result,
+                    "type":$("#type").val(),
+                    "date_forum":$("#date").val()
+                },
+                dataType: "json",
+                success:function (data) {
+                    that.removeAttr('disabled');
+                    if(data.status===200){
+                        alert("Réussi!");
+                    }
+                    else{
+                        alert("Erreur!");
+                    }
+                },
+                error: function(r){
                     alert("Erreur!");
+                    that.removeAttr('disabled');
                 }
+
             });
+        }
+        else if($("#type").val()==="Stage"){
+            $.ajax({
+                url: "/import/internship",
+                type:"post",
+                data: {
+                    "data":result,
+                    "type":$("#type").val(),
+                    "date_forum":$("#date").val()
+                },
+                dataType: "json",
+                success:function (data) {
+                    that.removeAttr('disabled');
+                    if(data.status===200){
+                        alert("Réussi!");
+                    }
+                    else{
+                        alert("Erreur!");
+                    }
+                },
+                error: function(r){
+                    alert("Erreur!");
+                    that.removeAttr('disabled');
+                }
+
+            });
+        }
     }
 })
 

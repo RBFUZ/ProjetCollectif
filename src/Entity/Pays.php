@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Pays
  *
  * @ORM\Table(name="pays", uniqueConstraints={@ORM\UniqueConstraint(name="code_UNIQUE", columns={"code"}), @ORM\UniqueConstraint(name="alpha2_UNIQUE", columns={"alpha2"}), @ORM\UniqueConstraint(name="alpha3_UNIQUE", columns={"alpha3"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PaysRepository")
  */
 class Pays
 {
