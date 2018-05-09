@@ -5,7 +5,7 @@
 
 <div class="ui one column stackable grid container">
 	<div class="column">
-    	<table id="data_table" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
+    	<table id="data_table_conventions" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
         	<thead>
             	<tr>
             		<th>Nom Établissement</th>
@@ -16,6 +16,17 @@
             	</tr>
             </thead>
             <tbody>
+				{% for c in conventions %}
+					{% for contact in c.idContactEtablissement %}
+						<tr>
+							<td> {{ c.idEtablissement.nomEtablissement }} </td>
+							<td> {{ c.sujetConference }} </td>
+							<td> {{ c.dateConference|date('Y-m-d') }} </td>
+							<td> {{ contact.idPersonne.nom }} </td>
+							<td> {{ contact.mailProfessionnel }} </td>
+						</tr>
+					{% endfor %}
+				{% endfor %}
             </tbody>
         </table>
     </div>
@@ -27,4 +38,5 @@
 {% block js %}
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="/js/customjs/custom-datatable.js"></script>
+	<script src="/js/search_conventions.js"></script>
 {% endblock %}

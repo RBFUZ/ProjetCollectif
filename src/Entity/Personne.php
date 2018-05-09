@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Personne
  *
  * @ORM\Table(name="personne", indexes={@ORM\Index(name="fk_Personne_Adresse1_idx", columns={"id_adresse"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PersonneRepository")
  */
 class Personne
 {
@@ -48,6 +48,13 @@ class Personne
      * @ORM\Column(name="code_sexe", type="string", length=1, nullable=true, options={"comment"="M, F, etc."})
      */
     private $codeSexe;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="date_naissance", type="date", nullable=true)
+     */
+    private $dateNaissance;
 
     /**
      * @var string|null
@@ -194,6 +201,30 @@ class Personne
     public function getCodeSexe()
     {
         return $this->codeSexe;
+    }
+
+    /**
+     * Set dateNaissance.
+     *
+     * @param \DateTime|null $dateNaissance
+     *
+     * @return Personne
+     */
+    public function setDateNaissance($dateNaissance = null)
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    /**
+     * Get dateNaissance.
+     *
+     * @return \DateTime|null
+     */
+    public function getDateNaissance()
+    {
+        return $this->dateNaissance;
     }
 
     /**

@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class ParticipationForumRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findEtablissementByForum($forum, $year)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+        'SELECT par_for
+                FROM App\Entity\ParticipationForum par_for
+                JOIN par_for.idForum forum
+                JOIN forum.idTypeForum type_forum
+                WHERE type_forum.libelleTypeForum = :nom_forum
+                AND forum.dateDebutForum BETWEEN :yearBegin AND :yearEnd'
+        )->setParameter('nom_forum', $forum)->setParameter('yearBegin', $year.'-01-01')
+        ->setParameter('yearEnd', $year.'-12-31');
+
+        return $query->getResult();
+    }
 }

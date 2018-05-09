@@ -43,19 +43,13 @@
 
             <!--combo box-->
             <div class="row">
-                <div class="two wide column">
-                    <div id="department_select" class="ui selection dropdown">
-                        <input type="hidden" name="department" >
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Département</div>
-                        <div id="list_cities" class="menu" >
-                            <div class="item"  data-value="ALL">Tous les départements</div>
-                            <div class="item"  data-value="DI">DI</div>
-                            <div class="item"  data-value="DSE">DSE</div>
-                            <div class="item"  data-value="DAE">DAE</div>
-                            <div class="item"  data-value="DMS">DMS</div>
-                        </div>
-                    </div>
+                <div class="two wide column" id="hide_dropdown_depart">
+                     <select class="ui dropdown" id="department_select" name="depart">
+                        <option value="all">Tous les départements</option>
+                        {% for d in department %}
+                            <option value="{{ d.libelleDepartement }}">{{ d.libelleDepartement }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
 
@@ -78,7 +72,7 @@
                                         <div class="eight wide column">
                                             <div class="ui segments">
                                                 <div class="ui segment">
-                                                    <h3 class="ui header">Nombre de stagaire</h3>
+                                                    <h3 class="ui header">Nombre de stagiaires</h3>
                                                 </div>
                                                 <div class="ui segment">
                                                     <canvas id="line-area1"></canvas>
@@ -90,7 +84,7 @@
                                         <div class="eight wide column">
                                             <div class="ui segments">
                                                 <div class="ui segment">
-                                                    <h3 class="ui header">Gratification</h3>
+                                                    <h3 class="ui header">Taux de stagiaires rémunérés</h3>
                                                 </div>
                                                 <div class="ui segment">
                                                     <canvas id="line-area2"></canvas>
@@ -104,7 +98,7 @@
                                         <div class="sixteen wide column">
                                             <div class="ui segments">
                                                 <div class="ui segment">
-                                                    <h3 class="ui header">List de stagaires</h3>
+                                                    <h3 class="ui header">Liste des stagaires</h3>
                                                 </div>
                                                 <div class="ui segment">
                                                     <table id="data_table_intern" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
@@ -113,14 +107,26 @@
                                                             <th>Numéro étudiant</th>
                                                             <th>Nom</th>
                                                             <th>Prénom</th>
-                                                            <th>Professeur réferent</th>
-                                                            <th>Nom du tuteur</th>
+                                                            <th>Tuteur pédagogique</th>
+                                                            <th>Tuteur professionnel</th>
                                                             <th>Année stage</th>
                                                             <th>Sujet</th>
                                                             <th>Département</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                            {% for t in trainee %}
+                                                        	<tr>
+                                                        		<td>{{ t.idEtudiant.numeroEtudiant }}</td>
+                                            					<td>{{ t.idEtudiant.idPersonne.nom }}</td>
+                                                                <td>{{ t.idEtudiant.idPersonne.prenom }}</td>
+                                                                <td>{{ t.idContactEtablissementTuteur.idPersonne.nom }}  {{ t.idContactEtablissementTuteur.idPersonne.prenom }}</td>
+                                                                <td>{{ t.idPersonnelPolytechTuteur.idPersonne.nom }}  {{ t.idPersonnelPolytechTuteur.idPersonne.prenom }}</td>
+                                                                <td>{{ t.dateCreation|date('Y') }}</td>
+                                                                <td>{{ t.idStage.sujetStage }}</td>
+                                                                <td>{{ t.idSpecialite.idDepartement.libelleDepartement }}</td>
+                                                        	</tr>
+                                            				{% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -147,18 +153,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!--chart 2-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Gratification</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area-apprentissage2"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <!--table of student-->
@@ -166,7 +160,7 @@
                                         <div class="sixteen wide column">
                                             <div class="ui segments">
                                                 <div class="ui segment">
-                                                    <h3 class="ui header">List d'apprentis</h3>
+                                                    <h3 class="ui header">Liste des apprentis</h3>
                                                 </div>
                                                 <div class="ui segment">
                                                     <table id="data_table_apprenti" class="ui compact selectable striped celled table" cellspacing="0" width="100%">
@@ -177,10 +171,18 @@
                                                             <th>Prénom</th>
                                                             <th>Année</th>
                                                             <th>Département</th>
-
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                            {% for a in apprenticeship %}
+                                                            <tr>
+                                                                <td>{{ a.idPersonneEtudiant.numeroEtudiant }}</td>
+                                                                <td>{{ a.idPersonneEtudiant.idPersonne.nom }}</td>
+                                                                <td>{{ a.idPersonneEtudiant.idPersonne.prenom }}</td>
+                                                                <td>{{ a.dateDebutApprentissage|date('Y') }}</td>
+                                                                <td>{{ a.idSpecialite.idDepartement.libelleDepartement }}</td>
+                                                            </tr>
+                                                            {% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -193,55 +195,40 @@
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="third">
                                 <div class="ui equal width left aligned padded grid">
-                                <div class="row">
-                                    <div class="eight wide column">
-                                        <div class="ui segments">
-                                            <div class="ui segment">
-                                                <h3 class="ui header">Timeline</h3>
-                                            </div>
-                                            <div class="ui segment">
-                                                <div class="ui feed timeline">
-                                                    <div class="event">
-                                                        <div class="label">
-                                                            <img src="/img/avatar/people/Abraham.png">
-                                                        </div>
-                                                        <div class="content">
-                                                            <div class="summary">
+                                    <div class="row">
 
-                                                                <h3 class="head">
-                                                                    2014
-                                                                </h3>
+                                        {% for t in type_forum %}
+                                            {% set idx_type_forum = loop.index0 %}
+                                            <div class="four wide column">
+                                                <div class="ui segments">
+                                                    <div class="ui segment">
+                                                        <h3 class="ui header">{{ t.libelleTypeForum }}</h3>
+                                                    </div>
+                                                        <div class="ui segment">
+                                                            <div class="ui feed timeline">
+
+                                                            {% for f in forum[idx_type_forum] %}
+                                                                {% set idx_forum = loop.index0 %}
+                                                                <div class="event">
+                                                                    <div class="label">
+                                                                        <img src=" {{ logo[idx_type_forum][idx_forum] }} ">
+                                                                    </div>
+                                                                    <div class="content">
+                                                                        <div class="summary">
+                                                                            <h3 class="head">
+                                                                                {{ f }}
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="meta"></div>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
                                                             </div>
-                                                            <div class="meta">
-
-                                                            </div>
-
                                                         </div>
                                                     </div>
-                                                    <div class="event">
-                                                        <div class="label">
-                                                            <img src="/img/avatar/people/Abraham.png">
-                                                        </div>
-                                                        <div class="content">
-                                                            <div class="summary">
-
-                                                                <h3 class="head">
-                                                                    2014
-                                                                </h3>
-                                                            </div>
-                                                            <div class="meta">
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-
                                                 </div>
-                                            </div>
-                                        </div>
+                                            {% endfor %}
                                     </div>
-                                </div>
                                 </div>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="fourth">
@@ -265,6 +252,17 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {% for c in convention %}
+                                                        <tr>
+                                                            {% for contact in c.idContactEtablissement %}
+                                                                <td>{{ contact.idPersonne.nom }}</td>
+                                                                <td>{{ contact.idPersonne.prenom }}</td>
+                                                                <td>{{ c.sujetConference }}</td>
+                                                                <td>{{ c.dateConference|date('Y-m-d') }}</td>
+                                                                <td>{{ contact.mailProfessionnel }}</td>
+                                                            {% endfor %}
+                                                        </tr>
+                                                        {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -295,65 +293,19 @@
                                 <div class="row">
                                     <div class="ui equal width left aligned padded grid">
 
-                                        <!--chart DI-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Informatique</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDI"></canvas>
+                                        {% for d in department %}
+                                            <div class="eight wide column">
+                                                <div class="ui segments">
+                                                    <div class="ui segment">
+                                                        <h3 class="ui header">{{ d.libelleDepartement }}</h3>
+                                                    </div>
+                                                    <div class="ui segment">
+                                                        <canvas id={{ 'line-area_taxeApprentissage' ~ d.libelleDepartement }}></canvas>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        {% endfor %}
 
-                                        <!--chart DII-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Informatique Industrielle</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDII"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--chart DAE-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Aménagement et Environnement</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDAE"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--chart DMS-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Mécanique et Systèmes</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDMS"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--chart DEE-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Electronique et Energie</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDEE"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 

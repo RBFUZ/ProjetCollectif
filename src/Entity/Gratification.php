@@ -31,16 +31,16 @@ class Gratification
     /**
      * @var string
      *
-     * @ORM\Column(name="unite_gratification", type="string", length=45, nullable=false, options={"comment"="BRUT / NET"})
+     * @ORM\Column(name="unite_gratification", type="string", length=45, nullable=false, options={"default"="Brut","comment"="BRUT / NET"})
      */
-    private $uniteGratification;
+    private $uniteGratification = 'Brut';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="unite_duree_gratification", type="string", length=45, nullable=false, options={"comment"="HEURE, MOIS, etc."})
+     * @ORM\Column(name="unite_duree_gratification", type="string", length=45, nullable=false, options={"default"="Mensuel","comment"="HEURE, MOIS, etc."})
      */
-    private $uniteDureeGratification;
+    private $uniteDureeGratification = 'Mensuel';
 
 
 

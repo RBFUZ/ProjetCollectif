@@ -29,6 +29,13 @@ class Cifre
     private $intituleCifre;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="soutenue", type="boolean", nullable=false, options={"default"="1"})
+     */
+    private $soutenue = '1';
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_debut_cifre", type="date", nullable=false)
@@ -36,11 +43,11 @@ class Cifre
     private $dateDebutCifre;
 
     /**
-     * @var bool
+     * @var \DateTime|null
      *
-     * @ORM\Column(name="soutenue", type="boolean", nullable=false)
+     * @ORM\Column(name="date_fin_cifre", type="date", nullable=true)
      */
-    private $soutenue;
+    private $dateFinCifre;
 
     /**
      * @var \App\Entity\Etablissement
@@ -111,6 +118,30 @@ class Cifre
     }
 
     /**
+     * Set soutenue.
+     *
+     * @param bool $soutenue
+     *
+     * @return Cifre
+     */
+    public function setSoutenue($soutenue)
+    {
+        $this->soutenue = $soutenue;
+
+        return $this;
+    }
+
+    /**
+     * Get soutenue.
+     *
+     * @return bool
+     */
+    public function getSoutenue()
+    {
+        return $this->soutenue;
+    }
+
+    /**
      * Set dateDebutCifre.
      *
      * @param \DateTime $dateDebutCifre
@@ -135,27 +166,27 @@ class Cifre
     }
 
     /**
-     * Set soutenue.
+     * Set dateFinCifre.
      *
-     * @param bool $soutenue
+     * @param \DateTime|null $dateFinCifre
      *
      * @return Cifre
      */
-    public function setSoutenue($soutenue)
+    public function setDateFinCifre($dateFinCifre = null)
     {
-        $this->soutenue = $soutenue;
+        $this->dateFinCifre = $dateFinCifre;
 
         return $this;
     }
 
     /**
-     * Get soutenue.
+     * Get dateFinCifre.
      *
-     * @return bool
+     * @return \DateTime|null
      */
-    public function getSoutenue()
+    public function getDateFinCifre()
     {
-        return $this->soutenue;
+        return $this->dateFinCifre;
     }
 
     /**

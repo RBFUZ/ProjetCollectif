@@ -2,49 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\Entreprise;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-
-/**
- * @method Entreprise|null find($id, $lockMode = null, $lockVersion = null)
- * @method Entreprise|null findOneBy(array $criteria, array $orderBy = null)
- * @method Entreprise[]    findAll()
- * @method Entreprise[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class EntrepriseRepository extends ServiceEntityRepository
+class EntrepriseRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function findTraineeByEstablishment($idEstablishment): array
     {
-        parent::__construct($registry, Entreprise::class);
+        $sql = "SELECT cov
+            FROM App\Entity\ConventionStage cov JOIN cov.idEtablissement etab
+            WHERE etab.id = ".$idEstablishment;
+
+        $query =  $this->getEntityManager()
+        ->createQuery(
+            $sql
+        );
+
+        return $query->getResult();
     }
 
-//    /**
-//     * @return Entreprise[] Returns an array of Entreprise objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findEnterpriseByName($nameEnterprise)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $sql = "SELECT ent FROM App\Entity\Entreprise ent 
+            WHERE UPPER(ent.nomEntreprise) = :nom";
 
-    /*
-    public function findOneBySomeField($value): ?Entreprise
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            )->setParameter("nom",strtoupper($nameEnterprise));
+
+        return $query->getOneOrNullResult();
     }
-    */
 }

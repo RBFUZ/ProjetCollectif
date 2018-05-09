@@ -1,7 +1,6 @@
 
 {% extends 'base/base.html.twig' %}
 {% block title %}Importation{% endblock %}
-{% block body %}
 {% block content %}
 
 	<div class="ui container">
@@ -18,24 +17,33 @@
 							<form class="ui form">
 								<div class="field">
 									<label>Type de fichier</label>
-									<select class="ui fluid dropdown">
+									<select id="type" class="ui fluid dropdown">
 										<option value="">Type
-										<option>Stage
-										<option>Alternance
-										<option>Taxe
-										<option>Intervenant
-										<option>Tout le tralala
+										<option value="Stage">Stage
+										<option value="Alternance">Alternance
+										<option value="Taxe">Taxe
+										<option value="Intervenant">Intervenant
+										<option value="Forum">Forum
 									</select>
+								</div>
+								<div id="forum_date" style="display: none" class="field">
+									<label>Date de Forum</label>
+									<div class="ui calendar">
+										<div class="ui input left icon">
+											<i class="calendar icon"></i>
+											<input id="date" type="text" placeholder="Date">
+										</div>
+									</div>
 								</div>
 								<div class="field">
 									<label>Choisir le fichier</label>
-									<input class="inverted ui" type="file" accept=".xls, xlsx"></input>
+									<input onchange="importf(this)" id="file" class="inverted ui" type="file" accept=".xls, .xlsx"></input>
 								</div>
 
 								<div class="ui buttons">
 									<a class="ui button" href="{{ path('index') }}">Annuler</a>
 									<div class="or"></div>
-									<a class="ui positive button active" href="{{ path('index') }}">Importer</a>
+									<button id="file_submit" class="ui positive button active" >Importer</button>
 								</div>
 							</form>
 
@@ -47,8 +55,29 @@
 
 		</div>
 	</div>
-
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/css/semantic-ui/semantic.min.js"></script>
 {% endblock %}
+	{% block js %}
+
+	<script lang="javascript" src="node_modules/xlsx/dist/xlsx.full.min.js"></script>
+	{#<script src="/node_modules/excel-as-json/lib/excel-as-json.js"></script>#}
+		<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+
+		<script src="/js/importation.js"></script>
+		<script>
+
+            $('#forum_date').calendar({
+                type: 'date',
+                monthFirst: false,
+                formatter: {
+                    date: function (date, settings) {
+                        if (!date) return '';
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        return day + '-' + month + '-' + year;
+                    }
+                }
+            });
+		</script>
+
 {% endblock %}

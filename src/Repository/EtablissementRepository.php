@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Repository;
-use App\Entity\Etablissement;
 
+use App\Entity\Etablissement;
 
 /**
  * EtablissementRepository
@@ -12,20 +12,20 @@ use App\Entity\Etablissement;
  */
 class EtablissementRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findEtablissementByEnterpriseName($enterprise_name){
-
-        $sql = "SELECT etab FROM App\Entity\Etablissement etab JOIN etab.idEntreprise ent WHERE ent.nomEntreprise = '".$enterprise_name."'";
+    public function findEtablissementByEnterpriseName($enterprise_name)
+    {
+        $sql = "SELECT etab FROM App\Entity\Etablissement etab JOIN etab.idEntreprise ent WHERE ent.nomEntreprise = :ent_name";
         //echo $sql;
         $query =  $this->getEntityManager()
             ->createQuery(
                 $sql
-            );
+            )->setParameter("ent_name", $enterprise_name);
 
         return $query->getResult();
     }
 
-    public function findEtablissementByEnterpriseNameAndCity($enterprise_name,$city_id){
-
+    public function findEtablissementByEnterpriseNameAndCity($enterprise_name, $city_id)
+    {
         $sql = "SELECT etab FROM App\Entity\Etablissement etab JOIN etab.idEntreprise ent JOIN etab.idAdresse addr WHERE ent.nomEntreprise = '".$enterprise_name."' and addr.idVille = ".$city_id;
         //echo $sql;
         $query =  $this->getEntityManager()
@@ -36,8 +36,8 @@ class EtablissementRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
-    public function findEtablissementByCity($city_id){
-
+    public function findEtablissementByCity($city_id)
+    {
         $sql = "SELECT addr FROM App\Entity\Adresse addr  WHERE addr.idVille = ".$city_id;
         //echo $sql;
         $query =  $this->getEntityManager()
@@ -45,6 +45,20 @@ class EtablissementRepository extends \Doctrine\ORM\EntityRepository
                 $sql
             );
         //echo $query->getDQL();
+        return $query->getResult();
+    }
+
+    public function getEnterpriseByEtablishment($idEstablishment)
+    {
+        $sql = "SELECT ent.id as id
+                FROM App\Entity\Etablissement etab
+                JOIN etab.idEntreprise ent WHERE etab.id = ".$idEstablishment;
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            );
+
         return $query->getResult();
     }
 }
