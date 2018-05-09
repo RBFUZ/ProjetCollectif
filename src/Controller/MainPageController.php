@@ -114,9 +114,21 @@ class MainPageController extends Controller
 
 
 
+        /************ APPRENTICESHIP ************/
 
-        // print_r($top3Enterprise);
-        // echo($top3Enterprise);
+        //get count of all apprenticeship
+        $statement = $connection->prepare("CALL `display_apprenticeship_stats_total`(@p0)");
+        $statement->execute();
+
+        $statement = $connection->prepare("SELECT @p0 AS `po_total`");
+        $statement->execute();
+        $po_total = $statement->fetchColumn();
+
+
+
+
+         // print_r($po_total);
+         // echo($top3Enterprise);
 
 
         return $this->render('index/index.html.twig', array(
