@@ -4,13 +4,13 @@
         <div class="row">
 
          <!-- card 1 : FORUM -->
-          <div class="eight wide tablet five wide computer column">
+          <div class="eight wide tablet four wide computer column">
             <div class="ui red card">
           <div class="content">
             <div class="header">Forum</div>
           </div>
           <div class="content">
-        <h4 class="ui sub header">Nombres de forums : {{countForum}}</h4>
+        <h4 class="ui sub header">Nombre de forums au total: {{countForum}}</h4>
 
             <div class="ui small feed">
               <div class="event">
@@ -38,7 +38,7 @@
     </div>
 
     <!-- card 2 : CONF -->
-    <div class="eight wide tablet five wide computer column">
+    <div class="eight wide tablet four wide computer column">
         <div class="ui orange card">
 
           <div class="content">
@@ -46,7 +46,7 @@
           </div>
 
           <div class="content">
-            <h4 class="ui sub header">Nombres de Conférences : {{countConf}}</h4>
+            <h4 class="ui sub header">Nombre de Conférences au total: {{countConf}}</h4>
           </div>
 
           <div class="content">
@@ -79,7 +79,7 @@
     </div>
 
     <!-- card 3 : ENTERPRISE -->
-    <div class="eight wide tablet five wide computer column">
+    <div class="eight wide tablet four wide computer column">
         <div class="ui yellow card">
 
           <div class="content">
@@ -87,7 +87,7 @@
           </div>
 
           <div class="content">
-            <h4 class="ui sub header">Nombres d'Entreprises : {{enterpriseCount}}</h4>
+            <h4 class="ui sub header">Nombre d'Entreprises au total: {{enterpriseCount}}</h4>
           </div>
 
           <div class="content">
@@ -132,6 +132,104 @@
 
           <div class="extra content">
             <a href="{{ path('search') }}" class="ui button">Recherche Avancée</a>
+          </div>
+
+        </div>
+    </div>
+
+
+    <!-- card 4 : APPRENTICESHIP -->
+    <div class="eight wide tablet four wide computer column">
+        <div class="ui green card">
+
+          <div class="content">
+            <div class="header">Apprentissages</div>
+          </div>
+
+          <div class="content">
+            <h4 class="ui sub header">Nombre d'Apprentissages au total : {{countApp}}</h4>
+          </div>
+
+          <div class="content">
+            <div class="ui small feed">
+              <div class="event">
+                <div class="content">
+                  <h4 class="ui sub header">Pour l'année {{currentYearApp}} :
+                    {{totalCurrentApp}}</h4>
+                  <div class="summary">
+                    <div class="ui list">
+                      <ul>
+                        <li>En cours : {{ongoingApp}}</li>
+                        <li>Terminés : {{finishedApp}}</li>
+                        <li>A venir : {{tocomeApp}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="extra content">
+            <a href="{{ path('search_convention') }}" class="ui button">Recherche Avancée</a>
+          </div>
+
+        </div>
+    </div>
+
+
+    <!-- card 5 : INTERNSHIP -->
+    <div class="eight wide tablet four wide computer column">
+        <div class="ui teal card">
+
+          <div class="content">
+            <div class="header">Stages</div>
+          </div>
+
+          <div class="content">
+            <h4 class="ui sub header">Nombre de stages au total : {{countInt}}</h4>
+            <div class="ui list">
+              <ul>
+                <li>En France : {{countFranceInt}}</li>
+                <li>A l'étranger : {{countAbroadInt}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content">
+            <div class="ui small feed">
+              <div class="event">
+                <div class="content">
+                  <h4 class="ui sub header">Pour l'année {{currentYearInt}} : {{countCurrentInt}}</h4>
+                  <div class="summary">
+                    <div class="ui list">
+                      <ul>
+                        <li>En cours : {{totalOngoing}}
+                          <ul>
+                            <li>En France : {{ongoingFr}}</li>
+                            <li>A l'étranger : {{ongoingAb}}</li>
+                          </ul>
+                        </li>
+                        <li>Terminés : {{countFinished}}
+                          <ul>
+                            <li>En France : {{finishedFr}}</li>
+                            <li>A l'étranger : {{finishedAb}}</li>
+                          </ul>
+                        </li>
+                        <li>A venir : {{countToCome}}
+                          <ul>
+                            <li>En France : {{tocomeFr}}</li>
+                            <li>A l'étranger : {{tocomeAb}}</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="extra content">
+            <a href="{{ path('search_convention') }}" class="ui button">Recherche Avancée</a>
           </div>
 
         </div>
