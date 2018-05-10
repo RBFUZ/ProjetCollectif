@@ -121,11 +121,15 @@ class ImportInternshipController extends Controller
             $start_date = $this->getValue($data,"Date Début Stage");
             $end_date = $this->getValue($data,"Date Fin Stage");
 
-            $start_date = strtotime($start_date);
-            $start_date = date_create_from_format("Y-m-d",date('Y-m-d',$start_date));
-            //$start_date = $start_date->format('Y-m-d');
-            $end_date = strtotime($end_date);
-            $end_date = date_create_from_format("Y-m-d",date('Y-m-d',$end_date));
+            if($start_date!=""&&$end_date!=""){
+                $start_date = strtotime($start_date);
+                $start_date = date_create_from_format("Y-m-d",date('Y-m-d',$start_date));
+                //$start_date = $start_date->format('Y-m-d');
+                $end_date = strtotime($end_date);
+                $end_date = date_create_from_format("Y-m-d",date('Y-m-d',$end_date));
+            }
+
+
             $forein = $address_etablissement->getIdVille()->getIdPays()->getId()==75?0:1;
             $school_year = $student->getAnneeEtude();
             $thema_internship = $this->getValue($data,"Thématique");
