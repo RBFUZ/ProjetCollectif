@@ -16,4 +16,18 @@ class DepartementRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+    public function getIdByName($name) : array
+    {
+        $sql = "SELECT dep.id
+            FROM App\Entity\Departement dep
+            WHERE dep.libelleDepartement = ".$name;
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            );
+
+        return $query->getResult();
+    }
 }
