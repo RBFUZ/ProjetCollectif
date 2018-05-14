@@ -120,7 +120,9 @@ class ImportInternshipController extends Controller
             // make internship
             $start_date = $this->getValue($data,"Date Début Stage");
             $end_date = $this->getValue($data,"Date Fin Stage");
-
+            $start_date = str_replace("/","-",trim($start_date));
+            $end_date = str_replace("/","-",trim($end_date));
+            
             if($start_date!=""&&$end_date!=""){
                 $start_date = strtotime($start_date);
                 $start_date = date_create_from_format("Y-m-d",date('Y-m-d',$start_date));
@@ -211,11 +213,14 @@ class ImportInternshipController extends Controller
             $date_create = $this->getValue($data,"Date de création de la convention");
             $date_modification = $this->getValue($data,"Date de modification de la convention");
 
+
             if($date_create!="")
             {
                 $date_create = trim(substr($date_create,0,10));
             }
 
+            $date_create = str_replace("/","-",trim($date_create));
+            $date_modification = str_replace("/","-",trim($date_modification));
             $date_create = strtotime($date_create);
             //var_dump($date_create);
             $date_create = date_create_from_format("Y-m-d",date('Y-m-d',$date_create));
