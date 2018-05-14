@@ -14,7 +14,7 @@ use App\Entity\VerseTaxeApprentissage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class ImportForumController extends Controller
+class TAController extends Controller
 {
     /**
      * @Route("/import/TA", name="import_ta")
