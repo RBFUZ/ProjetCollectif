@@ -13,6 +13,7 @@ use App\Entity\Forum;
 use App\Entity\VerseTaxeApprentissage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
 class TAController extends Controller
 {
