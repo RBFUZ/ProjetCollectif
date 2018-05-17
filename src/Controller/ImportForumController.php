@@ -88,7 +88,7 @@ class ImportForumController extends Controller
         $sector = "";
 
         // create forum
-        $year = date_create_from_format("d-m-Y",$date_forum);
+        $year = date_create_from_format("Y-m-d",$date_forum);
         $name_forum = "Forum des entreprises ".$year->format('Y');
 
         $rep_forum = $this->getDoctrine()->getRepository(Forum::class);

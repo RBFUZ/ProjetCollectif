@@ -15,11 +15,11 @@ use App\Entity\Ville;
 use App\Entity\Pays;
 use App\Entity\Adresse;
 use App\Entity\Etablissement;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Entreprise;
 use App\Entity\ServiceAccueil;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 set_time_limit(0);
 class ImportInternshipController extends Controller
@@ -245,12 +245,12 @@ class ImportInternshipController extends Controller
             }
 
             //var_dump($convention);
+            unset($convention);
 
         }
         return $this->json(array('status' => 200));
     }
-
-    private function getValue($data,$string)
+    public function getValue($data,$string)
     {
         $value = "";
         try
@@ -264,8 +264,8 @@ class ImportInternshipController extends Controller
         return $value;
     }
 
-    private function makeInternship($start_date,$end_date,$forein,$school_year,$thema_internship,$subject_internship,$function_internship,$detail_project
-    ,$duration_hours,$num_days,$comment_internship,$element_peda,$adventage_nature,$comment_duration):?Stage
+    public function makeInternship($start_date,$end_date,$forein,$school_year,$thema_internship,$subject_internship,$function_internship,$detail_project
+        ,$duration_hours,$num_days,$comment_internship,$element_peda,$adventage_nature,$comment_duration):?Stage
     {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -294,7 +294,7 @@ class ImportInternshipController extends Controller
      * @param $nom_etablissement
      * @return Entreprise
      */
-    private function checkEnterprise($nom_etablissement):?Entreprise
+    public function checkEnterprise($nom_etablissement):?Entreprise
     {
         $nom_etablissement = trim($nom_etablissement);
         // search for enterprise
@@ -307,7 +307,7 @@ class ImportInternshipController extends Controller
      * @param $nom_etablissement
      * @param $num_siret
      */
-    private function makeEnterprise($nom_etablissement,$num_siret,$statut_juri):?Entreprise
+    public function makeEnterprise($nom_etablissement,$num_siret,$statut_juri):?Entreprise
     {
         $num_siren = "";
         $entityManager = $this->getDoctrine()->getManager();
@@ -329,7 +329,7 @@ class ImportInternshipController extends Controller
      * @param $nom_etablissement
      * @return Etablissement
      */
-    private function checkEtablissement($nom_etablissement):?Etablissement
+    public function checkEtablissement($nom_etablissement):?Etablissement
     {
         // check etablissement exist or not
         $rep_etab = $this->getDoctrine()->getRepository(Etablissement::class);
@@ -347,7 +347,7 @@ class ImportInternshipController extends Controller
      * @param $code_naf
      * @return Etablissement
      */
-    private function makeEtablissement($address,$nom_etablissement,$enterprise,$type_struc,$effectif,$code_naf):?Etablissement
+    public function makeEtablissement($address,$nom_etablissement,$enterprise,$type_struc,$effectif,$code_naf):?Etablissement
     {
         $entityManager = $this->getDoctrine()->getManager();
         $etab = new Etablissement();
@@ -370,7 +370,7 @@ class ImportInternshipController extends Controller
      * @param null $comp
      * @return Adresse
      */
-    private function makeAddress($address,$city_name,$cp,$country,$comp = NULL):?Adresse
+    public function makeAddress($address,$city_name,$cp,$country,$comp = NULL):?Adresse
     {
         $entityManager = $this->getDoctrine()->getManager();
         $add = new Adresse();
@@ -456,7 +456,7 @@ class ImportInternshipController extends Controller
      * @param $num_tel
      * @return Telephone
      */
-    private function checkTelphone($num_tel):?Telephone
+    public function checkTelphone($num_tel):?Telephone
     {
         $rep_tel = $this->getDoctrine()->getRepository(Telephone::class);
         $tel_objet = $rep_tel->findOneBy(["numTelephone"=>$num_tel]);
@@ -468,7 +468,7 @@ class ImportInternshipController extends Controller
      * @param $person
      * @return Telephone
      */
-    private function makeTelephone($num_tel,$person):?Telephone
+    public function makeTelephone($num_tel,$person):?Telephone
     {
         $entityManager = $this->getDoctrine()->getManager();
         $tel_objet = new Telephone();
@@ -515,7 +515,7 @@ class ImportInternshipController extends Controller
         return $student;
     }
 
-    private function getNumverFromString($string)
+    public function getNumverFromString($string)
     {
         $patterns = "/\d+/";
         preg_match_all($patterns,$string,$arr);
@@ -526,7 +526,7 @@ class ImportInternshipController extends Controller
      * @param $major_string
      * @return int
      */
-    private function getStudyYear($major_string):int
+    public function getStudyYear($major_string):int
     {
         $arr = $this->getNumverFromString($major_string);
         //var_dump($arr);
@@ -541,7 +541,7 @@ class ImportInternshipController extends Controller
      * @param $major_string
      * @return Specialite
      */
-    private function getMajor($major_string):?Specialite
+    public function getMajor($major_string):?Specialite
     {
         $rep_spec = $this->getDoctrine()->getRepository(Specialite::class);
         $major = NULL;
@@ -584,7 +584,7 @@ class ImportInternshipController extends Controller
      * @param $person
      * @return PersonnelPolytech
      */
-    private function checkPersonPolytech($person):?PersonnelPolytech
+    public function checkPersonPolytech($person):?PersonnelPolytech
     {
         $rep_per_polytech = $this->getDoctrine()->getRepository(PersonnelPolytech::class);
         $person_poly = $rep_per_polytech->findOneBy(["idPersonne"=>$person]);
@@ -597,7 +597,7 @@ class ImportInternshipController extends Controller
      * @param $mail
      * @return PersonnelPolytech
      */
-    private function makePersonPolytech($person,$depart,$mail):?PersonnelPolytech
+    public function makePersonPolytech($person,$depart,$mail):?PersonnelPolytech
     {
         $entityManager = $this->getDoctrine()->getManager();
         $rep_person_polytech = $this->getDoctrine()->getRepository(PersonnelPolytech::class);
@@ -617,7 +617,7 @@ class ImportInternshipController extends Controller
      * @param $etablissement
      * @return ServiceAccueil
      */
-    private function checkService($etablissement):?ServiceAccueil
+    public function checkService($etablissement):?ServiceAccueil
     {
         $rep_service = $this->getDoctrine()->getRepository(ServiceAccueil::class);
         $service = $rep_service->findOneBy(["idEtablissement"=>$etablissement]);
@@ -629,7 +629,7 @@ class ImportInternshipController extends Controller
      * @param $nom_service
      * @return ServiceAccueil
      */
-    private function makeService($etablissement,$nom_service):?ServiceAccueil
+    public function makeService($etablissement,$nom_service):?ServiceAccueil
     {
         $entityManager = $this->getDoctrine()->getManager();
         $service = new ServiceAccueil();
@@ -645,7 +645,7 @@ class ImportInternshipController extends Controller
      * @param $person
      * @return ContactEtablissement
      */
-    private function checkContactEtablissement($person):?ContactEtablissement
+    public function checkContactEtablissement($person):?ContactEtablissement
     {
         $rep_contact_etab = $this->getDoctrine()->getRepository(ContactEtablissement::class);
         $contact_etab = $rep_contact_etab->findOneBy(["idPersonne"=>$person]);
@@ -657,7 +657,7 @@ class ImportInternshipController extends Controller
      * @param $mail
      * @return ContactEtablissement
      */
-    private function makeContactEtablissement($person,$mail):?ContactEtablissement
+    public function makeContactEtablissement($person,$mail):?ContactEtablissement
     {
         $entityManager = $this->getDoctrine()->getManager();
         $rep_contact_etab = $this->getDoctrine()->getRepository(ContactEtablissement::class);
@@ -678,7 +678,7 @@ class ImportInternshipController extends Controller
      * @param $unitu_duration
      * @return Gratification
      */
-    private function makeGratification($montant,$unity,$unitu_duration):?Gratification
+    public function makeGratification($montant,$unity,$unitu_duration):?Gratification
     {
         $entityManager = $this->getDoctrine()->getManager();
         $gratification = new Gratification();
@@ -691,15 +691,15 @@ class ImportInternshipController extends Controller
 
     }
 
-    private function checkConvention($student,$date_create):?ConventionStage
+    public function checkConvention($student,$date_create):?ConventionStage
     {
         $rep_convention = $this->getDoctrine()->getRepository(ConventionStage::class);
         $convention = $rep_convention->findOneBy(["dateCreation"=>$date_create,"idEtudiant"=>$student]);
         return $convention;
     }
 
-    private function makeConvention($internship,$etablissement,$major,$student,$person_polytech,$tutor_professional,$person_sign,
-                                    $gratification,$service_acc,$date_create,$date_modification,$valid,$valid_peda,$type):?ConventionStage
+    public function makeConvention($internship,$etablissement,$major,$student,$person_polytech,$tutor_professional,$person_sign,
+                                   $gratification,$service_acc,$date_create,$date_modification,$valid,$valid_peda,$type):?ConventionStage
     {
         $entityManager = $this->getDoctrine()->getManager();
         $convention = new ConventionStage();
@@ -713,7 +713,6 @@ class ImportInternshipController extends Controller
         $convention->setIdGratification($gratification);
         $convention->setIdServiceAccueil($service_acc);
 
-
         $convention->setValidee(strtoupper($valid)=="OUI"?1:0);
         $convention->setValideePedagogiquement(strtoupper($valid_peda)=="OUI"?1:0);
         $convention->setTypeConvention($type);
@@ -726,4 +725,6 @@ class ImportInternshipController extends Controller
         return $convention;
 
     }
+
+
 }

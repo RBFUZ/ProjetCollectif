@@ -21,7 +21,7 @@ class DepartementRepository extends \Doctrine\ORM\EntityRepository
     {
         $sql = "SELECT dep.id
             FROM App\Entity\Departement dep
-            WHERE dep.libelleDepartement = ".$name;
+            WHERE dep.libelleDepartement = '".$name."'";
 
         $query =  $this->getEntityManager()
             ->createQuery(
@@ -29,5 +29,19 @@ class DepartementRepository extends \Doctrine\ORM\EntityRepository
             );
 
         return $query->getResult();
+    }
+
+    public function getDepByName($name)
+    {
+        $sql = "SELECT dep
+            FROM App\Entity\Departement dep
+            WHERE dep.libelleDepartement = '".$name."'";
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            );
+
+        return $query->getSingleResult();
     }
 }

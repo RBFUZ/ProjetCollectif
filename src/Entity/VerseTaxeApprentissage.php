@@ -16,8 +16,6 @@ class VerseTaxeApprentissage
      * @var \DateTime
      *
      * @ORM\Column(name="annee_versement", type="date", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $anneeVersement;
 
@@ -30,7 +28,7 @@ class VerseTaxeApprentissage
 
     /**
      * @var string
-     *
+     * @ORM\Id
      * @ORM\Column(name="partie_versante", type="string", length=255, nullable=false)
      */
     private $partieVersante;
