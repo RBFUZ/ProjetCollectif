@@ -23,13 +23,13 @@
                                             <div class="content">
                                                 <span class="header">{{ establishment.nomEtablissement }}</span>
                                                 <div class="meta">
-                                                    <span class="cinema">{{ establishment.idAdresse.adresse }}, {{ establishment.idAdresse.idVille.nomVille }}</span>
+                                                    <span class="cinema">{% if establishment.idAdresse is not null %} {{establishment.idAdresse.adresse}} {% endif %}, {% if establishment.idAdresse.idVille is not null %} {{ establishment.idAdresse.idVille.nomVille }} {% endif %}</span>
                                                 </div>
                                                 <div class="description">
-                                                    <p>{{ establishment.idAdresse.idVille.idPays.nomFrFr }}</p>
+                                                    <p>{% if establishment.idAdresse.idVille.idPays is not null %} {{ establishment.idAdresse.idVille.idPays.nomFrFr }} {% endif %}</p>
                                                 </div>
                                                 <div class="extra">
-                                                    <div class="ui teal label"> {{ establishment.numSiret}}</div>
+                                                    <div class="ui teal label">{% if establishment.numSiret is not null %} {{ establishment.numSiret}} {% endif %}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -40,6 +40,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!--combo box-->
             <div class="row">
@@ -120,8 +121,8 @@
                                                         		<td>{{ t.idEtudiant.numeroEtudiant }}</td>
                                             					<td>{{ t.idEtudiant.idPersonne.nom }}</td>
                                                                 <td>{{ t.idEtudiant.idPersonne.prenom }}</td>
-                                                                <td>{{ t.idContactEtablissementTuteur.idPersonne.nom }}  {{ t.idContactEtablissementTuteur.idPersonne.prenom }}</td>
-                                                                <td>{{ t.idPersonnelPolytechTuteur.idPersonne.nom }}  {{ t.idPersonnelPolytechTuteur.idPersonne.prenom }}</td>
+                                                                <td>{% if t.idContactEtablissementTuteur is not null %} {{ t.idContactEtablissementTuteur.idPersonne.nom }} {{ t.idContactEtablissementTuteur.idPersonne.prenom }} {%endif%}</td>
+                                                                <td>{% if t.idPersonnelPolytechTuteur is not null %} {{ t.idPersonnelPolytechTuteur.idPersonne.nom }}  {{ t.idPersonnelPolytechTuteur.idPersonne.prenom }} {%endif%}</td>
                                                                 <td>{{ t.dateCreation|date('Y') }}</td>
                                                                 <td>{{ t.idStage.sujetStage }}</td>
                                                                 <td>{{ t.idSpecialite.idDepartement.libelleDepartement }}</td>
