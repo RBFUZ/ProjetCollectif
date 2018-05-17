@@ -41996,10 +41996,10 @@ INSERT INTO apprentissage(date_debut_apprentissage,date_fin_apprentissage,duree_
 ,('2017-09-20','2018-07-06',1,0,NULL,3,4,14,14,70);
 
 INSERT INTO verse_taxe_apprentissage (id_departement, id_entreprise, annee_versement, montant_taxe, partie_versante) VALUES
- (1, 1, '2018-01-01', 2000, 'C.C.I. Paris')
-,(3, 3, '2018-01-01', 5000, 'OPCA DEFI')
-,(4, 54, '2018-01-01', 500, 'OPCALIA')
-,(4, 54, '2017-01-01', 500, 'OPCALIA')
-,(5, 40, '2018-01-01', 1000, 'OPCALIA')
-,(6, 2, '2018-01-01', 6000, 'AGEFOS PME')
-,(7, 48, '2018-01-01', 3000, 'AGEFOS PME');
+ (1, 1, 2018, 2000, 'C.C.I. Paris')
+,(3, 3, 2018, 5000, 'OPCA DEFI')
+,(4, 54, 2018, 500, 'OPCALIA')
+,(4, 54, 2017, 500, 'OPCALIA')
+,(5, 40, 2018, 1000, 'OPCALIA')
+,(6, 2, 2018, 6000, 'AGEFOS PME')
+,(7, 48, 2018, 3000, 'AGEFOS PME');
