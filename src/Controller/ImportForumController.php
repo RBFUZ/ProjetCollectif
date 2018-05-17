@@ -33,7 +33,7 @@ class ImportForumController extends Controller
 
         if($date_forum == "")
         {
-            $date_forum = date("d-m-Y");
+            $date_forum = date("Y-m-d");
         }
 
         // convert to json
