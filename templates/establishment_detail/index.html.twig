@@ -273,43 +273,53 @@
 
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="fifth">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <div class="row">
 
-                                <div class="row">
-                                    <div class="ui equal width center aligned padded grid">
 
-                                        <!--chart total-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Tous les départements</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageTotal"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div class="ui equal width center aligned padded grid">
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="ui equal width left aligned padded grid">
-
-                                        {% for d in department %}
+                                            <!--chart total-->
                                             <div class="eight wide column">
                                                 <div class="ui segments">
                                                     <div class="ui segment">
-                                                        <h3 class="ui header">{{ d.libelleDepartement }}</h3>
+                                                        <h3 class="ui header">Tous les départements</h3>
                                                     </div>
                                                     <div class="ui segment">
-                                                        <canvas id={{ 'line-area_taxeApprentissage' ~ d.libelleDepartement }}></canvas>
+                                                        <canvas id="line-area_taxeApprentissageTotal"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
-                                        {% endfor %}
+
+                                        </div>
 
                                     </div>
-                                </div>
+                                    <div class="row">
+                                        <div class="ui equal width left aligned padded grid">
 
+                                            {% for d in department %}
+                                                <div class="eight wide column">
+                                                    <div class="ui segments">
+                                                        <div class="ui segment">
+                                                            <h3 class="ui header">{{ d.libelleDepartement }}</h3>
+                                                        </div>
+                                                        <div class="ui segment">
+                                                            <canvas id={{ 'line-area_taxeApprentissage' ~ d.libelleDepartement }}></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="ui warning message">
+                                        <i class="close icon"></i>
+                                        <i class="icon help"></i>
+                                        Vous devez avoir un compte et être connecté pour visualiser cette page.<br/>
+                                        <a href="{{ path('connection') }}">Connectez-vous</a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
