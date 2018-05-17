@@ -507,6 +507,7 @@ class ImportInternshipController extends Controller
         $student->setIdPersonne($person);
         $student->setNumeroEtudiant(trim($num_student));
         $student->setMailEtudiant(trim($mail_etu));
+       
         $student->setIdSpecialite($this->getMajor($major_string));
         $student->setDiplome(0);
         $student->setAnneeEtude($this->getStudyYear($major_string));
@@ -547,35 +548,35 @@ class ImportInternshipController extends Controller
         $major = NULL;
         if(stristr($major_string,"Informatique"))
         {
-            $major = $rep_spec->find(3);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"Informatique"]);
         }
         else if(stristr($major_string,"Electronique"))
         {
-            $major = $rep_spec->find(1);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"Électronique et génie électrique"]);
         }
         else if(stristr($major_string,"Mécanique"))
         {
-            $major = $rep_spec->find(5);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"Mécanique et conception des systèmes"]);
         }
         else if(stristr($major_string,"Aménagement"))
         {
-            $major = $rep_spec->find(2);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"Génie de l'aménagement et de l'environnement"]);
         }
         else if(stristr($major_string,"Maths-Info"))
         {
-            $major = $rep_spec->find(11);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"PeiP A Maths-Info"]);
         }
         else if(stristr($major_string,"A Sc. Matière"))
         {
-            $major = $rep_spec->find(10);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"PeiP A Sc. Matière"]);
         }
         else if(stristr($major_string,"biologie"))
         {
-            $major = $rep_spec->find(9);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"PeiP B Biologie"]);
         }
-        else if(stristr($major_string,"Réseaux"))
+        else if(stristr($major_string,"Informatique industrielle"))
         {
-            $major = $rep_spec->find(8);
+            $major = $rep_spec->findOneBy(["libelleSpecialite"=>"Informatique industrielle"]);
         }
         return $major;
     }
