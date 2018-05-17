@@ -29,6 +29,6 @@ VALUES ('Électronique et génie électrique', 6),
 ('Informatique', 4),
 ('Informatique industrielle', 5),
 ('Mécanique et conception des systèmes', 7),
-('PeiP Mathématiques / Physique', 2),
-('PeiP Génie Électrique et Informatique Industrielle', 2),
-('PeiP Réseaux et Télécommunications', 2);
+('PeiP A Maths-Info', 2),
+('PeiP A Sc. Matière', 2),
+('PeiP B Biologie', 2);
