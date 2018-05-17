@@ -48,14 +48,14 @@ INSERT INTO stage (date_debut_stage, date_fin_stage, etranger, annee_etude_stage
 ('2017-04-03', '2017-08-25', 1, 4, 'Brancher des ampoules', 'Brancher des ampoules', 'Brancheur d\'ampoules', NULL, 21, 735, 105, NULL, NULL, NULL, NULL); 
 
 INSERT INTO gratification(montant_gratification,unite_gratification,unite_duree_gratification) VALUES
- ('3,75','net','heure')
-,('5,2','brut','heure')
-,('26,25','net','jour')
-,('36,4','brut','jour')
-,('131,25','net','semaine')
-,('182','brut','semaine')
-,('577,5','net','mois')
-,('800,8','brut','mois');
+ (3,75,'net','heure')
+,(5,2,'brut','heure')
+,(26,25,'net','jour')
+,(36,4,'brut','jour')
+,(131,25,'net','semaine')
+,(182,'brut','semaine')
+,(577,5,'net','mois')
+,(800,8,'brut','mois');
 
 INSERT INTO convention_stage(numero_convention,date_creation,date_derniere_modification,type_convention,validee,validee_pedagogiquement,id_stage,id_etudiant,id_personne_etudiant,id_specialite,id_etablissement,id_personnel_polytech_tuteur,id_personne_personnel_polytech_tuteur,id_personnel_polytech_charge_suivi,id_personne_personnel_polytech_charge_suivi,id_contact_etablissement_tuteur,id_personne_contact_etablissement_tuteur,id_contact_etablissement_signataire,id_personne_contact_etablissement_signataire,id_gratification,id_service_accueil) VALUES
  (1,'2017-04-09','2017-05-09','OBLIGATOIRE',1,0,1,11,11,1,1,1,31,10,40,1,51,1,51,1,1)
