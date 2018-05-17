@@ -23,13 +23,13 @@
                                             <div class="content">
                                                 <span class="header">{{ establishment.nomEtablissement }}</span>
                                                 <div class="meta">
-                                                    <span class="cinema">{{ establishment.idAdresse.adresse }}, {{ establishment.idAdresse.idVille.nomVille }}</span>
+                                                    <span class="cinema">{% if establishment.idAdresse is not null %} {{establishment.idAdresse.adresse}} {% endif %}, {% if establishment.idAdresse.idVille is not null %} {{ establishment.idAdresse.idVille.nomVille }} {% endif %}</span>
                                                 </div>
                                                 <div class="description">
-                                                    <p>{{ establishment.idAdresse.idVille.idPays.nomFrFr }}</p>
+                                                    <p>{% if establishment.idAdresse.idVille.idPays is not null %} {{ establishment.idAdresse.idVille.idPays.nomFrFr }} {% endif %}</p>
                                                 </div>
                                                 <div class="extra">
-                                                    <div class="ui teal label"> {{ establishment.numSiret}}</div>
+                                                    <div class="ui teal label">{% if establishment.numSiret is not null %} {{ establishment.numSiret}} {% endif %}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -41,21 +41,16 @@
                 </div>
             </div>
 
+
             <!--combo box-->
             <div class="row">
-                <div class="two wide column">
-                    <div id="department_select" class="ui selection dropdown">
-                        <input type="hidden" name="department" >
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Département</div>
-                        <div id="list_cities" class="menu" >
-                            <div class="item"  data-value="ALL">Tous les départements</div>
-                            <div class="item"  data-value="DI">DI</div>
-                            <div class="item"  data-value="DSE">DSE</div>
-                            <div class="item"  data-value="DAE">DAE</div>
-                            <div class="item"  data-value="DMS">DMS</div>
-                        </div>
-                    </div>
+                <div class="two wide column" id="hide_dropdown_depart">
+                     <select class="ui dropdown" id="department_select" name="depart">
+                        <option value="all">Tous les départements</option>
+                        {% for d in department %}
+                            <option value="{{ d.libelleDepartement }}">{{ d.libelleDepartement }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
 
@@ -126,8 +121,8 @@
                                                         		<td>{{ t.idEtudiant.numeroEtudiant }}</td>
                                             					<td>{{ t.idEtudiant.idPersonne.nom }}</td>
                                                                 <td>{{ t.idEtudiant.idPersonne.prenom }}</td>
-                                                                <td>{{ t.idContactEtablissementTuteur.idPersonne.nom }}  {{ t.idContactEtablissementTuteur.idPersonne.prenom }}</td>
-                                                                <td>{{ t.idPersonnelPolytechTuteur.idPersonne.nom }}  {{ t.idPersonnelPolytechTuteur.idPersonne.prenom }}</td>
+                                                                <td>{% if t.idContactEtablissementTuteur is not null %} {{ t.idContactEtablissementTuteur.idPersonne.nom }} {{ t.idContactEtablissementTuteur.idPersonne.prenom }} {%endif%}</td>
+                                                                <td>{% if t.idPersonnelPolytechTuteur is not null %} {{ t.idPersonnelPolytechTuteur.idPersonne.nom }}  {{ t.idPersonnelPolytechTuteur.idPersonne.prenom }} {%endif%}</td>
                                                                 <td>{{ t.dateCreation|date('Y') }}</td>
                                                                 <td>{{ t.idStage.sujetStage }}</td>
                                                                 <td>{{ t.idSpecialite.idDepartement.libelleDepartement }}</td>
@@ -299,65 +294,19 @@
                                 <div class="row">
                                     <div class="ui equal width left aligned padded grid">
 
-                                        <!--chart DI-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Informatique</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDI"></canvas>
+                                        {% for d in department %}
+                                            <div class="eight wide column">
+                                                <div class="ui segments">
+                                                    <div class="ui segment">
+                                                        <h3 class="ui header">{{ d.libelleDepartement }}</h3>
+                                                    </div>
+                                                    <div class="ui segment">
+                                                        <canvas id={{ 'line-area_taxeApprentissage' ~ d.libelleDepartement }}></canvas>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        {% endfor %}
 
-                                        <!--chart DII-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Informatique Industrielle</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDII"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--chart DAE-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Aménagement et Environnement</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDAE"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--chart DMS-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Mécanique et Systèmes</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDMS"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--chart DEE-->
-                                        <div class="eight wide column">
-                                            <div class="ui segments">
-                                                <div class="ui segment">
-                                                    <h3 class="ui header">Département Electronique et Energie</h3>
-                                                </div>
-                                                <div class="ui segment">
-                                                    <canvas id="line-area_taxeApprentissageDEE"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
 

@@ -28,8 +28,8 @@ $(document).ready(function() {
             {data: "tax4Years"}
         ],
 
-        filter: false,
-        info: false,
+        filter: true,
+        info: true,
         ordering: true,
         processing: true,
         retrieve: true,

@@ -6,16 +6,15 @@ use Doctrine\ORM\EntityRepository;
 
 class ForumRepository extends EntityRepository
 {
-    public function getOldestForum($idTypeForum): array
+    public function getOldestForum($typeForum): array
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-        'SELECT for.dateDebutForum
+        'SELECT MIN(for.dateDebutForum) as date
             FROM App\Entity\Forum for JOIN for.idTypeForum type
-            WHERE type.id = :idTypeForum
-            ORDER BY for.dateDebutForum ASC'
-    )->setParameter('idTypeForum', $idTypeForum)->setMaxResults(1);
+            WHERE type.libelleTypeForum = :typeForum'
+    )->setParameter('typeForum', $typeForum)->setMaxResults(1);
 
         return $query->getResult();
     }
@@ -53,5 +52,18 @@ class ForumRepository extends EntityRepository
         } else {
             return "/img/greenCheck.png";
         }
+    }
+
+    public function findForumByName($nameForum)
+    {
+        $sql = "SELECT for  FROM App\Entity\Forum for
+            WHERE UPPER(for.nomForum) = :nom";
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            )->setParameter("nom",strtoupper($nameForum));
+
+        return $query->getOneOrNullResult();
     }
 }

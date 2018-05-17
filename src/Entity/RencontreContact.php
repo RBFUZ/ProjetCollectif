@@ -24,9 +24,9 @@ class RencontreContact
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_rencontre", type="date", nullable=false)
+     * @ORM\Column(name="date_rencontre", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateRencontre;
+    private $dateRencontre = '1900-01-01';
 
     /**
      * @var \DateTime|null

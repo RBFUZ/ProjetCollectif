@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Departement
  *
  * @ORM\Table(name="departement", uniqueConstraints={@ORM\UniqueConstraint(name="libelleDepartement_UNIQUE", columns={"libelle_departement"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\DepartementRepository")
  */
 class Departement
 {

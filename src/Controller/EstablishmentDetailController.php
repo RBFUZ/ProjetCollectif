@@ -12,6 +12,7 @@ use App\Entity\Conference;
 use App\Entity\TypeForum;
 use App\Entity\Forum;
 use App\Entity\VerseTaxeApprentissage;
+use App\Entity\Departement;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class EstablishmentDetailController extends Controller
@@ -40,6 +41,9 @@ class EstablishmentDetailController extends Controller
         $repository_type_forum = $this->getDoctrine()->getRepository(TypeForum::class);
         $type_forum = $repository_type_forum->findAll();
 
+        $repository_departement = $this->getDoctrine()->getRepository(Departement::class);
+        $department = $repository_departement->findAll();
+
         $type_forum = $this->checkIfForumCreateOrNot($type_forum); // // Supprime les types de forum du tableau quand aucun forum de ce type n'a été ajouté
         $years_forum = $this->fillYearForumUntilToday($type_forum); // Remplir les années de la plus ancienne jusqu'a aujourd'hui
         $logo = $this->fillPathLogo($type_forum, $years_forum); // Remplir le tableau avec le chemin du logo V vert ou croix rouge on fonction de l'année
@@ -51,7 +55,8 @@ class EstablishmentDetailController extends Controller
             'convention' => $convention,
             'type_forum' => $type_forum,
             'forum' => $years_forum,
-            'logo' => $logo
+            'logo' => $logo,
+            'department' => $department
         ]);
     }
 
@@ -80,9 +85,9 @@ class EstablishmentDetailController extends Controller
     }
 
     /**
-     * @Route("/establishment/countStageEachYear", name="count_stage_each_year")
+     * @Route("/establishment/countStageEachYear/{department}", name="count_stage_each_year")
      */
-    public function getCountStageEachYear()
+    public function getCountStageEachYear($department)
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
@@ -93,7 +98,7 @@ class EstablishmentDetailController extends Controller
         $count_stage_each_year_array = array();
 
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_stage_one_year = $repository_stage->countStageForOneYear($idEstablishment, $i);
+            $count_stage_one_year = $repository_stage->countStageForOneYear($idEstablishment, $i, $department);
             array_push($count_stage_each_year_array, $count_stage_one_year[0]['nbStage']);
         }
 
@@ -101,9 +106,9 @@ class EstablishmentDetailController extends Controller
     }
 
     /**
-     * @Route("/establishment/countStageMoneyEachYear", name="count_stage_money_each_year")
+     * @Route("/establishment/countStageMoneyEachYear/{department}", name="count_stage_money_each_year")
      */
-    public function getCountStageMoneyEachYear()
+    public function getCountStageMoneyEachYear($department)
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
@@ -114,7 +119,7 @@ class EstablishmentDetailController extends Controller
         $count_stage_each_year_array = array();
 
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_stage_one_year = $repository_stage->countStageMoneyForOneYear($idEstablishment, $i);
+            $count_stage_one_year = $repository_stage->countStageMoneyForOneYear($idEstablishment, $i, $department);
             array_push($count_stage_each_year_array, $count_stage_one_year[0]['nbStage']);
         }
 
@@ -135,9 +140,9 @@ class EstablishmentDetailController extends Controller
     }
 
     /**
-     * @Route("/establishment/countApprenticeshipEachYear", name="count_apprenticeship_each_year")
+     * @Route("/establishment/countApprenticeshipEachYear/{department}", name="count_apprenticeship_each_year")
      */
-    public function getCountApprenticeshipEachYear()
+    public function getCountApprenticeshipEachYear($department)
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
@@ -149,7 +154,7 @@ class EstablishmentDetailController extends Controller
 
         // Over each years
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_apprenticeship_one_year = $repository_apprenticeship->countApprenticeshipForOneYear($idEstablishment, $i);
+            $count_apprenticeship_one_year = $repository_apprenticeship->countApprenticeshipForOneYear($idEstablishment, $i, $department);
             array_push($count_apprenticeship_each_year_array, $count_apprenticeship_one_year[0]['nbApprenticeship']);
         }
 
@@ -176,9 +181,9 @@ class EstablishmentDetailController extends Controller
         $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
 
         foreach ($type_forum as $key=>$type) {
-            $forum = $repository_forum->getOldestForum($type->getId()); // Récupération de l'année la plus ancienne (forum)
+            $forum = $repository_forum->getOldestForum($type->getLibelleTypeForum()); // Récupération de l'année la plus ancienne (forum)
 
-            $oldest_year = date_format($forum[0]['dateDebutForum'], "Y"); // Extraire l'année de la date reçu
+            $oldest_year = strtok($forum[0]["date"], '-'); // Extraire l'année de la date reçu
             $current_year = date("Y"); // Année courante
 
             $year_array_one_forum = array();
@@ -209,6 +214,13 @@ class EstablishmentDetailController extends Controller
         return $logo_array_all_forum;
     }
 
+    public function getIdEnterpriseForOneEtablishment($idEstablishment)
+    {
+        $repository_establishment = $this->getDoctrine()->getRepository(Etablissement::class);
+        $idEnterprise = $repository_establishment->getEnterpriseByEtablishment($idEstablishment);
+        return $idEnterprise[0]['id'];
+    }
+
     /**
      * @Route("/establishment/minTaxeYear", name="min_taxe_year")
      */
@@ -216,8 +228,9 @@ class EstablishmentDetailController extends Controller
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
+        $idEnterprise = $this->getIdEnterpriseForOneEtablishment($idEstablishment);
         $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
-        $cov = $repository_taxe->findOldestYear($idEstablishment);
+        $cov = $repository_taxe->findOldestYear($idEnterprise);
         $year = $this->extractYear($cov);
         return $this->json(array("data"=>$year));
     }
@@ -229,18 +242,59 @@ class EstablishmentDetailController extends Controller
     {
         $session = new Session();
         $idEstablishment = $session->get('etabid');
+        $idEnterprise = $this->getIdEnterpriseForOneEtablishment($idEstablishment);
         $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
-        $year = $repository_taxe->findOldestYear($idEstablishment);
+        $year = $repository_taxe->findOldestYear($idEnterprise);
         $year = $this->extractYear($year);
         $current_year = date("Y"); // Année courante
         $count_taxe_each_year_array = array();
 
         // Over each years
         for ($i = $year; $i <= $current_year; $i++) {
-            $count_taxe_one_year = $repository_taxe->countTaxeEachYear($idEstablishment, $i);
+            $count_taxe_one_year = $repository_taxe->countTaxeEachYear($idEnterprise, $i);
+            if ($count_taxe_one_year[0]['amount'] == null) {
+                $count_taxe_one_year[0]['amount'] = 0;
+            }
             array_push($count_taxe_each_year_array, $count_taxe_one_year[0]['amount']);
         }
 
         return $this->json(array("data"=>$count_taxe_each_year_array));
+    }
+
+    /**
+     * @Route("/establishment/countTaxeEachYear/{libelleDepartment}", name="count_taxe_each_year_per_department")
+     */
+    public function countTaxeEachYearByDepartment($libelleDepartment)
+    {
+        $session = new Session();
+        $idEstablishment = $session->get('etabid');
+        $idEnterprise = $this->getIdEnterpriseForOneEtablishment($idEstablishment);
+        $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
+        $year = $repository_taxe->findOldestYear($idEnterprise);
+        $year = $this->extractYear($year);
+        $current_year = date("Y"); // Année courante
+        $count_taxe_each_year_array = array();
+
+        // Over each years
+        for ($i = $year; $i <= $current_year; $i++) {
+            $count_taxe_one_year = $repository_taxe->countTaxeEachYearForOneDepartment($idEnterprise, $i, $libelleDepartment);
+            if ($count_taxe_one_year[0]['amount'] == null) {
+                $count_taxe_one_year[0]['amount'] = 0;
+            }
+            array_push($count_taxe_each_year_array, $count_taxe_one_year[0]['amount']);
+        }
+
+        return $this->json(array("data"=>$count_taxe_each_year_array));
+    }
+
+    /**
+     * @Route("/establishment/list_department", name="list_department")
+     */
+    public function getListDepartment()
+    {
+        $repository_department = $this->getDoctrine()->getRepository(Departement::class);
+        $list_departments = $repository_department->getAllDepartment();
+
+        return $this->json(array("data"=>$list_departments));
     }
 }

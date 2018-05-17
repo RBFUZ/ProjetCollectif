@@ -47,4 +47,18 @@ class EtablissementRepository extends \Doctrine\ORM\EntityRepository
         //echo $query->getDQL();
         return $query->getResult();
     }
+
+    public function getEnterpriseByEtablishment($idEstablishment)
+    {
+        $sql = "SELECT ent.id as id
+                FROM App\Entity\Etablissement etab
+                JOIN etab.idEntreprise ent WHERE etab.id = ".$idEstablishment;
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            );
+
+        return $query->getResult();
+    }
 }

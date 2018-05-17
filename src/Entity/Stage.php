@@ -24,16 +24,16 @@ class Stage
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_stage", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_stage", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutStage;
+    private $dateDebutStage = '1900-01-01';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_fin_stage", type="date", nullable=false)
+     * @ORM\Column(name="date_fin_stage", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateFinStage;
+    private $dateFinStage = '1900-01-01';
 
     /**
      * @var bool
@@ -59,7 +59,7 @@ class Stage
     /**
      * @var string|null
      *
-     * @ORM\Column(name="sujet_stage", type="string", length=255, nullable=true)
+     * @ORM\Column(name="sujet_stage", type="text", length=65535, nullable=true)
      */
     private $sujetStage;
 

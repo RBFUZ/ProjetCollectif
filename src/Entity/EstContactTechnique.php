@@ -24,9 +24,9 @@ class EstContactTechnique
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_contact_technique", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_contact_technique", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutContactTechnique;
+    private $dateDebutContactTechnique = '1900-01-01';
 
     /**
      * @var \DateTime|null

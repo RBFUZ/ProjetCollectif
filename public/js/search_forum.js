@@ -10,32 +10,53 @@ $(document).ready(function(){
             "data":
                 function ( d ) {
                     d.nom_forum = $("input[name='nom_forum']").val();
+					d.annee = $('.ui.dropdown.dp_year').dropdown('get value');
                 },
         },
         "columns": [
-        	{data: 'idEtablissement.nomEtablissement'},
-			{data: 'idEtablissement.numSiret'},
+        	{data: 'nomEtablissement'},
+			{data: 'numSiret'},
         ],
 
         filter: true,
-        info: false,
+        info: true,
         ordering: true,
         processing: true,
         retrieve: true,
 		autoWidth:true,
     });
-});
 
-var list_forum = new Vue({
-    el: '#search_forum_custom', // the element that you want to control
-    data: {
-        establishment:[], // the data to the twig
-    },
-    delimiters: ['${', '}'],
-    methods:{
-        get_data: function (event) { // the methods that you want to execute
-            $("#data_table").show();
-            dtable.ajax.reload();
-        }
-    }
+	$('.ui.dropdown.dp_year').addClass("disabled"); // Disable year dropdown before selecting forum label.
+
+	// row click event
+	$("#libelleDropDown").dropdown({
+	    onChange: function (val) {
+			var current_year = new Date().getFullYear();
+			var year = current_year;
+		    $.ajax({
+		        type:'post',
+		        url: "/search_forum_year",
+		        async:false,
+				data:{"libelleTypeForum":val},
+		        success:function (data) {
+		            if(data.data) {
+		                year =  data.data;
+						$('.ui.dropdown.dp_year').removeClass("disabled");
+						$('#dropdown_year option').remove(); // Remove all items from the dropdown
+
+						for (var loop = year; loop <= current_year; loop++) {
+							$('#dropdown_year').append('<option value="'+loop+'">'+loop+'</option>'); // Add the item to the dropdown
+						}
+
+						$('.ui.dropdown').dropdown('refresh'); // Refresh items of the dropdown
+		            }
+		        }
+		    });
+	    }
+	});
+
+	$("#myButton").click(function() {
+		$("#data_table").show();
+		dtable.ajax.reload();
+	});
 });

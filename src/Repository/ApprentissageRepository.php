@@ -34,17 +34,30 @@ class ApprentissageRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Retourne le nombre d'apprentis pris par une entreprise sur une année donnée.
-    public function countApprenticeshipForOneYear($idEstablishment, $year): array
+    public function countApprenticeshipForOneYear($idEstablishment, $year, $department): array
     {
         $entityManager = $this->getEntityManager();
 
-        $query = $entityManager->createQuery(
-        'SELECT COUNT(app.dateDebutApprentissage) as nbApprenticeship
-            FROM App\Entity\Apprentissage app JOIN app.idEtablissement etab
-            WHERE etab.id = :idEtab
-            AND app.dateDebutApprentissage BETWEEN :yearBegin AND :yearEnd'
-        )->setParameter('idEtab', $idEstablishment)->setParameter('yearBegin', $year.'-01-01')
-        ->setParameter('yearEnd', $year.'-12-31');
+        if ($department == "all") {
+            $query = $entityManager->createQuery(
+            'SELECT COUNT(app.dateDebutApprentissage) as nbApprenticeship
+                FROM App\Entity\Apprentissage app JOIN app.idEtablissement etab
+                WHERE etab.id = :idEtab
+                AND app.dateDebutApprentissage BETWEEN :yearBegin AND :yearEnd'
+            )->setParameter('idEtab', $idEstablishment)->setParameter('yearBegin', $year.'-01-01')
+            ->setParameter('yearEnd', $year.'-12-31');
+        } else {
+            $query = $entityManager->createQuery(
+            'SELECT COUNT(app.dateDebutApprentissage) as nbApprenticeship
+                FROM App\Entity\Apprentissage app JOIN app.idEtablissement etab
+                JOIN app.idSpecialite spe
+                JOIN spe.idDepartement dep
+                WHERE etab.id = :idEtab
+                AND dep.libelleDepartement = :department
+                AND app.dateDebutApprentissage BETWEEN :yearBegin AND :yearEnd'
+            )->setParameter('idEtab', $idEstablishment)->setParameter('department', $department)->setParameter('yearBegin', $year.'-01-01')
+            ->setParameter('yearEnd', $year.'-12-31');
+        }
 
         return $query->getResult();
     }
