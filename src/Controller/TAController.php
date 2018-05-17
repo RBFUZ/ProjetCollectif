@@ -70,7 +70,7 @@ class TAController extends Controller
     private function parserTAData($TAs, $date)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $date_TA = date_create_from_format("Y",$date);
+        $date_TA = (int)$date;
 
         foreach($TAs as $data)
         {
@@ -84,22 +84,13 @@ class TAController extends Controller
 
             foreach ($depts as $d){
                 if($this->getValue($data, $d) != "") {
-
+                    var_dump($d);
                     //Get the Department
                     $rep_dep = $this->getDoctrine()->getRepository(Departement::class);
                     $dep = $rep_dep->getDepByName($d);
                     //var_dump($d);
-                   // var_dump($dep);
+                    var_dump($dep);
 
-//                    if (empty($rep)) {
-//                        $rep = new Departement();
-//                        $rep->setLibelleDepartement($d);
-//                        $entityManager->persist($rep);
-//                        $entityManager->flush();
-//                        //$iddepartement = $dep->getId();
-//                    }
-//                    else
-//                        $iddepartement = intval($rep[0]);
 
                     //Get the enterprise
                     $rep_ent = $this->getDoctrine()->getRepository(Entreprise::class);
@@ -131,7 +122,8 @@ class TAController extends Controller
                     $pv->setAnneeVersement($date_TA);
 
                     $rep_vp = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
-                    $pv_temp = $rep_vp->findOneBy(["partieVersante"=>$last_partie_versante,"idDepartement"=>$dep,"idEntreprise"=>$ent]);
+
+                    $pv_temp = $rep_vp->findOneBy(["anneeVersement"=>$date_TA,"partieVersante"=>$last_partie_versante,"idDepartement"=>$dep,"idEntreprise"=>$ent]);
 //                    var_dump($partie_versante);
 //                    var_dump($ent);
 //                    var_dump($pv_temp);
@@ -139,7 +131,7 @@ class TAController extends Controller
                         $entityManager->persist($pv);
                         $entityManager->flush();
                     }
-                    //var_dump($pv);
+
 
                 }
             }

@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class VerseTaxeApprentissage
 {
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="annee_versement", type="date", nullable=false)
+     * @var \int
+     * @ORM\Id
+     * @ORM\Column(name="annee_versement", type="int", nullable=false)
      */
     private $anneeVersement;
 
