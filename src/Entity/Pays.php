@@ -52,9 +52,9 @@ class Pays
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_fr_fr", type="string", length=45, nullable=false)
+     * @ORM\Column(name="nom_fr_fr", type="string", length=45, nullable=false, options={"default"="Inconnu"})
      */
-    private $nomFrFr;
+    private $nomFrFr = 'Inconnu';
 
 
 

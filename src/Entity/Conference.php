@@ -24,9 +24,9 @@ class Conference
     /**
      * @var string
      *
-     * @ORM\Column(name="sujet_conference", type="string", length=255, nullable=false)
+     * @ORM\Column(name="sujet_conference", type="string", length=255, nullable=false, options={"default"="Inconnu"})
      */
-    private $sujetConference;
+    private $sujetConference = 'Inconnu';
 
     /**
      * @var bool
@@ -38,9 +38,9 @@ class Conference
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_conference", type="date", nullable=false)
+     * @ORM\Column(name="date_conference", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateConference;
+    private $dateConference = '1900-01-01';
 
     /**
      * @var \DateTime|null

@@ -24,9 +24,9 @@ class Ville
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_ville", type="string", length=200, nullable=false)
+     * @ORM\Column(name="nom_ville", type="string", length=200, nullable=false, options={"default"="Inconnu"})
      */
-    private $nomVille;
+    private $nomVille = 'Inconnu';
 
     /**
      * @var string|null

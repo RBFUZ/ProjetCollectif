@@ -24,14 +24,14 @@ class Entreprise
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_entreprise", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nom_entreprise", type="string", length=255, nullable=false, options={"default"="Inconnu"})
      */
-    private $nomEntreprise;
+    private $nomEntreprise = 'Inconnu';
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="statut_juridique", type="string", length=45, nullable=false, options={"default"="Inconnu"})
+     * @ORM\Column(name="statut_juridique", type="string", length=255, nullable=true, options={"default"="Inconnu"})
      */
     private $statutJuridique = 'Inconnu';
 
@@ -95,11 +95,11 @@ class Entreprise
     /**
      * Set statutJuridique.
      *
-     * @param string $statutJuridique
+     * @param string|null $statutJuridique
      *
      * @return Entreprise
      */
-    public function setStatutJuridique($statutJuridique)
+    public function setStatutJuridique($statutJuridique = null)
     {
         $this->statutJuridique = $statutJuridique;
 
@@ -109,7 +109,7 @@ class Entreprise
     /**
      * Get statutJuridique.
      *
-     * @return string
+     * @return string|null
      */
     public function getStatutJuridique()
     {

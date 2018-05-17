@@ -13,25 +13,29 @@ use Doctrine\ORM\Mapping as ORM;
 class VerseTaxeApprentissage
 {
     /**
-     * @var \int
-     * @ORM\Id
+     * @var int
+     *
      * @ORM\Column(name="annee_versement", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $anneeVersement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="partie_versante", type="string", length=255, nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $partieVersante;
 
     /**
      * @var float
      *
      * @ORM\Column(name="montant_taxe", type="float", precision=10, scale=0, nullable=false)
      */
-    private $montantTaxe;
-
-    /**
-     * @var string
-     * @ORM\Id
-     * @ORM\Column(name="partie_versante", type="string", length=255, nullable=false)
-     */
-    private $partieVersante;
+    private $montantTaxe = '0';
 
     /**
      * @var \App\Entity\Departement
@@ -62,7 +66,7 @@ class VerseTaxeApprentissage
     /**
      * Set anneeVersement.
      *
-     * @param \DateTime $anneeVersement
+     * @param int $anneeVersement
      *
      * @return VerseTaxeApprentissage
      */
@@ -76,35 +80,11 @@ class VerseTaxeApprentissage
     /**
      * Get anneeVersement.
      *
-     * @return \DateTime
+     * @return int
      */
     public function getAnneeVersement()
     {
         return $this->anneeVersement;
-    }
-
-    /**
-     * Set montantTaxe.
-     *
-     * @param float $montantTaxe
-     *
-     * @return VerseTaxeApprentissage
-     */
-    public function setMontantTaxe($montantTaxe)
-    {
-        $this->montantTaxe = $montantTaxe;
-
-        return $this;
-    }
-
-    /**
-     * Get montantTaxe.
-     *
-     * @return float
-     */
-    public function getMontantTaxe()
-    {
-        return $this->montantTaxe;
     }
 
     /**
@@ -129,6 +109,30 @@ class VerseTaxeApprentissage
     public function getPartieVersante()
     {
         return $this->partieVersante;
+    }
+
+    /**
+     * Set montantTaxe.
+     *
+     * @param float $montantTaxe
+     *
+     * @return VerseTaxeApprentissage
+     */
+    public function setMontantTaxe($montantTaxe)
+    {
+        $this->montantTaxe = $montantTaxe;
+
+        return $this;
+    }
+
+    /**
+     * Get montantTaxe.
+     *
+     * @return float
+     */
+    public function getMontantTaxe()
+    {
+        return $this->montantTaxe;
     }
 
     /**

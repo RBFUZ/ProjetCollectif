@@ -24,9 +24,9 @@ class Telephone
     /**
      * @var string
      *
-     * @ORM\Column(name="num_telephone", type="string", length=45, nullable=false)
+     * @ORM\Column(name="num_telephone", type="string", length=45, nullable=false, options={"default"="00 00 00 00 00"})
      */
-    private $numTelephone;
+    private $numTelephone = '00 00 00 00 00';
 
     /**
      * @var string
