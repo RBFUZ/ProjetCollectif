@@ -84,12 +84,12 @@ class TAController extends Controller
 
             foreach ($depts as $d){
                 if($this->getValue($data, $d) != "") {
-                    var_dump($d);
+
                     //Get the Department
                     $rep_dep = $this->getDoctrine()->getRepository(Departement::class);
                     $dep = $rep_dep->getDepByName($d);
                     //var_dump($d);
-                    var_dump($dep);
+                    
 
 
                     //Get the enterprise

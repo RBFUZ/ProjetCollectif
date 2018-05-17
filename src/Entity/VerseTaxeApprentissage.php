@@ -15,7 +15,7 @@ class VerseTaxeApprentissage
     /**
      * @var \int
      * @ORM\Id
-     * @ORM\Column(name="annee_versement", type="int", nullable=false)
+     * @ORM\Column(name="annee_versement", type="integer", nullable=false)
      */
     private $anneeVersement;
 
