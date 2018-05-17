@@ -24,9 +24,9 @@ class EffectueVacation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_vacation", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_vacation", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutVacation;
+    private $dateDebutVacation = '1900-01-01';
 
     /**
      * @var \DateTime|null

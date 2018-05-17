@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ConventionStage
  *
- * @ORM\Table(name="convention_stage", indexes={@ORM\Index(name="fk_ConventionStage_Stage1_idx", columns={"id_stage"}), @ORM\Index(name="fk_ConventionStage_Gratification1_idx", columns={"id_gratification"}), @ORM\Index(name="fk_ConventionStage_Etudiant1_idx", columns={"id_etudiant", "id_personne_etudiant"}), @ORM\Index(name="fk_ConventionStage_Specialite1_idx", columns={"id_specialite"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech1_idx", columns={"id_personnel_polytech_tuteur", "id_personne_personnel_polytech_tuteur"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech2_idx", columns={"id_personnel_polytech_charge_suivi", "id_personne_personnel_polytech_charge_suivi"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement1_idx", columns={"id_contact_etablissement_tuteur", "id_personne_contact_etablissement_tuteur"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement2_idx", columns={"id_contact_etablissement_signataire", "id_personne_contact_etablissement_signataire"}), @ORM\Index(name="fk_ConventionStage_Etablissement1_idx", columns={"id_etablissement"}), @ORM\Index(name="fk_ConventionStage_ServiceAccueil1_idx", columns={"id_service_accueil"})})
+ * @ORM\Table(name="convention_stage", uniqueConstraints={@ORM\UniqueConstraint(name="numero_convention_UNIQUE", columns={"numero_convention"})}, indexes={@ORM\Index(name="fk_ConventionStage_Stage1_idx", columns={"id_stage"}), @ORM\Index(name="fk_ConventionStage_Gratification1_idx", columns={"id_gratification"}), @ORM\Index(name="fk_ConventionStage_Etudiant1_idx", columns={"id_etudiant", "id_personne_etudiant"}), @ORM\Index(name="fk_ConventionStage_Specialite1_idx", columns={"id_specialite"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech1_idx", columns={"id_personnel_polytech_tuteur", "id_personne_personnel_polytech_tuteur"}), @ORM\Index(name="fk_ConventionStage_PersonnelPolytech2_idx", columns={"id_personnel_polytech_charge_suivi", "id_personne_personnel_polytech_charge_suivi"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement1_idx", columns={"id_contact_etablissement_tuteur", "id_personne_contact_etablissement_tuteur"}), @ORM\Index(name="fk_ConventionStage_ContactEtablissement2_idx", columns={"id_contact_etablissement_signataire", "id_personne_contact_etablissement_signataire"}), @ORM\Index(name="fk_ConventionStage_Etablissement1_idx", columns={"id_etablissement"}), @ORM\Index(name="fk_ConventionStage_ServiceAccueil1_idx", columns={"id_service_accueil"})})
  * @ORM\Entity(repositoryClass="App\Repository\ConventionStageRepository")
  */
 class ConventionStage
@@ -22,18 +22,25 @@ class ConventionStage
     private $id;
 
     /**
-     * @var \DateTime
+     * @var int|null
      *
-     * @ORM\Column(name="date_creation", type="date", nullable=false)
+     * @ORM\Column(name="numero_convention", type="integer", nullable=true)
      */
-    private $dateCreation;
+    private $numeroConvention;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_derniere_modification", type="date", nullable=false)
+     * @ORM\Column(name="date_creation", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDerniereModification;
+    private $dateCreation = '1900-01-01';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_derniere_modification", type="date", nullable=false, options={"default"="1900-01-01"})
+     */
+    private $dateDerniereModification = '1900-01-01';
 
     /**
      * @var bool
@@ -171,6 +178,30 @@ class ConventionStage
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set numeroConvention.
+     *
+     * @param int|null $numeroConvention
+     *
+     * @return ConventionStage
+     */
+    public function setNumeroConvention($numeroConvention = null)
+    {
+        $this->numeroConvention = $numeroConvention;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroConvention.
+     *
+     * @return int|null
+     */
+    public function getNumeroConvention()
+    {
+        return $this->numeroConvention;
     }
 
     /**

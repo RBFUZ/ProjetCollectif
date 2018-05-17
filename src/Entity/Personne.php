@@ -24,16 +24,16 @@ class Personne
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=45, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=45, nullable=false, options={"default"="Nom"})
      */
-    private $nom;
+    private $nom = 'Nom';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=45, nullable=false)
+     * @ORM\Column(name="prenom", type="string", length=45, nullable=false, options={"default"="Prénom"})
      */
-    private $prenom;
+    private $prenom = 'Prénom';
 
     /**
      * @var string|null

@@ -38,16 +38,16 @@ class Apprentissage
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_apprentissage", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_apprentissage", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutApprentissage;
+    private $dateDebutApprentissage = '1900-01-01';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_fin_apprentissage", type="date", nullable=false)
+     * @ORM\Column(name="date_fin_apprentissage", type="date", nullable=false, options={"default"="1903-01-01"})
      */
-    private $dateFinApprentissage;
+    private $dateFinApprentissage = '1903-01-01';
 
     /**
      * @var string|null

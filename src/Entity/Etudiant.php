@@ -24,9 +24,9 @@ class Etudiant
     /**
      * @var int
      *
-     * @ORM\Column(name="annee_etude", type="integer", nullable=false)
+     * @ORM\Column(name="annee_etude", type="integer", nullable=false, options={"default"="1"})
      */
-    private $anneeEtude;
+    private $anneeEtude = '1';
 
     /**
      * @var bool
