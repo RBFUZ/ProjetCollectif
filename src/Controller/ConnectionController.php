@@ -16,7 +16,7 @@ class ConnectionController extends Controller
      */
     public function login(AuthenticationUtils $helper): Response
     {
-        return $this->render('Connection/index.html.twig', [
+        return $this->render('connection/index.html.twig', [
             // dernier username saisi (si il y en a un)
             'last_username' => $helper->getLastUsername(),
             // La derniere erreur de connexion (si il y en a une)
