@@ -64,6 +64,33 @@ $("#type").on("change",function(){
         $("#taxe_date").hide();
     }
 });
+
+var importApprentissage = function(year,school_year){
+    var error = false;
+    $.ajax({
+        url: "/import/apprentissage",
+        type:"post",
+        data: {
+            "data":result[year],
+            "type":$("#type").val(),
+            "school_year": school_year
+        },
+        dataType: "json",
+        async:false,
+        success:function (data) {
+            if(data.status===200){
+
+            }
+            else{
+                error = true;
+            }
+        },
+        error: function(r){
+            error = true;
+        }
+    });
+    return error;
+}
 $("#file_submit").click(function () {
     var that = $(this);
     //console.log(result);
@@ -151,89 +178,14 @@ $("#file_submit").click(function () {
             });
         }
         else if($("#type").val()==="Apprentissage"){
-            var error = false;
-            // DII3
-            $.ajax({
-                url: "/import/apprentissage",
-                type:"post",
-                data: {
-                    "data":result["DII3"],
-                    "type":$("#type").val(),
-                    "school_year": 3
-                },
-                dataType: "json",
-                success:function (data) {
-                    that.removeAttr('disabled');
-                    if(data.status===200){
 
-                    }
-                    else{
-                        error = true;
-                    }
-                },
-                error: function(r){
-                    error = true;
-                    that.removeAttr('disabled');
-                }
-
-            });
-
-            // DII4
-            $.ajax({
-                url: "/import/apprentissage",
-                type:"post",
-                data: {
-                    "data":result["DII4"],
-                    "type":$("#type").val(),
-                    "school_year": 4
-                },
-                dataType: "json",
-                success:function (data) {
-                    that.removeAttr('disabled');
-                    if(data.status===200){
-
-                    }
-                    else{
-                        error = true;
-                    }
-                },
-                error: function(r){
-                    error = true;
-                    that.removeAttr('disabled');
-                }
-            });
-
-            //DII5
-            $.ajax({
-                url: "/import/apprentissage",
-                type:"post",
-                data: {
-                    "data":result["DII5"],
-                    "type":$("#type").val(),
-                    "school_year": 5
-                },
-                dataType: "json",
-                success:function (data) {
-                    that.removeAttr('disabled');
-                    if(data.status===200){
-
-                    }
-                    else{
-                        error = true;
-                    }
-                },
-                error: function(r){
-                    error = true;
-                    that.removeAttr('disabled');
-                }
-            });
-
-            if(error){
+            if(importApprentissage("DII3",3)||importApprentissage("DII4",4)||importApprentissage("DII5",5)){
                 alert("Erreur!");
             }
             else{
                 alert("Réussi!");
             }
+            that.removeAttr('disabled');
         }
     }
 })
