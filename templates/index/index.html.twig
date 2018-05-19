@@ -100,27 +100,43 @@
                       <ul>
                         <li>Stage</li>
                         <ol>
+                            {% if top3enterprise is not empty %}
                           <li>{{top3enterprise[0]["nom_entreprise"]}} : {{top3enterprise[0]["stage_count"]}}</li>
                           <li>{{top3enterprise[1]["nom_entreprise"]}} : {{top3enterprise[1]["stage_count"]}}</li>
                           <li>{{top3enterprise[2]["nom_entreprise"]}} : {{top3enterprise[2]["stage_count"]}}</li>
+                          {% else %}
+                            Non résultat
+                          {% endif %}
                         </ol>
                         <li>Apprentissage</li>
                         <ol>
+                            {% if top3Apprenticeship is not empty %}
                           <li>{{top3Apprenticeship[0]["nom_entreprise"]}} : {{top3Apprenticeship[0]["apprenticeship_count"]}}</li>
                           <li>{{top3Apprenticeship[1]["nom_entreprise"]}} : {{top3Apprenticeship[1]["apprenticeship_count"]}}</li>
                           <li>{{top3Apprenticeship[2]["nom_entreprise"]}} : {{top3Apprenticeship[2]["apprenticeship_count"]}}</li>
+                            {% else %}
+                              Non résultat
+                            {% endif %}
                         </ol>
                         <li>Forum</li>
                         <ol>
+                            {% if top3forum is not empty %}
                           <li>{{top3forum[0]["nom_entreprise"]}} : {{top3forum[0]["forum_count"]}}</li>
                           <li>{{top3forum[1]["nom_entreprise"]}} : {{top3forum[1]["forum_count"]}}</li>
                           <li>{{top3forum[2]["nom_entreprise"]}} : {{top3forum[2]["forum_count"]}}</li>
+                            {% else %}
+                              Non résultat
+                            {% endif %}
                         </ol>
                         <li>Conférence</li>
                         <ol>
+                            {% if top3conference is not empty %}
                           <li>{{top3conference[0]["nom_entreprise"]}} : {{top3conference[0]["conference_count"]}}</li>
                           <li>{{top3conference[1]["nom_entreprise"]}} : {{top3conference[1]["conference_count"]}}</li>
                           <li>{{top3conference[2]["nom_entreprise"]}} : {{top3conference[2]["conference_count"]}}</li>
+                            {% else %}
+                              Non résultat
+                            {% endif %}
                         </ol>
                       </ul>
                     </div>
