@@ -3,43 +3,9 @@
     <div class="ui equal width left aligned padded grid stackable">
         <div class="row">
 
-         <!-- card 1 : FORUM -->
-          <!-- <div class="eight wide tablet four wide computer column">
-            <div class="ui red card">
-          <div class="content">
-            <div class="header">Forum</div>
-          </div>
-          <div class="content">
-        <h4 class="ui sub header">Nombre de forums au total: {{countForum}}</h4>
-
-            <div class="ui small feed">
-              <div class="event">
-            <div class="content">
-          <h5 class="ui sub header">Pour l'année {{yearForum}} : {{currentForums}}</h5>
-              <div class="summary">
-            <div class="ui list">
-              <ul>
-                <li>Déroulé(s) : {{countPastForums}}</li>
-                <li>A venir : {{countFutureForums}}</li>
-              </ul>
-            </div>
-              </div>
-            </div>
-      </div>
-              </div>
-              </div>
-        <div class="extra content">
-          <h4 class="ui sub header">Nombre d'entreprises : </h4>
-        </div>
-        <div class="extra content">
-          <a href="{{ path('search_forum') }}" class="ui button">Recherche Avancée</a>
-        </div>
-          </div>
-    </div> -->
-
     <!-- card 2 : CONF -->
     <div class="eight wide tablet four wide computer column">
-        <div class="ui orange card">
+        <div class="ui red card">
 
           <div class="content">
             <div class="header">Conférences</div>
@@ -54,7 +20,7 @@
               <div class="event">
                 <div class="content">
                   <h4 class="ui sub header">Pour l'année {{yearConference}} : {{currentConf}}</h4>
-                  <div class="summary">
+                  <div class="summary" style="font-weight: normal;">
                     <div class="ui list">
                       <ul>
                         <li>Déroulé(s) : {{countPastConf}}</li>
@@ -67,10 +33,6 @@
             </div>
           </div>
 
-          <div class="content">
-            <h4 class="ui sub header">Liste des entreprises : </h4>
-          </div>
-
           <div class="extra content">
             <a href="{{ path('search_convention') }}" class="ui button">Recherche Avancée</a>
           </div>
@@ -80,7 +42,7 @@
 
     <!-- card 3 : ENTERPRISE -->
     <div class="eight wide tablet four wide computer column">
-        <div class="ui yellow card">
+        <div class="ui orange card">
 
           <div class="content">
             <div class="header">Entreprises</div>
@@ -95,10 +57,10 @@
               <div class="event">
                 <div class="content">
                   <h4 class="ui sub header">TOP 3 : </h4>
-                  <div class="summary">
+                  <div class="summary" style="font-weight: normal;">
                     <div class="ui list">
                       <ul>
-                        <li>Stage</li>
+                        <li style="font-weight: bold;">Stage</li>
                         <ol>
                             {% if top3enterprise is not empty %}
                           <li>{{top3enterprise[0]["nom_entreprise"]}} : {{top3enterprise[0]["stage_count"]}}</li>
@@ -108,7 +70,7 @@
                             Non résultat
                           {% endif %}
                         </ol>
-                        <li>Apprentissage</li>
+                        <li style="font-weight: bold;">Apprentissage</li>
                         <ol>
                             {% if top3Apprenticeship is not empty %}
                           <li>{{top3Apprenticeship[0]["nom_entreprise"]}} : {{top3Apprenticeship[0]["apprenticeship_count"]}}</li>
@@ -118,7 +80,7 @@
                               Non résultat
                             {% endif %}
                         </ol>
-                        <li>Forum</li>
+                        <li style="font-weight: bold;">Forum</li>
                         <ol>
                             {% if top3forum is not empty %}
                           <li>{{top3forum[0]["nom_entreprise"]}} : {{top3forum[0]["forum_count"]}}</li>
@@ -128,7 +90,7 @@
                               Non résultat
                             {% endif %}
                         </ol>
-                        <li>Conférence</li>
+                        <li style="font-weight: bold;">Conférence</li>
                         <ol>
                             {% if top3conference is not empty %}
                           <li>{{top3conference[0]["nom_entreprise"]}} : {{top3conference[0]["conference_count"]}}</li>
@@ -156,7 +118,7 @@
 
     <!-- card 4 : APPRENTICESHIP -->
     <div class="eight wide tablet four wide computer column">
-        <div class="ui green card">
+        <div class="ui yellow card">
 
           <div class="content">
             <div class="header">Apprentissages</div>
@@ -172,7 +134,7 @@
                 <div class="content">
                   <h4 class="ui sub header">Pour l'année {{currentYearApp}} :
                     {{totalCurrentApp}}</h4>
-                  <div class="summary">
+                  <div class="summary" style="font-weight: normal;">
                     <div class="ui list">
                       <ul>
                         <li>En cours : {{ongoingApp}}</li>
@@ -185,10 +147,6 @@
               </div>
             </div>
           </div>
-          <div class="extra content">
-            <a href="{{ path('search') }}" class="ui button">Recherche Avancée</a>
-          </div>
-
         </div>
     </div>
 
@@ -216,7 +174,7 @@
               <div class="event">
                 <div class="content">
                   <h4 class="ui sub header">Pour l'année {{currentYearInt}} : {{countCurrentInt}}</h4>
-                  <div class="summary">
+                  <div class="summary" style="font-weight: normal;">
                     <div class="ui list">
                       <ul>
                         <li>En cours : {{totalOngoing}}
@@ -244,11 +202,7 @@
               </div>
             </div>
           </div>
-          <div class="extra content">
-            <a href="{{ path('search') }}" class="ui button">Recherche Avancée</a>
           </div>
-
-        </div>
     </div>
 
 
