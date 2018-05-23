@@ -26,7 +26,7 @@ class Gratification
      *
      * @ORM\Column(name="montant_gratification", type="float", precision=10, scale=0, nullable=false)
      */
-    private $montantGratification;
+    private $montantGratification = '0';
 
     /**
      * @var string

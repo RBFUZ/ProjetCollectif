@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link rel="image_src" type="image/jpeg" href="/images/logo.png" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <!-- Site Properities -->
+    <meta name="generator" content="Visual Studio 2015" />
+    <title>Connection</title>
+    <link href="/dist/semantic.min.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/plugins/pacejs/pace.css" rel="stylesheet" />
+
+</head>
+<body class="signin">
+
+<div class="ui container">
+    <div class="ui equal width center aligned padded grid stackable">
+        <div class="row">
+            <div class="five wide column">
+                <div class="ui segments">
+                    <div class="ui segment inverted nightli">
+                        <h3 class="ui header">
+                            Changement d'information
+                        </h3>
+                    </div>
+                    {{ form_start(form, {attr: {class: 'ui large form'} }) }}
+
+
+                    <div class="disabled field">
+                        <div class="ui left icon input">
+                            <i class="edit icon"></i>
+                            {{ form_widget(form.name, {attr: {placeholder: 'Nom...', value: app.user.name} }) }}
+                        </div>
+                    </div>
+
+
+
+                    <div class="disabled field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            {{ form_widget(form.username, {attr: {placeholder: "Nom d'utilisateur...", value: app.user.username} }) }}
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="{{  form.email.vars.errors|length > 0 ? 'field error' : 'field'}}">
+                        <div class="ui left icon input">
+                            <i class="at icon"></i>
+                            {{ form_widget(form.email, {attr: {placeholder: "Email...", value: app.user.email} }) }}
+                        </div>
+                    </div>
+
+                    <div class="{{  form.password.first.vars.errors|length > 0 ? 'field error' : 'field'}}">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            {{ form_widget(form.password.first, {attr: {placeholder: 'Mot de pass...'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="{{  form.password.second.vars.errors|length > 0 ? 'field error' : 'field'}}">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            {{ form_widget(form.password.second, {attr: {placeholder: 'Confirmer le mot de pass...'} }) }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="ui primary fluid submit button">Modifier !</button>
+                    {{ form_end(form) }}
+                    {% if (form.name.vars.errors|length > 0) or (form.username.vars.errors|length > 0) or (form.email.vars.errors|length > 0)or (form.password.first.vars.errors|length > 0) or (form.password.second.vars.errors|length > 0)%}
+                        <div class="ui error message">
+                            <ul class="er">
+                                {% for error in form.name.vars.errors %}
+                                    <li> {{ error.message }}</li>
+                                {% endfor %}
+                                {% for error in form.username.vars.errors %}
+                                    <li> {{ error.message }}</li>
+                                {% endfor %}
+                                {% for error in form.email.vars.errors %}
+                                    <li> {{ error.message }}</li>
+                                {% endfor %}
+                                {% for error in form.password.first.vars.errors %}
+                                    <li> Les mots de passes ne correspondent pas</li>
+                                {% endfor %}
+                                {% for error in form.password.second.vars.errors %}
+                                    <li> {{ error.message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+                <script src="/js/jquery-2.1.4.min.js"></script>
+</body>
+</html>

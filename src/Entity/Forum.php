@@ -24,16 +24,16 @@ class Forum
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_forum", type="string", length=45, nullable=false)
+     * @ORM\Column(name="nom_forum", type="string", length=45, nullable=false, options={"default"="Inconnu"})
      */
-    private $nomForum;
+    private $nomForum = 'Inconnu';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_forum", type="datetime", nullable=false)
+     * @ORM\Column(name="date_debut_forum", type="datetime", nullable=false, options={"default"="1900-01-01 00:00:00"})
      */
-    private $dateDebutForum;
+    private $dateDebutForum = '1900-01-01 00:00:00';
 
     /**
      * @var \DateTime|null

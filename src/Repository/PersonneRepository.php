@@ -25,4 +25,7 @@ class PersonneRepository extends  \Doctrine\ORM\EntityRepository
 
         return $query->getOneOrNullResult();
     }
+
+
+
 }
