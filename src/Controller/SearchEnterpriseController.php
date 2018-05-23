@@ -46,9 +46,14 @@ class SearchEnterpriseController extends Controller
         $data = array();
         $nom = $request->request->get("nom_enterprise"); // get parametter
 
-        $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
-        $etablissement = $repository_etab->findEtablissementByEnterpriseName($nom);
 
+        $repository_etab = $this->getDoctrine()->getRepository(Etablissement::class);
+        if($nom==""){
+            $etablissement = $repository_etab->findAll();
+        }
+        else{
+            $etablissement = $repository_etab->findEtablissementByEnterpriseName($nom);
+        }
         $repository_conv = $this->getDoctrine()->getRepository(ConventionStage::class);
         $repository_apprenti = $this->getDoctrine()->getRepository(Apprentissage::class);
         $repository_conf = $this->getDoctrine()->getRepository(Conference::class);
@@ -56,15 +61,24 @@ class SearchEnterpriseController extends Controller
         $repository_taxe = $this->getDoctrine()->getRepository(VerseTaxeApprentissage::class);
 
         foreach ($etablissement as $etab) {
+            if($etab->getNomEtablissement()==""){
+                continue;
+            }
             $result = array();
             // find stage.
             $convention = $repository_conv->findTraineeByEstablishment($etab->getId());
 
             //make one json object
             $result["id"]  = $etab->getId();
+
             $result["nomEtablissement"] = $etab->getNomEtablissement();
             $result["numSiret"] = $etab->getNumSiret();
-            $result["ville"] = $etab->getIdAdresse()->getIdVille()->getNomVille();
+            if($etab->getIdAdresse()!=null){
+                $result["ville"] = $etab->getIdAdresse()->getIdVille()->getNomVille();
+            }
+            else{
+                $result["ville"] = null;
+            }
             $result["nbStages"] = count($convention);
 
             $apptrntissage = $repository_apprenti->findAprenticeshipByEstablishment($etab->getId());
