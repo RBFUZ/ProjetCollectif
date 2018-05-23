@@ -24,16 +24,16 @@ class InterruptionStage
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_interruption", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_interruption", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutInterruption;
+    private $dateDebutInterruption = '1900-01-01';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_fin_interruption", type="date", nullable=false)
+     * @ORM\Column(name="date_fin_interruption", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateFinInterruption;
+    private $dateFinInterruption = '1900-01-01';
 
     /**
      * @var string|null

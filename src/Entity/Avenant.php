@@ -24,16 +24,16 @@ class Avenant
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_creation_avenant", type="date", nullable=false)
+     * @ORM\Column(name="date_creation_avenant", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateCreationAvenant;
+    private $dateCreationAvenant = '1900-01-01';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="objet_avenant", type="string", length=45, nullable=false)
+     * @ORM\Column(name="objet_avenant", type="string", length=45, nullable=false, options={"default"="Inconnu"})
      */
-    private $objetAvenant;
+    private $objetAvenant = 'Inconnu';
 
     /**
      * @var string|null

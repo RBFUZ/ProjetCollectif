@@ -24,9 +24,9 @@ class EstContactRh
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_contact_rh", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_contact_rh", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutContactRh;
+    private $dateDebutContactRh = '1900-01-01';
 
     /**
      * @var \DateTime|null

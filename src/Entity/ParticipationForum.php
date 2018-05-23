@@ -24,35 +24,35 @@ class ParticipationForum
     /**
      * @var string|null
      *
-     * @ORM\Column(name="recrute_stagiaire", type="string", length=45, nullable=true)
+     * @ORM\Column(name="recrute_stagiaire", type="string", length=255, nullable=true)
      */
     private $recruteStagiaire;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="recrute_diplome", type="string", length=45, nullable=true)
+     * @ORM\Column(name="recrute_diplome", type="string", length=255, nullable=true)
      */
     private $recruteDiplome;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="recrute_apprentis", type="string", length=45, nullable=true)
+     * @ORM\Column(name="recrute_apprentis", type="string", length=255, nullable=true)
      */
     private $recruteApprentis;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="niveaux_etudes_recherches", type="string", length=45, nullable=true)
+     * @ORM\Column(name="niveaux_etudes_recherches", type="string", length=255, nullable=true)
      */
     private $niveauxEtudesRecherches;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="filieres_recherchees", type="string", length=45, nullable=true)
+     * @ORM\Column(name="filieres_recherchees", type="string", length=255, nullable=true)
      */
     private $filieresRecherchees;
 

@@ -31,9 +31,9 @@ class EstEmploye
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_emploi", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_emploi", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutEmploi;
+    private $dateDebutEmploi = '1900-01-01';
 
     /**
      * @var \DateTime|null
