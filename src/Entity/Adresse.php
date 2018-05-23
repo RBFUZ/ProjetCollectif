@@ -24,16 +24,16 @@ class Adresse
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=false, options={"default"="Inconnue"})
      */
-    private $adresse;
+    private $adresse = 'Inconnue';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="code_postal", type="string", length=45, nullable=false)
+     * @ORM\Column(name="code_postal", type="string", length=45, nullable=false, options={"default"="Inconnu"})
      */
-    private $codePostal;
+    private $codePostal = 'Inconnu';
 
     /**
      * @var string|null

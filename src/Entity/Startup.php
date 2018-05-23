@@ -24,16 +24,16 @@ class Startup
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_startup", type="string", length=100, nullable=false)
+     * @ORM\Column(name="nom_startup", type="string", length=100, nullable=false, options={"default"="Inconnu"})
      */
-    private $nomStartup;
+    private $nomStartup = 'Inconnu';
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_creation_startup", type="date", nullable=false)
+     * @ORM\Column(name="date_creation_startup", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateCreationStartup;
+    private $dateCreationStartup = '1900-01-01';
 
 
 

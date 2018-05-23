@@ -61,4 +61,20 @@ class ApprentissageRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getResult();
     }
+
+
+    public function findByStudent($idStudent)
+    {
+        //$entityManager = $this->getEntityManager();
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM  apprentissage  
+            WHERE apprentissage.id_personne_etudiant = :idPerson';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['idPerson' => $idStudent]);
+
+
+
+
+        return $stmt->fetchAll();
+    }
 }

@@ -24,9 +24,9 @@ class Cifre
     /**
      * @var string
      *
-     * @ORM\Column(name="intitule_cifre", type="string", length=255, nullable=false)
+     * @ORM\Column(name="intitule_cifre", type="string", length=255, nullable=false, options={"default"="Inconnu"})
      */
-    private $intituleCifre;
+    private $intituleCifre = 'Inconnu';
 
     /**
      * @var bool
@@ -38,9 +38,9 @@ class Cifre
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_cifre", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_cifre", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutCifre;
+    private $dateDebutCifre = '1900-01-01';
 
     /**
      * @var \DateTime|null

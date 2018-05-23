@@ -24,9 +24,9 @@ class ConseilPerfectionnement
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_conseil_perfectionnement", type="date", nullable=false)
+     * @ORM\Column(name="date_conseil_perfectionnement", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateConseilPerfectionnement;
+    private $dateConseilPerfectionnement = '1900-01-01';
 
     /**
      * @var \App\Entity\Departement

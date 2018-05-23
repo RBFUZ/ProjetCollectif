@@ -8,7 +8,13 @@
         <div class="ui dropdown item">
             <img class="ui mini circular image" src="/img/avatar/people/user.png">
             <div class="menu">
-                <a class="item" href="{{ path('connection') }}">Sign Out</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="item" href="{{ path('profile') }}">Profil</a>
+                    <a class="item" href="{{ path('register') }}">Ajouter un nouvel admin</a>
+                    <a class="item" href="{{ path('security_logout') }}">Deconnexion</a>
+                {% else %}
+                    <a class="item" href="{{ path('connection') }}">Connexion</a>
+                {% endif %}
             </div>
         </div>
     </div>

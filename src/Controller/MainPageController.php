@@ -140,15 +140,22 @@ class MainPageController extends Controller
         $po_total = $statement->fetchColumn();
 
         // get data from the current year
-        $statement = $connection->prepare("CALL `display_apprenticeship_stats_current_year`('$currentDateApp', @p1, @p2, @p3, @p4)");
-        $statement->execute();
-        $statement = $connection->prepare("SELECT @p1 AS `po_total`, @p2 AS `po_ongoing`, @p3 AS `po_finished`, @p4 AS `po_tocome`");
-        $statement->execute();
-        $res = $statement->fetchAll();
-        $po_total_Current = $res[0]['po_total'];
-        $po_ongoing = $res[0]['po_ongoing'];
-        $po_finished = $res[0]['po_finished'];
-        $po_tocome = $res[0]['po_tocome'];
+        $po_total_Current = 0;
+        $po_ongoing = 0;
+        $po_finished = 0;
+        $po_tocome = 0;
+
+        if($currentDateApp!=NULL){
+            $statement = $connection->prepare("CALL `display_apprenticeship_stats_current_year`('$currentDateApp', @p1, @p2, @p3, @p4)");
+            $statement->execute();
+            $statement = $connection->prepare("SELECT @p1 AS `po_total`, @p2 AS `po_ongoing`, @p3 AS `po_finished`, @p4 AS `po_tocome`");
+            $statement->execute();
+            $res = $statement->fetchAll();
+            $po_total_Current = $res[0]['po_total'];
+            $po_ongoing = $res[0]['po_ongoing'];
+            $po_finished = $res[0]['po_finished'];
+            $po_tocome = $res[0]['po_tocome'];
+        }
 
 
         /************ INTERNSHIP ************/
@@ -176,22 +183,35 @@ class MainPageController extends Controller
         $po_abroad = $res[0]['po_abroad'];
 
         // get data from the current year
-        $statement = $connection->prepare("CALL `display_internship_stats_current_year`('$currentDateInternship', @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)");
-        $statement->execute();
-        $statement = $connection->prepare("SELECT @p1 AS `po_total`, @p2 AS `po_total_ongoing`, @p3 AS `po_france_ongoing`, @p4 AS `po_abroad_ongoing`, @p5 AS `po_total_finished`,
+        $po_total_Current_Int = 0;
+        $po_total_ongoing = 0;
+        $po_france_ongoing = 0;
+        $po_abroad_ongoing = 0;
+        $po_total_finished = 0;
+        $po_france_finished = 0;
+        $po_abroad_finished = 0;
+        $po_total_tocome = 0;
+        $po_france_tocome = 0;
+        $po_abroad_tocome = 0;
+        if($currentDateInternship!=NULL){
+            $statement = $connection->prepare("CALL `display_internship_stats_current_year`('$currentDateInternship', @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)");
+            $statement->execute();
+            $statement = $connection->prepare("SELECT @p1 AS `po_total`, @p2 AS `po_total_ongoing`, @p3 AS `po_france_ongoing`, @p4 AS `po_abroad_ongoing`, @p5 AS `po_total_finished`,
           @p6 AS `po_france_finished`, @p7 AS `po_abroad_finished`, @p8 AS `po_total_tocome`, @p9 AS `po_france_tocome`, @p10 AS `po_abroad_tocome`");
-        $statement->execute();
-        $res = $statement->fetchAll();
-        $po_total_Current_Int = $res[0]['po_total'];
-        $po_total_ongoing = $res[0]['po_total_ongoing'];
-        $po_france_ongoing = $res[0]['po_france_ongoing'];
-        $po_abroad_ongoing = $res[0]['po_abroad_ongoing'];
-        $po_total_finished = $res[0]['po_total_finished'];
-        $po_france_finished = $res[0]['po_france_finished'];
-        $po_abroad_finished = $res[0]['po_abroad_finished'];
-        $po_total_tocome = $res[0]['po_total_tocome'];
-        $po_france_tocome = $res[0]['po_france_tocome'];
-        $po_abroad_tocome = $res[0]['po_abroad_tocome'];
+            $statement->execute();
+            $res = $statement->fetchAll();
+            $po_total_Current_Int = $res[0]['po_total'];
+            $po_total_ongoing = $res[0]['po_total_ongoing'];
+            $po_france_ongoing = $res[0]['po_france_ongoing'];
+            $po_abroad_ongoing = $res[0]['po_abroad_ongoing'];
+            $po_total_finished = $res[0]['po_total_finished'];
+            $po_france_finished = $res[0]['po_france_finished'];
+            $po_abroad_finished = $res[0]['po_abroad_finished'];
+            $po_total_tocome = $res[0]['po_total_tocome'];
+            $po_france_tocome = $res[0]['po_france_tocome'];
+            $po_abroad_tocome = $res[0]['po_abroad_tocome'];
+        }
+
 
         // print_r($res);
         // echo($top3Enterprise);

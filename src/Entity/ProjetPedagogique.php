@@ -24,9 +24,9 @@ class ProjetPedagogique
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_debut_projet", type="date", nullable=false)
+     * @ORM\Column(name="date_debut_projet", type="date", nullable=false, options={"default"="1900-01-01"})
      */
-    private $dateDebutProjet;
+    private $dateDebutProjet = '1900-01-01';
 
     /**
      * @var string

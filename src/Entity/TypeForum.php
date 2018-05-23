@@ -24,9 +24,9 @@ class TypeForum
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle_type_forum", type="string", length=45, nullable=false)
+     * @ORM\Column(name="libelle_type_forum", type="string", length=45, nullable=false, options={"default"="Type inconnu"})
      */
-    private $libelleTypeForum;
+    private $libelleTypeForum = 'Type inconnu';
 
     /**
      * @var string|null
