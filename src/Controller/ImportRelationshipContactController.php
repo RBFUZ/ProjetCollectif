@@ -102,9 +102,9 @@ class ImportRelationshipContactController extends Controller
             }
 
             $rdv_phone_date = $this->getValue($data,"Date Rv téléphonique");
-            if($appointment_date!="") {
-                $appointment_date = strtotime($appointment_date);
-                $appointment_date = date_create_from_format("Y-m-d", date('Y-m-d', $appointment_date));
+            if($rdv_phone_date!="") {
+                $rdv_phone_date = strtotime($rdv_phone_date);
+                $rdv_phone_date = date_create_from_format("Y-m-d", date('Y-m-d', $rdv_phone_date));
             }
 
             $subject_string = $this->getValue($data,"Sujet");
