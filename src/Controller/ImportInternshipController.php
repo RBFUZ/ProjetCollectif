@@ -49,83 +49,83 @@ class ImportInternshipController extends Controller
     }
 
     private function parserInternshipData($internships)
-    {
-        foreach($internships as $data) {
-            // check enterprise
-            $nom_etablissement = $this->getValue($data, "Nom Etablissement d'accueil");
-            $num_siret = $this->getValue($data, "Siret");
-            $enterprise = $this->checkEnterprise($nom_etablissement);
-
-            if ($enterprise == NULL) {
-                // create enterprise
-                $statut_juri = $this->getValue($data,"Statut Juridique");
-                $enterprise = $this->makeEnterprise($nom_etablissement, $num_siret,$statut_juri);
-            }
-
-            //check etablissement
-            $etablissement = $this->checkEtablissement($nom_etablissement);
-
-            //get address
-            $address_string = $this->getValue($data,"Service d'accueil - Voie");
-            $city = $this->getValue($data,"Service d'accueil - Commune");
-            $cp = $this->getValue($data,"Service d'accueil - Code postal");
-            $country = $this->getValue($data,"Service d'accueil - Pays");
-            $complement = $this->getValue($data,"Service d'accueil - Residence");
-            $type_struc = $this->getValue($data,"Type de Structure");
-            $effectif = $this->getValue($data,"Effectif");
-            $code_naf = $this->getValue($data,"Code NAF");
-
-            $address_etablissement = $this->makeAddress($address_string,$city,$cp,$country,$complement);
-            if ($etablissement == NULL) {
-                //create etablissement
-                $etablissement = $this->makeEtablissement($address_etablissement,$nom_etablissement,$enterprise,$type_struc,$effectif,$code_naf);
-            }
-
-            // check service
-            $service_acc = $this->checkService($etablissement);
-            if($service_acc==NULL)
             {
-                $service_nom = $this->getValue($data,"Service d'accueil - Nom");
-                $service_acc = $this->makeService($etablissement,$service_nom);
-            }
+                foreach($internships as $data) {
+                    // check enterprise
+                    $nom_etablissement = $this->getValue($data, "Nom Etablissement d'accueil");
+                    $num_siret = $this->getValue($data, "Siret");
+                    $enterprise = $this->checkEnterprise($nom_etablissement);
 
-            // create student
-            // check person
-            $nom = $this->getValue($data,"Nom étudiant");
-            $prenom = $this->getValue($data,"Prénom étudiant");
-            $sex = $this->getValue($data,"Code sexe étudiant");
-            $tel_etu = $this->getValue($data,"Télephone Portable étudiant");
-            $mail_etu_perso = $this->getValue($data,"Mail Perso étudiant");
-            $person = $this->checkPerson($nom,$prenom);
-            if($person==NULL)
-            {
-                $address_string_etu = $this->getValue($data,"Adresse étudiant");
-                $city_etu = $this->getValue($data,"Ville étudiant");
-                $cp_etu = $this->getValue($data,"Code postal étudiant");
-                $country_etu = $this->getValue($data,"Pays étudiant");
-                $address_etu = $this->makeAddress($address_string_etu,$city_etu,$cp_etu,$country_etu);
+                    if ($enterprise == NULL) {
+                        // create enterprise
+                        $statut_juri = $this->getValue($data,"Statut Juridique");
+                        $enterprise = $this->makeEnterprise($nom_etablissement, $num_siret,$statut_juri);
+                    }
 
-                $person = $this->makePerson($nom,$prenom,$tel_etu,$mail_etu_perso,$sex,$address_etu);
-            }
+                    //check etablissement
+                    $etablissement = $this->checkEtablissement($nom_etablissement);
 
-            // check student
-            $student = $this->checkStudent($person);
-            if($student==NULL)
-            {
-                $num_student = $this->getValue($data,"Numéro étudiant");
-                $major_string = $this->getValue($data,"Libellé Etape");
-                $mail_etu = $this->getValue($data,"Mail Universitaire étudiant");
-                //make student
-                $student = $this->makeStudent($person,$major_string,$num_student,$mail_etu);
-            }
+                    //get address
+                    $address_string = $this->getValue($data,"Service d'accueil - Voie");
+                    $city = $this->getValue($data,"Service d'accueil - Commune");
+                    $cp = $this->getValue($data,"Service d'accueil - Code postal");
+                    $country = $this->getValue($data,"Service d'accueil - Pays");
+                    $complement = $this->getValue($data,"Service d'accueil - Residence");
+                    $type_struc = $this->getValue($data,"Type de Structure");
+                    $effectif = $this->getValue($data,"Effectif");
+                    $code_naf = $this->getValue($data,"Code NAF");
 
-            // make internship
-            $start_date = $this->getValue($data,"Date Début Stage");
-            $end_date = $this->getValue($data,"Date Fin Stage");
-            $start_date = str_replace("/","-",trim($start_date));
-            $end_date = str_replace("/","-",trim($end_date));
-            
-            if($start_date!=""&&$end_date!=""){
+                    $address_etablissement = $this->makeAddress($address_string,$city,$cp,$country,$complement);
+                    if ($etablissement == NULL) {
+                        //create etablissement
+                        $etablissement = $this->makeEtablissement($address_etablissement,$nom_etablissement,$enterprise,$type_struc,$effectif,$code_naf);
+                    }
+
+                    // check service
+                    $service_acc = $this->checkService($etablissement);
+                    if($service_acc==NULL)
+                    {
+                        $service_nom = $this->getValue($data,"Service d'accueil - Nom");
+                        $service_acc = $this->makeService($etablissement,$service_nom);
+                    }
+
+                    // create student
+                    // check person
+                    $nom = $this->getValue($data,"Nom étudiant");
+                    $prenom = $this->getValue($data,"Prénom étudiant");
+                    $sex = $this->getValue($data,"Code sexe étudiant");
+                    $tel_etu = $this->getValue($data,"Télephone Portable étudiant");
+                    $mail_etu_perso = $this->getValue($data,"Mail Perso étudiant");
+                    $person = $this->checkPerson($nom,$prenom);
+                    if($person==NULL)
+                    {
+                        $address_string_etu = $this->getValue($data,"Adresse étudiant");
+                        $city_etu = $this->getValue($data,"Ville étudiant");
+                        $cp_etu = $this->getValue($data,"Code postal étudiant");
+                        $country_etu = $this->getValue($data,"Pays étudiant");
+                        $address_etu = $this->makeAddress($address_string_etu,$city_etu,$cp_etu,$country_etu);
+
+                        $person = $this->makePerson($nom,$prenom,$tel_etu,$mail_etu_perso,$sex,$address_etu);
+                    }
+
+                    // check student
+                    $student = $this->checkStudent($person);
+                    if($student==NULL)
+                    {
+                        $num_student = $this->getValue($data,"Numéro étudiant");
+                        $major_string = $this->getValue($data,"Libellé Etape");
+                        $mail_etu = $this->getValue($data,"Mail Universitaire étudiant");
+                        //make student
+                        $student = $this->makeStudent($person,$major_string,$num_student,$mail_etu);
+                    }
+
+                    // make internship
+                    $start_date = $this->getValue($data,"Date Début Stage");
+                    $end_date = $this->getValue($data,"Date Fin Stage");
+                    $start_date = str_replace("/","-",trim($start_date));
+                    $end_date = str_replace("/","-",trim($end_date));
+
+                    if($start_date!=""&&$end_date!=""){
                 $start_date = strtotime($start_date);
                 $start_date = date_create_from_format("Y-m-d",date('Y-m-d',$start_date));
                 //$start_date = $start_date->format('Y-m-d');
