@@ -24,6 +24,18 @@ class EtablissementRepository extends \Doctrine\ORM\EntityRepository
         return $query->getResult();
     }
 
+    public function findEtablissementeByName($name)
+    {
+        $sql = "SELECT etab FROM App\Entity\Etablissement etab WHERE etab.nomEtablissement = :name";
+        //echo $sql;
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            )->setParameter("name", $name);
+
+        return $query->getOneOrNullResult();
+    }
+
     public function findEtablissementByEnterpriseNameAndCity($enterprise_name, $city_id)
     {
         $sql = "SELECT etab FROM App\Entity\Etablissement etab JOIN etab.idEntreprise ent JOIN etab.idAdresse addr WHERE ent.nomEntreprise = '".$enterprise_name."' and addr.idVille = ".$city_id;

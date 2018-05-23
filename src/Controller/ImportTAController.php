@@ -14,17 +14,18 @@ use App\Entity\Etablissement;
 use App\Entity\Adresse;
 use App\Entity\Ville;
 use App\Entity\Pays;
+use App\Service\SaveService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-class TAController extends Controller
+class ImportTAController extends Controller
 {
     /**
      * @Route("/import/TA", name="import_ta")
      */
-    public function importTA(Request $request)
+    public function importTA(Request $request,SaveService $saveService)
     {
         //get data
         $data = $request->request->get("data");
@@ -68,6 +69,7 @@ class TAController extends Controller
         ]
          */
         // return excute status, if succeed, return 200, else return 500
+        $saveService->saveDatabase();
         return $this->json(array('status' => 200));
     }
 

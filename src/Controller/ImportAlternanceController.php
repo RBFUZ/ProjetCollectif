@@ -16,13 +16,14 @@ use App\Entity\Etablissement;
 use App\Entity\Departement;
 use App\Entity\Entreprise;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\SaveService;
 
 class ImportAlternanceController extends Controller
 {
     /**
      * @Route("/import/alternance", name="import_alternance")
      */
-    public function index(Request $request)
+    public function index(Request $request,SaveService $saveService)
     {
 
 
@@ -33,6 +34,7 @@ class ImportAlternanceController extends Controller
         $json_data = json_decode($data,true);
 
         $this->addAll($data);
+        $saveService->saveDatabase();
         return $this->json(array('status' => 200 ));
     }
 

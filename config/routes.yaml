@@ -49,3 +49,7 @@ aproposentreprise:
 establishment_detail:
     path: /establishment/detail/{idEstablishment}
     controller: App\Controller\EstablishmentDetailController::index
+
+download_file:
+    path: /download/file
+    controller: App\Controller\DownloadFileController::index
