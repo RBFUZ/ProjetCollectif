@@ -93,7 +93,12 @@ class MainPageController extends Controller
         $statement->execute();
         $currentYearApp = $statement->fetchAll();
 
+        // get last date
+        $statement = $connection->prepare("SELECT MAX(date_debut_apprentissage) as latestyear FROM apprentissage");
+        $statement->execute();
+        $result = $statement->fetchAll();
 
+        $currentDateApp = $result[0]['latestyear'];
 
         //get count of all apprenticeship
         $statement = $connection->prepare("CALL `display_apprenticeship_stats_total`(@p0)");
