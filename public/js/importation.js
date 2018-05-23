@@ -201,8 +201,17 @@ $("#file_submit").click(function () {
                     that.removeAttr('disabled');
                 }
 
-            });
 
+        else if($("#type").val()==="Apprentissage"){
+
+            if(importApprentissage("DII3",3)||importApprentissage("DII4",4)||importApprentissage("DII5",5)){
+                alert("Erreur!");
+            }
+            else{
+                alert("Réussi!");
+            }
+            that.removeAttr('disabled');
+        }
     }
 })
 
