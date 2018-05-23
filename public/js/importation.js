@@ -126,9 +126,34 @@ $("#file_submit").click(function () {
 
             });
         }
-        else if($("#type").val()==="Stage"){
+        else if($("#type").val()==="Stage") {
             $.ajax({
                 url: "/import/internship",
+                type: "post",
+                data: {
+                    "data": result,
+                    "type": $("#type").val()
+                },
+                dataType: "json",
+                success: function (data) {
+                    that.removeAttr('disabled');
+                    if (data.status === 200) {
+                        alert("Réussi!");
+                    }
+                    else {
+                        alert("Erreur!");
+                    }
+                },
+                error: function (r) {
+                    alert("Erreur!");
+                    that.removeAttr('disabled');
+                }
+
+            })
+        }
+        else if($("#type").val()==="Relation"){
+            $.ajax({
+                url: "/import/relationship",
                 type:"post",
                 data: {
                     "data":result,
