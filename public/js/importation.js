@@ -178,29 +178,31 @@ $("#file_submit").click(function () {
             });
         }
 
-        else if($("#type").val()==="Alternance"){
+        else if($("#type").val()==="Alternance") {
             $.ajax({
-                url: "/import/alternance",
-                type:"post",
-                data: {
-                    "data":result,
-                    "type":$("#type").val(),
-                },
-                dataType: "json",
-                success:function (data) {
-                    that.removeAttr('disabled');
-                    if(data.status===200){
-                        alert("Réussi!");
-                    }
-                    else{
+                    url: "/import/alternance",
+                    type: "post",
+                    data: {
+                        "data": result,
+                        "type": $("#type").val(),
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        that.removeAttr('disabled');
+                        if (data.status === 200) {
+                            alert("Réussi!");
+                        }
+                        else {
+                            alert("Erreur!");
+                        }
+                    },
+                    error: function (r) {
                         alert("Erreur!");
+                        that.removeAttr('disabled');
                     }
-                },
-                error: function(r){
-                    alert("Erreur!");
-                    that.removeAttr('disabled');
                 }
-
+            )
+        }
 
         else if($("#type").val()==="Apprentissage"){
 
