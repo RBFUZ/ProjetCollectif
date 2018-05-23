@@ -20,8 +20,8 @@ class SaveService
         $dumppath ="/usr/local/Cellar/mysql/5.7.21/bin/mysqldump"; // Mon chemin vers mysqldump en local, à adapter sur le server
         $actualdate = date("d-m-y_H-m");
         $save_name = "../Backup/dump_".$base.$actualdate.'.sql';
-        $cmd_mysqldump = $dumppath." --host=".$host." --user=".$user." --password=".$pass." ".$base." > ".$save_name;
-        system($cmd_mysqldump);
+        $cmd_mysqldump = $dumppath." --routines=true --host=".$host." --user=".$user." --password=".$pass." ".$base." > ".$save_name;
+        return system($cmd_mysqldump);
 
         // exec("mysqldump db_rel_ent_pol_tours > dump".$actualdate.".sql");
 
