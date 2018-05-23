@@ -20,36 +20,6 @@ class MainPageController extends Controller
         $currentDate = new DateTime();
         $user = "User / Admin";
 
-        /************ FORUM ************/
-        $currentDateForum = new DateTime('1900-01-01');
-        $currentForums = array();
-        $currentPastForums = array();
-        $currentFutureForums = array();
-
-        //get all forums from database
-        $repository = $this->getDoctrine()->getRepository(Forum::class);
-        $forums = $repository->findAll();
-
-        //get date of the most reccent forum
-        foreach($forums as $forum){
-            if($currentDateForum < $forum->getDatedebutforum()){
-            $currentDateForum = $forum->getDatedebutforum();
-          }
-        }
-
-        //get past and future forum from the current date
-        foreach($forums as $forum){
-          if(strcmp($currentDateForum->format('Y'),$forum->getDatedebutforum()->format('Y')) == 0){
-            $currentForums[] = $forum;
-            if($forum->getDatedebutforum() < $currentDate){
-              $currentPastForums[] = $forum;
-            }elseif($forum->getDatedebutforum() > $currentDate){
-              $currentFutureForums[] = $forum;
-            }
-          }
-
-        }
-
         /************ CONFERENCE ************/
         $currentDateConf = new DateTime('1900-01-01');
         $currentConf = array();
@@ -118,15 +88,8 @@ class MainPageController extends Controller
 
         /************ APPRENTICESHIP ************/
 
-        // get last date apprenticeship
-        $statement = $connection->prepare("SELECT MAX(date_debut_apprentissage) as latestyear FROM apprentissage");
-        $statement->execute();
-        $result = $statement->fetchAll();
-
-        $currentDateApp = $result[0]['latestyear'];
-
         //last year
-        $statement = $connection->prepare("SELECT MAX(YEAR(date_debut_stage)) as latestyear FROM stage");
+        $statement = $connection->prepare("SELECT MAX(YEAR(date_debut_apprentissage)) as latestyear FROM apprentissage");
         $statement->execute();
         $currentYearApp = $statement->fetchAll();
 
@@ -140,7 +103,8 @@ class MainPageController extends Controller
         $po_total = $statement->fetchColumn();
 
         // get data from the current year
-        $statement = $connection->prepare("CALL `display_apprenticeship_stats_current_year`('$currentDateApp', @p1, @p2, @p3, @p4)");
+        $testDate = $currentDate->format('Y-m-d');
+        $statement = $connection->prepare("CALL `display_apprenticeship_stats_current_year`('$testDate', @p1, @p2, @p3, @p4)");
         $statement->execute();
         $statement = $connection->prepare("SELECT @p1 AS `po_total`, @p2 AS `po_ongoing`, @p3 AS `po_finished`, @p4 AS `po_tocome`");
         $statement->execute();
@@ -199,11 +163,6 @@ class MainPageController extends Controller
 
 
         return $this->render('index/index.html.twig', array(
-          'yearForum' => $currentDateForum->format('Y'),
-          'countForum' => count($forums),
-          'currentForums' => count($currentForums),
-          'countPastForums' => count($currentPastForums),
-          'countFutureForums' => count($currentFutureForums),
           'yearConference' => $currentDateConf->format('Y'),
           'countConf' => count($conferences),
           'currentConf' => count($currentConf),
