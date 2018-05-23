@@ -111,7 +111,7 @@ class ImportRelationshipContactController extends Controller
 
             $suite_string = $this->getValue($data,"Suite");
 
-            $this->makeRelationship($appointment_date, $rdv_phone_date, $address_rdv->getId(), $contact_etab->getId(), $subject_string, $suite_string);
+            $this->makeRelationship($appointment_date, $rdv_phone_date, $address_rdv, $contact_etab, $subject_string, $suite_string);
         }
     }
 
