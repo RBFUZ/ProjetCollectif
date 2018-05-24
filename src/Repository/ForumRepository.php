@@ -32,16 +32,18 @@ class ForumRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function checkIfForumByYear($type, $year): string
+    public function checkIfForumByYear($type, $year, $idEstablishment): string
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-        'SELECT for
-            FROM App\Entity\Forum for JOIN for.idTypeForum type
-            WHERE type.id = :idTypeForum
-            AND for.dateDebutForum BETWEEN :yearBegin AND :yearEnd'
-    )->setParameter('idTypeForum', $type)->setParameter('yearBegin', $year.'-01-01')
+        'SELECT part_forum
+            FROM App\Entity\ParticipationForum part_forum JOIN part_forum.idForum forum
+            JOIN forum.idTypeForum type
+            WHERE part_forum.idEtablissement = :idEtablissement
+            AND type.id = :idTypeForum
+            AND forum.dateDebutForum BETWEEN :yearBegin AND :yearEnd'
+    )->setParameter('idEtablissement', $idEstablishment)->setParameter('idTypeForum', $type)->setParameter('yearBegin', $year.'-01-01')
     ->setParameter('yearEnd', $year.'-12-31')
     ->setMaxResults(1);
 
@@ -62,7 +64,7 @@ class ForumRepository extends EntityRepository
         $query =  $this->getEntityManager()
             ->createQuery(
                 $sql
-            )->setParameter("nom",strtoupper($nameForum));
+            )->setParameter("nom", strtoupper($nameForum));
 
         return $query->getOneOrNullResult();
     }
