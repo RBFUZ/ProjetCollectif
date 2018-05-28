@@ -10,17 +10,22 @@ namespace App\Controller;
 use App\Entity\Departement;
 use App\Entity\Entreprise;
 use App\Entity\VerseTaxeApprentissage;
+use App\Entity\Etablissement;
+use App\Entity\Adresse;
+use App\Entity\Ville;
+use App\Entity\Pays;
+use App\Service\SaveService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-class TAController extends Controller
+class ImportTAController extends Controller
 {
     /**
      * @Route("/import/TA", name="import_ta")
      */
-    public function importTA(Request $request)
+    public function importTA(Request $request,SaveService $saveService)
     {
         //get data
         $data = $request->request->get("data");
@@ -64,6 +69,7 @@ class TAController extends Controller
         ]
          */
         // return excute status, if succeed, return 200, else return 500
+        $saveService->saveDatabase();
         return $this->json(array('status' => 200));
     }
 
@@ -89,8 +95,6 @@ class TAController extends Controller
                     $rep_dep = $this->getDoctrine()->getRepository(Departement::class);
                     $dep = $rep_dep->getDepByName($d);
                     //var_dump($d);
-                    
-
 
                     //Get the enterprise
                     $rep_ent = $this->getDoctrine()->getRepository(Entreprise::class);
@@ -103,9 +107,19 @@ class TAController extends Controller
                         $entityManager->flush();
                        // $identerprise = $e->getId();
                     }
-//                    else
-//                        $identerprise = intval($rep[0]);
 
+                    //check etablissement
+                    $etablissement = $this->checkEtablissement($entreprise);
+
+                    if ($etablissement == NULL) {
+                        //create etablissement
+                        $address_string = "";
+                        $city = "";
+                        $cp = "";
+                        $country = "France";
+                        $address_etablissement = $this->makeAddress($address_string,$city,$cp,$country);
+                        $etablissement = $this->makeEtablissement($entreprise,$ent,$address_etablissement);
+                    }
 
                     if ($partie_versante != "")
                         $last_partie_versante = $partie_versante;
@@ -150,5 +164,76 @@ class TAController extends Controller
         }
         return $value;
     }
+
+    /**
+     * @param $nom_etablissement
+     * @return Etablissement
+     */
+    private function checkEtablissement($nom_etablissement):?Etablissement
+    {
+        // check etablissement exist or not
+        $rep_etab = $this->getDoctrine()->getRepository(Etablissement::class);
+        $nom_etablissement = strtoupper(trim($nom_etablissement));
+        $etab = $rep_etab->findOneBy(["nomEtablissement"=>$nom_etablissement]);
+        return $etab;
+    }
+
+    /**
+     * @param $address
+     * @param $nom_etablissement
+     * @param $enterprise
+     * @param $type_struc
+     * @param $effectif
+     * @param $code_naf
+     * @return Etablissement
+     */
+    private function makeEtablissement($nom_etablissement,$enterprise, $address):?Etablissement
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $etab = new Etablissement();
+        $etab->setNomEtablissement($nom_etablissement);
+        $etab->setIdEntreprise($enterprise);
+        $etab->setIdAdresse($address);
+        $entityManager->persist($etab);
+        $entityManager->flush();
+        return $etab;
+    }
+
+    /**
+     * @param $address
+     * @param $city_name
+     * @param $cp
+     * @param $country
+     * @param null $comp
+     * @return Adresse
+     */
+    public function makeAddress($address,$city_name,$cp,$country,$comp = NULL):?Adresse
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $add = new Adresse();
+        $add->setAdresse($address);
+        $add->setCodePostal($cp);
+
+        $rep_city = $this->getDoctrine()->getRepository(Ville::class);
+        //var_dump($city_name);
+        $city = $rep_city->findCityByName($city_name,$cp);
+        if($city==NULL)
+        {
+            // create city
+            $city = new Ville();
+            $city->setDepartement(NULL);
+            $rep_country = $this->getDoctrine()->getRepository(Pays::class);
+            $city->setIdPays($rep_country->findCountryByName($country)); // in France by default
+            $city->setNomVille($city_name);
+            $entityManager->persist($city);
+            $entityManager->flush();
+        }
+
+        $add->setIdVille($city);
+        $entityManager->persist($add);
+        $entityManager->flush();
+        return $add;
+    }
+
 }
 

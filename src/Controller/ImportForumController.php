@@ -16,13 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Personne;
 use App\Entity\Ville;
+use App\Service\SaveService;
 
 class ImportForumController extends Controller
 {
     /**
      * @Route("/import/forum", name="import_forum")
      */
-    public function importForum(Request $request)
+    public function importForum(Request $request, SaveService $saveService)
     {
         //get data
         $data = $request->request->get("data");
@@ -67,6 +68,8 @@ class ImportForumController extends Controller
         ]
          */
         // return excute status, if succeed, return 200, else return 500
+
+        $saveService->saveDatabase();
         return $this->json(array('status' => 200));
     }
 

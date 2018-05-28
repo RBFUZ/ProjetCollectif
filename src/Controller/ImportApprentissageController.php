@@ -16,6 +16,7 @@ use App\Entity\Adresse;
 use App\Entity\Etablissement;
 use App\Entity\Entreprise;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\SaveService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -24,7 +25,7 @@ class ImportApprentissageController extends Controller
     /**
      * @Route("/import/apprentissage", name="import_apprentissage")
      */
-    public function importApprentissage(Request $request)
+    public function importApprentissage(Request $request,SaveService $saveService)
     {
         //get data
         $data = $request->request->get("data");
@@ -40,6 +41,7 @@ class ImportApprentissageController extends Controller
         {
             $this->parserApprentiData($json_data, $school_year);
         }
+        $saveService->saveDatabase();
         return $this->json(array('status' => 200));
 
     }

@@ -37,4 +37,16 @@ class PaysRepository extends \Doctrine\ORM\EntityRepository
         }
         return $result;
     }
+
+    public function findMaxId()
+    {
+        $sql = "SELECT MAX(pays.id) FROM App\Entity\Pays pays";
+
+        $query =  $this->getEntityManager()
+            ->createQuery(
+                $sql
+            );
+
+        return $query->getOneOrNullResult();
+    }
 }

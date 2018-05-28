@@ -46,7 +46,7 @@ class EstablishmentDetailController extends Controller
 
         $type_forum = $this->checkIfForumCreateOrNot($type_forum); // // Supprime les types de forum du tableau quand aucun forum de ce type n'a été ajouté
         $years_forum = $this->fillYearForumUntilToday($type_forum); // Remplir les années de la plus ancienne jusqu'a aujourd'hui
-        $logo = $this->fillPathLogo($type_forum, $years_forum); // Remplir le tableau avec le chemin du logo V vert ou croix rouge on fonction de l'année
+        $logo = $this->fillPathLogo($type_forum, $years_forum, $idEstablishment); // Remplir le tableau avec le chemin du logo V vert ou croix rouge on fonction de l'année
 
         return $this->render('establishment_detail/index.html.twig', [
             'establishment' => $establishment,
@@ -197,7 +197,7 @@ class EstablishmentDetailController extends Controller
         return $years_array_all_forum;
     }
 
-    public function fillPathLogo($type_forum, $years_forum): array
+    public function fillPathLogo($type_forum, $years_forum, $idEstablishment): array
     {
         $logo_array_all_forum = array(); // Contiendra les chemins des logos pour l'ensemble des année pour chaque forum
         $repository_forum = $this->getDoctrine()->getRepository(Forum::class);
@@ -205,7 +205,7 @@ class EstablishmentDetailController extends Controller
         foreach ($type_forum as $key=>$type) {
             $logo_array_one_forum = array();
             foreach ($years_forum[$key] as $year) {
-                $one_path = $repository_forum->checkIfForumByYear($type, $year);
+                $one_path = $repository_forum->checkIfForumByYear($type, $year, $idEstablishment);
                 array_push($logo_array_one_forum, $one_path);
             }
             array_push($logo_array_all_forum, $logo_array_one_forum);

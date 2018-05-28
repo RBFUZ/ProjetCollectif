@@ -774,6 +774,18 @@
         },
         {
             "name": "doctrine/migrations",
+<<<<<<< HEAD
+            "version": "v1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/migrations.git",
+                "reference": "d3e8b903233d5fb7f00193c95eec501f27c0b908"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/d3e8b903233d5fb7f00193c95eec501f27c0b908",
+                "reference": "d3e8b903233d5fb7f00193c95eec501f27c0b908",
+=======
             "version": "v1.7.2",
             "source": {
                 "type": "git",
@@ -784,6 +796,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/migrations/zipball/3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200",
                 "reference": "3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200",
+>>>>>>> 95752c7b96baa8ee6234891e14d002eb4cf17d4b
                 "shasum": ""
             },
             "require": {
@@ -843,7 +856,11 @@
                 "database",
                 "migrations"
             ],
+<<<<<<< HEAD
+            "time": "2018-05-07T12:37:11+00:00"
+=======
             "time": "2018-05-09T21:04:56+00:00"
+>>>>>>> 95752c7b96baa8ee6234891e14d002eb4cf17d4b
         },
         {
             "name": "doctrine/orm",
