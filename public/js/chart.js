@@ -59,11 +59,16 @@ var makeLineChartData = function (year, mainLabel, label, data) {
 
 // make chart
 var makeLineChart = function (canvas,chartData) {
+    if (document.getElementById(canvas) != null)
+    {
+        var ctx = document.getElementById(canvas).getContext('2d');
+        var lineChart = new Chart(ctx, chartData);
 
-    var ctx = document.getElementById(canvas).getContext('2d');
-	var lineChart = new Chart(ctx, chartData);
-
-    return lineChart;
+        return lineChart;
+    }
+    else {
+        return null;
+    }
 }
 
 // make bar chart
@@ -210,13 +215,19 @@ $(document).ready(function () {
         apprentissageLineChart1 = makeLineChart("line-area-apprentissage1",lineChartApprendata1);
 
         // taxe_apprentissage chartTotal
-        taxe_apprentissageLineChartTotal.destroy();
-        taxe_apprentissageLineChartTotal = makeLineChart("line-area_taxeApprentissageTotal",lineChartTaxedataTotal);
+        if (taxe_apprentissageLineChartTotal != null)
+        {
+            taxe_apprentissageLineChartTotal.destroy();
+            taxe_apprentissageLineChartTotal = makeLineChart("line-area_taxeApprentissageTotal",lineChartTaxedataTotal);
+        }
 
         // All taxe_apprentissage department
         for (var i = 0; i < arrayLength; i++) {
-            taxe_apprentissageLineChartArray[i].destroy();
-            taxe_apprentissageLineChartArray[i] = makeLineChart("line-area_taxeApprentissage"+list_departments[i].libelleDepartement, lineChartTaxeArray[i]);
+            if (taxe_apprentissageLineChartArray[i] != null)
+            {
+                taxe_apprentissageLineChartArray[i].destroy();
+                taxe_apprentissageLineChartArray[i] = makeLineChart("line-area_taxeApprentissage"+list_departments[i].libelleDepartement, lineChartTaxeArray[i]);
+            }
         }
 
         // disable the department select for forum and conference
