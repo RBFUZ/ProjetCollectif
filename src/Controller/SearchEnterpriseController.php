@@ -93,9 +93,18 @@ class SearchEnterpriseController extends Controller
                 $count+=count($conf->getIdContactEtablissement());
             }
             $result["nbConferencier"] = $count;
-            $count_taxe_one_year = 0;//$repository_taxe->countTaxeEachYear($etab->getId(), date("Y"));
-            $result["taxNow"] = $count_taxe_one_year;
-            $result["tax4Years"] = 0;
+            $count_taxe_one_year = $repository_taxe->countTaxeEachYear($etab->getId(), date("Y"));
+           // var_dump($count_taxe_one_year[0]["amount"]);
+            $result["taxNow"] = (float)$count_taxe_one_year[0]["amount"];
+            $fourYears = date('Y', strtotime('-1 year'));
+            $tax4years = 0;
+            for($i = 0;$i<4;$i++)
+            {
+                $fourYears = date('Y', strtotime('-'.$i.' year'));
+                //var_dump((float)$repository_taxe->countTaxeEachYear($etab->getId(), $fourYears));
+                $tax4years = $tax4years + (float)$repository_taxe->countTaxeEachYear($etab->getId(), $fourYears)[0]["amount"];
+            }
+            $result["tax4Years"] =$tax4years;
             //
 
 
