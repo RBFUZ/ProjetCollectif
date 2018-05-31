@@ -68,13 +68,25 @@ class ImportConference extends Controller
             $nomsIntervevants = $this->getValue($data, "Nom intervenant");
             $sujet = $this->getValue($data, "Sujet conférence");
             $date = $this->getValue($data, "Date");
-
+            if($etablissement=="")
+                continue;
             //Get the enterprise
             $rep_ent = $this->getDoctrine()->getRepository(Etablissement::class);
             $ent = $rep_ent->findEtablissementeByName($etablissement);
             if (empty($ent)) {
                 $ent = new Etablissement();
                 $ent->setNomEtablissement($etablissement);
+
+                $rep_entprise = $this->getDoctrine()->getRepository(Entreprise::class);
+                $entprise = $rep_entprise->findEnterpriseByName($etablissement);
+                if($entprise==null){
+                    $entprise = new Entreprise();
+                    $entprise->setNomEntreprise($etablissement);
+                    $entityManager->persist($entprise);
+                    $entityManager->flush();
+                }
+                $ent->setIdEntreprise($entprise);
+
                 $entityManager->persist($ent);
                 $entityManager->flush();
             }
